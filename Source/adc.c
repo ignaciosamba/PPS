@@ -221,7 +221,7 @@ void ADC0_Init (void)
               (unsigned long) 128) - 1;
 
    ADC0BUF = 0x00;                     // Turn off Input Buffers
-   ADC0MUX = 0x28;                     // Select AIN0.2 
+   ADC0MUX = 0x08;                     // Select AIN0.0 
 
    ADC0MD = 0x81;                      // Start internal calibration
    while(AD0CALC != 1);                // Wait until calibration is complete
@@ -279,20 +279,36 @@ void ADC0_ISR (void) interrupt 10
                                        // (i.e. 2500 (VREF) * 2^24 (ADC result)
                                        // is greater than 2^32)
 
-   if(ADC0MUX == 0x28)
+
+  // printf("%x\n", ADC0MUX);
+   if(ADC0MUX == 0x08)
+   printf("AIN0.0 voltage: %4ld mV\n",mV);
+   else if(ADC0MUX == 0x18)
+   printf("AIN0.1 voltage: %4ld mV\n",mV);
+   else if(ADC0MUX == 0x28)
    printf("AIN0.2 voltage: %4ld mV\n",mV);
-   else if(ADC0MUX = 0X38)
+   else if(ADC0MUX == 0x38)
    printf("AIN0.3 voltage: %4ld mV\n",mV);
+   else if(ADC0MUX == 0x48)
+   printf("AIN0.4 voltage: %4ld mV\n",mV);
+   else if(ADC0MUX == 0x58)
+   printf("AIN0.5 voltage: %4ld mV\n",mV);
+   else if(ADC0MUX == 0x68)
+   printf("AIN0.6 voltage: %4ld mV\n",mV);
+   else if(ADC0MUX == 0x78)
+   printf("AIN0.7 voltage: %4ld mV\n",mV);
 
 
 
    //ADC0MUX ^= 0x10;                    // Alternate ADC input with AIN0.2 and AIN0.3
-   if(ADC0MUX & 0x78)
+   if(ADC0MUX == 0x78)
       ADC0MUX = 0x08;
    else
    {
       ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4);
+      //printf("entro al else, ADC0MUX = %x\n", ADC0MUX);
       ADC0MUX++;
+      //printf("INCREMENTO, ADC0MUX = %x\n", ADC0MUX);
       ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4);
    }
 

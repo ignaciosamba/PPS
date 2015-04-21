@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   ADC                                                               04/15/2015 18:00:21 PAGE 1   
+C51 COMPILER V9.53.0.0   ADC                                                               04/21/2015 13:29:26 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE ADC
@@ -62,7 +62,7 @@ line level    source
   53          // ---------------
   54          // Timer1: clocks UART
   55          //
-C51 COMPILER V9.53.0.0   ADC                                                               04/15/2015 18:00:21 PAGE 2   
+C51 COMPILER V9.53.0.0   ADC                                                               04/21/2015 13:29:26 PAGE 2   
 
   56          // How To Test:
   57          // ------------
@@ -89,241 +89,265 @@ line level    source
   78          
   79          #include <C8051F350.h>                 // SFR declarations
   80          #include <stdio.h>
-  81          #include "adc.h"
-  82          
-  83          //-----------------------------------------------------------------------------
-  84          // 16-bit SFR Definitions for 'F35x
-  85          //-----------------------------------------------------------------------------
-  86          
-  87          sfr16 TMR2RL = 0xCA;                   // Timer2 reload value
-  88          sfr16 TMR2 = 0xCC;                     // Timer2 counter
-  89          sfr16 ADC0DEC = 0x9A;                  // ADC0 Decimation Ratio Register
-  90          
-  91          //-----------------------------------------------------------------------------
-  92          // MAIN Routine
-  93          //-----------------------------------------------------------------------------
-  94          void main (void)
-  95          {
-  96   1         PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer
-  97   1                                             // enable)
-  98   1      
-  99   1         Oscillator_Init();                  // Initialize system clock
- 100   1         Port_Init();                        // Initialize Crossbar and GPIO
- 101   1         UART0_Init();                       // Initialize UART0 for printf's
- 102   1         ADC0_Init();                        // Initialize ADC0
- 103   1      
- 104   1         AD0INT = 0;
- 105   1         ADC0MD = 0x83;                      // Start continuous conversions
- 106   1         EA = 1;                             // Enable global interrupts
- 107   1      
- 108   1         while (1) {                         // Spin forever
- 109   2         }
- 110   1      }
- 111          
- 112          //-----------------------------------------------------------------------------
- 113          // Initialization Subroutines
- 114          //-----------------------------------------------------------------------------
- 115          
- 116          //-----------------------------------------------------------------------------
- 117          // Oscillator_Init
-C51 COMPILER V9.53.0.0   ADC                                                               04/15/2015 18:00:21 PAGE 3   
+  81          #include <adc.h>
+  82          //-----------------------------------------------------------------------------
+  83          // 16-bit SFR Definitions for 'F35x
+  84          //-----------------------------------------------------------------------------
+  85          
+  86          sfr16 TMR2RL = 0xCA;                   // Timer2 reload value
+  87          sfr16 TMR2 = 0xCC;                     // Timer2 counter
+  88          sfr16 ADC0DEC = 0x9A;                  // ADC0 Decimation Ratio Register
+  89          
+  90          //-----------------------------------------------------------------------------
+  91          // MAIN Routine
+  92          //-----------------------------------------------------------------------------
+  93          void main (void)
+  94          {
+  95   1         PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer
+  96   1                                             // enable) PCA0MD = PCA0MD and con el complemento de 0x40
+  97   1      
+  98   1         Oscillator_Init();                  // Initialize system clock
+  99   1         Port_Init();                        // Initialize Crossbar and GPIO
+ 100   1         UART0_Init();                       // Initialize UART0 for printf's
+ 101   1         ADC0_Init();                        // Initialize ADC0
+ 102   1      
+ 103   1         AD0INT = 0;
+ 104   1         ADC0MD = 0x83;                      // Start continuous conversions
+ 105   1         EA = 1;                             // Enable global interrupts
+ 106   1      
+ 107   1         while (1) {                         // Spin forever
+ 108   2         }
+ 109   1      }
+ 110          
+ 111          //-----------------------------------------------------------------------------
+ 112          // Initialization Subroutines
+ 113          //-----------------------------------------------------------------------------
+ 114          
+ 115          //-----------------------------------------------------------------------------
+ 116          // Oscillator_Init
+ 117          //-----------------------------------------------------------------------------
+C51 COMPILER V9.53.0.0   ADC                                                               04/21/2015 13:29:26 PAGE 3   
 
- 118          //-----------------------------------------------------------------------------
- 119          //
- 120          // Return Value : None
- 121          // Parameters   : None
- 122          //
- 123          // This routine initializes the system clock to use the internal 24.5MHz
- 124          // oscillator as its clock source.  Also enables missing clock detector reset.
- 125          //
- 126          //-----------------------------------------------------------------------------
- 127          void Oscillator_Init (void)
- 128          {
- 129   1         OSCICN = 0x83;                      // Configure internal oscillator for
- 130   1                                             // its lowest frequency
- 131   1         RSTSRC = 0x04;                      // Enable missing clock detector
- 132   1      }
- 133          
- 134          //-----------------------------------------------------------------------------
- 135          // Port_Init
- 136          //-----------------------------------------------------------------------------
- 137          //
- 138          // Return Value : None
- 139          // Parameters   : None
- 140          //
- 141          // This function initializes the GPIO and the Crossbar
- 142          //
- 143          // Pinout:
- 144          //
- 145          //   P0.4 - UART TX (digital, push-pull)
- 146          //   P0.5 - UART RX (digital, open-drain)
- 147          //
- 148          //   AIN0.2 - ADC0 input
- 149          //
- 150          //-----------------------------------------------------------------------------
- 151          void Port_Init (void)
- 152          {
- 153   1         XBR0 = 0x01;                        // UART0 Selected
- 154   1         XBR1 = 0x40;                        // Enable crossbar and weak pull-ups
- 155   1         P0MDOUT |= 0xD0;                    // TX, LEDs = Push-pull
- 156   1      }
- 157          
- 158          //-----------------------------------------------------------------------------
- 159          // UART0_Init
- 160          //-----------------------------------------------------------------------------
- 161          //
- 162          // Return Value : None
- 163          // Parameters   : None
- 164          //
- 165          // Configure the UART0 using Timer1, for <BAUDRATE> and 8-N-1.
- 166          //
- 167          //-----------------------------------------------------------------------------
- 168          void UART0_Init (void)
- 169          {
- 170   1         SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
- 171   1                                             //        level of STOP bit is ignored
- 172   1                                             //        RX enabled
- 173   1                                             //        ninth bits are zeros
- 174   1                                             //        clear RI0 and TI0 bits
- 175   1         if (SYSCLK/BAUDRATE/2/256 < 1) {
- 176   2            TH1 = -(SYSCLK/BAUDRATE/2);
- 177   2            CKCON |=  0x08;                  // T1M = 1; SCA1:0 = xx
- 178   2         } else if (SYSCLK/BAUDRATE/2/256 < 4) {
- 179   2            TH1 = -(SYSCLK/BAUDRATE/2/4);
-C51 COMPILER V9.53.0.0   ADC                                                               04/15/2015 18:00:21 PAGE 4   
+ 118          //
+ 119          // Return Value : None
+ 120          // Parameters   : None
+ 121          //
+ 122          // This routine initializes the system clock to use the internal 24.5MHz
+ 123          // oscillator as its clock source.  Also enables missing clock detector reset.
+ 124          //
+ 125          //-----------------------------------------------------------------------------
+ 126          void Oscillator_Init (void)
+ 127          {
+ 128   1         OSCICN = 0x83;                      // Configure internal oscillator for
+ 129   1                                             // its lowest frequency
+ 130   1         RSTSRC = 0x04;                      // Enable missing clock detector
+ 131   1      }
+ 132          
+ 133          //-----------------------------------------------------------------------------
+ 134          // Port_Init
+ 135          //-----------------------------------------------------------------------------
+ 136          //
+ 137          // Return Value : None
+ 138          // Parameters   : None
+ 139          //
+ 140          // This function initializes the GPIO and the Crossbar
+ 141          //
+ 142          // Pinout:
+ 143          //
+ 144          //   P0.4 - UART TX (digital, push-pull)
+ 145          //   P0.5 - UART RX (digital, open-drain)
+ 146          //
+ 147          //   AIN0.2 - ADC0 input
+ 148          //
+ 149          //-----------------------------------------------------------------------------
+ 150          void Port_Init (void)
+ 151          {
+ 152   1         XBR0 = 0x01;                        // UART0 Selected
+ 153   1         XBR1 = 0x40;                        // Enable crossbar and weak pull-ups
+ 154   1         P0MDOUT |= 0xD0;                    // TX, LEDs = Push-pull
+ 155   1      }
+ 156          
+ 157          //-----------------------------------------------------------------------------
+ 158          // UART0_Init
+ 159          //-----------------------------------------------------------------------------
+ 160          //
+ 161          // Return Value : None
+ 162          // Parameters   : None
+ 163          //
+ 164          // Configure the UART0 using Timer1, for <BAUDRATE> and 8-N-1.
+ 165          //
+ 166          //-----------------------------------------------------------------------------
+ 167          void UART0_Init (void)
+ 168          {
+ 169   1         SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
+ 170   1                                             //        level of STOP bit is ignored
+ 171   1                                             //        RX enabled
+ 172   1                                             //        ninth bits are zeros
+ 173   1                                             //        clear RI0 and TI0 bits
+ 174   1         if (SYSCLK/BAUDRATE/2/256 < 1) {
+ 175   2            TH1 = -(SYSCLK/BAUDRATE/2);
+ 176   2            CKCON |=  0x08;                  // T1M = 1; SCA1:0 = xx
+ 177   2         } else if (SYSCLK/BAUDRATE/2/256 < 4) {
+ 178   2            TH1 = -(SYSCLK/BAUDRATE/2/4);
+ 179   2            CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01
+C51 COMPILER V9.53.0.0   ADC                                                               04/21/2015 13:29:26 PAGE 4   
 
- 180   2            CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01
- 181   2            CKCON |=  0x01;
- 182   2         } else if (SYSCLK/BAUDRATE/2/256 < 12) {
- 183   2            TH1 = -(SYSCLK/BAUDRATE/2/12);
- 184   2            CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00
- 185   2         } else if (SYSCLK/BAUDRATE/2/256 < 48) {
- 186   2            TH1 = -(SYSCLK/BAUDRATE/2/48);
- 187   2            CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
- 188   2            CKCON |=  0x02;
- 189   2         } else {
- 190   2            while (1);                       // Error.  Unsupported baud rate
- 191   2         }
- 192   1      
- 193   1         TL1 = TH1;                          // Init Timer1
- 194   1         TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
- 195   1         TMOD |=  0x20;
- 196   1         TR1 = 1;                            // START Timer1
- 197   1         TI0 = 1;                            // Indicate TX0 ready
- 198   1      }
- 199          
- 200          //-----------------------------------------------------------------------------
- 201          // ADC0_Init
- 202          //-----------------------------------------------------------------------------
- 203          //
- 204          // Return Value : None
- 205          // Parameters   : None
- 206          //
- 207          // Initialize the ADC to use the temperature sensor. (non-differential)
- 208          //
- 209          //-----------------------------------------------------------------------------
- 210          void ADC0_Init (void)
- 211          {
- 212   1         REF0CN |= 0x03;                     // Enable internal Vref
- 213   1         ADC0CN = 0x00;                      // Gain = 1, Unipolar mode
- 214   1         ADC0CF = 0x00;                      // Interrupts upon SINC3 filter output
- 215   1                                             // and uses internal VREF
- 216   1      
- 217   1         ADC0CLK = (SYSCLK/MDCLK)-1;         // Generate MDCLK for modulator.
- 218   1                                             // Ideally MDCLK = 2.4576MHz
- 219   1      
- 220   1         // Program decimation rate for desired OWR
- 221   1         ADC0DEC = ((unsigned long) MDCLK / (unsigned long) OWR /
- 222   1                    (unsigned long) 128) - 1;
- 223   1      
- 224   1         ADC0BUF = 0x00;                     // Turn off Input Buffers
- 225   1         ADC0MUX = 0x28;                     // Select AIN0.2 
- 226   1      
- 227   1         ADC0MD = 0x81;                      // Start internal calibration
- 228   1         while(AD0CALC != 1);                // Wait until calibration is complete
- 229   1      
- 230   1         EIE1   |= 0x08;                     // Enable ADC0 Interrupts
- 231   1         ADC0MD  = 0x80;                     // Enable the ADC0 (IDLE Mode)
- 232   1      }
- 233          
- 234          //-----------------------------------------------------------------------------
- 235          // Interrupt Service Routines
- 236          //-----------------------------------------------------------------------------
- 237          
- 238          //-----------------------------------------------------------------------------
- 239          // ADC0_ISR
- 240          //-----------------------------------------------------------------------------
- 241          //
-C51 COMPILER V9.53.0.0   ADC                                                               04/15/2015 18:00:21 PAGE 5   
+ 180   2            CKCON |=  0x01;
+ 181   2         } else if (SYSCLK/BAUDRATE/2/256 < 12) {
+ 182   2            TH1 = -(SYSCLK/BAUDRATE/2/12);
+ 183   2            CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00
+ 184   2         } else if (SYSCLK/BAUDRATE/2/256 < 48) {
+ 185   2            TH1 = -(SYSCLK/BAUDRATE/2/48);
+ 186   2            CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
+ 187   2            CKCON |=  0x02;
+ 188   2         } else {
+ 189   2            while (1);                       // Error.  Unsupported baud rate
+ 190   2         }
+ 191   1      
+ 192   1         TL1 = TH1;                          // Init Timer1
+ 193   1         TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
+ 194   1         TMOD |=  0x20;
+ 195   1         TR1 = 1;                            // START Timer1
+ 196   1         TI0 = 1;                            // Indicate TX0 ready
+ 197   1      }
+ 198          
+ 199          //-----------------------------------------------------------------------------
+ 200          // ADC0_Init
+ 201          //-----------------------------------------------------------------------------
+ 202          //
+ 203          // Return Value : None
+ 204          // Parameters   : None
+ 205          //
+ 206          // Initialize the ADC to use the temperature sensor. (non-differential)
+ 207          //
+ 208          //-----------------------------------------------------------------------------
+ 209          void ADC0_Init (void)
+ 210          {
+ 211   1         REF0CN |= 0x03;                     // Enable internal Vref
+ 212   1         ADC0CN = 0x00;                      // Gain = 1, Unipolar mode
+ 213   1         ADC0CF = 0x00;                      // Interrupts upon SINC3 filter output
+ 214   1                                             // and uses internal VREF
+ 215   1      
+ 216   1         ADC0CLK = (SYSCLK/MDCLK)-1;         // Generate MDCLK for modulator.
+ 217   1                                             // Ideally MDCLK = 2.4576MHz
+ 218   1      
+ 219   1         // Program decimation rate for desired OWR
+ 220   1         ADC0DEC = ((unsigned long) MDCLK / (unsigned long) OWR /
+ 221   1                    (unsigned long) 128) - 1;
+ 222   1      
+ 223   1         ADC0BUF = 0x00;                     // Turn off Input Buffers
+ 224   1         ADC0MUX = 0x08;                     // Select AIN0.0 
+ 225   1      
+ 226   1         ADC0MD = 0x81;                      // Start internal calibration
+ 227   1         while(AD0CALC != 1);                // Wait until calibration is complete
+ 228   1      
+ 229   1         EIE1   |= 0x08;                     // Enable ADC0 Interrupts
+ 230   1         ADC0MD  = 0x80;                     // Enable the ADC0 (IDLE Mode)
+ 231   1      }
+ 232          
+ 233          //-----------------------------------------------------------------------------
+ 234          // Interrupt Service Routines
+ 235          //-----------------------------------------------------------------------------
+ 236          
+ 237          //-----------------------------------------------------------------------------
+ 238          // ADC0_ISR
+ 239          //-----------------------------------------------------------------------------
+ 240          //
+ 241          // This ISR prints the result to the UART. The ISR is called after each ADC
+C51 COMPILER V9.53.0.0   ADC                                                               04/21/2015 13:29:26 PAGE 5   
 
- 242          // This ISR prints the result to the UART. The ISR is called after each ADC
- 243          // conversion.
- 244          //
- 245          //-----------------------------------------------------------------------------
- 246          void ADC0_ISR (void) interrupt 10
- 247          {
- 248   1         static LONGDATA rawValue;
- 249   1         unsigned long mV;
- 250   1      
- 251   1         while(!AD0INT);                     // Wait till conversion complete
- 252   1         AD0INT = 0;                         // Clear ADC0 conversion complete flag
- 253   1      
- 254   1         // Copy the output value of the ADC
- 255   1         rawValue.Byte[Byte3] = 0x00;
- 256   1         rawValue.Byte[Byte2] = (unsigned char)ADC0H;
- 257   1         rawValue.Byte[Byte1] = (unsigned char)ADC0M;
- 258   1         rawValue.Byte[Byte0] = (unsigned char)ADC0L;
- 259   1      
- 260   1         //                           Vref (mV)
- 261   1         //   measurement (mV) =   --------------- * result (bits)
- 262   1         //                       (2^24)-1 (bits)
- 263   1         //
- 264   1         //   measurement (mV) =  result (bits) / ((2^24)-1 (bits) / Vref (mV))
+ 242          // conversion.
+ 243          //
+ 244          //-----------------------------------------------------------------------------
+ 245          void ADC0_ISR (void) interrupt 10
+ 246          {
+ 247   1         static LONGDATA rawValue;
+ 248   1         unsigned long mV;
+ 249   1      
+ 250   1         while(!AD0INT);                     // Wait till conversion complete
+ 251   1         AD0INT = 0;                         // Clear ADC0 conversion complete flag
+ 252   1      
+ 253   1         // Copy the output value of the ADC
+ 254   1         rawValue.Byte[Byte3] = 0x00;
+ 255   1         rawValue.Byte[Byte2] = (unsigned char)ADC0H;
+ 256   1         rawValue.Byte[Byte1] = (unsigned char)ADC0M;
+ 257   1         rawValue.Byte[Byte0] = (unsigned char)ADC0L;
+ 258   1      
+ 259   1         //                           Vref (mV)
+ 260   1         //   measurement (mV) =   --------------- * result (bits)
+ 261   1         //                       (2^24)-1 (bits)
+ 262   1         //
+ 263   1         //   measurement (mV) =  result (bits) / ((2^24)-1 (bits) / Vref (mV))
+ 264   1         //
  265   1         //
- 266   1         //
- 267   1         //   With a Vref (mV) of 2500:
- 268   1         //
- 269   1         //   measurement (mV) =  result (bits) / ((2^24)-1 / 2500)
- 270   1         //
- 271   1         //   measurement (mV) =  result (bits) / ((2^24)-1 / 2500)
- 272   1         //
- 273   1         //   measurement (mV) =  result (bits) / (16777215 / 2500)
- 274   1         //
- 275   1         //   measurement (mV) =  result (bits) / (6710)
- 276   1      
- 277   1         mV = rawValue.result / 6710;        // Because of bounds issues, this
- 278   1                                             // calculation has been manipulated as
- 279   1                                             // shown above
- 280   1                                             // (i.e. 2500 (VREF) * 2^24 (ADC result)
- 281   1                                             // is greater than 2^32)
+ 266   1         //   With a Vref (mV) of 2500:
+ 267   1         //
+ 268   1         //   measurement (mV) =  result (bits) / ((2^24)-1 / 2500)
+ 269   1         //
+ 270   1         //   measurement (mV) =  result (bits) / ((2^24)-1 / 2500)
+ 271   1         //
+ 272   1         //   measurement (mV) =  result (bits) / (16777215 / 2500)
+ 273   1         //
+ 274   1         //   measurement (mV) =  result (bits) / (6710)
+ 275   1      
+ 276   1         mV = rawValue.result / 6710;        // Because of bounds issues, this
+ 277   1                                             // calculation has been manipulated as
+ 278   1                                             // shown above
+ 279   1                                             // (i.e. 2500 (VREF) * 2^24 (ADC result)
+ 280   1                                             // is greater than 2^32)
+ 281   1      
  282   1      
- 283   1      
- 284   1         ADC0MUX ^= 0x10;                    // Alternate ADC input with AIN0.2 and AIN0.3
- 285   1      
- 286   1         if(ADC0MUX == 0x28)
- 287   1         printf("AIN0.2 voltage: %4ld mV\n",mV);
- 288   1         else if(ADC0MUX = 0X38)
-*** WARNING C276 IN LINE 288 OF adc.c: constant in condition expression
- 289   1         printf("AIN0.3 voltage: %4ld mV\n",mV);
- 290   1      }
- 291          
- 292          //-----------------------------------------------------------------------------
- 293          // End Of File
- 294          //-----------------------------------------------------------------------------
-*** WARNING C294 IN LINE 179 OF adc.c: unreachable code
+ 283   1        // printf("%x\n", ADC0MUX);
+ 284   1         if(ADC0MUX == 0x08)
+ 285   1         printf("AIN0.0 voltage: %4ld mV\n",mV);
+ 286   1         else if(ADC0MUX == 0x18)
+ 287   1         printf("AIN0.1 voltage: %4ld mV\n",mV);
+ 288   1         else if(ADC0MUX == 0x28)
+ 289   1         printf("AIN0.2 voltage: %4ld mV\n",mV);
+ 290   1         else if(ADC0MUX == 0x38)
+ 291   1         printf("AIN0.3 voltage: %4ld mV\n",mV);
+ 292   1         else if(ADC0MUX == 0x48)
+ 293   1         printf("AIN0.4 voltage: %4ld mV\n",mV);
+ 294   1         else if(ADC0MUX == 0x58)
+ 295   1         printf("AIN0.5 voltage: %4ld mV\n",mV);
+ 296   1         else if(ADC0MUX == 0x68)
+ 297   1         printf("AIN0.6 voltage: %4ld mV\n",mV);
+ 298   1         else if(ADC0MUX == 0x78)
+ 299   1         printf("AIN0.7 voltage: %4ld mV\n",mV);
+ 300   1      
+ 301   1      
+ 302   1      
+ 303   1         //ADC0MUX ^= 0x10;                    // Alternate ADC input with AIN0.2 and AIN0.3
+C51 COMPILER V9.53.0.0   ADC                                                               04/21/2015 13:29:26 PAGE 6   
+
+ 304   1         if(ADC0MUX == 0x78)
+ 305   1            ADC0MUX = 0x08;
+ 306   1         else
+ 307   1         {
+ 308   2            ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4);
+ 309   2            //printf("entro al else, ADC0MUX = %x\n", ADC0MUX);
+ 310   2            ADC0MUX++;
+ 311   2            //printf("INCREMENTO, ADC0MUX = %x\n", ADC0MUX);
+ 312   2            ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4);
+ 313   2         }
+ 314   1      
+ 315   1      }
+ 316          
+ 317          //-----------------------------------------------------------------------------
+ 318          // End Of File
+ 319          //-----------------------------------------------------------------------------
+*** WARNING C294 IN LINE 178 OF adc.c: unreachable code
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    238    ----
-   CONSTANT SIZE    =     50    ----
+   CODE SIZE        =    445    ----
+   CONSTANT SIZE    =    200    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-C51 COMPILER V9.53.0.0   ADC                                                               04/15/2015 18:00:21 PAGE 6   
-
    DATA SIZE        =      4       4
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
