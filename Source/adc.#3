@@ -93,7 +93,7 @@ sfr16 ADC0DEC = 0x9A;                  // ADC0 Decimation Ratio Register
 void main (void)
 {
    PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer
-                                       // enable) LUCHO TROLO!!!!!
+                                       // enable)
 
    Oscillator_Init();                  // Initialize system clock
    Port_Init();                        // Initialize Crossbar and GPIO

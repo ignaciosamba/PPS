@@ -93,7 +93,7 @@ sfr16 ADC0DEC = 0x9A;                  // ADC0 Decimation Ratio Register
 void main (void)
 {
    PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer
-                                       // enable)
+                                       // enable) PCA0MD = PCA0MD and con el complemento de 0x40
 
    Oscillator_Init();                  // Initialize system clock
    Port_Init();                        // Initialize Crossbar and GPIO
@@ -283,6 +283,8 @@ void ADC0_ISR (void) interrupt 10
    printf("AIN0.2 voltage: %4ld mV\n",mV);
    else if(ADC0MUX = 0X38)
    printf("AIN0.3 voltage: %4ld mV\n",mV);
+
+
 
    //ADC0MUX ^= 0x10;                    // Alternate ADC input with AIN0.2 and AIN0.3
    if(ADC0MUX & 0x78)
