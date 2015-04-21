@@ -144,11 +144,16 @@ WindowName=Ready
 ResourceID=0
 [WorkState_v1_1.DockState.Bar-1]
 BarID=59419
+<<<<<<< HEAD
 Bars=11
+=======
+Bars=13
+>>>>>>> origin/master
 Bar#0=0
 Bar#1=59647
 Bar#2=0
 Bar#3=59392
+<<<<<<< HEAD
 Bar#4=59401
 Bar#5=59399
 Bar#6=59398
@@ -156,6 +161,17 @@ Bar#7=59400
 Bar#8=59397
 Bar#9=59402
 Bar#10=0
+=======
+Bar#4=59399
+Bar#5=59398
+Bar#6=59400
+Bar#7=59397
+Bar#8=0
+Bar#9=59401
+Bar#10=0
+Bar#11=59402
+Bar#12=0
+>>>>>>> origin/master
 Style=0
 ExStyle=0
 PrevFloating=False
@@ -221,7 +237,11 @@ WindowName=
 ResourceID=0
 [WorkState_v1_1.DockState.Bar-4]
 BarID=59421
+<<<<<<< HEAD
 Bars=54
+=======
+Bars=78
+>>>>>>> origin/master
 Bar#0=0
 Bar#1=281
 Bar#2=280
@@ -236,6 +256,7 @@ Bar#10=272
 Bar#11=271
 Bar#12=270
 Bar#13=269
+<<<<<<< HEAD
 Bar#14=62088
 Bar#15=62083
 Bar#16=62077
@@ -276,6 +297,72 @@ Bar#50=33236
 Bar#51=59403
 Bar#52=59141
 Bar#53=0
+=======
+Bar#14=0
+Bar#15=0
+Bar#16=0
+Bar#17=0
+Bar#18=0
+Bar#19=0
+Bar#20=0
+Bar#21=0
+Bar#22=0
+Bar#23=0
+Bar#24=0
+Bar#25=0
+Bar#26=0
+Bar#27=0
+Bar#28=0
+Bar#29=0
+Bar#30=0
+Bar#31=0
+Bar#32=0
+Bar#33=0
+Bar#34=0
+Bar#35=0
+Bar#36=268
+Bar#37=267
+Bar#38=62088
+Bar#39=62083
+Bar#40=62077
+Bar#41=62089
+Bar#42=62063
+Bar#43=62062
+Bar#44=62007
+Bar#45=61891
+Bar#46=61905
+Bar#47=62014
+Bar#48=61939
+Bar#49=61956
+Bar#50=61875
+Bar#51=61871
+Bar#52=59141
+Bar#53=0
+Bar#54=33247
+Bar#55=33246
+Bar#56=266
+Bar#57=265
+Bar#58=264
+Bar#59=263
+Bar#60=262
+Bar#61=261
+Bar#62=260
+Bar#63=259
+Bar#64=258
+Bar#65=257
+Bar#66=256
+Bar#67=33239
+Bar#68=33240
+Bar#69=33238
+Bar#70=33241
+Bar#71=33237
+Bar#72=33236
+Bar#73=59403
+Bar#74=0
+Bar#75=33295
+Bar#76=33294
+Bar#77=0
+>>>>>>> origin/master
 Style=0
 ExStyle=0
 PrevFloating=False
@@ -302,9 +389,15 @@ MRUDockID=0
 MRUDockLeftPos=1
 MRUDockTopPos=5
 MRUDockRightPos=1366
+<<<<<<< HEAD
 MRUDockBottomPos=135
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
+=======
+MRUDockBottomPos=164
+MRUFloatStyle=4
+MRUFloatXPos=-1
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=36756
 ExStyle=3857
@@ -314,7 +407,11 @@ PctWidth=1000000
 MRUFloatCX=300
 MRUFloatCY=180
 MRUHorzDockCX=1365
+<<<<<<< HEAD
 MRUHorzDockCY=130
+=======
+MRUHorzDockCY=159
+>>>>>>> origin/master
 MRUVertDockCX=300
 MRUVertDockCY=180
 MRUDockingState=0
@@ -335,7 +432,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -366,7 +467,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -397,7 +502,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -428,7 +537,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -459,7 +572,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -490,8 +607,13 @@ MRUDockTopPos=0
 MRUDockRightPos=774778414
 MRUDockBottomPos=774778414
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
 MRUFloatYPos=774778414
+=======
+MRUFloatXPos=-1833414164
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -518,11 +640,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=774778414
+MRUDockBottomPos=774778414
+MRUFloatStyle=4
+MRUFloatXPos=-1833414164
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -549,11 +679,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=774778414
+MRUDockBottomPos=774778414
+MRUFloatStyle=4
+MRUFloatXPos=-1833414164
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -580,11 +718,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=0
+MRUDockBottomPos=0
+MRUFloatStyle=4
+MRUFloatXPos=-1833414164
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -614,7 +760,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -645,7 +795,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -676,7 +830,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -707,7 +865,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -738,7 +900,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -769,7 +935,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -800,7 +970,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -831,7 +1005,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -862,7 +1040,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -893,7 +1075,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -921,11 +1107,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=0
+=======
+MRUDockRightPos=808464432
+MRUDockBottomPos=808464432
+MRUFloatStyle=4
+MRUFloatXPos=-1833414164
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -952,11 +1146,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=0
+=======
+MRUDockRightPos=808464432
+MRUDockBottomPos=808464432
+MRUFloatStyle=4
+MRUFloatXPos=-1833414164
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -986,7 +1188,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -1017,7 +1223,11 @@ MRUDockTopPos=0
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
+=======
+MRUFloatXPos=-1833414164
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=20372
 ExStyle=3857
@@ -1106,10 +1316,17 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=-2
+<<<<<<< HEAD
 MRUDockRightPos=180
 MRUDockBottomPos=490
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
+=======
+MRUDockRightPos=188
+MRUDockBottomPos=431
+MRUFloatStyle=4
+MRUFloatXPos=-1
+>>>>>>> origin/master
 MRUFloatYPos=0
 Style=8084
 ExStyle=3857
@@ -1120,8 +1337,13 @@ MRUFloatCX=300
 MRUFloatCY=180
 MRUHorzDockCX=300
 MRUHorzDockCY=180
+<<<<<<< HEAD
 MRUVertDockCX=180
 MRUVertDockCY=492
+=======
+MRUVertDockCX=188
+MRUVertDockCY=433
+>>>>>>> origin/master
 MRUDockingState=0
 DockingStyle=61440
 TypeID=0
@@ -1137,11 +1359,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=0
+=======
+MRUDockRightPos=774778414
+MRUDockBottomPos=774778414
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1168,11 +1398,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=0
+=======
+MRUDockRightPos=774778414
+MRUDockBottomPos=774778414
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1199,11 +1437,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=0
+=======
+MRUDockRightPos=774778414
+MRUDockBottomPos=774778414
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1230,11 +1476,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=0
+=======
+MRUDockRightPos=774778414
+MRUDockBottomPos=774778414
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1261,11 +1515,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=0
 MRUDockBottomPos=0
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=0
+=======
+MRUDockRightPos=774778414
+MRUDockBottomPos=774778414
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1292,10 +1554,17 @@ MRUDockID=0
 MRUDockLeftPos=5
 MRUDockTopPos=-2
 MRUDockRightPos=185
+<<<<<<< HEAD
 MRUDockBottomPos=490
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=38236888
+=======
+MRUDockBottomPos=431
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1306,7 +1575,11 @@ MRUFloatCY=180
 MRUHorzDockCX=300
 MRUHorzDockCY=180
 MRUVertDockCX=180
+<<<<<<< HEAD
 MRUVertDockCY=492
+=======
+MRUVertDockCY=433
+>>>>>>> origin/master
 MRUDockingState=0
 DockingStyle=61440
 TypeID=0
@@ -1322,11 +1595,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=774778414
+MRUDockBottomPos=774778414
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1353,11 +1634,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=774778414
+MRUDockBottomPos=774778414
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1384,11 +1673,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=774778414
 MRUDockBottomPos=774778414
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=774778414
+=======
+MRUDockRightPos=0
+MRUDockBottomPos=0
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1415,11 +1712,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=170930224
+MRUDockBottomPos=808464432
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1449,8 +1754,13 @@ MRUDockTopPos=0
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUFloatXPos=-1
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1477,11 +1787,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=774778414
 MRUDockBottomPos=774778414
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=774778414
+=======
+MRUDockRightPos=808464432
+MRUDockBottomPos=808464432
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1508,11 +1826,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=0
+MRUDockBottomPos=0
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1539,11 +1865,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=5639496
+MRUDockBottomPos=5639500
+MRUFloatStyle=4
+MRUFloatXPos=-1
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1563,6 +1897,7 @@ WindowName=Cache Data
 ResourceID=0
 [WorkState_v1_1.DockState.Bar-46]
 BarID=59647
+<<<<<<< HEAD
 Docking=True
 MRUDockID=0
 MRUDockLeftPos=-1
@@ -1572,17 +1907,38 @@ MRUDockBottomPos=28
 MRUFloatStyle=8196
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUWidth=351
+Docking=True
+MRUDockID=59419
+MRUDockLeftPos=-1
+MRUDockTopPos=-1
+MRUDockRightPos=1279
+MRUDockBottomPos=26
+MRUFloatStyle=8196
+MRUFloatXPos=-1
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=12220
 ExStyle=908
 PrevFloating=False
 MDIChild=False
 PctWidth=1000000
+<<<<<<< HEAD
 MRUFloatCX=0
 MRUFloatCY=0
 MRUHorzDockCX=1366
 MRUHorzDockCY=29
 MRUVertDockCX=0
 MRUVertDockCY=0
+=======
+MRUFloatCX=351
+MRUFloatCY=27
+MRUHorzDockCX=1366
+MRUHorzDockCY=29
+MRUVertDockCX=76
+MRUVertDockCY=765
+>>>>>>> origin/master
 MRUDockingState=0
 DockingStyle=61440
 TypeID=14947
@@ -1603,13 +1959,22 @@ MRUDockTopPos=28
 MRUDockRightPos=195
 MRUDockBottomPos=58
 MRUFloatStyle=8196
+<<<<<<< HEAD
 MRUFloatXPos=-2147483648
 MRUFloatYPos=774778414
+=======
+MRUFloatXPos=-1
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=12212
 ExStyle=780
 PrevFloating=False
 MDIChild=False
+<<<<<<< HEAD
 PctWidth=35516
+=======
+PctWidth=41666
+>>>>>>> origin/master
 MRUFloatCX=0
 MRUFloatCY=0
 MRUHorzDockCX=196
@@ -1629,6 +1994,7 @@ Buttons=AABOAAAAAABABOAAAAAADABOAAAAAAAAAAAAAAAADCBOAAAAAACCBOAAAAAAFCBOAAAAAAAA
 [WorkState_v1_1.DockState.Bar-48]
 BarID=59402
 XPos=989
+<<<<<<< HEAD
 YPos=28
 Docking=True
 MRUDockID=0
@@ -1639,11 +2005,27 @@ MRUDockBottomPos=58
 MRUFloatStyle=8196
 MRUFloatXPos=-2147483648
 MRUFloatYPos=774778414
+=======
+YPos=58
+Docking=True
+MRUDockID=0
+MRUDockLeftPos=989
+MRUDockTopPos=58
+MRUDockRightPos=1100
+MRUDockBottomPos=88
+MRUFloatStyle=8196
+MRUFloatXPos=-2147483648
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=12212
 ExStyle=780
 PrevFloating=False
 MDIChild=False
+<<<<<<< HEAD
 PctWidth=35516
+=======
+PctWidth=1000000
+>>>>>>> origin/master
 MRUFloatCX=0
 MRUFloatCY=0
 MRUHorzDockCX=111
@@ -1662,6 +2044,7 @@ Title=Navigate
 Buttons=EPBIAAAAAAFPBIAAAAAAJPBIAAAAAAKPBIAAAAAA
 [WorkState_v1_1.DockState.Bar-49]
 BarID=59397
+<<<<<<< HEAD
 XPos=878
 YPos=28
 Docking=True
@@ -1673,10 +2056,25 @@ MRUDockBottomPos=58
 MRUFloatStyle=8196
 MRUFloatXPos=-2147483648
 MRUFloatYPos=774778414
+=======
+XPos=813
+YPos=28
+MRUWidth=111
+Docking=True
+MRUDockID=59419
+MRUDockLeftPos=813
+MRUDockTopPos=28
+MRUDockRightPos=924
+MRUDockBottomPos=58
+MRUFloatStyle=8196
+MRUFloatXPos=-1
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=12212
 ExStyle=780
 PrevFloating=False
 MDIChild=False
+<<<<<<< HEAD
 PctWidth=61931
 MRUFloatCX=0
 MRUFloatCY=0
@@ -1684,6 +2082,15 @@ MRUHorzDockCX=111
 MRUHorzDockCY=30
 MRUVertDockCX=0
 MRUVertDockCY=0
+=======
+PctWidth=41666
+MRUFloatCX=111
+MRUFloatCY=30
+MRUHorzDockCX=111
+MRUHorzDockCY=30
+MRUVertDockCX=31
+MRUVertDockCY=107
+>>>>>>> origin/master
 MRUDockingState=0
 DockingStyle=61440
 TypeID=14946
@@ -1696,6 +2103,7 @@ Title=BookMark
 Buttons=EPALAAAAAADNALAAAAAAFBBLAAAAAAGDBLAAAAAA
 [WorkState_v1_1.DockState.Bar-50]
 BarID=59400
+<<<<<<< HEAD
 XPos=721
 YPos=28
 Docking=True
@@ -1707,10 +2115,25 @@ MRUDockBottomPos=58
 MRUFloatStyle=8196
 MRUFloatXPos=-2147483648
 MRUFloatYPos=774778414
+=======
+XPos=656
+YPos=28
+MRUWidth=157
+Docking=True
+MRUDockID=59419
+MRUDockLeftPos=656
+MRUDockTopPos=28
+MRUDockRightPos=813
+MRUDockBottomPos=58
+MRUFloatStyle=8196
+MRUFloatXPos=-1
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=12212
 ExStyle=780
 PrevFloating=False
 MDIChild=False
+<<<<<<< HEAD
 PctWidth=123862
 MRUFloatCX=0
 MRUFloatCY=0
@@ -1718,6 +2141,15 @@ MRUHorzDockCX=157
 MRUHorzDockCY=30
 MRUVertDockCX=0
 MRUVertDockCY=0
+=======
+PctWidth=83333
+MRUFloatCX=157
+MRUFloatCY=30
+MRUHorzDockCX=157
+MRUHorzDockCY=30
+MRUVertDockCX=31
+MRUVertDockCY=151
+>>>>>>> origin/master
 MRUDockingState=0
 DockingStyle=61440
 TypeID=14946
@@ -1730,6 +2162,7 @@ Title=View
 Buttons=ILAIAAAAAAOBBIAAAAAAIKAIAAAAAAFFAIAAAAAADGBIAAAAAAKMAIAAAAAA
 [WorkState_v1_1.DockState.Bar-51]
 BarID=59398
+<<<<<<< HEAD
 XPos=371
 YPos=28
 Docking=True
@@ -1741,10 +2174,25 @@ MRUDockBottomPos=58
 MRUFloatStyle=8196
 MRUFloatXPos=-2147483648
 MRUFloatYPos=774778414
+=======
+XPos=329
+YPos=28
+MRUWidth=879
+Docking=True
+MRUDockID=59419
+MRUDockLeftPos=329
+MRUDockTopPos=28
+MRUDockRightPos=648
+MRUDockBottomPos=58
+MRUFloatStyle=8196
+MRUFloatXPos=-1
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=12212
 ExStyle=780
 PrevFloating=False
 MDIChild=False
+<<<<<<< HEAD
 PctWidth=247724
 MRUFloatCX=0
 MRUFloatCY=0
@@ -1752,6 +2200,15 @@ MRUHorzDockCX=350
 MRUHorzDockCY=30
 MRUVertDockCX=0
 MRUVertDockCY=0
+=======
+PctWidth=500001
+MRUFloatCX=327
+MRUFloatCY=30
+MRUHorzDockCX=319
+MRUHorzDockCY=30
+MRUVertDockCX=31
+MRUVertDockCY=303
+>>>>>>> origin/master
 MRUDockingState=0
 DockingStyle=61440
 TypeID=14946
@@ -1761,6 +2218,7 @@ ResourceID=0
 ptn_Child1=ToolBarInfoEx
 [WorkState_v1_1.DockState.Bar-51.ToolBarInfoEx]
 Title=Debug
+<<<<<<< HEAD
 Buttons=FJAIAAAAAAAAAAAAAAAAHJAIAAAAAACNAIAAAAAAJBAIAAAAAAGNAIAAAAAAMBAIAAAAAAAAAAAAAAAADHAIAAAAAAPGAIAAAAAAJHAIAAAAAAHHAIAAAAAAAAAAAAAAAAHMAIAAAAAAAAAAAAAAAAFKAIAAAAAAHGAIAAAAAA
 [WorkState_v1_1.DockState.Bar-52]
 BarID=59399
@@ -1776,10 +2234,28 @@ MRUDockBottomPos=58
 MRUFloatStyle=8196
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+Buttons=FJAIAAAAAAHJAIAAAAAACNAIAAAAAAGNAIAAAAAALBAIAAAAAAAAAAAAAAAADHAIAAAAAAPGAIAAAAAAJHAIAAAAAAHHAIAAAAAAAAAAAAAAAAHMAIAAAAAAAAAAAAAAAAFKAIAAAAAAHGAIAAAAAA
+[WorkState_v1_1.DockState.Bar-52]
+BarID=59399
+XPos=195
+YPos=28
+MRUWidth=801
+Docking=True
+MRUDockID=59419
+MRUDockLeftPos=195
+MRUDockTopPos=28
+MRUDockRightPos=329
+MRUDockBottomPos=58
+MRUFloatStyle=8196
+MRUFloatXPos=-1
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=12212
 ExStyle=780
 PrevFloating=False
 MDIChild=False
+<<<<<<< HEAD
 PctWidth=495449
 MRUFloatCX=0
 MRUFloatCY=0
@@ -1787,6 +2263,15 @@ MRUHorzDockCX=134
 MRUHorzDockCY=30
 MRUVertDockCX=0
 MRUVertDockCY=0
+=======
+PctWidth=333333
+MRUFloatCX=134
+MRUFloatCY=30
+MRUHorzDockCX=134
+MRUHorzDockCY=30
+MRUVertDockCX=31
+MRUVertDockCY=129
+>>>>>>> origin/master
 MRUDockingState=0
 DockingStyle=61440
 TypeID=14946
@@ -1800,6 +2285,7 @@ Buttons=JGAIAAAAAALFAIAAAAAAPKBIAAAAAAPMAIAAAAAADGAIAAAAAA
 [WorkState_v1_1.DockState.Bar-53]
 BarID=59401
 Visible=False
+<<<<<<< HEAD
 XPos=195
 YPos=28
 Docking=True
@@ -1811,11 +2297,28 @@ MRUDockBottomPos=58
 MRUFloatStyle=8196
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+XPos=166
+YPos=36
+Docking=True
+MRUDockID=0
+MRUDockLeftPos=166
+MRUDockTopPos=36
+MRUDockRightPos=208
+MRUDockBottomPos=66
+MRUFloatStyle=8196
+MRUFloatXPos=-1833414164
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=12212
 ExStyle=780
 PrevFloating=False
 MDIChild=False
+<<<<<<< HEAD
 PctWidth=497717
+=======
+PctWidth=1000000
+>>>>>>> origin/master
 MRUFloatCX=0
 MRUFloatCY=0
 MRUHorzDockCX=42
@@ -1841,11 +2344,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=774778414
 MRUDockBottomPos=774778414
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=774778414
+=======
+MRUDockRightPos=59141
+MRUDockBottomPos=0
+MRUFloatStyle=4
+MRUFloatXPos=-2147483648
+MRUFloatYPos=266
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1872,11 +2383,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=0
+MRUDockBottomPos=0
+MRUFloatStyle=4
+MRUFloatXPos=-2147483648
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1907,7 +2426,11 @@ MRUDockRightPos=774778414
 MRUDockBottomPos=774778414
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
+<<<<<<< HEAD
 MRUFloatYPos=774778414
+=======
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1934,11 +2457,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=0
+MRUDockBottomPos=0
+MRUFloatStyle=4
+MRUFloatXPos=-2147483648
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -1965,11 +2496,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=774778414
+MRUDockBottomPos=774778414
+MRUFloatStyle=4
+MRUFloatXPos=-2147483648
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -2000,7 +2539,11 @@ MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
+<<<<<<< HEAD
 MRUFloatYPos=808464432
+=======
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -2027,11 +2570,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=41612784
+MRUDockBottomPos=41581400
+MRUFloatStyle=4
+MRUFloatXPos=-2147483648
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -2058,11 +2609,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=0
+MRUDockBottomPos=0
+MRUFloatStyle=4
+MRUFloatXPos=-2147483648
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -2093,7 +2652,11 @@ MRUDockRightPos=774778414
 MRUDockBottomPos=774778414
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
+<<<<<<< HEAD
 MRUFloatYPos=774778414
+=======
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -2120,11 +2683,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=808464432
 MRUDockBottomPos=808464432
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=808464432
+=======
+MRUDockRightPos=0
+MRUDockBottomPos=0
+MRUFloatStyle=4
+MRUFloatXPos=-2147483648
+MRUFloatYPos=0
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -2151,11 +2722,19 @@ Docking=True
 MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=0
+<<<<<<< HEAD
 MRUDockRightPos=774778414
 MRUDockBottomPos=774778414
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=774778414
+=======
+MRUDockRightPos=58327488
+MRUDockBottomPos=58332360
+MRUFloatStyle=4
+MRUFloatXPos=-2147483648
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -2186,7 +2765,11 @@ MRUDockRightPos=774778414
 MRUDockBottomPos=774778414
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
+<<<<<<< HEAD
 MRUFloatYPos=774778414
+=======
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -2217,7 +2800,11 @@ MRUDockRightPos=774778414
 MRUDockBottomPos=774778414
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
+<<<<<<< HEAD
 MRUFloatYPos=774778414
+=======
+MRUFloatYPos=736
+>>>>>>> origin/master
 Style=20372
 ExStyle=3857
 PrevFloating=False
@@ -2243,7 +2830,11 @@ LargeButtons=False
 ptn_Child1=MainFrame
 ptn_Child2=ChildFrames
 [WorkState_v1_1.Frames.MainFrame]
+<<<<<<< HEAD
 WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPKBAAAAAAKBAAAAAALBEAAAAAHCCAAAAA
+=======
+WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPEIAAAAAAEIAAAAAAEEEAAAAANFDAAAAA
+>>>>>>> origin/master
 Title=Silicon Laboratories IDE - [adc]
 [WorkState_v1_1.Frames.ChildFrames]
 ptn_Child1=Document-0
@@ -2253,7 +2844,11 @@ ptn_Child1=ViewFrame-0
 DocPathName=adc.c
 DocumentString=Source File
 DocTemplateIndex=0
+<<<<<<< HEAD
 WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAPPPPPPPPPPPPPPPPIPPPPPPPBOPPPPPPAAAAAAAAAAAAAAAAMPDAAAAAGDBAAAAA
+=======
+WindowPlacement=MCAAAAAACAAAAAAADAAAAAAAPPPPPPPPPPPPPPPPIPPPPPPPBOPPPPPPKBAAAAAAKBAAAAAABHDAAAAADDBAAAAA
+>>>>>>> origin/master
 IsActiveChildFrame=True
 [WorkState_v1_1.ProjectTarget]
 ProjectTarget=C8051F350
@@ -2274,19 +2869,31 @@ Watch1Base=1
 [WorkState_v1_1.Vendor]
 Vendor=0
 [WorkState_v1_1.HITECHPRO]
+<<<<<<< HEAD
 HITECHPRO=1
+=======
+HITECHPRO=0
+>>>>>>> origin/master
 [WorkState_v1_1.Assembler]
 Assembler=C:\Keil\C51\BIN\a51.exe
 [WorkState_v1_1.AssFlag]
 AssFlag=XR GEN DB EP NOMOD51 INCDIR(C:\SiLabs\MCU\Inc)
 [WorkState_v1_1.AssFormat]
+<<<<<<< HEAD
 AssFormat=<Executable Name> <Input File(s)> <Flags> 
+=======
+AssFormat=<Executable Name> <Input File(s)> <Flags>  
+>>>>>>> origin/master
 [WorkState_v1_1.Compiler]
 Compiler=C:\Keil\C51\BIN\C51.exe
 [WorkState_v1_1.CompFlag]
 CompFlag=DB OE BR INCDIR(C:\SiLabs\MCU\Inc)
 [WorkState_v1_1.CompFormat]
+<<<<<<< HEAD
 CompFormat=<Executable Name> <Input File(s)> <Flags> 
+=======
+CompFormat=<Executable Name> <Input File(s)> <Flags>  
+>>>>>>> origin/master
 [WorkState_v1_1.RunOptimizer]
 RunOptimizer=0
 [WorkState_v1_1.Linker]
@@ -2294,11 +2901,19 @@ Linker=C:\Keil\C51\BIN\bl51.exe
 [WorkState_v1_1.LinkFlag]
 LinkFlag=RS(256) PL(68) PW(78)
 [WorkState_v1_1.LinkFormat]
+<<<<<<< HEAD
 LinkFormat=<Executable Name> <Input File(s)> TO <Output File> <Flags> 
 [WorkState_v1_1.PreprocFlag]
 PreprocFlag=
 [WorkState_v1_1.PreprocFormat]
 PreprocFormat=
+=======
+LinkFormat=<Executable Name> <Input File(s)> TO <Output File> <Flags>  
+[WorkState_v1_1.PreprocFlag]
+PreprocFlag=
+[WorkState_v1_1.PreprocFormat]
+PreprocFormat=  
+>>>>>>> origin/master
 [WorkState_v1_1.DisList]
 DisList=1
 [WorkState_v1_1.DisOP]
@@ -2323,7 +2938,11 @@ BitsBeforeTargetIR=0
 [WorkState_v1_1.BankingPN]
 BankingPN=32767
 [WorkState_v1_1.OutputFile]
+<<<<<<< HEAD
 OutputFile=adc
+=======
+OutputFile=..\..\..\..\..\..\..\SiLabs\MCU\Examples\C8051F35x\UART\F35x_UART_STDIO
+>>>>>>> origin/master
 [WorkState_v1_1.MakeFile]
 MakeFile=
 [WorkState_v1_1.HexGenerator]
@@ -2350,6 +2969,7 @@ ptn_Child1=FileName
 FileName=adc.c
 [WorkState_v1_1.AFiles]
 [WorkState_v1_1.CFiles]
+<<<<<<< HEAD
 ptn_Child1=FileName
 [WorkState_v1_1.CFiles.FileName]
 FileName=adc.c
@@ -2357,5 +2977,11 @@ FileName=adc.c
 ptn_Child1=FileName
 [WorkState_v1_1.LFiles.FileName]
 FileName=adc.obj
+=======
+[WorkState_v1_1.LFiles]
+ptn_Child1=FileName
+[WorkState_v1_1.LFiles.FileName]
+FileName=..\adc.obj
+>>>>>>> origin/master
 [WorkState_v1_1.BankMap]
 [WorkState_v1_1.Folders]
