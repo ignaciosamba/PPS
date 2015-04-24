@@ -278,8 +278,6 @@ void ADC0_ISR (void) interrupt 10
                                        // (i.e. 2500 (VREF) * 2^24 (ADC result)
                                        // is greater than 2^32)
 
-<<<<<<< HEAD
-
   // printf("%x\n", ADC0MUX);
    if(ADC0MUX == 0x08)
    printf("AIN0.0 voltage: %4ld mV\n",mV);

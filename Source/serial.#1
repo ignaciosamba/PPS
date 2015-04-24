@@ -65,7 +65,7 @@ void Timer2_Init (int);
 
 void main (void) 
 {
-   unsigned char c;       // Used to store character from UART
+   unsigned char inputcharacter;       // Used to store character from UART
 
    PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer 
                                        // enable)
@@ -73,22 +73,19 @@ void main (void)
    SYSCLK_Init ();                     // Initialize Oscillator
    UART0_Init();
 
+   while (1)
+   {
 
-      printf("-------------------------------------------------------------------\n");
-      printf("-------------------------CONFIGURACION-----------------------------\n");
-      printf("-------------------------------------------------------------------\n");
-      printf("configuracion de sensor...\n");
-      printf("diferencial [D] o singular [S]? \n");
-      c = getchar();
-      if((c != 'S') || (c != 'D'))
-      {
-         
-      }
-
-      printf ("\nCharacter entered : %c",c);
-      printf ("\n      Value in Hex: %bx",c);
-	
-   
+	if(SW2 == 1)
+	printf("no apretado\n");
+	else
+	printf("apretado\n");
+      /*printf ("\nEnter character: ");
+      inputcharacter = getchar ();
+      printf ("\nCharacter entered : %c",inputcharacter);
+      printf ("\n      Value in Hex: %bx",inputcharacter);
+	*/
+   }
 }
 
 //-----------------------------------------------------------------------------
