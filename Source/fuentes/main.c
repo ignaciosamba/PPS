@@ -6,8 +6,12 @@
  * @details [long description]
  */
 #include "headers.h"
+#include "interfaz.h"
+#include "configurador.h"
+ 
 
 void main(void)
 {
-	
+	iniciar_UART();
+	imprimir_menu();
 }

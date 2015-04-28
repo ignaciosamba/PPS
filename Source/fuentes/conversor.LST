@@ -1,16 +1,14 @@
-C51 COMPILER V9.53.0.0   COMUNICACION                                                      04/28/2015 14:24:07 PAGE 1   
+C51 COMPILER V9.53.0.0   CONVERSOR                                                         04/28/2015 14:24:07 PAGE 1   
 
 
-C51 COMPILER V9.53.0.0, COMPILATION OF MODULE COMUNICACION
-OBJECT MODULE PLACED IN comunicacion.OBJ
-COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe comunicacion.c DB OE BR INCDIR(C:\SiLabs\MCU\Inc)
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE CONVERSOR
+OBJECT MODULE PLACED IN conversor.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe conversor.c DB OE BR INCDIR(C:\SiLabs\MCU\Inc)
 
 line level    source
 
    1          #include "headers.h"
-   2          #include "comunicacion.h"
-   3          
-   4          
+   2          #include "conversor.h"
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

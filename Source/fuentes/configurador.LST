@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      04/27/2015 18:58:46 PAGE 1   
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      04/28/2015 14:24:07 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE CONFIGURADOR
@@ -15,7 +15,7 @@ line level    source
    6          
    7          #include "headers.h"
    8          #include "configurador.h"
-   9          #include "comunicacion.h"
+   9          
   10          
   11          int iniciar_ADC(void)
   12          {
@@ -62,7 +62,7 @@ line level    source
   53   2              } 
   54   1              else 
   55   1              {
-C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      04/27/2015 18:58:46 PAGE 2   
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      04/28/2015 14:24:07 PAGE 2   
 
   56   2                      TH1 = -(SYSCLK/BAUDRATE/2/48);
   57   2                      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
@@ -82,13 +82,18 @@ line level    source
   71          {
   72   1              return 0;
   73   1      }
+  74          
+  75          int guardar_configuracionFlash(void)
+  76          {
+  77   1              return 0;
+  78   1      }
 *** WARNING C294 IN LINE 39 OF configurador.c: unreachable code
 *** WARNING C294 IN LINE 45 OF configurador.c: unreachable code
 *** WARNING C294 IN LINE 56 OF configurador.c: unreachable code
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     39    ----
+   CODE SIZE        =     43    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

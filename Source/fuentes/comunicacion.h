@@ -1,1 +1,0 @@
-#define BAUDRATE        9600           // Baudios del UART

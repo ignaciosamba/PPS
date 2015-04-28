@@ -6,7 +6,7 @@
 
 #include "headers.h"
 #include "configurador.h"
-#include "comunicacion.h"
+
 
 int iniciar_ADC(void)
 {
@@ -68,6 +68,11 @@ void iniciar_UART(void)
 }
 
 int cargar_configuracionFlash(void)
+{
+	return 0;
+}
+
+int guardar_configuracionFlash(void)
 {
 	return 0;
 }

@@ -1,21 +1,20 @@
-BL51 BANKED LINKER/LOCATER V6.22              04/27/2015  18:58:46  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22              04/28/2015  14:24:07  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
 C:\KEIL\C51\BIN\BL51.EXE F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\
->> adc.obj, F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\comunicacion.
->> obj, F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\configurador.obj,
->>  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\interfaz.obj, F:\LUCH
->> O\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\main.obj, F:\LUCHO\Facu\Quint
->> o año\PPS\Repo\PPS\Source\fuentes\memoria.obj TO F:\LUCHO\Facu\Quinto año\P
->> PS\Repo\PPS\Source\fuentes\adc RS (256) PL (68) PW (78)
+>> comunicacion.obj, F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\conf
+>> igurador.obj, F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\interfaz
+>> .obj, F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\main.obj, F:\LUC
+>> HO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\memoria.obj, F:\LUCHO\Facu\Q
+>> uinto año\PPS\Repo\PPS\Source\fuentes\conversor.obj TO F:\LUCHO\Facu\Quinto
+>>  año\PPS\Repo\PPS\Source\fuentes\adc RS (256) PL (68) PW (78)
 
 
 MEMORY MODEL: SMALL
 
 
 INPUT MODULES INCLUDED:
-  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\adc.obj (ADC)
   F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\comunicacion.obj (COMUN
 >> ICACION)
   F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\configurador.obj (CONFI
@@ -24,6 +23,8 @@ INPUT MODULES INCLUDED:
 >> 
   F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\main.obj (MAIN)
   F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\memoria.obj (MEMORIA)
+  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\conversor.obj (CONVERSO
+>> R)
   C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
   C:\KEIL\C51\LIB\C51S.LIB (PRINTF)
   C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
@@ -35,7 +36,7 @@ INPUT MODULES INCLUDED:
 
 
 LINK MAP OF MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\adc 
->> (ADC)
+>> (COMUNICACION)
 
 
             TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
@@ -43,9 +44,9 @@ LINK MAP OF MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\adc
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            DATA    0008H     0014H     UNIT         ?DT?PRINTF?PRINTF
+            DATA    0008H     0014H     UNIT         _DATA_GROUP_
                     001CH     0004H                  *** GAP ***
-            BIT     0020H.0   0001H.1   UNIT         ?BI?PRINTF?PRINTF
+            BIT     0020H.0   0001H.1   UNIT         _BIT_GROUP_
                     0021H.1   0000H.7                *** GAP ***
             IDATA   0022H     0001H     UNIT         ?STACK
 
@@ -54,49 +55,65 @@ LINK MAP OF MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\adc
                     0003H     07FDH                  *** GAP ***
             CODE    0800H     035CH     UNIT         ?PR?PRINTF?PRINTF
             CODE    0B5CH     008EH     UNIT         ?C?LIB_CODE
-            CODE    0BEAH     002EH     UNIT         ?CO?INTERFAZ
-            CODE    0C18H     0027H     UNIT         ?PR?PUTCHAR?PUTCHAR
-            CODE    0C3FH     0017H     UNIT         ?PR?INICIAR_UART?CONFIGUR
+            CODE    0BEAH     0027H     UNIT         ?PR?PUTCHAR?PUTCHAR
+            CODE    0C11H     0021H     UNIT         ?CO?INTERFAZ
+            CODE    0C32H     0017H     UNIT         ?PR?INICIAR_UART?CONFIGUR
 >> ADOR
-            CODE    0C56H     000CH     UNIT         ?C_C51STARTUP
-            CODE    0C62H     0009H     UNIT         ?PR?IMPRIMIR_MENU?INTERFA
+            CODE    0C49H     000CH     UNIT         ?C_C51STARTUP
+            CODE    0C55H     0009H     UNIT         ?PR?IMPRIMIR_MENU?INTERFA
 >> Z
-            CODE    0C6BH     0004H     UNIT         ?PR?INICIAR_ADC?CONFIGURA
+            CODE    0C5EH     0006H     UNIT         ?PR?MAIN?MAIN
+            CODE    0C64H     0004H     UNIT         ?PR?INICIAR_ADC?CONFIGURA
 >> DOR
-            CODE    0C6FH     0004H     UNIT         ?PR?INICIAR_INTERRUPCIONE
+            CODE    0C68H     0004H     UNIT         ?PR?INICIAR_INTERRUPCIONE
 >> S?CONFIGURADOR
-            CODE    0C73H     0004H     UNIT         ?PR?INICIAR_FLASH?CONFIGU
+BL51 BANKED LINKER/LOCATER V6.22            04/28/2015  14:24:07  PAGE 2
+
+
+            CODE    0C6CH     0004H     UNIT         ?PR?INICIAR_FLASH?CONFIGU
 >> RADOR
-BL51 BANKED LINKER/LOCATER V6.22            04/27/2015  18:58:46  PAGE 2
-
-
-            CODE    0C77H     0004H     UNIT         ?PR?CARGAR_CONFIGURACIONF
+            CODE    0C70H     0004H     UNIT         ?PR?CARGAR_CONFIGURACIONF
 >> LASH?CONFIGURADOR
-            CODE    0C7BH     0001H     UNIT         ?PR?MAIN?MAIN
+            CODE    0C74H     0004H     UNIT         ?PR?GUARDAR_CONFIGURACION
+>> FLASH?CONFIGURADOR
 
 
 
 OVERLAY MAP OF MODULE:   F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\
->> adc (ADC)
+>> adc (COMUNICACION)
 
 
-SEGMENT
-  +--> CALLED SEGMENT
----------------------
-?C_C51STARTUP
+SEGMENT                                             BIT_GROUP          DATA_GR
+>> OUP 
+  +--> CALLED SEGMENT                            START    LENGTH     START    
+>> LENGTH
+------------------------------------------------------------------------------
+>> ------
+?C_C51STARTUP                                    -----    -----      -----    
+>> -----
   +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                                    -----    -----      -----    
+>> -----
+  +--> ?PR?INICIAR_UART?CONFIGURADOR
+  +--> ?PR?IMPRIMIR_MENU?INTERFAZ
+
+?PR?IMPRIMIR_MENU?INTERFAZ                       -----    -----      -----    
+>> -----
+  +--> ?CO?INTERFAZ
+  +--> ?PR?PRINTF?PRINTF
+
+?PR?PRINTF?PRINTF                                0020H.0  0001H.1    0008H    
+>> 0014H
+  +--> ?PR?PUTCHAR?PUTCHAR
 
 
 
 SYMBOL TABLE OF MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\
->> adc (ADC)
+>> adc (COMUNICACION)
 
   VALUE           TYPE          NAME
   ----------------------------------
-
-  -------         MODULE        ADC
-  C:0000H         SYMBOL        _ICE_DUMMY_
-  -------         ENDMOD        ADC
 
   -------         MODULE        COMUNICACION
   C:0000H         SYMBOL        _ICE_DUMMY_
@@ -104,12 +121,13 @@ SYMBOL TABLE OF MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\
 
   -------         MODULE        CONFIGURADOR
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0C3FH         PUBLIC        iniciar_UART
-  C:0C6BH         PUBLIC        iniciar_ADC
-  C:0C73H         PUBLIC        iniciar_FLASH
+  C:0C32H         PUBLIC        iniciar_UART
+  C:0C64H         PUBLIC        iniciar_ADC
+  C:0C74H         PUBLIC        guardar_configuracionFlash
+  C:0C6CH         PUBLIC        iniciar_FLASH
   D:0089H         PUBLIC        TMOD
-  C:0C77H         PUBLIC        cargar_configuracionFlash
-  C:0C6FH         PUBLIC        iniciar_interrupciones
+  C:0C70H         PUBLIC        cargar_configuracionFlash
+  C:0C68H         PUBLIC        iniciar_interrupciones
   B:0098H.1       PUBLIC        TI0
   D:008DH         PUBLIC        TH1
   D:008BH         PUBLIC        TL1
@@ -117,84 +135,94 @@ SYMBOL TABLE OF MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\
   D:0098H         PUBLIC        SCON0
   D:008EH         PUBLIC        CKCON
   -------         PROC          INICIAR_ADC
-  C:0C6BH         LINE#         11
-  C:0C6BH         LINE#         12
-  C:0C6BH         LINE#         14
-  C:0C6EH         LINE#         15
+BL51 BANKED LINKER/LOCATER V6.22            04/28/2015  14:24:07  PAGE 3
+
+
+  C:0C64H         LINE#         11
+  C:0C64H         LINE#         12
+  C:0C64H         LINE#         14
+  C:0C67H         LINE#         15
   -------         ENDPROC       INICIAR_ADC
   -------         PROC          INICIAR_INTERRUPCIONES
-  C:0C6FH         LINE#         17
-  C:0C6FH         LINE#         18
-  C:0C6FH         LINE#         20
-  C:0C72H         LINE#         21
+  C:0C68H         LINE#         17
+  C:0C68H         LINE#         18
+  C:0C68H         LINE#         20
+  C:0C6BH         LINE#         21
   -------         ENDPROC       INICIAR_INTERRUPCIONES
   -------         PROC          INICIAR_FLASH
-  C:0C73H         LINE#         23
-  C:0C73H         LINE#         24
-  C:0C73H         LINE#         26
-  C:0C76H         LINE#         27
+  C:0C6CH         LINE#         23
+  C:0C6CH         LINE#         24
+  C:0C6CH         LINE#         26
+  C:0C6FH         LINE#         27
   -------         ENDPROC       INICIAR_FLASH
   -------         PROC          INICIAR_UART
-BL51 BANKED LINKER/LOCATER V6.22            04/27/2015  18:58:46  PAGE 3
-
-
-  C:0C3FH         LINE#         29
-  C:0C3FH         LINE#         30
-  C:0C3FH         LINE#         32
-  C:0C42H         LINE#         37
-  C:0C42H         LINE#         38
-  C:0C42H         LINE#         39
-  C:0C42H         LINE#         40
-  C:0C42H         LINE#         41
-  C:0C42H         LINE#         42
-  C:0C42H         LINE#         43
-  C:0C42H         LINE#         44
-  C:0C42H         LINE#         45
-  C:0C42H         LINE#         46
-  C:0C42H         LINE#         47
-  C:0C42H         LINE#         48
-  C:0C42H         LINE#         49
-  C:0C42H         LINE#         50
-  C:0C42H         LINE#         51
-  C:0C45H         LINE#         52
-  C:0C48H         LINE#         53
-  C:0C48H         LINE#         55
-  C:0C48H         LINE#         56
-  C:0C48H         LINE#         57
-  C:0C48H         LINE#         58
-  C:0C48H         LINE#         59
-  C:0C48H         LINE#         61
-  C:0C4BH         LINE#         62
-  C:0C4EH         LINE#         63
-  C:0C51H         LINE#         64
-  C:0C53H         LINE#         65
-  C:0C55H         LINE#         68
+  C:0C32H         LINE#         29
+  C:0C32H         LINE#         30
+  C:0C32H         LINE#         32
+  C:0C35H         LINE#         37
+  C:0C35H         LINE#         38
+  C:0C35H         LINE#         39
+  C:0C35H         LINE#         40
+  C:0C35H         LINE#         41
+  C:0C35H         LINE#         42
+  C:0C35H         LINE#         43
+  C:0C35H         LINE#         44
+  C:0C35H         LINE#         45
+  C:0C35H         LINE#         46
+  C:0C35H         LINE#         47
+  C:0C35H         LINE#         48
+  C:0C35H         LINE#         49
+  C:0C35H         LINE#         50
+  C:0C35H         LINE#         51
+  C:0C38H         LINE#         52
+  C:0C3BH         LINE#         53
+  C:0C3BH         LINE#         55
+  C:0C3BH         LINE#         56
+  C:0C3BH         LINE#         57
+  C:0C3BH         LINE#         58
+  C:0C3BH         LINE#         59
+  C:0C3BH         LINE#         61
+  C:0C3EH         LINE#         62
+  C:0C41H         LINE#         63
+  C:0C44H         LINE#         64
+  C:0C46H         LINE#         65
+  C:0C48H         LINE#         68
   -------         ENDPROC       INICIAR_UART
   -------         PROC          CARGAR_CONFIGURACIONFLASH
-  C:0C77H         LINE#         70
-  C:0C77H         LINE#         71
-  C:0C77H         LINE#         72
-  C:0C7AH         LINE#         73
+  C:0C70H         LINE#         70
+  C:0C70H         LINE#         71
+  C:0C70H         LINE#         72
+  C:0C73H         LINE#         73
   -------         ENDPROC       CARGAR_CONFIGURACIONFLASH
+  -------         PROC          GUARDAR_CONFIGURACIONFLASH
+  C:0C74H         LINE#         75
+  C:0C74H         LINE#         76
+  C:0C74H         LINE#         77
+  C:0C77H         LINE#         78
+  -------         ENDPROC       GUARDAR_CONFIGURACIONFLASH
   -------         ENDMOD        CONFIGURADOR
 
   -------         MODULE        INTERFAZ
+BL51 BANKED LINKER/LOCATER V6.22            04/28/2015  14:24:07  PAGE 4
+
+
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0C62H         PUBLIC        imprimir_menu
+  C:0C55H         PUBLIC        imprimir_menu
   -------         PROC          IMPRIMIR_MENU
-  C:0C62H         LINE#         4
-  C:0C62H         LINE#         5
-  C:0C62H         LINE#         6
+  C:0C55H         LINE#         4
+  C:0C55H         LINE#         5
+  C:0C55H         LINE#         6
   -------         ENDPROC       IMPRIMIR_MENU
   -------         ENDMOD        INTERFAZ
 
   -------         MODULE        MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0C7BH         PUBLIC        main
+  C:0C5EH         PUBLIC        main
   -------         PROC          MAIN
-  C:0C7BH         LINE#         10
-  C:0C7BH         LINE#         11
-  C:0C7BH         LINE#         13
+  C:0C5EH         LINE#         13
+  C:0C5EH         LINE#         14
+  C:0C5EH         LINE#         15
+  C:0C61H         LINE#         16
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
@@ -202,10 +230,11 @@ SYMBOL TABLE OF MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\
   C:0000H         SYMBOL        _ICE_DUMMY_
   -------         ENDMOD        MEMORIA
 
+  -------         MODULE        CONVERSOR
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  -------         ENDMOD        CONVERSOR
+
   -------         MODULE        PRINTF
-BL51 BANKED LINKER/LOCATER V6.22            04/27/2015  18:58:46  PAGE 4
-
-
   D:0008H         PUBLIC        ?_PRINTF517?BYTE
   D:0008H         PUBLIC        ?_PRINTF?BYTE
   D:0008H         PUBLIC        ?_SPRINTF517?BYTE
@@ -237,11 +266,14 @@ SYMBOL TABLE OF MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\
   -------         ENDMOD        ?C?CCASE
 
   -------         MODULE        PUTCHAR
-  C:0C18H         PUBLIC        _PUTCHAR
+  C:0BEAH         PUBLIC        _PUTCHAR
   -------         ENDMOD        PUTCHAR
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?INICIAR_ADC?CONFIGURADOR
+BL51 BANKED LINKER/LOCATER V6.22            04/28/2015  14:24:07  PAGE 5
+
+
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?INICIAR_INTERRUPCIONES?CONFIGURADOR
@@ -250,20 +282,17 @@ SYMBOL TABLE OF MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\
     SEGMENT: ?PR?INICIAR_FLASH?CONFIGURADOR
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INICIAR_UART?CONFIGURADOR
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?CARGAR_CONFIGURACIONFLASH?CONFIGURADOR
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?IMPRIMIR_MENU?INTERFAZ
+    SEGMENT: ?PR?GUARDAR_CONFIGURACIONFLASH?CONFIGURADOR
 
 ******************************************************************************
 >> 
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 005FH BYTE ( 4%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 005BH BYTE ( 4%) *
 >> 
 ******************************************************************************
 >> 
 
-Program Size: data=30.1 xdata=0 code=1151
-LINK/LOCATE RUN COMPLETE.  6 WARNING(S),  0 ERROR(S)
+Program Size: data=30.1 xdata=0 code=1147
+LINK/LOCATE RUN COMPLETE.  5 WARNING(S),  0 ERROR(S)
