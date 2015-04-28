@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   INTERFAZ                                                          04/28/2015 14:24:07 PAGE 1   
+C51 COMPILER V9.53.0.0   INTERFAZ                                                          04/28/2015 16:46:39 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE INTERFAZ
@@ -12,19 +12,72 @@ line level    source
    3          
    4          void imprimir_menu(void)
    5          {
-   6   1              printf("bienvenido al menu de la placa.\n");
-   7   1      }
+   6   1              printf("\n Menú de configuracion\n");
+   7   1              printf("1. Configuración de ADC\n");
+   8   1              printf("2. Modos de transmision de datos\n");
+   9   1              printf("3. Tipo de comunicacion serial\n");
+  10   1              printf("4. Guardar la configuracion\n");
+  11   1              printf("5. Salir\n");
+  12   1      }
+  13          
+  14          void imprimir_conf_ADC(void)
+  15          {
+  16   1              printf("\n1. Configurar pins en modo single-ended\n");
+  17   1              printf("2. Configurar pins en modo diferencial\n");
+  18   1              printf("3. Configurar ganancia\n");
+  19   1      }
+  20          
+  21          void imprimir_conf_modos(void)
+  22          {
+  23   1              printf("\n1. Por peticion de dispositivo externo\n");
+  24   1              printf("2. Flujo constante\n");
+  25   1              printf("3. Por vencimiento de temporarizador\n");
+  26   1      }
+  27          
+  28          void imprimir_conf_tipoSerial(void)
+  29          {
+  30   1              printf("\n1. RS232\n");
+  31   1              printf("2. I2C\n");     
+  32   1      }
+  33          
+  34          
+  35          void correr_menu(void)
+  36          {
+  37   1              char c_opcion;
+  38   1              int opcion;
+  39   1      
+  40   1              imprimir_menu();
+  41   1      
+  42   1                      c_opcion = getchar();
+  43   1                      // printf("%c\n", c_opcion);
+  44   1      /*              if(c_opcion == '1')
+  45   1                              printf("YEAH\n");
+  46   1                      else printf("FUCK\n");*/
+  47   1              
+  48   1              switch(c_opcion)
+  49   1              {
+  50   2                      case '1': imprimir_conf_ADC(); break;
+  51   2                      case '2': imprimir_conf_modos(); break;
+  52   2                      case '3': imprimir_conf_tipoSerial(); break;
+  53   2                      default: printf("default!!\n");
+  54   2                      break;
+  55   2              }
+C51 COMPILER V9.53.0.0   INTERFAZ                                                          04/28/2015 16:46:39 PAGE 2   
+
+  56   1      
+  57   1      }
+*** WARNING C280 IN LINE 38 OF interfaz.c: 'opcion': unreferenced local variable
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =      9    ----
-   CONSTANT SIZE    =     33    ----
+   CODE SIZE        =    163    ----
+   CONSTANT SIZE    =    392    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
+   DATA SIZE        =   ----       2
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

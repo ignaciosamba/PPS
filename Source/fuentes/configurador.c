@@ -8,6 +8,21 @@
 #include "configurador.h"
 
 
+void iniciar_puertos (void)
+{
+   P0MDOUT |= 0x10;                    // Enable UTX as push-pull output
+   XBR0     = 0x01;                    // Enable UART on P0.4(TX) and P0.5(RX)                     
+   XBR1     = 0x40;                    // Enable crossbar and weak pull-ups
+}
+
+void iniciar_sysclock (void)
+{
+   OSCICN |= 0x03;                     // Configure internal oscillator for
+                                       // its maximum frequency
+   RSTSRC  = 0x04;                     // Enable missing clock detector
+}
+
+
 int iniciar_ADC(void)
 {
 	
@@ -26,7 +41,7 @@ int iniciar_FLASH(void)
 	return 0;
 }
 
-void iniciar_UART(void)
+int iniciar_UART(void)
 {
 
 	SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
@@ -64,7 +79,7 @@ void iniciar_UART(void)
 	TR1 = 1;                            // START Timer1
 	TI0 = 1;                            // Indicate TX0 ready
 
-
+	return 0;
 }
 
 int cargar_configuracionFlash(void)

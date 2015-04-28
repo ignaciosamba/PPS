@@ -1,5 +1,9 @@
 int iniciar_ADC(void);
 int iniciar_interrupciones(void);
 int iniciar_FLASH(void);
-void iniciar_UART(void);
+int iniciar_UART(void);
 int cargar_configuracionFlash(void);
+void iniciar_puertos (void);
+void iniciar_sysclock (void);
+
+#define BAUDRATE        9600           // Baudios del UART
