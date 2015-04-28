@@ -7,8 +7,8 @@
 
  static char * test_UART() 
 { 
-	// res = funcio();
-    mu_assert("error, funcion_1 no respondio 10",res == 10);
+
+    mu_assert("error, iniciar_UART no devolvio 0", iniciar_UART());
     return 0;
 }
  

@@ -6,12 +6,10 @@
  int err;
 
  
- int main(void) {
+ void main(void) {
 
-    // if()
+    if((err = run_test_comunicacion()) != 1)
+        printf("error en comunicacion.c\n");
+    tests_run++;
 
-    else {
-          printf("TEST PASSED\n");
-    } 
-     return result != 0;
  }
