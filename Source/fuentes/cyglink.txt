@@ -3,4 +3,5 @@
 "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\conversor.obj",
 "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\interfaz.obj",
 "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\memoria.obj",
-"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_comunicacion.obj"  TO "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\comunicacion" RS(256) PL(68) PW(78) 
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_comunicacion.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_global.obj"  TO "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\comunicacion" RS(256) PL(68) PW(78) 

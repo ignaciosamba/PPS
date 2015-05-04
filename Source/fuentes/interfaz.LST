@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   INTERFAZ                                                          04/28/2015 16:46:39 PAGE 1   
+C51 COMPILER V9.53.0.0   INTERFAZ                                                          05/04/2015 17:31:11 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE INTERFAZ
@@ -62,7 +62,7 @@ line level    source
   53   2                      default: printf("default!!\n");
   54   2                      break;
   55   2              }
-C51 COMPILER V9.53.0.0   INTERFAZ                                                          04/28/2015 16:46:39 PAGE 2   
+C51 COMPILER V9.53.0.0   INTERFAZ                                                          05/04/2015 17:31:11 PAGE 2   
 
   56   1      
   57   1      }

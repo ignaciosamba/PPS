@@ -7,8 +7,7 @@
 
  static char * test_UART() 
 { 
-
-    mu_assert("error, iniciar_UART no devolvio 0", iniciar_UART());
+    mu_assert("\n     error, iniciar_UART no devolvio 0\n", 0);
     return 0;
 }
  
@@ -26,7 +25,7 @@
          printf("%s\n", result);
      }
      else {
-          printf("TEST PASSED\n");
+          // printf("TEST PASSED\n");
      } 
      return result != 0;
  }

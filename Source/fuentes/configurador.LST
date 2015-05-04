@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      04/28/2015 16:46:39 PAGE 1   
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/04/2015 17:31:11 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE CONFIGURADOR
@@ -34,77 +34,99 @@ line level    source
   25          
   26          int iniciar_ADC(void)
   27          {
-  28   1              
-  29   1              return 0;
-  30   1      }
-  31          
-  32          int iniciar_interrupciones(void)
-  33          {
-  34   1              
-  35   1              return 0;
-  36   1      }
-  37          
-  38          int iniciar_FLASH(void)
-  39          {
-  40   1              
-  41   1              return 0;
-  42   1      }
-  43          
-  44          int iniciar_UART(void)
-  45          {
-  46   1      
-  47   1              SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
-  48   1                                                 //        level of STOP bit is ignored
-  49   1                                                 //        RX enabled
-  50   1                                                 //        ninth bits are zeros
-  51   1                                                 //        clear RI0 and TI0 bits
-  52   1              if (SYSCLK/BAUDRATE/2/256 < 1) 
-  53   1              {
-  54   2                      TH1 = -(SYSCLK/BAUDRATE/2);
-  55   2                      CKCON &= ~0x0B;                  // T1M = 1; SCA1:0 = xx
-C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      04/28/2015 16:46:39 PAGE 2   
+  28   1              // REF0CN |= 0x03;                     // Enable internal Vref
+  29   1              // ADC0CN = 0x00;                      // Gain = 1, Unipolar mode
+  30   1              // ADC0CF = 0x00;                      // Interrupts upon SINC3 filter output
+  31   1              //                                    // and uses internal VREF
+  32   1      
+  33   1              // ADC0CLK = (SYSCLK/MDCLK)-1;         // Generate MDCLK for modulator.
+  34   1              //                                    // Ideally MDCLK = 2.4576MHz
+  35   1      
+  36   1              // // Program decimation rate for desired OWR
+  37   1              // ADC0DEC = ((unsigned long) MDCLK / (unsigned long) OWR /
+  38   1              //           (unsigned long) 128) - 1;
+  39   1      
+  40   1              // ADC0BUF = 0x00;                     // Turn off Input Buffers
+  41   1              // ADC0MUX = 0x28;                     // Select AIN0.2
+  42   1      
+  43   1              // ADC0MD = 0x81;                      // Start internal calibration
+  44   1              // while(AD0CALC != 1);                // Wait until calibration is complete
+  45   1      
+  46   1              // EIE1   |= 0x08;                     // Enable ADC0 Interrupts
+  47   1              // ADC0MD  = 0x80;                     // Enable the ADC0 (IDLE Mode)
+  48   1              
+  49   1              return 0;
+  50   1      }
+  51          
+  52          int iniciar_interrupciones(void)
+  53          {
+  54   1              
+  55   1              return 0;
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/04/2015 17:31:11 PAGE 2   
 
-  56   2                      CKCON |=  0x08;
-  57   2              } 
-  58   1              else if (SYSCLK/BAUDRATE/2/256 < 4) 
-  59   1              {
-  60   2                      TH1 = -(SYSCLK/BAUDRATE/2/4);
-  61   2                      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01                  
-  62   2                      CKCON |=  0x01;
-  63   2              } 
-  64   1              else if (SYSCLK/BAUDRATE/2/256 < 12) 
-  65   1              {
-  66   2                      TH1 = -(SYSCLK/BAUDRATE/2/12);
-  67   2                      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00
-  68   2              } 
-  69   1              else 
-  70   1              {
-  71   2                      TH1 = -(SYSCLK/BAUDRATE/2/48);
-  72   2                      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
-  73   2                      CKCON |=  0x02;
-  74   2              }
-  75   1      
-  76   1              TL1 = TH1;                          // Init Timer1
-  77   1              TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
-  78   1              TMOD |=  0x20;                       
-  79   1              TR1 = 1;                            // START Timer1
-  80   1              TI0 = 1;                            // Indicate TX0 ready
-  81   1      
-  82   1              return 0;
-  83   1      }
-  84          
-  85          int cargar_configuracionFlash(void)
-  86          {
-  87   1              return 0;
-  88   1      }
-  89          
-  90          int guardar_configuracionFlash(void)
-  91          {
-  92   1              return 0;
-  93   1      }
-*** WARNING C294 IN LINE 54 OF configurador.c: unreachable code
-*** WARNING C294 IN LINE 60 OF configurador.c: unreachable code
-*** WARNING C294 IN LINE 71 OF configurador.c: unreachable code
+  56   1      }
+  57          
+  58          int iniciar_FLASH(void)
+  59          {
+  60   1              
+  61   1              return 0;
+  62   1      }
+  63          
+  64          int iniciar_UART(void)
+  65          {
+  66   1      
+  67   1              SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
+  68   1                                                 //        level of STOP bit is ignored
+  69   1                                                 //        RX enabled
+  70   1                                                 //        ninth bits are zeros
+  71   1                                                 //        clear RI0 and TI0 bits
+  72   1              if (SYSCLK/BAUDRATE/2/256 < 1) 
+  73   1              {
+  74   2                      TH1 = -(SYSCLK/BAUDRATE/2);
+  75   2                      CKCON &= ~0x0B;                  // T1M = 1; SCA1:0 = xx
+  76   2                      CKCON |=  0x08;
+  77   2              } 
+  78   1              else if (SYSCLK/BAUDRATE/2/256 < 4) 
+  79   1              {
+  80   2                      TH1 = -(SYSCLK/BAUDRATE/2/4);
+  81   2                      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01                  
+  82   2                      CKCON |=  0x01;
+  83   2              } 
+  84   1              else if (SYSCLK/BAUDRATE/2/256 < 12) 
+  85   1              {
+  86   2                      TH1 = -(SYSCLK/BAUDRATE/2/12);
+  87   2                      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00
+  88   2              } 
+  89   1              else 
+  90   1              {
+  91   2                      TH1 = -(SYSCLK/BAUDRATE/2/48);
+  92   2                      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
+  93   2                      CKCON |=  0x02;
+  94   2              }
+  95   1      
+  96   1              TL1 = TH1;                          // Init Timer1
+  97   1              TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
+  98   1              TMOD |=  0x20;                       
+  99   1              TR1 = 1;                            // START Timer1
+ 100   1              TI0 = 1;                            // Indicate TX0 ready
+ 101   1      
+ 102   1              return 0;
+ 103   1      }
+ 104          
+ 105          int cargar_configuracionFlash(void)
+ 106          {
+ 107   1              return 0;
+ 108   1      }
+ 109          
+ 110          int guardar_configuracionFlash(void)
+ 111          {
+ 112   1              return 0;
+ 113   1      }
+*** WARNING C294 IN LINE 74 OF configurador.c: unreachable code
+*** WARNING C294 IN LINE 80 OF configurador.c: unreachable code
+*** WARNING C294 IN LINE 91 OF configurador.c: unreachable code
+
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/04/2015 17:31:11 PAGE 3   
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
