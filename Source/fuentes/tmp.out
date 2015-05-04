@@ -7,7 +7,8 @@ COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2009
 "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\interfaz.obj",
 "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\memoria.obj",
 "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_comunicacion.obj",
-"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_global.obj"  TO "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\comunicacion" RS(256) PL(68) PW(78) 
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_global.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\interrupciones.obj"  TO "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\comunicacion" RS(256) PL(68) PW(78) 
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?INICIAR_ADC?CONFIGURADOR
@@ -25,14 +26,25 @@ COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2009
     SEGMENT: ?PR?GUARDAR_CONFIGURACIONFLASH?CONFIGURADOR
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?IMPRIMIR_CONF_MODO_SINGLE_ENDED?INTERFAZ
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?IMPRIMIR_CONF_MODO_DIFERENCIAL?INTERFAZ
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?CORRER_MENU?INTERFAZ
 
+*** WARNING L15: MULTIPLE CALL TO SEGMENT
+    SEGMENT: ?PR?PRINTF?PRINTF
+    CALLER1: ?PR?ADC0_ISR?INTERRUPCIONES
+    CALLER2: ?C_C51STARTUP
+
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0386H BYTE (44%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0564H BYTE (67%) *
 ******************************************************************************
 
 >> 
 >> 
 >> 
-Program Size: data=46.2 xdata=0 code=2114
-LINK/LOCATE RUN COMPLETE.  6 WARNING(S),  0 ERROR(S)
+Program Size: data=71.3 xdata=0 code=2798
+LINK/LOCATE RUN COMPLETE.  9 WARNING(S),  0 ERROR(S)

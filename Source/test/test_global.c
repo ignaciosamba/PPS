@@ -1,6 +1,6 @@
 #include "minunit.h"
 #include "../fuentes/headers.h"
-#include "../fuentes/configuracion.h"
+#include "../fuentes/configurador.h"
 #include "test_headers/test_comunicacion.h"
 
 

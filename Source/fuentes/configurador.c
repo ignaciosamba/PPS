@@ -17,49 +17,37 @@ void iniciar_puertos (void)
 
 void iniciar_sysclock (void)
 {
-   OSCICN |= 0x03;                     // Configure internal oscillator for
-                                       // its maximum frequency
+   OSCICN |= 0x03;                     // configuracion del oscilador para la maxima frecuencia
    RSTSRC  = 0x04;                     // Enable missing clock detector
 }
 
 
 int iniciar_ADC(void)
 {
-	// REF0CN |= 0x03;                     // Enable internal Vref
-	// ADC0CN = 0x00;                      // Gain = 1, Unipolar mode
-	// ADC0CF = 0x00;                      // Interrupts upon SINC3 filter output
-	//                                    // and uses internal VREF
+	REF0CN |= 0x03;                     // Enable internal Vref
+	ADC0CN = 0x00;                      // Gain = 1, Unipolar mode
+	ADC0CF = 0x00;                      // Interrupts upon SINC3 filter output
+	                                   // and uses internal VREF
 
-	// ADC0CLK = (SYSCLK/MDCLK)-1;         // Generate MDCLK for modulator.
-	//                                    // Ideally MDCLK = 2.4576MHz
+	ADC0CLK = (SYSCLK/MDCLK)-1;         // Generate MDCLK for modulator.
+	                                   // Ideally MDCLK = 2.4576MHz
 
-	// // Program decimation rate for desired OWR
-	// ADC0DEC = ((unsigned long) MDCLK / (unsigned long) OWR /
-	//           (unsigned long) 128) - 1;
+	// Program decimation rate for desired OWR
+	ADC0DEC = ((unsigned long) MDCLK / (unsigned long) OWR /
+	          (unsigned long) 128) - 1;
 
-	// ADC0BUF = 0x00;                     // Turn off Input Buffers
-	// ADC0MUX = 0x28;                     // Select AIN0.2
+	ADC0BUF = 0x00;                     // Turn off Input Buffers
+	ADC0MUX = 0x28;                     // Select AIN0.2
 
-	// ADC0MD = 0x81;                      // Start internal calibration
-	// while(AD0CALC != 1);                // Wait until calibration is complete
+	ADC0MD = 0x81;                      // Start internal calibration
+	while(AD0CALC != 1);                // Wait until calibration is complete
 
-	// EIE1   |= 0x08;                     // Enable ADC0 Interrupts
-	// ADC0MD  = 0x80;                     // Enable the ADC0 (IDLE Mode)
+	EIE1   |= 0x08;                     // Enable ADC0 Interrupts
+	ADC0MD  = 0x80;                     // Enable the ADC0 (IDLE Mode)
 	
 	return 0;
 }
 
-int iniciar_interrupciones(void)
-{
-	
-	return 0;
-}
-
-int iniciar_FLASH(void)
-{
-	
-	return 0;
-}
 
 int iniciar_UART(void)
 {
@@ -99,6 +87,18 @@ int iniciar_UART(void)
 	TR1 = 1;                            // START Timer1
 	TI0 = 1;                            // Indicate TX0 ready
 
+	return 0;
+}
+
+int iniciar_interrupciones(void)
+{
+	
+	return 0;
+}
+
+int iniciar_FLASH(void)
+{
+	
 	return 0;
 }
 
