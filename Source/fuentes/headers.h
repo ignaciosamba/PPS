@@ -22,7 +22,12 @@ sfr16 ADC0DEC = 0x9A;                  // ADC0 Decimation Ratio Register
 #define Byte1 2
 #define Byte0 3
 
+/*typedefs*/
+
 typedef union LONGDATA{                // Access LONGDATA as an
    unsigned long result;               // unsigned long variable or
    unsigned char Byte[4];              // 4 unsigned byte variables
 }LONGDATA;
+
+typedef char byte;
+#define ARRAYSIZE 8

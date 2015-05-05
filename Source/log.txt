@@ -10,4 +10,7 @@ IDEAS DE TESTS
 -para testear al adc, que inicie la configuracion y analice el registro en el que se activa el bit de end of conversion, si se activa, el adc anda por lo menos. Ya mas tarde cuando esten bien hechas las funciones de configuracion, hay que testear valores esperados para el adc dada una configuracion.
 
 
-HOLAAAAAAAAAAAAAAAAAAa
+POR AHORA
+
+por ahora lo que voy a hacer, para no romperme la cabeza con la configuracion de los pines. es que lea todos los pines de pecho y pase toda la informacion siempre. despues lo voy detallando de a poco.
+	Entonces por ahora va a haber un primer prototipo.. no tiene un carajo de configuracion. lo conectas y de pecho te entra a mandar informacion de las 8 patas del adc en modo single ended.

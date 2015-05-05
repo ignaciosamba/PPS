@@ -2,7 +2,6 @@
 #include "interfaz.h"
 
 ///MENU DE CONFIGURACION
-
 void imprimir_menu(void)
 {
 	printf("\n Menú de configuracion\n");

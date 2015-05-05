@@ -8,6 +8,7 @@
 #include "configurador.h"
 
 
+
 void iniciar_puertos (void)
 {
    P0MDOUT |= 0x10;                    // Enable UTX as push-pull output
