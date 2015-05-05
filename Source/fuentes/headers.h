@@ -31,3 +31,14 @@ typedef union LONGDATA{                // Access LONGDATA as an
 
 typedef char byte;
 #define ARRAYSIZE 8
+
+typedef enum { false, true } bool;
+
+// /*variables globales*/
+// unsigned long dato_convertido;
+// unsigned short pin_actual;
+
+
+/*FLAGS globales*/
+
+extern bool f_dato_convertido;

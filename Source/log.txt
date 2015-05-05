@@ -13,4 +13,8 @@ IDEAS DE TESTS
 POR AHORA
 
 por ahora lo que voy a hacer, para no romperme la cabeza con la configuracion de los pines. es que lea todos los pines de pecho y pase toda la informacion siempre. despues lo voy detallando de a poco.
-	Entonces por ahora va a haber un primer prototipo.. no tiene un carajo de configuracion. lo conectas y de pecho te entra a mandar informacion de las 8 patas del adc en modo single ended.
+Entonces por ahora va a haber un primer prototipo.. no tiene un carajo de configuracion. lo conectas y de pecho te entra a mandar informacion de las 8 patas del adc en modo single ended.
+
+PRIMER PROTOTIPO
+
+va a entregar los datos que reciba de las 8 patas todo el tiempo a una frecuencia fija en modo single-ended. Con una tension de referencia de 2.5V. Cuando tiene el dato listo lo imprime por la UART.

@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   INTERRUPCIONES                                                    05/04/2015 20:24:22 PAGE 1   
+C51 COMPILER V9.53.0.0   INTERRUPCIONES                                                    05/05/2015 17:13:25 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE INTERRUPCIONES
@@ -20,53 +20,19 @@ line level    source
   11          
   12          void ADC0_ISR (void) interrupt 10
   13          {
-  14   1         static LONGDATA rawValue;
-  15   1         unsigned long mV;
-  16   1      
-  17   1         while(!AD0INT);                     // Wait till conversion complete
-  18   1         AD0INT = 0;                         // Clear ADC0 conversion complete flag
-  19   1      
-  20   1         // Copy the output value of the ADC
-  21   1         rawValue.Byte[Byte3] = 0x00;
-  22   1         rawValue.Byte[Byte2] = (unsigned char)ADC0H;
-  23   1         rawValue.Byte[Byte1] = (unsigned char)ADC0M;
-  24   1         rawValue.Byte[Byte0] = (unsigned char)ADC0L;
-  25   1      
-  26   1         //                           Vref (mV)
-  27   1         //   measurement (mV) =   --------------- * result (bits)
-  28   1         //                       (2^24)-1 (bits)
-  29   1         //
-  30   1         //   measurement (mV) =  result (bits) / ((2^24)-1 (bits) / Vref (mV))
-  31   1         //
-  32   1         //
-  33   1         //   With a Vref (mV) of 2500:
-  34   1         //
-  35   1         //   measurement (mV) =  result (bits) / ((2^24)-1 / 2500)
-  36   1         //
-  37   1         //   measurement (mV) =  result (bits) / ((2^24)-1 / 2500)
-  38   1         //
-  39   1         //   measurement (mV) =  result (bits) / (16777215 / 2500)
-  40   1         //
-  41   1         //   measurement (mV) =  result (bits) / (6710)
-  42   1      
-  43   1         mV = rawValue.result / 6710;        // Because of bounds issues, this
-  44   1                                             // calculation has been manipulated as
-  45   1                                             // shown above
-  46   1                                             // (i.e. 2500 (VREF) * 2^24 (ADC result)
-  47   1                                             // is greater than 2^32)
-  48   1      
-  49   1         printf("AIN0.2 voltage: %4ld mV\n",mV);
-  50   1      }
+  14   1         printf("hola, acabo de convertir\n");
+  15   1         while(!AD0INT);                     // Wait till conversion complete
+  16   1         AD0INT = 0;                         // Clear ADC0 conversion complete flag
+  17   1         f_dato_convertido = true;
+  18   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    108    ----
-   CONSTANT SIZE    =     25    ----
-C51 COMPILER V9.53.0.0   INTERRUPCIONES                                                    05/04/2015 20:24:22 PAGE 2   
-
+   CODE SIZE        =     73    ----
+   CONSTANT SIZE    =     26    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      4    ----
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

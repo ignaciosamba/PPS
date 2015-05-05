@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   MAIN                                                              04/28/2015 16:13:04 PAGE 1   
+C51 COMPILER V9.53.0.0   MAIN                                                              05/05/2015 17:13:24 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE MAIN
@@ -10,39 +10,60 @@ line level    source
    1          /**
    2           * @file main.c
    3           * @author Sambataro, Ignacio; Mantovani, Luciano
-   4           * @date Año 2015
+   4           * @date 2015
    5           * @brief [brief description]
    6           * @details [long description]
    7           */
    8          #include "headers.h"
    9          #include "interfaz.h"
   10          #include "configurador.h"
-  11           
-  12          
-  13          void main(void)
-  14          {
-  15   1      
-  16   1              PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer 
-  17   1      
+  11          #include "conversor.h"
+  12           
+  13          unsigned long dato_a_enviar;
+  14          bool f_dato_convertido;
+  15          
+  16          void main(void)
+  17          {
   18   1      
-  19   1              iniciar_puertos();
-  20   1              iniciar_sysclock();
-  21   1              iniciar_UART();
-  22   1              correr_menu();
-  23   1      
-  24   1              while(1);
-  25   1      }
+  19   1              PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer 
+  20   1      
+  21   1      
+  22   1              iniciar_sysclock();
+  23   1              iniciar_puertos();
+  24   1              iniciar_UART();
+  25   1              iniciar_ADC();
+  26   1              // correr_menu();
+  27   1      
+  28   1              AD0INT = 0;
+  29   1              ADC0MD = 0x83;                      // Start continuous conversions
+  30   1              EA = 1;                             // Enable global interrupts
+  31   1      
+  32   1              while(1)
+  33   1              {
+  34   2                      // printf("no entraaa\n");
+  35   2                      if(f_dato_convertido)
+  36   2                      {
+  37   3                              printf("AAAAAAAAAAAAAAA\n");
+  38   3                              f_dato_convertido = false;
+  39   3                              dato_a_enviar = convertir();
+  40   3                              enviar_dato(dato_a_enviar);
+  41   3                              cambiar_pin ();
+  42   3                      }
+  43   2              }
+  44   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     17    ----
-   CONSTANT SIZE    =   ----    ----
+   CODE SIZE        =     57    ----
+   CONSTANT SIZE    =     17    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
+   DATA SIZE        =      5    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
+
+C51 COMPILER V9.53.0.0   MAIN                                                              05/05/2015 17:13:24 PAGE 2   
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

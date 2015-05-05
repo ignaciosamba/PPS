@@ -3,15 +3,11 @@ BL51 BANKED LINKER/LOCATER V6.22 - SN: Eval Version
 COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2009
 "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\comunicacion.obj",
 "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\configurador.obj",
-"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\conversor.obj",
 "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\interfaz.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\main.obj",
 "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\memoria.obj",
-"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_comunicacion.obj",
-"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_global.obj",
-"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\interrupciones.obj"  TO "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\comunicacion" RS(256) PL(68) PW(78) 
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INICIAR_ADC?CONFIGURADOR
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\conversor.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\interrupciones.obj"  TO "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\adc" RS(256) PL(68) PW(78) 
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?INICIAR_INTERRUPCIONES?CONFIGURADOR
@@ -40,11 +36,11 @@ COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2009
     CALLER2: ?C_C51STARTUP
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0564H BYTE (67%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 04E2H BYTE (61%) *
 ******************************************************************************
 
 >> 
 >> 
 >> 
-Program Size: data=71.3 xdata=0 code=2798
-LINK/LOCATE RUN COMPLETE.  9 WARNING(S),  0 ERROR(S)
+Program Size: data=63.3 xdata=0 code=2539
+LINK/LOCATE RUN COMPLETE.  8 WARNING(S),  0 ERROR(S)
