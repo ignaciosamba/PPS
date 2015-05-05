@@ -10,3 +10,4 @@ IDEAS DE TESTS
 -para testear al adc, que inicie la configuracion y analice el registro en el que se activa el bit de end of conversion, si se activa, el adc anda por lo menos. Ya mas tarde cuando esten bien hechas las funciones de configuracion, hay que testear valores esperados para el adc dada una configuracion.
 
 
+HOLAAAAAAAAAAAAAAAAAAa
