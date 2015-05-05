@@ -306,7 +306,7 @@ MRUDockID=59422
 MRUDockLeftPos=1
 MRUDockTopPos=5
 MRUDockRightPos=1366
-MRUDockBottomPos=165
+MRUDockBottomPos=305
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=0
@@ -318,7 +318,7 @@ PctWidth=1000000
 MRUFloatCX=300
 MRUFloatCY=180
 MRUHorzDockCX=1365
-MRUHorzDockCY=160
+MRUHorzDockCY=300
 MRUVertDockCX=300
 MRUVertDockCY=180
 MRUDockingState=0
@@ -1111,7 +1111,7 @@ MRUDockID=0
 MRUDockLeftPos=0
 MRUDockTopPos=-2
 MRUDockRightPos=331
-MRUDockBottomPos=460
+MRUDockBottomPos=320
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=0
@@ -1125,7 +1125,7 @@ MRUFloatCY=180
 MRUHorzDockCX=300
 MRUHorzDockCY=180
 MRUVertDockCX=331
-MRUVertDockCY=462
+MRUVertDockCY=322
 MRUDockingState=0
 DockingStyle=61440
 TypeID=0
@@ -1296,7 +1296,7 @@ MRUDockID=0
 MRUDockLeftPos=5
 MRUDockTopPos=-2
 MRUDockRightPos=185
-MRUDockBottomPos=460
+MRUDockBottomPos=320
 MRUFloatStyle=4
 MRUFloatXPos=-2147483648
 MRUFloatYPos=736
@@ -1310,7 +1310,7 @@ MRUFloatCY=180
 MRUHorzDockCX=300
 MRUHorzDockCY=180
 MRUVertDockCX=180
-MRUVertDockCY=462
+MRUVertDockCY=322
 MRUDockingState=0
 DockingStyle=61440
 TypeID=0
@@ -1771,7 +1771,7 @@ Buttons=FJAIAAAAAAHJAIAAAAAACNAIAAAAAAJBAIAAAAAAGNAIAAAAAAMBAIAAAAAAAAAAAAAAAADH
 BarID=59399
 XPos=237
 YPos=28
-MRUWidth=51696
+MRUWidth=52800
 Docking=True
 MRUDockID=0
 MRUDockLeftPos=237
@@ -2258,7 +2258,7 @@ ptn_Child1=ViewFrame-0
 DocPathName=test_global.c
 DocumentString=Source File
 DocTemplateIndex=0
-WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPDCAAAAAAAAAAAAAAIGDAAAAAGGBAAAAA
+WindowPlacement=MCAAAAAAAAAAAAAABAAAAAAAPPPPPPPPPPPPPPPPIPPPPPPPBOPPPPPPPPPPPPPPMPPPPPPPEEDAAAAAHHBAAAAA
 IsActiveChildFrame=True
 [WorkState_v1_1.ProjectTarget]
 ProjectTarget=C8051F350
@@ -2373,6 +2373,9 @@ FileName=test_comunicacion.c
 ptn_Child1=FileName
 [WorkState_v1_1.CFiles.FileName.FileName.FileName.FileName.FileName.FileName.FileName]
 FileName=test_global.c
+ptn_Child1=FileName
+[WorkState_v1_1.CFiles.FileName.FileName.FileName.FileName.FileName.FileName.FileName.FileName]
+FileName=..\fuentes\interrupciones.c
 [WorkState_v1_1.LFiles]
 ptn_Child1=FileName
 [WorkState_v1_1.LFiles.FileName]
@@ -2395,6 +2398,9 @@ FileName=test_comunicacion.obj
 ptn_Child1=FileName
 [WorkState_v1_1.LFiles.FileName.FileName.FileName.FileName.FileName.FileName.FileName]
 FileName=test_global.obj
+ptn_Child1=FileName
+[WorkState_v1_1.LFiles.FileName.FileName.FileName.FileName.FileName.FileName.FileName.FileName]
+FileName=..\fuentes\interrupciones.obj
 [WorkState_v1_1.BankMap]
 [WorkState_v1_1.Folders]
 ptn_Child1=FolderName
