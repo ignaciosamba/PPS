@@ -1,6 +1,6 @@
-update=20/04/2015 05:08:26 p.m.
+update=04/05/2015 05:03:58 p.m.
 version=1
-last_client=eeschema
+last_client=cvpcb
 [pcbnew]
 version=1
 LastNetListRead=
@@ -55,14 +55,12 @@ LibName31=C:/Users/Samba/Downloads/converted/lm2937
 LibName32=C:/Users/Samba/Downloads/converted/maxim-6
 LibName33=maxim-8
 LibName34=maxim-9
+LibName35=pinhead
+LibName36=pinhead-1
+LibName37=lm2937
 LibDir=
 [general]
 version=1
-[cvpcb]
-version=1
-NetIExt=net
-[cvpcb/libraries]
-EquName1=devcms
 [eeschema]
 version=1
 LibDir=
@@ -116,4 +114,11 @@ LibName41=C:/Users/Samba/Downloads/converted/Cap-Gold
 LibName42=C:/Users/Samba/Downloads/converted/m-pad-2.1
 LibName43=C:/Users/Samba/Downloads/converted/micro-silabs
 LibName44=C:/Users/Samba/Downloads/diy_connectors
-LibName45=stuart
+LibName45=pinhead-1
+LibName46=pinhead
+LibName47=stuart
+[cvpcb]
+version=1
+NetIExt=net
+[cvpcb/libraries]
+EquName1=devcms

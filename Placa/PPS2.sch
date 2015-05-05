@@ -1,0 +1,179 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:special
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:pinhead-1
+LIBS:pinhead
+LIBS:PPS2-cache
+EELAYER 27 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date "28 apr 2015"
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L PINHD-2X5 JP1
+U 1 1 553FBABF
+P 4100 3150
+F 0 "JP1" H 3850 3475 50  0000 L BNN
+F 1 "PINHD-2X5" H 3850 2750 50  0000 L BNN
+F 2 "pinhead-2X05" H 4100 3300 50  0001 C CNN
+F 3 "" H 4100 3150 60  0000 C CNN
+	1    4100 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3,3V #PWR1
+U 1 1 553FBB60
+P 3700 2800
+F 0 "#PWR1" H 3700 2760 30  0001 C CNN
+F 1 "+3,3V" H 3700 2910 30  0000 C CNN
+F 2 "" H 3700 2800 60  0000 C CNN
+F 3 "" H 3700 2800 60  0000 C CNN
+	1    3700 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L GNDPWR #PWR2
+U 1 1 553FBB7C
+P 3750 3650
+F 0 "#PWR2" H 3750 3700 40  0001 C CNN
+F 1 "GNDPWR" H 3750 3570 40  0000 C CNN
+F 2 "" H 3750 3650 60  0000 C CNN
+F 3 "" H 3750 3650 60  0000 C CNN
+	1    3750 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L PINHD-1X1 C2CLK1
+U 1 1 553FBBB4
+P 3300 3250
+F 0 "C2CLK1" H 3050 3375 50  0000 L BNN
+F 1 "PINHD-1X1" H 3050 3050 50  0000 L BNN
+F 2 "pinhead-1X01" H 3300 3400 50  0001 C CNN
+F 3 "" H 3300 3250 60  0000 C CNN
+	1    3300 3250
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GNDPWR #PWR3
+U 1 1 553FBBF6
+P 4750 2800
+F 0 "#PWR3" H 4750 2850 40  0001 C CNN
+F 1 "GNDPWR" H 4750 2720 40  0000 C CNN
+F 2 "" H 4750 2800 60  0000 C CNN
+F 3 "" H 4750 2800 60  0000 C CNN
+	1    4750 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R1
+U 1 1 553FBC23
+P 3250 2500
+F 0 "R1" V 3330 2500 40  0000 C CNN
+F 1 "1K" V 3257 2501 40  0000 C CNN
+F 2 "~" V 3180 2500 30  0000 C CNN
+F 3 "~" H 3250 2500 30  0000 C CNN
+	1    3250 2500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L PINHD-1X1 C2DATOS1
+U 1 1 553FBC7A
+P 2600 2750
+F 0 "C2DATOS1" H 2350 2875 50  0000 L BNN
+F 1 "PINHD-1X1" H 2350 2550 50  0000 L BNN
+F 2 "pinhead-1X01" H 2600 2900 50  0001 C CNN
+F 3 "" H 2600 2750 60  0000 C CNN
+	1    2600 2750
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 2950 3700 2950
+Wire Wire Line
+	3700 2950 3700 2800
+Wire Wire Line
+	4000 3050 3750 3050
+Wire Wire Line
+	3750 3050 3750 3650
+Wire Wire Line
+	4000 3350 3750 3350
+Connection ~ 3750 3350
+Wire Wire Line
+	4000 3250 3400 3250
+Wire Wire Line
+	4300 2950 4500 2950
+Wire Wire Line
+	4500 2950 4500 2750
+Wire Wire Line
+	4500 2750 4750 2750
+Wire Wire Line
+	4750 2750 4750 2800
+Wire Wire Line
+	4300 3050 5000 3050
+Wire Wire Line
+	5000 3050 5000 2500
+Wire Wire Line
+	5000 2500 3500 2500
+Wire Wire Line
+	2800 2500 3000 2500
+Wire Wire Line
+	4300 3150 5100 3150
+Wire Wire Line
+	5100 3150 5100 2300
+Wire Wire Line
+	5100 2300 2800 2300
+Wire Wire Line
+	2800 2300 2800 2750
+Wire Wire Line
+	2800 2750 2700 2750
+Connection ~ 2800 2500
+Wire Wire Line
+	4300 3350 5000 3350
+$Comp
+L PINHD-1X1 PIN1
+U 1 1 553FBCCD
+P 5100 3350
+F 0 "PIN1" H 4850 3475 50  0000 L BNN
+F 1 "PINHD-1X1" H 4850 3150 50  0000 L BNN
+F 2 "pinhead-1X01" H 5100 3500 50  0001 C CNN
+F 3 "" H 5100 3350 60  0000 C CNN
+	1    5100 3350
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

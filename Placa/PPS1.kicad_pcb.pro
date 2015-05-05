@@ -1,8 +1,8 @@
-update=20/04/2015 04:56:59 p.m.
+update=28/04/2015 02:42:26 p.m.
 last_client=pcbnew
 [pcbnew]
 version=1
-LastNetListRead=
+LastNetListRead=prueba1.net
 UseCmpFile=1
 PadDrill=1.016000000000
 PadDrillOvalY=1.016000000000

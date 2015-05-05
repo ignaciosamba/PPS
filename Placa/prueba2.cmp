@@ -1,192 +1,171 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 04/05/2015 05:11:23 p.m.
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 04/05/2015 05:09:14 p.m.
 
 BeginCmp
 TimeStamp = /5524216A;
 Reference = +1;
 ValeurCmp = C8051F352;
-IdModule  = micro-silabs-LQFP32;
+IdModule  = TQFP32;
 EndCmp
 
 BeginCmp
 TimeStamp = /55242576;
 Reference = C1;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /55242560;
 Reference = C2;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
-EndCmp
-
-BeginCmp
-TimeStamp = /553FBF3A;
-Reference = C2D1;
-ValeurCmp = PINHD-1X1;
-IdModule  = pinhead-1X01;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /5524235B;
 Reference = C3;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /5524258C;
 Reference = C4;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552425AE;
 Reference = C5;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552425C4;
 Reference = C6;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552426B8;
 Reference = C7;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552426CD;
 Reference = C8;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552C6244;
 Reference = C9;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552C6235;
 Reference = C10;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552C5E39;
 Reference = C11;
 ValeurCmp = 1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552C5E2A;
 Reference = C12;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552C5629;
 Reference = C13;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552C560E;
 Reference = C14;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
-EndCmp
-
-BeginCmp
-TimeStamp = /552C6D98;
-Reference = C15;
-ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552C4D78;
 Reference = C16;
 ValeurCmp = 15uF;
-IdModule  = C1;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552C4886;
 Reference = C17;
 ValeurCmp = C;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552C4920;
 Reference = C18;
 ValeurCmp = 10uF;
-IdModule  = C1;
-EndCmp
-
-BeginCmp
-TimeStamp = /552C44E7;
-Reference = C19;
-ValeurCmp = C;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /5526E163;
 Reference = C30;
 ValeurCmp = 0,1mF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /5526D3CB;
 Reference = C31;
 ValeurCmp = 0,1mF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /5526DBBB;
 Reference = C32;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /5526E07D;
 Reference = C33;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /5526DE58;
 Reference = C34;
 ValeurCmp = 0,1micF;
-IdModule  = SM1206;
+IdModule  = ;
 EndCmp
 
 BeginCmp
 TimeStamp = /552C2D9E;
 Reference = J1;
 ValeurCmp = JACK_2P;
-IdModule  = POWER-IN-JACK-PMS;
+IdModule  = ;
 EndCmp
 
 BeginCmp
@@ -218,45 +197,45 @@ IdModule  = PIN_ARRAY_2X1;
 EndCmp
 
 BeginCmp
-TimeStamp = /552C7019;
-Reference = JP7;
-ValeurCmp = JUMPER;
-IdModule  = PIN_ARRAY_2X1;
+TimeStamp = /5547CCBB;
+Reference = JP5;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
 EndCmp
 
 BeginCmp
-TimeStamp = /552C7028;
-Reference = JP8;
-ValeurCmp = JUMPER;
-IdModule  = PIN_ARRAY_2X1;
+TimeStamp = /5547CCCA;
+Reference = JP6;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
 EndCmp
 
 BeginCmp
 TimeStamp = /552C4328;
 Reference = JP9;
 ValeurCmp = JUMPER3;
-IdModule  = PIN_ARRAY_3X1;
+IdModule  = PIN_ARRAY_2X1;
 EndCmp
 
 BeginCmp
 TimeStamp = /553FC122;
 Reference = PIN1;
 ValeurCmp = PINHD-1X1;
-IdModule  = pinhead-1X01;
+IdModule  = PIN_ARRAY_1;
 EndCmp
 
 BeginCmp
 TimeStamp = /552D503B;
 Reference = Prueba1;
 ValeurCmp = LED;
-IdModule  = LEDV;
+IdModule  = LED-5MM;
 EndCmp
 
 BeginCmp
 TimeStamp = /552D4B5B;
 Reference = PWR1;
 ValeurCmp = LED;
-IdModule  = LEDV;
+IdModule  = LED-5MM;
 EndCmp
 
 BeginCmp
@@ -351,17 +330,10 @@ IdModule  = SM1206;
 EndCmp
 
 BeginCmp
-TimeStamp = /553FC02E;
-Reference = RST1;
-ValeurCmp = PINHD-1X1;
-IdModule  = pinhead-1X01;
-EndCmp
-
-BeginCmp
 TimeStamp = /5524333D;
 Reference = U1;
 ValeurCmp = MAX232_TID;
-IdModule  = max232ti_n-DIL16;
+IdModule  = max232ti-DIL16;
 EndCmp
 
 BeginCmp
@@ -372,38 +344,45 @@ IdModule  = lm2937-SOT223;
 EndCmp
 
 BeginCmp
-TimeStamp = /552C36AA;
-Reference = U3;
-ValeurCmp = MAX874;
-IdModule  = maxim-8-SC70-5L;
+TimeStamp = /553FBF3A;
+Reference = Vref+1;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /553FC02E;
+Reference = Vref-1;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
 EndCmp
 
 BeginCmp
 TimeStamp = /553FC5E4;
 Reference = XCTS1;
 ValeurCmp = PINHD-1X1;
-IdModule  = pinhead-1X01;
+IdModule  = PIN_ARRAY_1;
 EndCmp
 
 BeginCmp
 TimeStamp = /553FC602;
 Reference = XRTS1;
 ValeurCmp = PINHD-1X1;
-IdModule  = pinhead-1X01;
+IdModule  = PIN_ARRAY_1;
 EndCmp
 
 BeginCmp
 TimeStamp = /553FC5D5;
 Reference = XRX1;
 ValeurCmp = PINHD-1X1;
-IdModule  = pinhead-1X01;
+IdModule  = PIN_ARRAY_1;
 EndCmp
 
 BeginCmp
 TimeStamp = /553FC5F3;
 Reference = XTX1;
 ValeurCmp = PINHD-1X1;
-IdModule  = pinhead-1X01;
+IdModule  = PIN_ARRAY_1;
 EndCmp
 
 EndListe

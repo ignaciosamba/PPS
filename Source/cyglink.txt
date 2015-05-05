@@ -1,1 +1,0 @@
-"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\adc.obj"  TO "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\adc" RS(256) PL(68) PW(78) 
