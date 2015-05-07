@@ -74,6 +74,7 @@ void cambiar_pin (void)
 	  ADC0MUX = 0x08;
 	else
 	{
+		printf ("lucho come traba de 22 pesos");
 	  ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4); //Swapeo los 4 MSB con los 4 LSB para aumentar en uno el LSB
 	  ADC0MUX++;
 	  ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4); //Swapeo una vez mas asi me queda incrementado los 4 MSB y asi me movi de puerto. 
