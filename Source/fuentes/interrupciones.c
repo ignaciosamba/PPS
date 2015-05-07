@@ -11,7 +11,7 @@
 
 void ADC0_ISR (void) interrupt 10
 {
-   printf("hola, acabo de convertir\n");
+   // printf("hola, acabo de convertir\n");
    while(!AD0INT);                     // Wait till conversion complete
    AD0INT = 0;                         // Clear ADC0 conversion complete flag
    f_dato_convertido = true;

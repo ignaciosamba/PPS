@@ -34,11 +34,11 @@ void main(void)
 		// printf("no entraaa\n");
 		if(f_dato_convertido)
 		{
-			printf("AAAAAAAAAAAAAAA\n");
+			// printf("AAAAAAAAAAAAAAA\n");
 			f_dato_convertido = false;
 			dato_a_enviar = convertir();
 			enviar_dato(dato_a_enviar);
-			//cambiar_pin ();
+			cambiar_pin ();
 		}
 	}
 }
