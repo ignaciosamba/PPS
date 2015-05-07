@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22              05/07/2015  16:51:54  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22              05/07/2015  17:16:40  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -50,8 +50,7 @@ LINK MAP OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\adc (C
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            DATA    0008H     0014H     UNIT         _DATA_GROUP_
-            DATA    001CH     0002H     UNIT         ?DT?CORRER_MENU?INTERFAZ
+            DATA    0008H     0016H     UNIT         _DATA_GROUP_
             DATA    001EH     0001H     UNIT         ?DT?GETCHAR
                     001FH     0001H                  *** GAP ***
             BIT     0020H.0   0001H.1   UNIT         _BIT_GROUP_
@@ -67,53 +66,53 @@ LINK MAP OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\adc (C
             CODE    0053H     0003H     ABSOLUTE     
                     0056H     07AAH                  *** GAP ***
             CODE    0800H     035CH     UNIT         ?PR?PRINTF?PRINTF
-BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  16:51:54  PAGE 2
-
-
             CODE    0B5CH     0286H     UNIT         ?CO?INTERFAZ
+BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  17:16:40  PAGE 2
+
+
             CODE    0DE2H     015CH     UNIT         ?C?LIB_CODE
             CODE    0F3EH     008CH     UNIT         ?C_C51STARTUP
             CODE    0FCAH     0063H     UNIT         ?PR?CAMBIAR_PIN?CONVERSOR
 >> 
             CODE    102DH     0036H     UNIT         ?PR?IMPRIMIR_MENU?INTERFA
 >> Z
-            CODE    1063H     0030H     UNIT         ?PR?MAIN?MAIN
-            CODE    1093H     0027H     UNIT         ?PR?PUTCHAR?PUTCHAR
-            CODE    10BAH     0026H     UNIT         ?PR?INICIAR_ADC?CONFIGURA
+            CODE    1063H     0033H     UNIT         ?PR?MAIN?MAIN
+            CODE    1096H     0027H     UNIT         ?PR?PUTCHAR?PUTCHAR
+            CODE    10BDH     0026H     UNIT         ?PR?INICIAR_ADC?CONFIGURA
 >> DOR
-            CODE    10E0H     0025H     UNIT         ?PR?CORRER_MENU?INTERFAZ
-            CODE    1105H     0024H     UNIT         ?PR?IMPRIMIR_CONF_ADC?INT
+            CODE    10E3H     0025H     UNIT         ?PR?CORRER_MENU?INTERFAZ
+            CODE    1108H     0024H     UNIT         ?PR?IMPRIMIR_CONF_ADC?INT
 >> ERFAZ
-            CODE    1129H     0024H     UNIT         ?PR?IMPRIMIR_CONF_MODOS?I
+            CODE    112CH     0024H     UNIT         ?PR?IMPRIMIR_CONF_MODOS?I
 >> NTERFAZ
-            CODE    114DH     0023H     UNIT         ?PR?CONVERTIR?CONVERSOR
-            CODE    1170H     0021H     UNIT         ?CO?CONVERSOR
-            CODE    1191H     001DH     UNIT         ?PR?INICIAR_UART?CONFIGUR
+            CODE    1150H     0023H     UNIT         ?PR?CONVERTIR?CONVERSOR
+            CODE    1173H     0021H     UNIT         ?CO?CONVERSOR
+            CODE    1194H     001DH     UNIT         ?PR?INICIAR_UART?CONFIGUR
 >> ADOR
-            CODE    11AEH     0012H     UNIT         ?PR?IMPRIMIR_CONF_MODO_SI
+            CODE    11B1H     0012H     UNIT         ?PR?IMPRIMIR_CONF_MODO_SI
 >> NGLE_ENDED?INTERFAZ
-            CODE    11C0H     0012H     UNIT         ?PR?IMPRIMIR_CONF_MODO_DI
+            CODE    11C3H     0012H     UNIT         ?PR?IMPRIMIR_CONF_MODO_DI
 >> FERENCIAL?INTERFAZ
-            CODE    11D2H     0012H     UNIT         ?PR?IMPRIMIR_CONF_TIPOSER
+            CODE    11D5H     0012H     UNIT         ?PR?IMPRIMIR_CONF_TIPOSER
 >> IAL?INTERFAZ
-            CODE    11E4H     0011H     UNIT         ?PR?_ENVIAR_DATO?CONVERSO
+            CODE    11E7H     0011H     UNIT         ?PR?_ENVIAR_DATO?CONVERSO
 >> R
-            CODE    11F5H     0011H     UNIT         ?PR?GETCHAR?GETCHAR
-            CODE    1206H     000AH     UNIT         ?PR?INICIAR_PUERTOS?CONFI
+            CODE    11F8H     0011H     UNIT         ?PR?GETCHAR?GETCHAR
+            CODE    1209H     000AH     UNIT         ?PR?INICIAR_PUERTOS?CONFI
 >> GURADOR
-            CODE    1210H     000AH     UNIT         ?PR?_GETKEY?_GETKEY
-            CODE    121AH     0009H     UNIT         ?PR?ADC0_ISR?INTERRUPCION
+            CODE    1213H     000AH     UNIT         ?PR?_GETKEY?_GETKEY
+            CODE    121DH     0009H     UNIT         ?PR?ADC0_ISR?INTERRUPCION
 >> ES
-            CODE    1223H     0007H     UNIT         ?PR?INICIAR_SYSCLOCK?CONF
+            CODE    1226H     0007H     UNIT         ?PR?INICIAR_SYSCLOCK?CONF
 >> IGURADOR
-            CODE    122AH     0005H     UNIT         ?C_INITSEG
-            CODE    122FH     0004H     UNIT         ?PR?INICIAR_INTERRUPCIONE
+            CODE    122DH     0005H     UNIT         ?C_INITSEG
+            CODE    1232H     0004H     UNIT         ?PR?INICIAR_INTERRUPCIONE
 >> S?CONFIGURADOR
-            CODE    1233H     0004H     UNIT         ?PR?INICIAR_FLASH?CONFIGU
+            CODE    1236H     0004H     UNIT         ?PR?INICIAR_FLASH?CONFIGU
 >> RADOR
-            CODE    1237H     0004H     UNIT         ?PR?CARGAR_CONFIGURACIONF
+            CODE    123AH     0004H     UNIT         ?PR?CARGAR_CONFIGURACIONF
 >> LASH?CONFIGURADOR
-            CODE    123BH     0004H     UNIT         ?PR?GUARDAR_CONFIGURACION
+            CODE    123EH     0004H     UNIT         ?PR?GUARDAR_CONFIGURACION
 >> FLASH?CONFIGURADOR
 
 
@@ -135,25 +134,61 @@ SEGMENT                                             BIT_GROUP          DATA_GR
 
 ?PR?MAIN?MAIN                                    -----    -----      -----    
 >> -----
-BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  16:51:54  PAGE 3
-
-
   +--> ?PR?INICIAR_SYSCLOCK?CONFIGURADOR
+BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  17:16:40  PAGE 3
+
+
   +--> ?PR?INICIAR_PUERTOS?CONFIGURADOR
   +--> ?PR?INICIAR_UART?CONFIGURADOR
+  +--> ?PR?CORRER_MENU?INTERFAZ
   +--> ?PR?INICIAR_ADC?CONFIGURADOR
   +--> ?PR?CONVERTIR?CONVERSOR
   +--> ?PR?_ENVIAR_DATO?CONVERSOR
   +--> ?PR?CAMBIAR_PIN?CONVERSOR
 
+?PR?CORRER_MENU?INTERFAZ                         -----    -----      0008H    
+>> 0002H
+  +--> ?PR?IMPRIMIR_MENU?INTERFAZ
+  +--> ?PR?GETCHAR?GETCHAR
+  +--> ?PR?IMPRIMIR_CONF_ADC?INTERFAZ
+  +--> ?PR?IMPRIMIR_CONF_MODOS?INTERFAZ
+  +--> ?PR?IMPRIMIR_CONF_TIPOSERIAL?INTERFAZ
+  +--> ?CO?INTERFAZ
+  +--> ?PR?PRINTF?PRINTF
+
+?PR?IMPRIMIR_MENU?INTERFAZ                       -----    -----      -----    
+>> -----
+  +--> ?CO?INTERFAZ
+  +--> ?PR?PRINTF?PRINTF
+
+?PR?PRINTF?PRINTF                                0020H.0  0001H.1    000AH    
+>> 0014H
+  +--> ?PR?PUTCHAR?PUTCHAR
+
+?PR?GETCHAR?GETCHAR                              -----    -----      -----    
+>> -----
+  +--> ?PR?_GETKEY?_GETKEY
+  +--> ?PR?PUTCHAR?PUTCHAR
+
+?PR?IMPRIMIR_CONF_ADC?INTERFAZ                   -----    -----      -----    
+>> -----
+  +--> ?CO?INTERFAZ
+  +--> ?PR?PRINTF?PRINTF
+
+?PR?IMPRIMIR_CONF_MODOS?INTERFAZ                 -----    -----      -----    
+>> -----
+  +--> ?CO?INTERFAZ
+  +--> ?PR?PRINTF?PRINTF
+
+?PR?IMPRIMIR_CONF_TIPOSERIAL?INTERFAZ            -----    -----      -----    
+>> -----
+  +--> ?CO?INTERFAZ
+  +--> ?PR?PRINTF?PRINTF
+
 ?PR?_ENVIAR_DATO?CONVERSOR                       -----    -----      -----    
 >> -----
   +--> ?CO?CONVERSOR
   +--> ?PR?PRINTF?PRINTF
-
-?PR?PRINTF?PRINTF                                0020H.0  0001H.1    0008H    
->> 0014H
-  +--> ?PR?PUTCHAR?PUTCHAR
 
 ?PR?CAMBIAR_PIN?CONVERSOR                        -----    -----      -----    
 >> -----
@@ -168,30 +203,33 @@ SYMBOL TABLE OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\ad
   VALUE           TYPE          NAME
   ----------------------------------
 
+BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  17:16:40  PAGE 4
+
+
   -------         MODULE        COMUNICACION
   C:0000H         SYMBOL        _ICE_DUMMY_
   -------         ENDMOD        COMUNICACION
 
   -------         MODULE        CONFIGURADOR
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:1191H         PUBLIC        iniciar_UART
+  C:1194H         PUBLIC        iniciar_UART
   D:00FBH         PUBLIC        ADC0CF
   D:00E6H         PUBLIC        EIE1
   D:00F4H         PUBLIC        ADC0CN
   D:00F3H         PUBLIC        ADC0MD
   D:00A4H         PUBLIC        P0MDOUT
-  C:10BAH         PUBLIC        iniciar_ADC
+  C:10BDH         PUBLIC        iniciar_ADC
   D:00E1H         PUBLIC        XBR0
   D:00E2H         PUBLIC        XBR1
   D:00D1H         PUBLIC        REF0CN
-  C:123BH         PUBLIC        guardar_configuracionFlash
-  C:1233H         PUBLIC        iniciar_FLASH
-  C:1223H         PUBLIC        iniciar_sysclock
+  C:123EH         PUBLIC        guardar_configuracionFlash
+  C:1236H         PUBLIC        iniciar_FLASH
+  C:1226H         PUBLIC        iniciar_sysclock
   D:0089H         PUBLIC        TMOD
-  C:1237H         PUBLIC        cargar_configuracionFlash
+  C:123AH         PUBLIC        cargar_configuracionFlash
   D:00B2H         PUBLIC        OSCICN
   D:009AH         PUBLIC        ADC0DEC
-  C:122FH         PUBLIC        iniciar_interrupciones
+  C:1232H         PUBLIC        iniciar_interrupciones
   B:00E8H.2       PUBLIC        AD0CALC
   B:0098H.1       PUBLIC        TI0
   D:008DH         PUBLIC        TH1
@@ -199,118 +237,118 @@ SYMBOL TABLE OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\ad
   D:00F7H         PUBLIC        ADC0CLK
   B:0088H.6       PUBLIC        TR1
   D:00BDH         PUBLIC        ADC0BUF
-  C:1206H         PUBLIC        iniciar_puertos
+  C:1209H         PUBLIC        iniciar_puertos
   D:00EFH         PUBLIC        RSTSRC
   D:0098H         PUBLIC        SCON0
   D:008EH         PUBLIC        CKCON
-BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  16:51:54  PAGE 4
-
-
   D:00C6H         PUBLIC        ADC0MUX
   -------         PROC          INICIAR_PUERTOS
-  C:1206H         LINE#         12
-  C:1206H         LINE#         13
-  C:1206H         LINE#         14
-  C:1209H         LINE#         15
-  C:120CH         LINE#         16
-  C:120FH         LINE#         17
+  C:1209H         LINE#         12
+  C:1209H         LINE#         13
+  C:1209H         LINE#         14
+  C:120CH         LINE#         15
+  C:120FH         LINE#         16
+  C:1212H         LINE#         17
   -------         ENDPROC       INICIAR_PUERTOS
   -------         PROC          INICIAR_SYSCLOCK
-  C:1223H         LINE#         19
-  C:1223H         LINE#         20
-  C:1223H         LINE#         21
-  C:1226H         LINE#         22
-  C:1229H         LINE#         23
+  C:1226H         LINE#         19
+  C:1226H         LINE#         20
+  C:1226H         LINE#         21
+  C:1229H         LINE#         22
+  C:122CH         LINE#         23
   -------         ENDPROC       INICIAR_SYSCLOCK
   -------         PROC          INICIAR_ADC
-  C:10BAH         LINE#         26
-  C:10BAH         LINE#         27
-  C:10BAH         LINE#         28
-  C:10BDH         LINE#         29
-  C:10C0H         LINE#         30
-  C:10C2H         LINE#         33
-  C:10C5H         LINE#         38
-  C:10CBH         LINE#         40
-  C:10CDH         LINE#         41
-  C:10D0H         LINE#         43
-  C:10D3H         LINE#         44
-  C:10D6H         LINE#         46
-  C:10D9H         LINE#         47
-  C:10DCH         LINE#         49
-  C:10DFH         LINE#         50
+  C:10BDH         LINE#         26
+  C:10BDH         LINE#         27
+  C:10BDH         LINE#         28
+  C:10C0H         LINE#         29
+  C:10C3H         LINE#         30
+  C:10C5H         LINE#         33
+  C:10C8H         LINE#         38
+  C:10CEH         LINE#         40
+  C:10D0H         LINE#         41
+  C:10D3H         LINE#         43
+  C:10D6H         LINE#         44
+  C:10D9H         LINE#         46
+  C:10DCH         LINE#         47
+BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  17:16:40  PAGE 5
+
+
+  C:10DFH         LINE#         49
+  C:10E2H         LINE#         50
   -------         ENDPROC       INICIAR_ADC
   -------         PROC          INICIAR_UART
-  C:1191H         LINE#         53
-  C:1191H         LINE#         54
-  C:1191H         LINE#         56
-  C:1194H         LINE#         61
-  C:1194H         LINE#         62
-  C:1194H         LINE#         63
-  C:1197H         LINE#         64
-  C:119AH         LINE#         65
-  C:119DH         LINE#         66
-  C:119DH         LINE#         67
-  C:119DH         LINE#         68
-  C:119DH         LINE#         69
-  C:119DH         LINE#         70
-  C:119DH         LINE#         71
-  C:119DH         LINE#         72
-  C:119DH         LINE#         73
-  C:119DH         LINE#         74
-  C:119DH         LINE#         75
-  C:119DH         LINE#         76
-  C:119DH         LINE#         77
-  C:119DH         LINE#         79
-  C:119DH         LINE#         80
-  C:119DH         LINE#         81
-  C:119DH         LINE#         82
-  C:119DH         LINE#         83
-  C:119DH         LINE#         85
-  C:11A0H         LINE#         86
-  C:11A3H         LINE#         87
-  C:11A6H         LINE#         88
-  C:11A8H         LINE#         89
-  C:11AAH         LINE#         91
-BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  16:51:54  PAGE 5
-
-
-  C:11ADH         LINE#         92
+  C:1194H         LINE#         53
+  C:1194H         LINE#         54
+  C:1194H         LINE#         56
+  C:1197H         LINE#         61
+  C:1197H         LINE#         62
+  C:1197H         LINE#         63
+  C:119AH         LINE#         64
+  C:119DH         LINE#         65
+  C:11A0H         LINE#         66
+  C:11A0H         LINE#         67
+  C:11A0H         LINE#         68
+  C:11A0H         LINE#         69
+  C:11A0H         LINE#         70
+  C:11A0H         LINE#         71
+  C:11A0H         LINE#         72
+  C:11A0H         LINE#         73
+  C:11A0H         LINE#         74
+  C:11A0H         LINE#         75
+  C:11A0H         LINE#         76
+  C:11A0H         LINE#         77
+  C:11A0H         LINE#         79
+  C:11A0H         LINE#         80
+  C:11A0H         LINE#         81
+  C:11A0H         LINE#         82
+  C:11A0H         LINE#         83
+  C:11A0H         LINE#         85
+  C:11A3H         LINE#         86
+  C:11A6H         LINE#         87
+  C:11A9H         LINE#         88
+  C:11ABH         LINE#         89
+  C:11ADH         LINE#         91
+  C:11B0H         LINE#         92
   -------         ENDPROC       INICIAR_UART
   -------         PROC          INICIAR_INTERRUPCIONES
-  C:122FH         LINE#         94
-  C:122FH         LINE#         95
-  C:122FH         LINE#         97
-  C:1232H         LINE#         98
+  C:1232H         LINE#         94
+  C:1232H         LINE#         95
+  C:1232H         LINE#         97
+  C:1235H         LINE#         98
   -------         ENDPROC       INICIAR_INTERRUPCIONES
   -------         PROC          INICIAR_FLASH
-  C:1233H         LINE#         100
-  C:1233H         LINE#         101
-  C:1233H         LINE#         103
-  C:1236H         LINE#         104
+  C:1236H         LINE#         100
+  C:1236H         LINE#         101
+  C:1236H         LINE#         103
+  C:1239H         LINE#         104
   -------         ENDPROC       INICIAR_FLASH
   -------         PROC          CARGAR_CONFIGURACIONFLASH
-  C:1237H         LINE#         106
-  C:1237H         LINE#         107
-  C:1237H         LINE#         108
-  C:123AH         LINE#         109
+  C:123AH         LINE#         106
+  C:123AH         LINE#         107
+  C:123AH         LINE#         108
+  C:123DH         LINE#         109
   -------         ENDPROC       CARGAR_CONFIGURACIONFLASH
   -------         PROC          GUARDAR_CONFIGURACIONFLASH
-  C:123BH         LINE#         111
-  C:123BH         LINE#         112
-  C:123BH         LINE#         113
-  C:123EH         LINE#         114
+  C:123EH         LINE#         111
+  C:123EH         LINE#         112
+  C:123EH         LINE#         113
+  C:1241H         LINE#         114
   -------         ENDPROC       GUARDAR_CONFIGURACIONFLASH
   -------         ENDMOD        CONFIGURADOR
 
   -------         MODULE        INTERFAZ
   C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  17:16:40  PAGE 6
+
+
   C:102DH         PUBLIC        imprimir_menu
-  C:1105H         PUBLIC        imprimir_conf_ADC
-  C:10E0H         PUBLIC        correr_menu
-  C:11AEH         PUBLIC        imprimir_conf_modo_single_ended
-  C:11C0H         PUBLIC        imprimir_conf_modo_diferencial
-  C:11D2H         PUBLIC        imprimir_conf_tipoSerial
-  C:1129H         PUBLIC        imprimir_conf_modos
+  C:1108H         PUBLIC        imprimir_conf_ADC
+  C:10E3H         PUBLIC        correr_menu
+  C:11B1H         PUBLIC        imprimir_conf_modo_single_ended
+  C:11C3H         PUBLIC        imprimir_conf_modo_diferencial
+  C:11D5H         PUBLIC        imprimir_conf_tipoSerial
+  C:112CH         PUBLIC        imprimir_conf_modos
   -------         PROC          IMPRIMIR_MENU
   C:102DH         LINE#         5
   C:102DH         LINE#         6
@@ -322,60 +360,60 @@ SYMBOL TABLE OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\ad
   C:105AH         LINE#         12
   -------         ENDPROC       IMPRIMIR_MENU
   -------         PROC          IMPRIMIR_CONF_ADC
-  C:1105H         LINE#         17
-  C:1105H         LINE#         18
-  C:1105H         LINE#         19
-  C:110EH         LINE#         20
-  C:1117H         LINE#         21
-  C:1120H         LINE#         22
+  C:1108H         LINE#         17
+  C:1108H         LINE#         18
+  C:1108H         LINE#         19
+  C:1111H         LINE#         20
+  C:111AH         LINE#         21
+  C:1123H         LINE#         22
   -------         ENDPROC       IMPRIMIR_CONF_ADC
   -------         PROC          IMPRIMIR_CONF_MODO_SINGLE_ENDED
-  C:11AEH         LINE#         25
-  C:11AEH         LINE#         26
-  C:11AEH         LINE#         27
-  C:11B7H         LINE#         28
+  C:11B1H         LINE#         25
+  C:11B1H         LINE#         26
+  C:11B1H         LINE#         27
+  C:11BAH         LINE#         28
   -------         ENDPROC       IMPRIMIR_CONF_MODO_SINGLE_ENDED
   -------         PROC          IMPRIMIR_CONF_MODO_DIFERENCIAL
-  C:11C0H         LINE#         31
-  C:11C0H         LINE#         32
-  C:11C0H         LINE#         33
-BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  16:51:54  PAGE 6
-
-
-  C:11C9H         LINE#         34
+  C:11C3H         LINE#         31
+  C:11C3H         LINE#         32
+  C:11C3H         LINE#         33
+  C:11CCH         LINE#         34
   -------         ENDPROC       IMPRIMIR_CONF_MODO_DIFERENCIAL
   -------         PROC          IMPRIMIR_CONF_MODOS
-  C:1129H         LINE#         39
-  C:1129H         LINE#         40
-  C:1129H         LINE#         41
-  C:1132H         LINE#         42
-  C:113BH         LINE#         43
-  C:1144H         LINE#         44
+  C:112CH         LINE#         39
+  C:112CH         LINE#         40
+  C:112CH         LINE#         41
+  C:1135H         LINE#         42
+  C:113EH         LINE#         43
+  C:1147H         LINE#         44
   -------         ENDPROC       IMPRIMIR_CONF_MODOS
   -------         PROC          IMPRIMIR_CONF_TIPOSERIAL
-  C:11D2H         LINE#         47
-  C:11D2H         LINE#         48
-  C:11D2H         LINE#         49
-  C:11DBH         LINE#         50
+  C:11D5H         LINE#         47
+  C:11D5H         LINE#         48
+  C:11D5H         LINE#         49
+  C:11DEH         LINE#         50
   -------         ENDPROC       IMPRIMIR_CONF_TIPOSERIAL
   -------         PROC          CORRER_MENU
   -------         DO            
   D:0007H         SYMBOL        c_opcion
-  D:001CH         SYMBOL        opcion
+  D:0008H         SYMBOL        opcion
   -------         ENDDO         
-  C:10E0H         LINE#         54
-  C:10E0H         LINE#         55
-  C:10E0H         LINE#         59
-  C:10E3H         LINE#         61
-  C:10E6H         LINE#         67
-  C:10F2H         LINE#         68
-  C:10F2H         LINE#         69
-  C:10F5H         LINE#         70
-  C:10F8H         LINE#         71
-  C:10FBH         LINE#         72
-  C:1104H         LINE#         73
-  C:1104H         LINE#         74
-  C:1104H         LINE#         76
+  C:10E3H         LINE#         54
+  C:10E3H         LINE#         55
+  C:10E3H         LINE#         59
+  C:10E6H         LINE#         61
+  C:10E9H         LINE#         67
+  C:10F5H         LINE#         68
+  C:10F5H         LINE#         69
+  C:10F8H         LINE#         70
+  C:10FBH         LINE#         71
+BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  17:16:40  PAGE 7
+
+
+  C:10FEH         LINE#         72
+  C:1107H         LINE#         73
+  C:1107H         LINE#         74
+  C:1107H         LINE#         76
   -------         ENDPROC       CORRER_MENU
   -------         ENDMOD        INTERFAZ
 
@@ -396,22 +434,20 @@ SYMBOL TABLE OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\ad
   C:1069H         LINE#         23
   C:106CH         LINE#         24
   C:106FH         LINE#         25
-  C:1072H         LINE#         28
-  C:1074H         LINE#         29
-  C:1077H         LINE#         30
-  C:1079H         LINE#         32
-  C:1079H         LINE#         33
-  C:1079H         LINE#         35
-  C:107DH         LINE#         36
-  C:107DH         LINE#         38
-  C:1080H         LINE#         39
-  C:108BH         LINE#         40
-  C:108EH         LINE#         41
-BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  16:51:54  PAGE 7
-
-
-  C:1091H         LINE#         42
-  C:1091H         LINE#         43
+  C:1072H         LINE#         26
+  C:1075H         LINE#         28
+  C:1077H         LINE#         29
+  C:107AH         LINE#         30
+  C:107CH         LINE#         32
+  C:107CH         LINE#         33
+  C:107CH         LINE#         35
+  C:1080H         LINE#         36
+  C:1080H         LINE#         38
+  C:1083H         LINE#         39
+  C:108EH         LINE#         40
+  C:1091H         LINE#         41
+  C:1094H         LINE#         42
+  C:1094H         LINE#         43
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
@@ -421,13 +457,13 @@ SYMBOL TABLE OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\ad
 
   -------         MODULE        CONVERSOR
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:11E4H         PUBLIC        _enviar_dato
+  C:11E7H         PUBLIC        _enviar_dato
   B:00E8H.5       PUBLIC        AD0INT
   D:0026H         PUBLIC        cont
   D:00C5H         PUBLIC        ADC0H
   D:00C3H         PUBLIC        ADC0L
   D:00C4H         PUBLIC        ADC0M
-  C:114DH         PUBLIC        convertir
+  C:1150H         PUBLIC        convertir
   D:00C6H         PUBLIC        ADC0MUX
   C:0FCAH         PUBLIC        cambiar_pin
   -------         PROC          CONVERTIR
@@ -435,23 +471,26 @@ SYMBOL TABLE OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\ad
   D:0022H         SYMBOL        rawValue
   D:0004H         SYMBOL        mV
   -------         ENDDO         
-  C:114DH         LINE#         5
-  C:114DH         LINE#         6
-  C:114DH         LINE#         10
-  C:1150H         LINE#         11
-  C:1152H         LINE#         14
-  C:1155H         LINE#         15
-  C:1158H         LINE#         16
-  C:115BH         LINE#         17
-  C:115EH         LINE#         36
-  C:116FH         LINE#         42
-  C:116FH         LINE#         44
+  C:1150H         LINE#         5
+  C:1150H         LINE#         6
+  C:1150H         LINE#         10
+  C:1153H         LINE#         11
+BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  17:16:40  PAGE 8
+
+
+  C:1155H         LINE#         14
+  C:1158H         LINE#         15
+  C:115BH         LINE#         16
+  C:115EH         LINE#         17
+  C:1161H         LINE#         36
+  C:1172H         LINE#         42
+  C:1172H         LINE#         44
   -------         ENDPROC       CONVERTIR
   -------         PROC          _ENVIAR_DATO
   D:0004H         SYMBOL        dato
-  C:11E4H         LINE#         49
-  C:11E4H         LINE#         50
-  C:11E4H         LINE#         53
+  C:11E7H         LINE#         49
+  C:11E7H         LINE#         50
+  C:11E7H         LINE#         53
   -------         ENDPROC       _ENVIAR_DATO
   -------         PROC          CAMBIAR_PIN
   C:0FCAH         LINE#         75
@@ -475,18 +514,15 @@ SYMBOL TABLE OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\ad
   -------         ENDMOD        CONVERSOR
 
   -------         MODULE        INTERRUPCIONES
-BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  16:51:54  PAGE 8
-
-
   C:0000H         SYMBOL        _ICE_DUMMY_
   B:00E8H.5       PUBLIC        AD0INT
-  C:121AH         PUBLIC        ADC0_ISR
+  C:121DH         PUBLIC        ADC0_ISR
   -------         PROC          ADC0_ISR
-  C:121AH         LINE#         12
-  C:121AH         LINE#         15
-  C:121DH         LINE#         16
-  C:121FH         LINE#         17
-  C:1222H         LINE#         18
+  C:121DH         LINE#         12
+  C:121DH         LINE#         15
+  C:1220H         LINE#         16
+  C:1222H         LINE#         17
+  C:1225H         LINE#         18
   -------         ENDPROC       ADC0_ISR
   -------         ENDMOD        INTERRUPCIONES
 
@@ -495,10 +531,10 @@ SYMBOL TABLE OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\ad
   -------         ENDMOD        ?C?ULDIV
 
   -------         MODULE        PRINTF
-  D:0008H         PUBLIC        ?_PRINTF517?BYTE
-  D:0008H         PUBLIC        ?_PRINTF?BYTE
-  D:0008H         PUBLIC        ?_SPRINTF517?BYTE
-  D:0008H         PUBLIC        ?_SPRINTF?BYTE
+  D:000AH         PUBLIC        ?_PRINTF517?BYTE
+  D:000AH         PUBLIC        ?_PRINTF?BYTE
+  D:000AH         PUBLIC        ?_SPRINTF517?BYTE
+  D:000AH         PUBLIC        ?_SPRINTF?BYTE
   C:0862H         PUBLIC        _PRINTF
   C:0862H         PUBLIC        _PRINTF517
   C:085CH         PUBLIC        _SPRINTF
@@ -507,8 +543,11 @@ SYMBOL TABLE OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\ad
 
   -------         MODULE        GETCHAR
   B:0021H.1       PUBLIC        ?C?CHARLOADED
+BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  17:16:40  PAGE 9
+
+
   D:001EH         PUBLIC        ?_UNGETCHAR?BYTE
-  C:11F5H         PUBLIC        GETCHAR
+  C:11F8H         PUBLIC        GETCHAR
   -------         ENDMOD        GETCHAR
 
   -------         MODULE        ?C?CLDPTR
@@ -532,20 +571,17 @@ SYMBOL TABLE OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\ad
   -------         ENDMOD        ?C?CCASE
 
   -------         MODULE        PUTCHAR
-  C:1093H         PUBLIC        _PUTCHAR
+  C:1096H         PUBLIC        _PUTCHAR
   -------         ENDMOD        PUTCHAR
 
   -------         MODULE        _GETKEY
-  C:1210H         PUBLIC        _GETKEY
+  C:1213H         PUBLIC        _GETKEY
   -------         ENDMOD        _GETKEY
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?INICIAR_INTERRUPCIONES?CONFIGURADOR
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-BL51 BANKED LINKER/LOCATER V6.22            05/07/2015  16:51:54  PAGE 9
-
-
     SEGMENT: ?PR?INICIAR_FLASH?CONFIGURADOR
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
@@ -560,15 +596,12 @@ SYMBOL TABLE OF MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\ad
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?IMPRIMIR_CONF_MODO_DIFERENCIAL?INTERFAZ
 
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?CORRER_MENU?INTERFAZ
-
 ******************************************************************************
 >> 
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 04BBH BYTE (59%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 04BEH BYTE (59%) *
 >> 
 ******************************************************************************
 >> 
 
-Program Size: data=44.2 xdata=0 code=2629
-LINK/LOCATE RUN COMPLETE.  7 WARNING(S),  0 ERROR(S)
+Program Size: data=44.2 xdata=0 code=2632
+LINK/LOCATE RUN COMPLETE.  6 WARNING(S),  0 ERROR(S)

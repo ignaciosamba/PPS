@@ -22,9 +22,17 @@ void iniciar_sysclock (void)
    RSTSRC  = 0x04;                     // Enable missing clock detector
 }
 
+/**
+void cambiarpuerto(puerto)
+{
+	pasar de decimal a binario con switch.
+	ADC0MUX = puerto;
+}
+**/
 
 int iniciar_ADC(void)
 {
+
 	REF0CN |= 0x03;                     // Enable internal Vref
 	ADC0CN = 0x00;                      // Gain = 1, Unipolar mode
 	ADC0CF = 0x00;                      // Interrupts upon SINC3 filter output
@@ -38,7 +46,7 @@ int iniciar_ADC(void)
 	          (unsigned long) 128) - 1;
 
 	ADC0BUF = 0x00;                     // Turn off Input Buffers
-	ADC0MUX = 0x08;                     // Select AIN0.2
+	ADC0MUX = 0x08;                     // Select AIN0.0
 
 	ADC0MD = 0x81;                      // Start internal calibration
 	while(AD0CALC != 1);                // Wait until calibration is complete
@@ -111,4 +119,9 @@ int cargar_configuracionFlash(void)
 int guardar_configuracionFlash(void)
 {
 	return 0;
+}
+
+void configurar_single_ended (char puerto)
+{
+
 }

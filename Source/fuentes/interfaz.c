@@ -1,5 +1,6 @@
 #include "headers.h"
 #include "interfaz.h"
+#include "coonfigurador.h"
 
 ///MENU DE CONFIGURACION
 void imprimir_menu(void)
@@ -26,6 +27,7 @@ void imprimir_conf_modo_single_ended(void)
 {
 	printf("\nIngresar los numeros de los pines separados por la tecla 'enter'\n");
 	printf("Al terminar, ingrese la tecla 'r'\n");
+
 }
 
 void imprimir_conf_modo_diferencial(void)
@@ -66,7 +68,19 @@ void correr_menu(void)
 	
 	switch(c_opcion)
 	{
-		case '1': imprimir_conf_ADC(); break;
+		case '1': 
+					imprimir_conf_ADC(); 
+					c_opcion = getchar();
+					switch (c_opcion)
+					{
+						case '1':
+							imprimir_conf_modo_single_ended();
+							 numeropuerto = getchar();
+							 configurar_single_ended(numeropuerto);
+							break;
+						default: printf("default\n");
+					}
+					break;
 		case '2': imprimir_conf_modos(); break;
 		case '3': imprimir_conf_tipoSerial(); break;
 		default: printf("default!!\n");

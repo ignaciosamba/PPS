@@ -22,13 +22,13 @@ void main(void)
 	iniciar_sysclock();
 	iniciar_puertos();
 	iniciar_UART();
+	correr_menu();
 	iniciar_ADC();
-	// correr_menu();
 
 	AD0INT = 0;							
 	ADC0MD = 0x83;                      // Start continuous conversions
-	EA = 1;                             // Enable global interrupts
-
+	EA = 1;   	                        // Enable global interrupts
+	//ADC0MUX
 	while(1)
 	{
 		// printf("no entraaa\n");
