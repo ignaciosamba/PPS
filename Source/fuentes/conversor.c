@@ -42,9 +42,9 @@ unsigned long convertir(void)
  * @brief por ahora no envia un carajo.. imprime en la UART nomas
  * @details [long description]
  */
-void enviar_dato(unsigned long dato)
+void enviar_dato(unsigned long *dato)
 {
-	printf("voltage: %4ld mV\n",dato);
+	printf("voltage: %4ld mV\n",*dato);
 	// dato_convertido = dato;
 	// f_enviar_dato = true;
 
