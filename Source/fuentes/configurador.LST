@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/07/2015 14:52:49 PAGE 1   
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/07/2015 15:00:02 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE CONFIGURADOR
@@ -62,7 +62,7 @@ line level    source
   53          int iniciar_UART(void)
   54          {
   55   1      
-C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/07/2015 14:52:49 PAGE 2   
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/07/2015 15:00:02 PAGE 2   
 
   56   1              SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
   57   1                                                 //        level of STOP bit is ignored
@@ -126,7 +126,7 @@ line level    source
 *** WARNING C294 IN LINE 69 OF configurador.c: unreachable code
 
 
-C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/07/2015 14:52:49 PAGE 3   
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/07/2015 15:00:02 PAGE 3   
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    100    ----

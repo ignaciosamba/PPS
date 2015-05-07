@@ -10,7 +10,7 @@
 #include "configurador.h"
 #include "conversor.h"
  
-unsigned long dato_a_enviar;
+long int dato_a_enviar;
 bool f_dato_convertido;
 
 void main(void)
@@ -25,7 +25,7 @@ void main(void)
 	iniciar_ADC();
 	// correr_menu();
 
-	AD0INT = 0;
+	AD0INT = 0;							
 	ADC0MD = 0x83;                      // Start continuous conversions
 	EA = 1;                             // Enable global interrupts
 
@@ -38,7 +38,7 @@ void main(void)
 			f_dato_convertido = false;
 			dato_a_enviar = convertir();
 			enviar_dato(dato_a_enviar);
-			cambiar_pin ();
+			//cambiar_pin ();
 		}
 	}
 }

@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   MAIN                                                              05/07/2015 14:52:49 PAGE 1   
+C51 COMPILER V9.53.0.0   MAIN                                                              05/07/2015 15:36:29 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE MAIN
@@ -19,7 +19,7 @@ line level    source
   10          #include "configurador.h"
   11          #include "conversor.h"
   12           
-  13          unsigned long dato_a_enviar;
+  13          long int dato_a_enviar;
   14          bool f_dato_convertido;
   15          
   16          void main(void)
@@ -34,7 +34,7 @@ line level    source
   25   1              iniciar_ADC();
   26   1              // correr_menu();
   27   1      
-  28   1              AD0INT = 0;
+  28   1              AD0INT = 0;                                                     
   29   1              ADC0MD = 0x83;                      // Start continuous conversions
   30   1              EA = 1;                             // Enable global interrupts
   31   1      
@@ -47,14 +47,14 @@ line level    source
   38   3                              f_dato_convertido = false;
   39   3                              dato_a_enviar = convertir();
   40   3                              enviar_dato(dato_a_enviar);
-  41   3                              cambiar_pin ();
+  41   3                              //cambiar_pin ();
   42   3                      }
   43   2              }
   44   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     57    ----
+   CODE SIZE        =     54    ----
    CONSTANT SIZE    =     17    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
@@ -63,7 +63,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
-C51 COMPILER V9.53.0.0   MAIN                                                              05/07/2015 14:52:49 PAGE 2   
+C51 COMPILER V9.53.0.0   MAIN                                                              05/07/2015 15:36:29 PAGE 2   
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
