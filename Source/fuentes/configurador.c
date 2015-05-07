@@ -38,7 +38,7 @@ int iniciar_ADC(void)
 	          (unsigned long) 128) - 1;
 
 	ADC0BUF = 0x00;                     // Turn off Input Buffers
-	ADC0MUX = 0x28;                     // Select AIN0.2
+	ADC0MUX = 0x08;                     // Select AIN0.2
 
 	ADC0MD = 0x81;                      // Start internal calibration
 	while(AD0CALC != 1);                // Wait until calibration is complete

@@ -1,10 +1,14 @@
 #include "headers.h"
 #include "conversor.h"
+int cont = 0;
 
 unsigned long convertir(void)
 {
 	static LONGDATA rawValue;
 	unsigned long mV;
+	
+	while (!AD0INT);
+	AD0INT = 0;
 
 	   // Copy the output value of the ADC
 	rawValue.Byte[Byte3] = 0x00;
@@ -46,7 +50,7 @@ void enviar_dato(unsigned long dato)
 {
 	//unsigned long dato2;
 	//dato2=100;
-	printf("voltage: %8ld mV\n",dato);
+	printf("voltaje: %8ld mV\n",dato);
 	// dato_convertido = dato;
 	// f_enviar_dato = true;
 
@@ -70,13 +74,21 @@ void enviar_dato(unsigned long dato)
 
 void cambiar_pin (void)
 {
-	if(ADC0MUX & 0x78)
-	  ADC0MUX = 0x08;
+	
+	if(ADC0MUX == 0x78)
+	{
+
+	  		ADC0MUX = 0x08;
+	  		cont = 0;
+	  		printf("Entrada: %1d, ",cont);
+	  		cont++;
+	}
 	else
 	{
-		printf ("lucho come traba de 22 pesos");
-	  ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4); //Swapeo los 4 MSB con los 4 LSB para aumentar en uno el LSB
-	  ADC0MUX++;
-	  ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4); //Swapeo una vez mas asi me queda incrementado los 4 MSB y asi me movi de puerto. 
+		  printf("Entrada: %1d, ",cont);
+		  ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4); //Swapeo los 4 MSB con los 4 LSB para aumentar en uno el LSB
+		  ADC0MUX++;
+		  ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4); //Swapeo una vez mas asi me queda incrementado los 4 MSB y asi me movi de puerto. 
+		  cont++;
 	}
 }

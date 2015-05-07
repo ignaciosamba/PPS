@@ -31,11 +31,11 @@ COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2009
     SEGMENT: ?PR?CORRER_MENU?INTERFAZ
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0471H BYTE (55%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 04BBH BYTE (59%) *
 ******************************************************************************
 
 >> 
 >> 
 >> 
-Program Size: data=42.2 xdata=0 code=2426
+Program Size: data=44.2 xdata=0 code=2629
 LINK/LOCATE RUN COMPLETE.  7 WARNING(S),  0 ERROR(S)
