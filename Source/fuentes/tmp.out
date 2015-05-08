@@ -1,63 +1,40 @@
 
 BL51 BANKED LINKER/LOCATER V6.22 - SN: Eval Version
 COPYRIGHT KEIL ELEKTRONIK GmbH 1987 - 2009
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\comunicacion.obj",
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\configurador.obj",
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\interfaz.obj",
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\main.obj",
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\memoria.obj",
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\conversor.obj",
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\interrupciones.obj"  TO "C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\adc" RS(256) PL(68) PW(78) 
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\comunicacion.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\configurador.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\conversor.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\interfaz.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\memoria.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_comunicacion.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_global.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\interrupciones.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_comunicacion.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_configurador.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_conversor.obj",
+"F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_global.obj"  TO "F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\fuentes\comunicacion" RS(256) PL(68) PW(78) 
 
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INICIAR_INTERRUPCIONES?CONFIGURADOR
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INICIAR_FLASH?CONFIGURADOR
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?CARGAR_CONFIGURACIONFLASH?CONFIGURADOR
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?GUARDAR_CONFIGURACIONFLASH?CONFIGURADOR
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_CONFIGURAR_SINGLE_ENDED?CONFIGURADOR
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?IMPRIMIR_CONF_MODO_DIFERENCIAL?INTERFAZ
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_INIT_MEMPOOL?INIT_MEM
-
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  _CARGAR_BUFFER_SINGLE
-    MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\interfaz.obj (INTERFAZ)
+*** WARNING L7: MODULE NAME NOT UNIQUE
+    MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_comunicacion.obj (TEST_COMUNICACION)
 
 >> 
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  _CARGAR_BUFFER_SINGLE
-    MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\interfaz.obj (INTERFAZ)
-
->>     ADDRESS: 115BH
-
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  CAMBIAR_PIN
-    MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\main.obj (MAIN)
+*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
+    SYMBOL:  TESTS_RUN
+    MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_configurador.obj (TEST_CONFIGURADOR)
 
 >> 
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  CAMBIAR_PIN
-    MODULE:  C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\main.obj (MAIN)
-
->>     ADDRESS: 11BCH
-
-******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 05FAH BYTE (74%) *
-******************************************************************************
+*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
+    SYMBOL:  RES
+    MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_configurador.obj (TEST_CONFIGURADOR)
 
 >> 
+*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
+    SYMBOL:  RUN_TEST_COMUNICACION
+    MODULE:  F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_configurador.obj (TEST_CONFIGURADOR)
+
 >> 
+*** FATAL ERROR L210: I/O ERROR ON INPUT FILE:
+    EXCEPTION 0021H: PATH OR FILE NOT FOUND
+    FILE: F:\LUCHO\Facu\Quinto año\PPS\Repo\PPS\Source\test\test_conversor.obj
+
 >> 
-Program Size: data=63.2 xdata=8 code=3175
-LINK/LOCATE RUN COMPLETE.  11 WARNING(S),  0 ERROR(S)

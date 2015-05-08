@@ -42,7 +42,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-
-SiLabs/Output/
-SiLabs/BLHeli.LST
-SiLabs/MakeHex_Result.txt
+*.LST
+*.M51
+*.OBJ
+*.OUT
+*.out
