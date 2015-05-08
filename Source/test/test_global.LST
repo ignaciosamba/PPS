@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   TEST_GLOBAL                                                       05/08/2015 17:14:23 PAGE 1   
+C51 COMPILER V9.53.0.0   TEST_GLOBAL                                                       05/08/2015 17:39:17 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE TEST_GLOBAL
@@ -28,28 +28,29 @@ line level    source
   19   1          iniciar_puertos();
   20   1          iniciar_sysclock();
   21   1          iniciar_UART();
-  22   1      
+  22   1          
   23   1          if((err = run_test_comunicacion()) != 1)
   24   1          {
   25   2              printf("error en comunicacion.c\n");
   26   2              errores++;
   27   2          }
-  28   1          if((err = run_test_conversor()) != 1)
-  29   1          {
-  30   2              errores++;
-  31   2          }
-  32   1          tests_run++;
-  33   1      
-  34   1          printf("Tests corridos: %d\n", tests_run);
-  35   1          printf("Errores: %d\n", errores);
-  36   1      
-  37   1          while(1);
-  38   1      
-  39   1       }
+  28   1          iniciar_ADC();
+  29   1          if((err = run_test_conversor()) != 1)
+  30   1          {
+  31   2              errores++;
+  32   2          }
+  33   1          tests_run++;
+  34   1      
+  35   1          printf("Tests corridos: %d\n", tests_run);
+  36   1          printf("Errores: %d\n", errores);
+  37   1      
+  38   1          while(1);
+  39   1      
+  40   1       }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    111    ----
+   CODE SIZE        =    114    ----
    CONSTANT SIZE    =     58    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

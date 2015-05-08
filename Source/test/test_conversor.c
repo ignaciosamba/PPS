@@ -1,10 +1,14 @@
 #include "minunit.h"
 #include "../fuentes/headers.h"
 #include "../fuentes/configurador.h"
+#include "../fuentes/conversor.h"
 #include "test_headers/test_conversor.h"
 
  int tests_run = 0; 
  int res;
+long int dato_a_enviar;
+bool f_dato_convertido;
+
 
  static char * test_pasar_datos_continuamente() 
 {   
@@ -45,8 +49,7 @@
  
  int run_test_conversor(void) {
 
-    iniciar_ADC();
-
+    // iniciar_ADC();
 
     char *result = all_tests();
     if (result != 0) {

@@ -47,3 +47,10 @@ Temporary Items
 *.OBJ
 *.OUT
 *.out
+*.OBJ
+*.LST
+*.#3
+*.M51
+*.OBJ
+*.#3
+*.LST

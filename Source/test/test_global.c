@@ -19,12 +19,13 @@
     iniciar_puertos();
     iniciar_sysclock();
     iniciar_UART();
-
+    
     if((err = run_test_comunicacion()) != 1)
     {
         printf("error en comunicacion.c\n");
         errores++;
     }
+    iniciar_ADC();
     if((err = run_test_conversor()) != 1)
     {
         errores++;
