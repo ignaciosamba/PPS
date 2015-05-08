@@ -18,3 +18,11 @@ Entonces por ahora va a haber un primer prototipo.. no tiene un carajo de config
 PRIMER PROTOTIPO
 
 va a entregar los datos que reciba de las 8 patas todo el tiempo a una frecuencia fija en modo single-ended. Con una tension de referencia de 2.5V. Cuando tiene el dato listo lo imprime por la UART.
+
+7/5
+
+ya pudimos hacer andar el primer prototipo con solo el adc andando y tirando la info de todas las patas de manera continua. ahora estamos intentando configurar alguna de las patas.
+
+8/5
+
+Orlando nos dijo hoy que el gain del adc puede variar segun la temperatura y el tiempo que hace que esta convirtiendo y nos dejo bastante en offside.. hay que hacer algunas pruebas
