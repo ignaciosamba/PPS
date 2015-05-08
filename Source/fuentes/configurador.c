@@ -24,33 +24,34 @@ void iniciar_sysclock (void)
 }
 
 
-void seleccionar_puerto(short int puerto)
+void seleccionar_puerto(int puerto)
 {
 	switch (puerto)
 	{
-		case 1:
+		case 0:
 			puerto = 0x08;
 			break;
-		case 2:
+		case 1:
 			puerto = 0x18;
 			printf("elegi el puerto 2\n");
 			break;
-		case 3:
+		case 2:
 			puerto = 0x28;
 			break;
-		case 4: 
+		case 3: 
 			puerto = 0x38;
 			break;
-		case 5:
+		case 4:
 			puerto = 0x48;
 			break;
-		case 6:
+		case 5:
 			puerto = 0x58;
 			break;
-		case 7:
+		case 9:
 			puerto = 0x68;
 			break;
-		case 8:
+		case 7:
+			printf("elegi el puerto 7\n");
 			puerto = 0x78;
 			break;
 		default:
@@ -63,6 +64,7 @@ void seleccionar_puerto(short int puerto)
 
 int iniciar_ADC()
 {
+	printf("Entre a lo loco aca iniciar_ADC\n");
 
 	REF0CN |= 0x03;                     // Enable internal Vref
 	ADC0CN = 0x00;                      // Gain = 1, Unipolar mode

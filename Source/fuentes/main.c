@@ -14,7 +14,7 @@
  
 long int dato_a_enviar;
 int buffer_single [TAM_SINGLE]; 
-short int puerto;
+char puerto;
 bool f_dato_convertido;
 
 
@@ -28,7 +28,9 @@ void main(void)
 	iniciar_sysclock();
 	iniciar_puertos();
 	iniciar_UART();
+	printf("Volvi arriba una mocha\n");
 	correr_menu();
+	printf("sali del menu!!!! \n");
 	iniciar_ADC();
 	//puerto = cambiar_pin();
 	//seleccionar_puerto(puerto);

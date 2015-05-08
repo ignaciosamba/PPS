@@ -46,3 +46,4 @@ typedef enum { false, true } bool;
 
 extern bool f_dato_convertido;
 extern int buffer_single [TAM_SINGLE];
+extern void cargar_buffer_single(char dato);

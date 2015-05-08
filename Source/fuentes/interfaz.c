@@ -59,11 +59,11 @@ void correr_menu(void)
 {
 	char c_opcion;
 	int opcion;
-	short int numeropuerto;
+	char numeropuerto;
 
 	imprimir_menu();
 
-		c_opcion = getchar();
+	c_opcion = getchar();
 		// printf("%c\n", c_opcion);
 /*		if(c_opcion == '1')
 			printf("YEAH\n");
@@ -79,6 +79,7 @@ void correr_menu(void)
 						case '1':
 								imprimir_conf_modo_single_ended();
 								numeropuerto = getchar();
+								printf("numero de puerto: %c \n", numeropuerto );
 							 	cargar_buffer_single(numeropuerto);
 								break;
 						default: printf("default\n");
@@ -86,6 +87,8 @@ void correr_menu(void)
 					break;
 		case '2': imprimir_conf_modos(); break;
 		case '3': imprimir_conf_tipoSerial(); break;
+	
+		case '5': printf("entre al 5 \n" ); iniciar_ADC(); break;
 		default: printf("default!!\n");
 		break;
 	}

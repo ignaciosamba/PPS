@@ -2,11 +2,14 @@
 #include "control.h"
 
 #define TAM_SINGLE 8
-int buffer_single [TAM_SINGLE];
+//int buffer_single [TAM_SINGLE];
 int posicion;
 
-int cargar_buffer_single(short int dato)
+
+void cargar_buffer_single(char dato)
 {
+	//printf("sdadasdasdas\n");
+	printf("cargue un 1 en la poscion: %c\n", dato );
 	buffer_single [dato] = 1; 
 }
 

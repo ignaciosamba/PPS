@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   MAIN                                                              05/08/2015 16:04:05 PAGE 1   
+C51 COMPILER V9.53.0.0   MAIN                                                              05/08/2015 16:58:10 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE MAIN
@@ -23,7 +23,7 @@ line level    source
   14           
   15          long int dato_a_enviar;
   16          int buffer_single [TAM_SINGLE]; 
-  17          short int puerto;
+  17          char puerto;
   18          bool f_dato_convertido;
   19          
   20          
@@ -37,47 +37,49 @@ line level    source
   28   1              iniciar_sysclock();
   29   1              iniciar_puertos();
   30   1              iniciar_UART();
-  31   1              correr_menu();
-  32   1              iniciar_ADC();
-  33   1              //puerto = cambiar_pin();
-  34   1              //seleccionar_puerto(puerto);
-  35   1      
-  36   1              AD0INT = 0;                                                     
-  37   1              ADC0MD = 0x83;                      // Start continuous conversions
-  38   1              EA = 1;                                 // Enable global interrupts
-  39   1              //ADC0MUX
-  40   1              while(1)
-  41   1              {
-  42   2      
-  43   2                      // printf("no entraaa\n");
-  44   2                      //necesitas contador para leer el arreglo de puertos
-  45   2                      
-  46   2                      if(f_dato_convertido)
-  47   2                      {
-  48   3                              //lees el dato correspondiente a la posicion del arreglo
-  49   3                              //llamas a seleccionar_puerto(parametro el numero de puerto que lee del arreglo)
-  50   3                              puerto = cambiar_pin();
-  51   3                              seleccionar_puerto(puerto);
-  52   3                              f_dato_convertido = false;
-  53   3                              dato_a_enviar = convertir();
-  54   3                              enviar_dato(dato_a_enviar);
-  55   3                              //cambiar_pin ();
-C51 COMPILER V9.53.0.0   MAIN                                                              05/08/2015 16:04:05 PAGE 2   
+  31   1              printf("Volvi arriba una mocha\n");
+  32   1              correr_menu();
+  33   1              printf("sali del menu!!!! \n");
+  34   1              iniciar_ADC();
+  35   1              //puerto = cambiar_pin();
+  36   1              //seleccionar_puerto(puerto);
+  37   1      
+  38   1              AD0INT = 0;                                                     
+  39   1              ADC0MD = 0x83;                      // Start continuous conversions
+  40   1              EA = 1;                                 // Enable global interrupts
+  41   1              //ADC0MUX
+  42   1              while(1)
+  43   1              {
+  44   2      
+  45   2                      // printf("no entraaa\n");
+  46   2                      //necesitas contador para leer el arreglo de puertos
+  47   2                      
+  48   2                      if(f_dato_convertido)
+  49   2                      {
+  50   3                              //lees el dato correspondiente a la posicion del arreglo
+  51   3                              //llamas a seleccionar_puerto(parametro el numero de puerto que lee del arreglo)
+  52   3                              puerto = cambiar_pin();
+  53   3                              seleccionar_puerto(puerto);
+  54   3                              f_dato_convertido = false;
+  55   3                              dato_a_enviar = convertir();
+C51 COMPILER V9.53.0.0   MAIN                                                              05/08/2015 16:58:10 PAGE 2   
 
-  56   3                      }
-  57   2                      //incrementas contador;
-  58   2                      //if (cont >= tam del arreglo) cont= 0;
-  59   2              }
-  60   1      }
-  61          
+  56   3                              enviar_dato(dato_a_enviar);
+  57   3                              //cambiar_pin ();
+  58   3                      }
+  59   2                      //incrementas contador;
+  60   2                      //if (cont >= tam del arreglo) cont= 0;
+  61   2              }
+  62   1      }
+  63          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     69    ----
-   CONSTANT SIZE    =   ----    ----
+   CODE SIZE        =     90    ----
+   CONSTANT SIZE    =     44    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     23    ----
+   DATA SIZE        =     22    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
