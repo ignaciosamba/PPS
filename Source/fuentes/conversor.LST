@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   CONVERSOR                                                         05/07/2015 17:15:13 PAGE 1   
+C51 COMPILER V9.53.0.0   CONVERSOR                                                         05/08/2015 16:00:44 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE CONVERSOR
@@ -62,7 +62,7 @@ line level    source
   53   1              printf("voltaje: %8ld mV\n",dato);
   54   1              // dato_convertido = dato;
   55   1              // f_enviar_dato = true;
-C51 COMPILER V9.53.0.0   CONVERSOR                                                         05/07/2015 17:15:13 PAGE 2   
+C51 COMPILER V9.53.0.0   CONVERSOR                                                         05/08/2015 16:00:44 PAGE 2   
 
   56   1      
   57   1              // if(ADC0MUX == 0x08)
@@ -83,33 +83,33 @@ line level    source
   72   1              //    pin_actual = 7;
   73   1      }
   74          
-  75          void cambiar_pin (void)
+  75          /**void cambiar_pin (void)
   76          {
-  77   1              
-  78   1              if(ADC0MUX == 0x78)
-  79   1              {
-  80   2      
-  81   2                              ADC0MUX = 0x08;
-  82   2                              cont = 0;
-  83   2                              printf("Entrada: %1d, ",cont);
-  84   2                              cont++;
-  85   2              }
-  86   1              else
-  87   1              {
-  88   2                        printf("Entrada: %1d, ",cont);
-  89   2                        ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4); //Swapeo los 4 MSB con los 4 LSB para aum
+  77                  
+  78                  if(ADC0MUX == 0x78)
+  79                  {
+  80          
+  81                                  ADC0MUX = 0x08;
+  82                                  cont = 0;
+  83                                  printf("Entrada: %1d, ",cont);
+  84                                  cont++;
+  85                  }
+  86                  else
+  87                  {
+  88                            printf("Entrada: %1d, ",cont);
+  89                            ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4); //Swapeo los 4 MSB con los 4 LSB para aum
              -entar en uno el LSB
-  90   2                        ADC0MUX++;
-  91   2                        ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4); //Swapeo una vez mas asi me queda increme
+  90                            ADC0MUX++;
+  91                            ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4); //Swapeo una vez mas asi me queda increme
              -ntado los 4 MSB y asi me movi de puerto. 
-  92   2                        cont++;
-  93   2              }
-  94   1      }
+  92                            cont++;
+  93                  }
+  94          }**/
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    151    ----
-   CONSTANT SIZE    =     33    ----
+   CODE SIZE        =     52    ----
+   CONSTANT SIZE    =     18    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =      6    ----

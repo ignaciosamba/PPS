@@ -6,6 +6,7 @@
 
 #include "headers.h"
 #include "configurador.h"
+#include "control.h"
 
 
 
@@ -22,15 +23,45 @@ void iniciar_sysclock (void)
    RSTSRC  = 0x04;                     // Enable missing clock detector
 }
 
-/**
-void cambiarpuerto(puerto)
+
+void seleccionar_puerto(short int puerto)
 {
-	pasar de decimal a binario con switch.
+	switch (puerto)
+	{
+		case 1:
+			puerto = 0x08;
+			break;
+		case 2:
+			puerto = 0x18;
+			printf("elegi el puerto 2\n");
+			break;
+		case 3:
+			puerto = 0x28;
+			break;
+		case 4: 
+			puerto = 0x38;
+			break;
+		case 5:
+			puerto = 0x48;
+			break;
+		case 6:
+			puerto = 0x58;
+			break;
+		case 7:
+			puerto = 0x68;
+			break;
+		case 8:
+			puerto = 0x78;
+			break;
+		default:
+			printf("ESTAMOS EN LA B \n" );
+			break;
+	}
 	ADC0MUX = puerto;
 }
-**/
 
-int iniciar_ADC(void)
+
+int iniciar_ADC()
 {
 
 	REF0CN |= 0x03;                     // Enable internal Vref
@@ -46,6 +77,7 @@ int iniciar_ADC(void)
 	          (unsigned long) 128) - 1;
 
 	ADC0BUF = 0x00;                     // Turn off Input Buffers
+
 	ADC0MUX = 0x08;                     // Select AIN0.0
 
 	ADC0MD = 0x81;                      // Start internal calibration

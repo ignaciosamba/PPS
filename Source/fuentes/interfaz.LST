@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   INTERFAZ                                                          05/07/2015 17:15:12 PAGE 1   
+C51 COMPILER V9.53.0.0   INTERFAZ                                                          05/08/2015 16:00:44 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE INTERFAZ
@@ -9,89 +9,107 @@ line level    source
 
    1          #include "headers.h"
    2          #include "interfaz.h"
-   3          
-   4          ///MENU DE CONFIGURACION
-   5          void imprimir_menu(void)
-   6          {
-   7   1              printf("\n Menú de configuracion\n");
-   8   1              printf("1. Configuración de ADC\n");
-   9   1              printf("2. Modos de transmision de datos\n");
-  10   1              printf("3. Tipo de comunicacion serial\n");
-  11   1              printf("4. Guardar la configuracion\n");
-  12   1              printf("5. Salir e iniciar\n");
-  13   1      }
-  14          
-  15          ///CONFIGURACION DEL ADC
-  16          
-  17          void imprimir_conf_ADC(void)
-  18          {
-  19   1              printf("\n1. Configurar pins en modo single-ended\n");
-  20   1              printf("2. Configurar pins en modo diferencial\n");
-  21   1              printf("3. Configurar ganancia\n");
-  22   1              printf("4. Volver al menu anterior\n");
-  23   1      }
-  24          
-  25          void imprimir_conf_modo_single_ended(void)
-  26          {
-  27   1              printf("\nIngresar los numeros de los pines separados por la tecla 'enter'\n");
-  28   1              printf("Al terminar, ingrese la tecla 'r'\n");
-  29   1      }
-  30          
-  31          void imprimir_conf_modo_diferencial(void)
-  32          {
-  33   1              printf("\nIngresar, de a dos, los pares de los pines desados, separando los grupos con la tecla 'enter'\n
+   3          #include "coonfigurador.h"
+*** WARNING C318 IN LINE 3 OF interfaz.c: can't open file 'coonfigurador.h'
+   4          #include "control.h"
+   5          
+   6          
+   7          ///MENU DE CONFIGURACION
+   8          void imprimir_menu(void)
+   9          {
+  10   1              printf("\n Menú de configuracion\n");
+  11   1              printf("1. Configuración de ADC\n");
+  12   1              printf("2. Modos de transmision de datos\n");
+  13   1              printf("3. Tipo de comunicacion serial\n");
+  14   1              printf("4. Guardar la configuracion\n");
+  15   1              printf("5. Salir e iniciar\n");
+  16   1      }
+  17          
+  18          ///CONFIGURACION DEL ADC
+  19          
+  20          void imprimir_conf_ADC(void)
+  21          {
+  22   1              printf("\n1. Configurar pins en modo single-ended\n");
+  23   1              printf("2. Configurar pins en modo diferencial\n");
+  24   1              printf("3. Configurar ganancia\n");
+  25   1              printf("4. Volver al menu anterior\n");
+  26   1      }
+  27          
+  28          void imprimir_conf_modo_single_ended(void)
+  29          {
+  30   1              printf("\nIngresar los numeros de los pines separados por la tecla 'enter'\n");
+  31   1              printf("Al terminar, ingrese la tecla 'r'\n");
+  32   1      
+  33   1      }
+  34          
+  35          void imprimir_conf_modo_diferencial(void)
+  36          {
+  37   1              printf("\nIngresar, de a dos, los pares de los pines desados, separando los grupos con la tecla 'enter'\n
              -");
-  34   1              printf("Al terminar, ingrese la tecla 'r'\n");
-  35   1      }
-  36          
-  37          ///CONFIGURACION DE MODOS DE TRANSMISION DE DATOS
-  38          
-  39          void imprimir_conf_modos(void)
-  40          {
-  41   1              printf("\n1. Por peticion de dispositivo externo\n");
-  42   1              printf("2. Flujo constante\n");
-  43   1              printf("3. Por vencimiento de temporarizador\n");
-  44   1              printf("4. Volver al menu anterior\n");
-  45   1      }
-  46          
-  47          void imprimir_conf_tipoSerial(void)
-  48          {
-  49   1              printf("\n1. RS232\n");
-  50   1              printf("2. I2C (no implementado)\n");   
-  51   1      }
-  52          
-  53          
-  54          void correr_menu(void)
-C51 COMPILER V9.53.0.0   INTERFAZ                                                          05/07/2015 17:15:12 PAGE 2   
+  38   1              printf("Al terminar, ingrese la tecla 'r'\n");
+  39   1      }
+  40          
+  41          ///CONFIGURACION DE MODOS DE TRANSMISION DE DATOS
+  42          
+  43          void imprimir_conf_modos(void)
+  44          {
+  45   1              printf("\n1. Por peticion de dispositivo externo\n");
+  46   1              printf("2. Flujo constante\n");
+  47   1              printf("3. Por vencimiento de temporarizador\n");
+  48   1              printf("4. Volver al menu anterior\n");
+  49   1      }
+  50          
+  51          void imprimir_conf_tipoSerial(void)
+  52          {
+  53   1              printf("\n1. RS232\n");
+C51 COMPILER V9.53.0.0   INTERFAZ                                                          05/08/2015 16:00:44 PAGE 2   
 
-  55          {
-  56   1              char c_opcion;
-  57   1              int opcion;
-  58   1      
-  59   1              imprimir_menu();
-  60   1      
-  61   1                      c_opcion = getchar();
-  62   1                      // printf("%c\n", c_opcion);
-  63   1      /*              if(c_opcion == '1')
-  64   1                              printf("YEAH\n");
-  65   1                      else printf("FUCK\n");*/
-  66   1              
-  67   1              switch(c_opcion)
-  68   1              {
-  69   2                      case '1': imprimir_conf_ADC(); break;
-  70   2                      case '2': imprimir_conf_modos(); break;
-  71   2                      case '3': imprimir_conf_tipoSerial(); break;
-  72   2                      default: printf("default!!\n");
-  73   2                      break;
-  74   2              }
-  75   1      
-  76   1      }
-*** WARNING C280 IN LINE 57 OF interfaz.c: 'opcion': unreferenced local variable
+  54   1              printf("2. I2C (no implementado)\n");   
+  55   1      }
+  56          
+  57          
+  58          void correr_menu(void)
+  59          {
+  60   1              char c_opcion;
+  61   1              int opcion;
+  62   1              short int numeropuerto;
+  63   1      
+  64   1              imprimir_menu();
+  65   1      
+  66   1                      c_opcion = getchar();
+  67   1                      // printf("%c\n", c_opcion);
+  68   1      /*              if(c_opcion == '1')
+  69   1                              printf("YEAH\n");
+  70   1                      else printf("FUCK\n");*/
+  71   1              
+  72   1              switch(c_opcion)
+  73   1              {
+  74   2                      case '1': 
+  75   2                                              imprimir_conf_ADC(); 
+  76   2                                              c_opcion = getchar();
+  77   2                                              switch (c_opcion)
+  78   2                                              {
+  79   3                                                      case '1':
+  80   3                                                                      imprimir_conf_modo_single_ended();
+  81   3                                                                      numeropuerto = getchar();
+  82   3                                                                      cargar_buffer_single(numeropuerto);
+  83   3                                                                      break;
+  84   3                                                      default: printf("default\n");
+  85   3                                              }
+  86   2                                              break;
+  87   2                      case '2': imprimir_conf_modos(); break;
+  88   2                      case '3': imprimir_conf_tipoSerial(); break;
+  89   2                      default: printf("default!!\n");
+  90   2                      break;
+  91   2              }
+  92   1      
+  93   1      }
+*** WARNING C280 IN LINE 61 OF interfaz.c: 'opcion': unreferenced local variable
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    217    ----
-   CONSTANT SIZE    =    646    ----
+   CODE SIZE        =    247    ----
+   CONSTANT SIZE    =    655    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----       2
@@ -100,4 +118,4 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)
