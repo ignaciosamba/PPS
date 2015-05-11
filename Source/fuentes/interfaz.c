@@ -80,13 +80,11 @@ void correr_menu(void)
 										while (getchar() != '\n');
 										printf("esc\n");
 										 // c_opcion = fgetc(stdin);
-										
 										if (c_opcion == 'r') 
 											break;
-
+										/*if (c_opcion > 7)
+											printf("Valor invalido! Ingrese un numero del 0 al 7. \n");*/
 										cargar_buffer_single(c_opcion);
-										
-
 									}
 									break;
 						
