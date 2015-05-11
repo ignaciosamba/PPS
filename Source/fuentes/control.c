@@ -3,7 +3,7 @@
 
 #define TAM_SINGLE 8
 //int buffer_single [TAM_SINGLE];
-int posicion = 0;
+short int posicion = 0;
 short int dato_n;
 
 
@@ -16,7 +16,7 @@ void cargar_buffer_single(char dato)
 	buffer_single [dato_n] = 1; 
 }
 
-int cambiar_pin()
+short int cambiar_pin()
 {
 	while(1)
 	{

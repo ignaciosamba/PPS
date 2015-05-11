@@ -14,6 +14,7 @@
 long int dato_a_enviar;
 bool f_dato_convertido;
 int buffer_single [TAM_SINGLE]; 
+short int posicion_adc;
 
 void main(void)
 {
@@ -31,7 +32,7 @@ void main(void)
 	AD0INT = 0;							
 	ADC0MD = 0x83;                      // Start continuous conversions
 	EA = 1;                             // Enable global interrupts
-	
+
 	while(1)
 	{
 		// empezar_adc();
@@ -42,7 +43,8 @@ void main(void)
 			f_dato_convertido = false;
 			dato_a_enviar = convertir();
 			enviar_dato(dato_a_enviar);
-			cambiar_pin();
+			posicion_adc = cambiar_pin();
+			seleccionar_puerto(posicion_adc);
 		}
 	}
 }
