@@ -72,7 +72,7 @@ void enviar_dato(unsigned long dato)
 	//    pin_actual = 7;
 }
 
-/**void cambiar_pin (void)
+void cambiar_pin (void)
 {
 	
 	if(ADC0MUX == 0x78)
@@ -91,4 +91,4 @@ void enviar_dato(unsigned long dato)
 		  ADC0MUX = ((ADC0MUX & 0xf0) >> 4) | ((ADC0MUX & 0x0f) << 4); //Swapeo una vez mas asi me queda incrementado los 4 MSB y asi me movi de puerto. 
 		  cont++;
 	}
-}**/
+}

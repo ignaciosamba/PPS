@@ -6,7 +6,6 @@
 
 #include "headers.h"
 #include "configurador.h"
-#include "control.h"
 
 
 
@@ -24,48 +23,8 @@ void iniciar_sysclock (void)
 }
 
 
-void seleccionar_puerto(unsigned short puerto)
+int iniciar_ADC(void)
 {
-	switch (puerto)
-	{
-		case 0:
-			puerto = 0x08;
-			break;
-		case 1:
-			puerto = 0x18;
-			printf("elegi el puerto 2\n");
-			break;
-		case 2:
-			puerto = 0x28;
-			break;
-		case 3: 
-			puerto = 0x38;
-			break;
-		case 4:
-			puerto = 0x48;
-			break;
-		case 5:
-			puerto = 0x58;
-			break;
-		case 9:
-			puerto = 0x68;
-			break;
-		case 7:
-			printf("elegi el puerto 7\n");
-			puerto = 0x78;
-			break;
-		default:
-			printf("ESTAMOS EN LA B \n" );
-			break;
-	}
-	ADC0MUX = puerto;
-}
-
-
-int iniciar_ADC()
-{
-	printf("Entre a lo loco aca iniciar_ADC\n");
-
 	REF0CN |= 0x03;                     // Enable internal Vref
 	ADC0CN = 0x00;                      // Gain = 1, Unipolar mode
 	ADC0CF = 0x00;                      // Interrupts upon SINC3 filter output
@@ -79,8 +38,7 @@ int iniciar_ADC()
 	          (unsigned long) 128) - 1;
 
 	ADC0BUF = 0x00;                     // Turn off Input Buffers
-
-	ADC0MUX = 0x08;                     // Select AIN0.0
+	ADC0MUX = 0x08;                     // Select AIN0.2
 
 	ADC0MD = 0x81;                      // Start internal calibration
 	while(AD0CALC != 1);                // Wait until calibration is complete
@@ -153,9 +111,4 @@ int cargar_configuracionFlash(void)
 int guardar_configuracionFlash(void)
 {
 	return 0;
-}
-
-void configurar_single_ended (char puerto)
-{
-
 }
