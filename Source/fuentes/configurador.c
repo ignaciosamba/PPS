@@ -6,8 +6,48 @@
 
 #include "headers.h"
 #include "configurador.h"
+#include "control.h"
 
-
+void empezar_adc()
+{
+	ADC0MUX = 0x08;
+}
+void seleccionar_puerto(unsigned short puerto)
+{
+	switch (puerto)
+	{
+		case 0:
+			puerto = 0x08;
+			break;
+		case 1:
+			puerto = 0x18;
+			printf("elegi el puerto 2\n");
+			break;
+		case 2:
+			puerto = 0x28;
+			break;
+		case 3: 
+			puerto = 0x38;
+			break;
+		case 4:
+			puerto = 0x48;
+			break;
+		case 5:
+			puerto = 0x58;
+			break;
+		case 9:
+			puerto = 0x68;
+			break;
+		case 7:
+			printf("elegi el puerto 7\n");
+			puerto = 0x78;
+			break;
+		default:
+			printf("ESTAMOS EN LA B \n" );
+			break;
+	}
+	ADC0MUX = puerto;
+}
 
 void iniciar_puertos (void)
 {
@@ -111,4 +151,8 @@ int cargar_configuracionFlash(void)
 int guardar_configuracionFlash(void)
 {
 	return 0;
+}
+void configurar_single_ended (char puerto)
+{
+
 }

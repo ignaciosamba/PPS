@@ -1,11 +1,12 @@
 #include <C8051F350.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #define SYSCLK      24500000           // SYSCLK Frecuencia del Clock en Hertz
 #define MDCLK         2457600          // Modulator clock in Hz (ideal i
 #define OWR                20          // Desired Output Word Rate in Hz
 #define BAUDRATE        115200           // Baudios del UART
-
+#define TAM_SINGLE 			 8 			//define para tamaño de buffer! 
 //-----------------------------------------------------------------------------
 // 16-bit SFR Definitions for 'F35x
 //-----------------------------------------------------------------------------
@@ -42,3 +43,4 @@ typedef enum { false, true } bool;
 /*FLAGS globales*/
 
 extern bool f_dato_convertido;
+extern int buffer_single [TAM_SINGLE];

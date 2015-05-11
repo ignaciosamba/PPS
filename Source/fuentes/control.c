@@ -3,14 +3,17 @@
 
 #define TAM_SINGLE 8
 //int buffer_single [TAM_SINGLE];
-int posicion;
+int posicion = 0;
+short int dato_n;
 
 
 void cargar_buffer_single(char dato)
 {
-	//printf("sdadasdasdas\n");
+	// printf("sdadasdasdas\n");
 	printf("cargue un 1 en la poscion: %c\n", dato );
-	buffer_single [dato] = 1; 
+	dato_n = dato - '0';
+	printf("El valor numerico es: %hi\n",dato_n );
+	buffer_single [dato_n] = 1; 
 }
 
 int cambiar_pin()

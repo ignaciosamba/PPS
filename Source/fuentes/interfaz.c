@@ -1,5 +1,7 @@
 #include "headers.h"
 #include "interfaz.h"
+#include "configurador.h"
+#include "control.h"
 
 ///MENU DE CONFIGURACION
 void imprimir_menu(void)
@@ -54,19 +56,30 @@ void imprimir_conf_tipoSerial(void)
 void correr_menu(void)
 {
 	char c_opcion;
-	int opcion;
+	//int opcion;
 
 	imprimir_menu();
 
 		c_opcion = getchar();
 		// printf("%c\n", c_opcion);
-/*		if(c_opcion == '1')
+		/*if(c_opcion == '1')
 			printf("YEAH\n");
-		else printf("FUCK\n");*/
-	
+		else printf("FUCK\n");
+	*/
 	switch(c_opcion)
 	{
-		case '1': imprimir_conf_ADC(); break;
+		case '1': 	imprimir_conf_ADC();
+					c_opcion = getchar(); 
+					switch (c_opcion)
+					{
+						case '1':	imprimir_conf_modo_single_ended();
+									c_opcion = getchar();
+									printf("tutuutututuutututututu\n");
+									cargar_buffer_single(c_opcion);
+									break;
+	
+					}
+				   	break;
 		case '2': imprimir_conf_modos(); break;
 		case '3': imprimir_conf_tipoSerial(); break;
 		default: printf("default!!\n");
