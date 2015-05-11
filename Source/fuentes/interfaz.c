@@ -1,6 +1,6 @@
 #include "headers.h"
 #include "interfaz.h"
-#include "coonfigurador.h"
+#include "configurador.h"
 #include "control.h"
 
 

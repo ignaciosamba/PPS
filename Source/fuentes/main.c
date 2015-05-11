@@ -31,6 +31,8 @@ void main(void)
 	printf("Volvi arriba una mocha\n");
 	correr_menu();
 	printf("sali del menu!!!! \n");
+
+	
 	iniciar_ADC();
 	//puerto = cambiar_pin();
 	//seleccionar_puerto(puerto);

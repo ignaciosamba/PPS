@@ -24,7 +24,7 @@ void iniciar_sysclock (void)
 }
 
 
-void seleccionar_puerto(int puerto)
+void seleccionar_puerto(unsigned short puerto)
 {
 	switch (puerto)
 	{
