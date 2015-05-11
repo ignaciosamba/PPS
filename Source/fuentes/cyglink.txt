@@ -1,7 +1,0 @@
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\comunicacion.obj",
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\configurador.obj",
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\interfaz.obj",
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\main.obj",
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\memoria.obj",
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\conversor.obj",
-"C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\interrupciones.obj"  TO "C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\adc" RS(256) PL(68) PW(78) 

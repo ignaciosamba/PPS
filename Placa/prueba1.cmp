@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 04/05/2015 05:11:23 p.m.
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 08/05/2015 06:56:52 p.m.
 
 BeginCmp
 TimeStamp = /5524216A;
@@ -19,13 +19,6 @@ TimeStamp = /55242560;
 Reference = C2;
 ValeurCmp = 0,1micF;
 IdModule  = SM1206;
-EndCmp
-
-BeginCmp
-TimeStamp = /553FBF3A;
-Reference = C2D1;
-ValeurCmp = PINHD-1X1;
-IdModule  = pinhead-1X01;
 EndCmp
 
 BeginCmp
@@ -113,13 +106,6 @@ IdModule  = SM1206;
 EndCmp
 
 BeginCmp
-TimeStamp = /552C6D98;
-Reference = C15;
-ValeurCmp = 0,1micF;
-IdModule  = SM1206;
-EndCmp
-
-BeginCmp
 TimeStamp = /552C4D78;
 Reference = C16;
 ValeurCmp = 15uF;
@@ -138,13 +124,6 @@ TimeStamp = /552C4920;
 Reference = C18;
 ValeurCmp = 10uF;
 IdModule  = C1;
-EndCmp
-
-BeginCmp
-TimeStamp = /552C44E7;
-Reference = C19;
-ValeurCmp = C;
-IdModule  = SM1206;
 EndCmp
 
 BeginCmp
@@ -218,17 +197,31 @@ IdModule  = PIN_ARRAY_2X1;
 EndCmp
 
 BeginCmp
-TimeStamp = /552C7019;
-Reference = JP7;
-ValeurCmp = JUMPER;
-IdModule  = PIN_ARRAY_2X1;
+TimeStamp = /5547CCBB;
+Reference = JP5;
+ValeurCmp = PINHD-1X1;
+IdModule  = pinhead-1X01;
 EndCmp
 
 BeginCmp
-TimeStamp = /552C7028;
+TimeStamp = /5547CCCA;
+Reference = JP6;
+ValeurCmp = PINHD-1X1;
+IdModule  = pinhead-1X01;
+EndCmp
+
+BeginCmp
+TimeStamp = /554D2E17;
+Reference = JP7;
+ValeurCmp = PINHD-1X1;
+IdModule  = pinhead-1X01;
+EndCmp
+
+BeginCmp
+TimeStamp = /554D2DF9;
 Reference = JP8;
-ValeurCmp = JUMPER;
-IdModule  = PIN_ARRAY_2X1;
+ValeurCmp = PINHD-1X1;
+IdModule  = pinhead-1X01;
 EndCmp
 
 BeginCmp
@@ -236,6 +229,20 @@ TimeStamp = /552C4328;
 Reference = JP9;
 ValeurCmp = JUMPER3;
 IdModule  = PIN_ARRAY_3X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /554D2E08;
+Reference = JP10;
+ValeurCmp = PINHD-1X1;
+IdModule  = pinhead-1X01;
+EndCmp
+
+BeginCmp
+TimeStamp = /554D2E26;
+Reference = JP11;
+ValeurCmp = PINHD-1X1;
+IdModule  = pinhead-1X01;
 EndCmp
 
 BeginCmp
@@ -351,13 +358,6 @@ IdModule  = SM1206;
 EndCmp
 
 BeginCmp
-TimeStamp = /553FC02E;
-Reference = RST1;
-ValeurCmp = PINHD-1X1;
-IdModule  = pinhead-1X01;
-EndCmp
-
-BeginCmp
 TimeStamp = /5524333D;
 Reference = U1;
 ValeurCmp = MAX232_TID;
@@ -372,10 +372,17 @@ IdModule  = lm2937-SOT223;
 EndCmp
 
 BeginCmp
-TimeStamp = /552C36AA;
-Reference = U3;
-ValeurCmp = MAX874;
-IdModule  = maxim-8-SC70-5L;
+TimeStamp = /553FBF3A;
+Reference = Vref+1;
+ValeurCmp = PINHD-1X1;
+IdModule  = pinhead-1X01;
+EndCmp
+
+BeginCmp
+TimeStamp = /553FC02E;
+Reference = Vref-1;
+ValeurCmp = PINHD-1X1;
+IdModule  = pinhead-1X01;
 EndCmp
 
 BeginCmp

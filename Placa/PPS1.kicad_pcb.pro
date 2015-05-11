@@ -1,4 +1,4 @@
-update=28/04/2015 02:42:26 p.m.
+update=08/05/2015 07:13:34 p.m.
 last_client=pcbnew
 [pcbnew]
 version=1
@@ -38,3 +38,6 @@ LibName14=dip_sockets
 LibName15=pga_sockets
 LibName16=valves
 LibName17=DB9FD
+LibName18=pinhead
+LibName19=satcard.kicad
+LibName20=samba
