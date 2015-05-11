@@ -3,6 +3,7 @@
 #include "configurador.h"
 #include "control.h"
 
+int cont1 = 1;
 ///MENU DE CONFIGURACION
 void imprimir_menu(void)
 {
@@ -56,7 +57,7 @@ void imprimir_conf_tipoSerial(void)
 void correr_menu(void)
 {
 	char c_opcion;
-	//int opcion;
+	short int opcion;
 
 	imprimir_menu();
 
@@ -73,11 +74,22 @@ void correr_menu(void)
 					switch (c_opcion)
 					{
 						case '1':	imprimir_conf_modo_single_ended();
-									c_opcion = getchar();
-									printf("tutuutututuutututututu\n");
-									cargar_buffer_single(c_opcion);
+									while (1)
+									{
+										c_opcion = getchar();
+										while (getchar() != '\n');
+										printf("esc\n");
+										 // c_opcion = fgetc(stdin);
+										
+										if (c_opcion == 'r') 
+											break;
+
+										cargar_buffer_single(c_opcion);
+										
+
+									}
 									break;
-	
+						
 					}
 				   	break;
 		case '2': imprimir_conf_modos(); break;
