@@ -17,29 +17,35 @@ void seleccionar_puerto(unsigned short puerto)
 	switch (puerto)
 	{
 		case 0:
+			printf("Puerto 0.0: \n");
 			puerto = 0x08;
 			break;
 		case 1:
+			printf("Puerto 0.1: \n");
 			puerto = 0x18;
-			printf("elegi el puerto 2\n");
 			break;
 		case 2:
+			printf("Puerto 0.2: \n");
 			puerto = 0x28;
 			break;
 		case 3: 
+			printf("Puerto 0.3: \n");
 			puerto = 0x38;
 			break;
 		case 4:
+			printf("Puerto 0.4: \n");
 			puerto = 0x48;
 			break;
 		case 5:
 			puerto = 0x58;
+			printf("Puerto 0.5: \n");
 			break;
-		case 9:
+		case 6:
+			printf("Puerto 0.6: \n");
 			puerto = 0x68;
 			break;
 		case 7:
-			printf("elegi el puerto 7\n");
+			printf("Puerto 0.7: \n");
 			puerto = 0x78;
 			break;
 		default:
