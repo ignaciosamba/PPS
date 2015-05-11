@@ -69,3 +69,6 @@ Source/fuentes/adc
 Source/fuentes/cyglink.txt
 Source/fuentes/comunicacion
 >>>>>>> origin/master
+Source/fuentes/configurador.c
+*.c
+Source/fuentes/configurador.c
