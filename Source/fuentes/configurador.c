@@ -158,7 +158,3 @@ int guardar_configuracionFlash(void)
 {
 	return 0;
 }
-void configurar_single_ended (char puerto)
-{
-
-}
