@@ -1,3 +1,4 @@
 unsigned long convertir(void);
 void enviar_dato(unsigned long);
-// void cambiar_pin (void);
+void cargar_buffer_single(char dato);
+short int cambiar_pin();

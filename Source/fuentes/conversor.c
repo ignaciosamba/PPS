@@ -1,6 +1,9 @@
 #include "headers.h"
 #include "conversor.h"
 int cont = 0;
+short int posicion = 0;
+short int dato_n;
+
 
 unsigned long convertir(void)
 {
@@ -71,6 +74,36 @@ void enviar_dato(unsigned long dato)
 	// else if(ADC0MUX == 0x78)
 	//    pin_actual = 7;
 }
+
+void cargar_buffer_single(char dato)
+{
+		// printf("sdadasdasdas\n");
+		printf("cargue un 1 en la poscion: %c\n", dato );
+		dato_n = dato - '0';
+		printf("El valor numerico es: %hi\n",dato_n );
+		if(dato >= 0 && dato < 8)
+		buffer_single [dato_n] = 1;
+}
+
+short int cambiar_pin()
+{
+	while(1)
+	{
+		if (posicion > 7)
+		{
+			posicion = 0;
+		}
+		if(buffer_single[posicion] == 1)
+		{
+			posicion++;
+			return posicion-1;
+		}
+		posicion++;
+	}
+}
+
+
+
 
 /*void cambiar_pin (void)
 {

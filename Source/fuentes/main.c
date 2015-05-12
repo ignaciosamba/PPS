@@ -9,7 +9,6 @@
 #include "interfaz.h"
 #include "configurador.h"
 #include "conversor.h"
-#include "control.h"
  
 long int dato_a_enviar;
 bool f_dato_convertido;

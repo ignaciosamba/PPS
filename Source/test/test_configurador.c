@@ -8,12 +8,10 @@
 
  static char * test_configurar1() 
 { 
-    //configurar(1,2,3,4,5);
 
-    //aca deberia comprobar los valores de algunos registros cambiados por la funcion
-    mu_assert("\n     error, iniciar_UART no devolvio 0\n", 0);
+    
     return 0;
-} 
+}
 
 
  static char * all_tests() {

@@ -6,7 +6,7 @@
 
 #include "headers.h"
 #include "configurador.h"
-#include "control.h"
+#include "conversor.h"
 
 void empezar_adc()
 {

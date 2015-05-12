@@ -1,7 +1,7 @@
 #include "headers.h"
 #include "interfaz.h"
 #include "configurador.h"
-#include "control.h"
+#include "conversor.h"
 
 int cont1 = 1;
 ///MENU DE CONFIGURACION
