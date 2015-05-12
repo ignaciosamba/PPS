@@ -13,16 +13,16 @@
     //aca deberia comprobar los valores de algunos registros cambiados por la funcion
     mu_assert("\n     error, iniciar_UART no devolvio 0\n", 0);
     return 0;
-}
- 
- 
+} 
+
+
  static char * all_tests() {
     mu_run_test(test_configurar1);
      return 0;
 
  }
  
- int run_test_comunicacion(void) {
+ int run_test_configurador(void) {
 
      char *result = all_tests();
      if (result != 0) {
