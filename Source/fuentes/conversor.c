@@ -1,5 +1,6 @@
 #include "headers.h"
 #include "conversor.h"
+
 int cont = 0;
 short int posicion = 0;
 short int dato_n;
@@ -12,7 +13,7 @@ unsigned long convertir(void)
 	
 	while (!AD0INT);
 	AD0INT = 0;
-
+	printf("Entre al convertir\n");
 	   // Copy the output value of the ADC
 	rawValue.Byte[Byte3] = 0x00;
 	rawValue.Byte[Byte2] = (unsigned char)ADC0H;
@@ -77,12 +78,17 @@ void enviar_dato(unsigned long dato)
 
 void cargar_buffer_single(char dato)
 {
-		// printf("sdadasdasdas\n");
-		printf("cargue un 1 en la poscion: %c\n", dato );
+		int i = 0;
+		//printf("sdadasdasdas\n");
+		// printf("cargue un 1 en la poscion: %c\n", dato );
 		dato_n = dato - '0';
-		printf("El valor numerico es: %hi\n",dato_n );
-		if(dato >= 0 && dato < 8)
+	 	printf("El valor numerico es: %hi\n",dato_n );
+		//if(dato >= 0 && dato < 8)
 		buffer_single [dato_n] = 1;
+		for (i=0; i<8 ; i++)
+		{
+			printf("%hi\n", buffer_single[i]);
+		}
 }
 
 short int cambiar_pin()

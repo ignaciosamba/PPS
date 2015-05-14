@@ -7,12 +7,13 @@
 int cont1 = 1;
 
 
+
 void correr_menu(void)
 {
 	char c_opcion;
 	short int opcion = 1;
 
-	while(opcion)
+	while(opcion==1)
 	{
 		imprimir_menu();
 
@@ -26,7 +27,6 @@ void correr_menu(void)
 						imprimir_conf_ADC();
 						c_opcion = getchar(); 
 						while (getchar() != '\n');
-
 						switch (c_opcion)
 						{
 							case '1':	conf_single_ended(); break;
@@ -47,7 +47,6 @@ void correr_menu(void)
 void conf_single_ended(void)
 {
 	char c_opcion;
-
 	imprimir_conf_modo_single_ended();
 	while (1)
 	{
@@ -55,7 +54,7 @@ void conf_single_ended(void)
 		while (getchar() != '\n');
 		// printf("esc\n");
 		if (c_opcion == 'r') 
-			break;
+				break;
 		/*if (c_opcion > 7)
 			printf("Valor invalido! Ingrese un numero del 0 al 7. \n");*/
 		cargar_buffer_single(c_opcion);

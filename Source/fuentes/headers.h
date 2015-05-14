@@ -1,6 +1,6 @@
-#include <C8051F350.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <C8051F350.h>
 
 #define SYSCLK      24500000           // SYSCLK Frecuencia del Clock en Hertz
 #define MDCLK         2457600          // Modulator clock in Hz (ideal i

@@ -17,15 +17,15 @@ short int posicion_adc;
 
 void main(void)
 {
-
+	int i = 0;
    	PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer 
-
+   	for (i=0 ; i<0 ; i++)
+   		buffer_single[i]=0;
    	buffer_single [TAM_SINGLE] = malloc(TAM_SINGLE);
 	iniciar_sysclock();
 	iniciar_puertos();
 	iniciar_UART();
 	iniciar_ADC();
-	printf("aaaaaaa \n");
 	correr_menu();
 
 	AD0INT = 0;							
@@ -35,10 +35,8 @@ void main(void)
 	while(1)
 	{
 		// empezar_adc();
-		// printf("no entraaa\n");
 		if(f_dato_convertido)
 		{
-			// printf("AAAAAAAAAAAAAAA\n");
 			f_dato_convertido = false;
 			dato_a_enviar = convertir();
 			enviar_dato(dato_a_enviar);
