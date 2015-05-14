@@ -3,7 +3,6 @@
  * memoria y las carga en el programa en cada inicio del dispositivo.
  *  Tambien configura los registros de las interrupciones
 **/
-
 #include "headers.h"
 #include "configurador.h"
 #include "conversor.h"
@@ -16,6 +15,7 @@ void seleccionar_puerto(unsigned short puerto)
 {
 	switch (puerto)
 	{
+		// ADC0CN = 0x01;
 		case 0:
 			printf("Puerto 0.0: \n");
 			puerto = 0x08;

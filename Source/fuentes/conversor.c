@@ -13,7 +13,8 @@ unsigned long convertir(void)
 	
 	while (!AD0INT);
 	AD0INT = 0;
-	printf("Entre al convertir\n");
+	//ADC0CN = 0X01;
+	//printf("Entre al convertir\n");
 	   // Copy the output value of the ADC
 	rawValue.Byte[Byte3] = 0x00;
 	rawValue.Byte[Byte2] = (unsigned char)ADC0H;
