@@ -54,3 +54,6 @@ Source/fuentes/adc
 Source/fuentes/cyglink.txt
 Source/fuentes/comunicacion
 *.wsp
+*.uvproj
+*.plg
+Proyecto Uvision/Embebido
