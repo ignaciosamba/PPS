@@ -16,4 +16,12 @@
  * complete la operacion
  * - La pagina de la flash que contiene el o los bytes del Lock no se pueden borrar desde el codigo de 
  * aplicacion
+ * 
+ * 
+ * Para escribir en la memoria flash se usa la instruccion MOVX. Por defecto, esta instruccion carga datos
+ * en la XRAM, pero cambiando el registro PSCTL se puede modificar para que escriba en la Flash. Las
+ * instrucciones MOVX se generan en C usando punteros de memoria de tipo xdata o pdata.
+ * 
+ * Solo se puede escribir en memoria habiendo borrado todo antes. La instruccion de escritura solo puede poner
+ * bits en 0
  */
