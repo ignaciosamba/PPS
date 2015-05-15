@@ -5,7 +5,15 @@
 #include "test_headers/test_memoria.h"
 
  bit f_dato_convertido;
- char bdata buffer_single; 
+ char bdata buffer_single;
+ sbit buffer_single_0 = buffer_single ^ 0;
+ sbit buffer_single_1 = buffer_single ^ 1;
+ sbit buffer_single_2 = buffer_single ^ 2;
+ sbit buffer_single_3 = buffer_single ^ 3;
+ sbit buffer_single_4 = buffer_single ^ 4;
+ sbit buffer_single_5 = buffer_single ^ 5;
+ sbit buffer_single_6 = buffer_single ^ 6;
+ sbit buffer_single_7 = buffer_single ^ 7;
 
  
  void main(void) 

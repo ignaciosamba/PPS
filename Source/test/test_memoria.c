@@ -11,7 +11,7 @@
  static char * test_write() 
 {
     unsigned numbytes = 2;
-    char *src = malloc(2);
+    char *src;/* = malloc(2);*/
     FLADDR dest = 0x1000;
     *src = 500;
 
@@ -24,7 +24,7 @@
  static char * test_read() 
 {   
     unsigned numbytes = 2;
-    char *dest = malloc(numbytes);
+    char *dest;/* = malloc(numbytes);*/
     FLADDR src = 0x1000;
     *dest = 0;
 

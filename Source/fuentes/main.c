@@ -10,19 +10,26 @@
 #include "configurador.h"
 #include "conversor.h"
  
-long int dato_a_enviar;
-bit f_dato_convertido;
-unsigned char pdata buffer_single [TAM_SINGLE]; 
 short int posicion_adc;
+long int dato_a_enviar;
+ bit f_dato_convertido;
+
+ char bdata buffer_single;
+ sbit buffer_single_0 = buffer_single ^ 0;
+ sbit buffer_single_1 = buffer_single ^ 1;
+ sbit buffer_single_2 = buffer_single ^ 2;
+ sbit buffer_single_3 = buffer_single ^ 3;
+ sbit buffer_single_4 = buffer_single ^ 4;
+ sbit buffer_single_5 = buffer_single ^ 5;
+ sbit buffer_single_6 = buffer_single ^ 6;
+ sbit buffer_single_7 = buffer_single ^ 7;
 
 void main(void)
 {
 	short int i = 0;
    	PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer 
 
-   	buffer_single = malloc(TAM_SINGLE);
-   	for (i=0 ; i < TAM_SINGLE ; i++)
-   		buffer_single[i]=0;
+    buffer_single = 0;	
 
 	iniciar_sysclock();
 	iniciar_puertos();
@@ -41,12 +48,11 @@ void main(void)
 		{
 			f_dato_convertido = false;
 			dato_a_enviar = convertir();
-			enviar_dato(dato_a_enviar);
+			enviar_dato(&dato_a_enviar);
 			posicion_adc = cambiar_pin();
 			seleccionar_puerto(posicion_adc);
 		}
 	}
 
 
-	free(buffer_single);
 }

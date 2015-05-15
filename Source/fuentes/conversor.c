@@ -4,7 +4,6 @@
 int cont = 0;
 short int posicion = 0;
 char dato_n;
-sbit buffer_single_destpin;
 
 
 unsigned long convertir(void)
@@ -78,21 +77,37 @@ void enviar_dato(unsigned long int *dato)
 	//    pin_actual = 7;
 }
 
-void cargar_buffer_single(char dato)
+char cargar_buffer_single(char *dato)
 {
-		// int i = 0;
-		//printf("sdadasdasdas\n");
-		// printf("cargue un 1 en la poscion: %c\n", dato );
-		dato_n = dato - '0';
+	switch(*dato)
+	{
+		case '0': return (*dato | 0x01);
+		case '1': return (*dato | 0x02);
+		case '2': return (*dato | 0x04);
+		case '3': return (*dato | 0x08);
+		case '4': return (*dato | 0x10);
+		case '5': return (*dato | 0x20);
+		case '6': return (*dato | 0x40);
+		case '7': return (*dato | 0x80);
 
-	 	// printf("El valor numerico es: %hi\n",dato_n );
-		//if(dato >= 0 && dato < 8)
-		buffer_single_destpin = buffer_single ^ dato_n;
-		buffer_single_destpin = 1;
-		// for (i=0; i<8 ; i++)
-		// {
-		// 	printf("%hi\n", buffer_single[i]);
-		// }
+		default: return *dato;
+	}
+
+
+		// sbit buffer_single_destpin;
+		// // int i = 0;
+		// //printf("sdadasdasdas\n");
+		// // printf("cargue un 1 en la poscion: %c\n", dato );
+		// dato_n = dato - '0';
+
+	 // 	// printf("El valor numerico es: %hi\n",dato_n );
+		// //if(dato >= 0 && dato < 8)
+		// buffer_single_destpin = buffer_single ^ dato_n;
+		// buffer_single_destpin = 1;
+		// // for (i=0; i<8 ; i++)
+		// // {
+		// // 	printf("%hi\n", buffer_single[i]);
+		// // }
 }
 
 short int cambiar_pin()
