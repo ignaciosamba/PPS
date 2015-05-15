@@ -1,0 +1,14 @@
+".\comunicacion.obj",
+".\configurador.obj",
+".\conversor.obj",
+".\impresiones.obj",
+".\interfaz.obj",
+".\interrupciones.obj",
+".\memoria.obj",
+".\test_comunicacion.obj",
+".\test_configurador.obj",
+".\test_conversor.obj",
+".\test_global.obj",
+".\test_memoria.obj" 
+TO "Test_embebido" 
+RAMSIZE(256) 

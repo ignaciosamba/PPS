@@ -18,9 +18,15 @@
     iniciar_sysclock();
     iniciar_UART();
 
-    if((err = run_test_comunicacion()) != 1)
+    // if((err = run_test_comunicacion()) != 1)
+    // {
+    //     printf("error en comunicacion.c\n");
+    //     errores++;
+    // }
+    // tests_run++;
+    if((err = run_test_memoria()) != 1)
     {
-        printf("error en comunicacion.c\n");
+        printf("error en memoria.c\n");
         errores++;
     }
     tests_run++;

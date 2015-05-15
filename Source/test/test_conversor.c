@@ -1,15 +1,16 @@
 #include "minunit.h"
 #include "../fuentes/headers.h"
+#include "../fuentes/conversor.h"
 #include "../fuentes/configurador.h"
 #include "test_headers/test_conversor.h"
 
- int tests_run = 0; 
- int res;
+ // int tests_run = 0; 
+ // int res;
 
  static char * test_pasar_datos_continuamente() 
 {   
-    dato_convertido = 0;
-    while(!dato_convertido);
+    f_dato_convertido = 0;
+    while(!f_dato_convertido);
     mu_assert("\n     error, nunca convirtio nada\n", 1);
     return 0;
 }
@@ -27,6 +28,7 @@ static char * test_cargar_buffer_single()
 }
  
  static char * all_tests() {
+    iniciar_ADC();
     mu_run_test(test_pasar_datos_continuamente);
     mu_run_test(test_cargar_buffer_single);
      return 0;
@@ -35,9 +37,8 @@ static char * test_cargar_buffer_single()
  
  int run_test_conversor(void) {
 
-    iniciar_ADC();
-
     char *result = all_tests();
+
     if (result != 0) {
      printf("%s\n", result);
     }

@@ -1,7 +1,7 @@
 #include "minunit.h"
 
- int tests_run = 0; 
- int res;
+ // int tests_run = 0; 
+ // int res;
 
  static char * test_1() 
 { 
