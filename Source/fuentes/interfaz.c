@@ -4,8 +4,6 @@
 #include "conversor.h"
 #include "impresiones.h"
 
-int cont1 = 1;
-
 
 
 void correr_menu(void)

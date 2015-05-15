@@ -56,3 +56,9 @@ Source/fuentes/comunicacion
 *.wsp
 Proyecto Uvision/Embebido
 Proyecto Uvision/Embebido.plg
+*.uvopt
+*.bak
+*.Samba
+*.lnp
+Proyecto Uvision/Test_embebido.lnp
+Proyecto Uvision/Test_embebido.plg

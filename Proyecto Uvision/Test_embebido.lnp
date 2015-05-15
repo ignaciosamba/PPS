@@ -5,6 +5,8 @@
 ".\interfaz.obj",
 ".\interrupciones.obj",
 ".\memoria.obj",
+".\F350_FlashPrimitives.obj",
+".\F350_FlashUtils.obj",
 ".\test_comunicacion.obj",
 ".\test_configurador.obj",
 ".\test_conversor.obj",

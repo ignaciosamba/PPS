@@ -17,11 +17,11 @@ short int posicion_adc;
 
 void main(void)
 {
-	int i = 0;
+	short int i = 0;
    	PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer 
+   	buffer_single [TAM_SINGLE] = malloc(TAM_SINGLE);
    	for (i=0 ; i<0 ; i++)
    		buffer_single[i]=0;
-   	buffer_single [TAM_SINGLE] = malloc(TAM_SINGLE);
 	iniciar_sysclock();
 	iniciar_puertos();
 	iniciar_UART();
