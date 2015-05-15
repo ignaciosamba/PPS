@@ -3,7 +3,8 @@
 
 int cont = 0;
 short int posicion = 0;
-short int dato_n;
+char dato_n;
+sbit buffer_single_destpin;
 
 
 unsigned long convertir(void)
@@ -51,11 +52,11 @@ unsigned long convertir(void)
  * @brief por ahora no envia un carajo.. imprime en la UART nomas
  * @details [long description]
  */
-void enviar_dato(unsigned long dato)
+void enviar_dato(unsigned long int *dato)
 {
 	//unsigned long dato2;
 	//dato2=100;
-	printf("voltaje: %8ld mV\n",dato);
+	printf("voltaje: %8ld mV\n",*dato);
 	// dato_convertido = dato;
 	// f_enviar_dato = true;
 
@@ -79,17 +80,19 @@ void enviar_dato(unsigned long dato)
 
 void cargar_buffer_single(char dato)
 {
-		int i = 0;
+		// int i = 0;
 		//printf("sdadasdasdas\n");
 		// printf("cargue un 1 en la poscion: %c\n", dato );
 		dato_n = dato - '0';
-	 	printf("El valor numerico es: %hi\n",dato_n );
+
+	 	// printf("El valor numerico es: %hi\n",dato_n );
 		//if(dato >= 0 && dato < 8)
-		buffer_single [dato_n] = 1;
-		for (i=0; i<8 ; i++)
-		{
-			printf("%hi\n", buffer_single[i]);
-		}
+		buffer_single_destpin = buffer_single ^ dato_n;
+		buffer_single_destpin = 1;
+		// for (i=0; i<8 ; i++)
+		// {
+		// 	printf("%hi\n", buffer_single[i]);
+		// }
 }
 
 short int cambiar_pin()
@@ -100,7 +103,7 @@ short int cambiar_pin()
 		{
 			posicion = 0;
 		}
-		if(buffer_single[posicion] == 1)
+		if(buffer_single ^ posicion == 1)
 		{
 			posicion++;
 			return posicion-1;

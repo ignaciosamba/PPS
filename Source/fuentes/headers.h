@@ -42,5 +42,5 @@ typedef enum { false, true } bool;
 
 /*FLAGS globales*/
 
-extern bool f_dato_convertido;
-extern int buffer_single [TAM_SINGLE];
+extern bit f_dato_convertido;
+extern char bdata buffer_single;

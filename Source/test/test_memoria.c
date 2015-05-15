@@ -39,6 +39,7 @@
  
  
  static char * all_tests() {
+    printf("llego a run test memoria\n");
     mu_run_test(test_write);
     mu_run_test(test_read);
      return 0;

@@ -18,13 +18,13 @@
 static char * test_cargar_buffer_single()
 {
     cargar_buffer_single(0);
-    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 0\n", buffer_single[0] == 1);    
+    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 0\n", buffer_single ^ 0 == 1);    
     cargar_buffer_single(4);
-    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 4\n", buffer_single[4] == 1);    
+    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 4\n", buffer_single ^ 4 == 1);    
     cargar_buffer_single(18);
-    mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", buffer_single[0] == 0);    
+    mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", buffer_single ^ 0 == 0);    
     cargar_buffer_single(-4);
-    mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", buffer_single[0] == 0);
+    mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", buffer_single ^ 0 == 0);
 }
  
  static char * all_tests() {

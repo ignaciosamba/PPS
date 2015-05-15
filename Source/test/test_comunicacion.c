@@ -1,20 +1,25 @@
 #include "minunit.h"
 #include "../fuentes/headers.h"
 #include "../fuentes/configurador.h"
+#include "../fuentes/conversor.h"
 #include "test_headers/test_comunicacion.h"
 
  // int tests_run = 0; 
  // int res;
 
- static char * test_UART() 
-{ 
-    mu_assert("\n     error, iniciar_UART no devolvio 0\n", 0);
+ static char * test_enviar() 
+{
+    unsigned long int dato;
+    dato = 10;
+
+    enviar_dato(&dato);
+
     return 0;
 }
  
  
  static char * all_tests() {
-    mu_run_test(test_UART);
+    mu_run_test(test_enviar);
      return 0;
 
  }

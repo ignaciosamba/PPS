@@ -11,17 +11,19 @@
 #include "conversor.h"
  
 long int dato_a_enviar;
-bool f_dato_convertido;
-int buffer_single [TAM_SINGLE]; 
+bit f_dato_convertido;
+unsigned char pdata buffer_single [TAM_SINGLE]; 
 short int posicion_adc;
 
 void main(void)
 {
 	short int i = 0;
    	PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer 
-   	buffer_single [TAM_SINGLE] = malloc(TAM_SINGLE);
-   	for (i=0 ; i<0 ; i++)
+
+   	buffer_single = malloc(TAM_SINGLE);
+   	for (i=0 ; i < TAM_SINGLE ; i++)
    		buffer_single[i]=0;
+
 	iniciar_sysclock();
 	iniciar_puertos();
 	iniciar_UART();
@@ -44,4 +46,7 @@ void main(void)
 			seleccionar_puerto(posicion_adc);
 		}
 	}
+
+
+	free(buffer_single);
 }
