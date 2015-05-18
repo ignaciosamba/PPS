@@ -5,7 +5,7 @@
 #define SYSCLK      24500000           // SYSCLK Frecuencia del Clock en Hertz
 #define MDCLK         2457600          // Modulator clock in Hz (ideal i
 #define OWR                20          // Desired Output Word Rate in Hz
-#define BAUDRATE        115200           // Baudios del UART
+#define BAUDRATE        19200           // Baudios del UART
 #define TAM_SINGLE 			 8 			//define para tamaño de buffer! 
 //-----------------------------------------------------------------------------
 // 16-bit SFR Definitions for 'F35x

@@ -38,12 +38,18 @@
         errores++;
     }
     tests_run++;
-    // if((err = run_test_memoria()) != 1)
-    // {
-    //     printf("error en memoria.c\n");
-    //     errores++;
-    // }
-    // tests_run++;
+    if((err = run_test_configurador()) != 1)
+    {
+        printf("error en configurador.c\n");
+        errores++;
+    }
+    tests_run++;
+    if((err = run_test_memoria()) != 1)
+    {
+        printf("error en memoria.c\n");
+        errores++;
+    }
+    tests_run++;
 
     printf("Tests corridos: %d\n", tests_run);
     printf("Errores: %d\n", errores);
