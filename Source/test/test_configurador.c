@@ -15,7 +15,7 @@
 
 
  static char * all_tests() {
-    mu_run_test(test_configurar1);
+    // mu_run_test(test_configurar1);
      return 0;
 
  }

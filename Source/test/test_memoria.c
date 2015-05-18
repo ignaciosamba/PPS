@@ -11,11 +11,12 @@
  static char * test_write() 
 {
     unsigned numbytes = 2;
-    char *src = malloc(2);
-    FLADDR dest = 0x1000;
-    *src = 500;
+    // char *src = malloc(2);
+    int src;
+    FLADDR dest = 0x1b58;
+    src = 500;
 
-    FLASH_Write(dest, src, numbytes);
+    FLASH_Write(dest, &src, numbytes);
     printf("la escritura no tuvo errores");
 
     return 0;
@@ -24,16 +25,17 @@
  static char * test_read() 
 {   
     unsigned numbytes = 2;
-    char *dest = malloc(numbytes);
-    FLADDR src = 0x1000;
-    *dest = 0;
+    // char *dest = malloc(numbytes);
+    int dest;
+    FLADDR src = 0x1b58;
+    dest = 0;
 
-    dest = FLASH_Read(dest, src, numbytes);
+    FLASH_Read(&dest, src, numbytes);
+    printf("contenido en 0x1000: %d\n", dest);
 
-    mu_assert("la lectura no dio 500", *dest == 500);
+    mu_assert("la lectura no dio 500", dest == 500);
 
     printf("la lectura no tuvo errores");
-    printf("contenido en 0x1000: %d\n", *dest);
     return 0;
 }
  

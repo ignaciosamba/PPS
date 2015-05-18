@@ -14,6 +14,7 @@ long int dato_a_enviar;
 bool f_dato_convertido;
 int buffer_single [TAM_SINGLE]; 
 short int posicion_adc;
+short int bandera_dif;
 
 void main(void)
 {

@@ -3,6 +3,8 @@
 int cont = 0;
 short int posicion = 0;
 short int dato_n;
+int i ;
+
 
 
 unsigned long convertir(void)
@@ -81,8 +83,18 @@ void cargar_buffer_single(char dato)
 		printf("cargue un 1 en la poscion: %c\n", dato );
 		dato_n = dato - '0';
 		printf("El valor numerico es: %hi\n",dato_n );
-		if(dato >= 0 && dato < 8)
 		buffer_single [dato_n] = 1;
+}
+
+ void cargar_buffer_dif (char dato)
+ {
+	printf("cargue un 1 en la poscion: %c\n", dato );
+	dato_n = dato - '0';
+	printf("El valor numerico es: %hi\n",dato_n );
+	buffer_single [dato_n] = 2;
+	for (i=0 ; i<8 ; i++)
+		printf("%d\n", buffer_single[i] );
+
 }
 
 short int cambiar_pin()
@@ -97,6 +109,14 @@ short int cambiar_pin()
 		{
 			posicion++;
 			return posicion-1;
+		}
+		else if(buffer_single[posicion] == 2)
+		{
+			printf("Entre aca al else if. \n" );
+			bandera_dif = 1;
+			printf("la bandera es : %d\n",bandera_dif );
+			posicion = posicion + 2;
+			return posicion-2;
 		}
 		posicion++;
 	}
