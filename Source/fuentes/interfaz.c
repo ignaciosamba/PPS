@@ -5,7 +5,6 @@
 #include "impresiones.h"
 
 
-
 void correr_menu(void)
 {
 	char c_opcion;
@@ -57,6 +56,7 @@ void conf_single_ended(void)
 		/*if (c_opcion > 7)
 			printf("Valor invalido! Ingrese un numero del 0 al 7. \n");*/
 		 cargar_buffer_single(c_opcion);
+		// FLASH_Write(dest, &c_opcion, numbytes);
 	}
 
 }
@@ -76,6 +76,7 @@ void conf_dif(void)
 		/*if (c_opcion > 7)
 			printf("Valor invalido! Ingrese un numero del 0 al 7. \n");*/
 		cargar_buffer_dif(c_opcion);
+		// FLASH_Write(dest, &c_opcion, numbytes);
 	}
 
 }

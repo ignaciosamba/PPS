@@ -7,7 +7,6 @@ short int dato_n;
 int i ;
 
 
-
 unsigned long convertir(void)
 {
 	static LONGDATA rawValue;
@@ -87,7 +86,7 @@ void cargar_buffer_single(char dato)
 		dato_n = dato - '0';
 	 	printf("El valor numerico es: %hi\n",dato_n );
 		//if(dato >= 0 && dato < 8)
-
+	 	// FLASH_Read(&dato_n, src, numbytes);
 		buffer_single [dato_n] = 1;
 		for (i=0; i<8 ; i++)
 		{
