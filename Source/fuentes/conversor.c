@@ -101,8 +101,8 @@ void cargar_buffer_single(char dato)
 	dato_n = dato - '0';
 	printf("El valor numerico es: %hi\n",dato_n );
 	buffer_single [dato_n] = 2;
-	for (i=0 ; i<8 ; i++)
-		printf("%d\n", buffer_single[i] );
+	// for (i=0 ; i<8 ; i++)
+	// 	printf("%d\n", buffer_single[i] );
 
 }
 
