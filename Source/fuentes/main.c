@@ -10,7 +10,7 @@
 #include "configurador.h"
 #include "conversor.h"
  
-long int dato_a_enviar;
+unsigned long int dato_a_enviar;
 bool f_dato_convertido;
 int buffer_single [TAM_SINGLE]; 
 short int posicion_adc;
@@ -40,7 +40,7 @@ void main(void)
 		{
 			f_dato_convertido = false;
 			dato_a_enviar = convertir();
-			enviar_dato(dato_a_enviar);
+			enviar_dato(&dato_a_enviar);
 			posicion_adc = cambiar_pin();
 			seleccionar_puerto(posicion_adc);
 		}
