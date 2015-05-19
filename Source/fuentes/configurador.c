@@ -7,6 +7,8 @@
 #include "configurador.h"
 #include "conversor.h"
 
+
+
 void empezar_adc()
 {
 	ADC0MUX = 0x08;
@@ -21,7 +23,7 @@ void seleccionar_puerto(unsigned short puerto)
 			if (bandera_dif == 1)
 			{
 				bandera_dif = 0;
-				ADC0CN = 0X17;
+				ADC0CN | 0x10;
 				puerto = 0x01;
 				break;
 			}
@@ -39,6 +41,7 @@ void seleccionar_puerto(unsigned short puerto)
 			if (bandera_dif == 1)
 			{
 				bandera_dif = 0;
+				ADC0CN | 0x10;
 				puerto = 0x23;
 				break;
 			}
@@ -56,6 +59,7 @@ void seleccionar_puerto(unsigned short puerto)
 			if (bandera_dif == 1)
 			{
 				bandera_dif = 0;
+				ADC0CN | 0x10;
 				puerto = 0x45;
 				break;
 			}
@@ -73,6 +77,7 @@ void seleccionar_puerto(unsigned short puerto)
 			if (bandera_dif == 1)
 			{
 				bandera_dif = 0;
+				ADC0CN | 0x10;
 				puerto = 0x67;
 				break;
 			}
