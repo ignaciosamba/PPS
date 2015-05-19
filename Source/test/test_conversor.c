@@ -11,26 +11,39 @@
 {   
     f_dato_convertido = 0;
     while(!f_dato_convertido);
-    mu_assert("\n     error, nunca convirtio nada\n", 1);
+    // mu_assert("\n     error, nunca convirtio nada\n", 1);
     return 0;
 }
 
 static char * test_cargar_buffer_single()
 {
-    cargar_buffer_single(0);
-    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 0\n", buffer_single[0] == 1);    
-    cargar_buffer_single(4);
-    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 4\n", buffer_single[4] == 1);    
-    cargar_buffer_single(18);
-    mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", buffer_single[0] == 0);    
-    cargar_buffer_single(-4);
-    mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", buffer_single[0] == 0);
+    char bdata buffer = 0;
+    char dato;
+
+    dato = '0';
+    buffer = cargar_buffer_single(&dato);
+    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 0\n", buffer_single ^ 0 == 1);    
+    dato = '3';
+    buffer = cargar_buffer_single(&dato);
+    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 4\n", buffer_single ^ 4 == 1);    
+    dato = '0';
+    buffer = cargar_buffer_single(&dato);
+    mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", buffer_single ^ 0 == 0);    
+    dato = '0';
+    buffer = cargar_buffer_single(&dato);
+    mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", buffer_single ^ 0 == 0);
+
+    return 0;
 }
  
  static char * all_tests() {
     iniciar_ADC();
+    printf("test_pasar_datos_continuamente...\n");
     mu_run_test(test_pasar_datos_continuamente);
+    printf("test_pasar_datos_continuamente_OK\n");
+    printf("test_cargar_buffer_single\n");
     mu_run_test(test_cargar_buffer_single);
+    printf("test_cargar_buffer_single_OK\n");
      return 0;
 
  }

@@ -4,8 +4,6 @@
 #include "conversor.h"
 #include "impresiones.h"
 
-int cont1 = 1;
-
 
 
 void correr_menu(void)
@@ -58,7 +56,7 @@ void conf_single_ended(void)
 				break;
 		/*if (c_opcion > 7)
 			printf("Valor invalido! Ingrese un numero del 0 al 7. \n");*/
-		cargar_buffer_single(c_opcion);
+		// cargar_buffer_single(c_opcion);
 	}
 
 }

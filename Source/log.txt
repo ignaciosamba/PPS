@@ -7,25 +7,33 @@ la plataforma de tests esta hecha. la idea es que test_global corre todos los ot
 
 IDEAS DE TESTS
 
--para testear al adc, que inicie la configuracion y analice el registro en el que se activa el bit de end of conversion, si se activa, el adc anda por lo menos. Ya mas tarde cuando esten bien hechas las funciones de configuracion, hay que testear valores esperados para el adc dada una configuracion.
+-para testear al adc, que iniciamos la configuracion y analizamos el registro en el que se activa el bit de end of conversion, si se activa, el adc anda por lo menos. Ya mas tarde cuando esten bien hechas las funciones de configuracion, hay que testear valores esperados para el adc dada una configuracion.
 
 
 POR AHORA
 
-por ahora lo que voy a hacer, para no romperme la cabeza con la configuracion de los pines. es que lea todos los pines de pecho y pase toda la informacion siempre. despues lo voy detallando de a poco.
+por ahora lo que vamos a hacer, para no romperme la cabeza con la configuracion de los pines. es que lea todos los pines de pecho y pase toda la informacion siempre. despues lo vamos detallando de a poco.
 Entonces por ahora va a haber un primer prototipo.. no tiene un carajo de configuracion. lo conectas y de pecho te entra a mandar informacion de las 8 patas del adc en modo single ended.
+
+-lucho
 
 PRIMER PROTOTIPO
 
 va a entregar los datos que reciba de las 8 patas todo el tiempo a una frecuencia fija en modo single-ended. Con una tension de referencia de 2.5V. Cuando tiene el dato listo lo imprime por la UART.
 
+-lucho
+
 7/5
 
 ya pudimos hacer andar el primer prototipo con solo el adc andando y tirando la info de todas las patas de manera continua. ahora estamos intentando configurar alguna de las patas.
 
+-lucho
+
 8/5
 
 Orlando nos dijo hoy que el gain del adc puede variar segun la temperatura y el tiempo que hace que esta convirtiendo y nos dejo bastante en offside.. hay que hacer algunas pruebas
+
+-lucho
 
 14/5
 
@@ -44,3 +52,14 @@ PUNTOS CLAVE DE UTILIZACION DE LA FLASH
 Para escribir en la memoria flash se usa la instruccion MOVX. Por defecto, esta instruccion carga datos en la XRAM, pero cambiando el registro PSCTL se puede modificar para que escriba en la Flash. Las instrucciones MOVX se neran en C usando punteros de memoria de tipo xdata o pdata.
 
 Solo se puede escribir en memoria habiendo borrado todo antes. La instruccion de escritura solo puede poner bits en 0
+
+-lucho
+
+18/5
+
+estoy pensando en un cambio de paradigma de la interfaz con el usuario. como nos estamos quedando sin memoria una buena alternativa es usar MML, que nos permitiria directamente ingresarle comandos al sistema y que el haga bobamente lo que dicen las instrucciones de pechaso, de esa forma tendriamos nomas un case gigante con todas las instrucciones y esas instrucciones llaman funciones que segun los argumentos que tengan las instrucciones hacen lo que queremos. es un lenguaje osea es burdamente crear una especie de mini assembler para el sistema.
+
+
+SOBRE EL ADC: hay que fijar la frecuencia maxima de muestreo.
+
+-lucho
