@@ -56,3 +56,10 @@ Source/fuentes/comunicacion
 *.wsp
 Proyecto Uvision/Embebido
 Proyecto Uvision/Embebido.plg
+*.Luciano
+*.bak
+*.uvopt
+*.uvproj
+*.plg
+*.lnp
+*.gch
