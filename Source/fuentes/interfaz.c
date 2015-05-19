@@ -30,6 +30,7 @@ void correr_menu(void)
 						switch (c_opcion)
 						{
 							case '1':	conf_single_ended(); break;
+							case '2':	conf_dif(); break;
 							case '3':	conf_ganancia(); break;
 							
 						}
@@ -61,6 +62,26 @@ void conf_single_ended(void)
 	}
 
 }
+
+void conf_dif(void)
+{
+	char c_opcion;
+
+	imprimir_conf_modo_diferencial();
+	while (1)
+	{
+		c_opcion = getchar();
+		while (getchar() != '\n');
+		// printf("esc\n");
+		if (c_opcion == 'r') 
+			break;
+		/*if (c_opcion > 7)
+			printf("Valor invalido! Ingrese un numero del 0 al 7. \n");*/
+		cargar_buffer_dif(c_opcion);
+	}
+
+}
+
 
 void conf_ganancia(void)
 {

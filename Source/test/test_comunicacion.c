@@ -14,7 +14,7 @@
  
  
  static char * all_tests() {
-    mu_run_test(test_UART);
+    // mu_run_test(test_UART);
      return 0;
 
  }

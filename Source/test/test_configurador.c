@@ -3,8 +3,8 @@
 #include "../fuentes/configurador.h"
 #include "test_headers/test_configurador.h"
 
- int tests_run = 0; 
- int res;
+ // int tests_run = 0; 
+ // int res;
 
  static char * test_configurar1() 
 { 
@@ -15,7 +15,7 @@
 
 
  static char * all_tests() {
-    mu_run_test(test_configurar1);
+    // mu_run_test(test_configurar1);
      return 0;
 
  }

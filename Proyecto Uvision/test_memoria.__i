@@ -1,0 +1,1 @@
+"..\Source\test\test_memoria.c" BROWSE DEBUG OBJECTEXTEND PRINT(.\test_memoria.lst) TABS (2) OBJECT(.\test_memoria.obj)
