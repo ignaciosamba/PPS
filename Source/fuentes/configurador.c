@@ -21,6 +21,7 @@ void seleccionar_puerto(unsigned short puerto)
 			if (bandera_dif == 1)
 			{
 				bandera_dif = 0;
+				ADC0CN = 0X17;
 				puerto = 0x01;
 				break;
 			}
