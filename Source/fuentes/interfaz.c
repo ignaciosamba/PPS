@@ -4,36 +4,7 @@
 #include "conversor.h"
 #include "impresiones.h"
 
-char correr_shell(struct shellstr *shell)
-{
 
-	printf("MML>"); // prints out the prompt
-	char *shell->entrada;
-	 // shell->entrada = readline("emul-mips> ");
-    fgets(shell->entrada, MAXSIZE, stdin);
-            
-    if (shell->entrada == NULL)
-    {
-        printf("\n");
-        return 0;    
-    }
-    // add_history(shell->entrada);
-
-
-	if (strlen(shell->entrada) > 1)
-	{
-		shell = parsear_entrada(shell);													
-		shell = analizar(shell); 
-
-		if(shell->report != 0)
-			report(shell->report);
-		shell->report = 0;
-
-		restart(shell);
-	}
-
-	return 0;
-}
 
 
 void correr_menu(void)
@@ -130,4 +101,6 @@ void conf_ganancia(void)
 		case '8' : printf("Ganancia x128.\n"); ADC0CN = 0x07; break;
 	}
 }
+
+
 

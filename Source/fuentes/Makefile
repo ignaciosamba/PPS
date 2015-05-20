@@ -1,14 +1,14 @@
 TARGET=../test/test_exec
-TEST_O= conversor_logic.o interfaz.o
+TEST_O= conversor_logic.o interfaz_logic.o
 # CONF_D= configurador.c configurador.h headers_logic.h conversor.h
 CONV_D= conversor_logic.c conversor_logic.h headers_logic.h
-INTF_D= interfaz.c interfaz.h headers_logic.h conversor_logic.h impresiones.
+INTF_D= interfaz_logic.c interfaz_logic.h headers_logic.h conversor_logic.h
 # TEST_CONF_O= ../test/test_configurador.o configurador.o
 # TEST_CONF_D= ../test/test_configurador.c headers_logic.h ../test/minunit.h configurador.h
 TEST_CONV_O= ../test/test_conversor.o conversor_logic.o
 TEST_CONV_D= ../test/test_conversor.c headers_logic.h ../test/minunit.h conversor_logic.h
-TEST_INTF_O= ../test/test_interfaz.o interfaz.o conversor_logic.o
-TEST_INTF_D= ../test/test_interfaz.c headers_logic.h ../test/minunit.h interfaz.h conversor_logic.h
+TEST_INTF_O= ../test/test_interfaz.o interfaz_logic.o
+TEST_INTF_D= ../test/test_interfaz.c headers_logic.h ../test/minunit.h interfaz_logic.h
 
 test: testconversor testinterfaz
 	@echo TESTS_OK
@@ -21,8 +21,8 @@ test: testconversor testinterfaz
 conversor_logic.o: $(CONV_D)
 	gcc -pg -c conversor_logic.c -o conversor_logic.o
 
-interfaz.o: $(INTF_D)
-	gcc -pg -c interfaz.c -o interfaz.o
+interfaz_logic.o: $(INTF_D)
+	gcc -pg -c interfaz_logic.c -o interfaz_logic.o
 
 
 #armando los tests
@@ -69,4 +69,6 @@ testinterfaz: ../test/test_interfaz
 	gcc -c ../test/test_interfaz.c -o ../test/test_interfaz.o
 
 clean:
-	rm *.o
+	@rm *.o
+	@rm gmon.out
+	@rm *~
