@@ -1,8 +1,39 @@
-#include "headers.h"
+#include "headers_logic.h"
 #include "interfaz.h"
 #include "configurador.h"
 #include "conversor.h"
 #include "impresiones.h"
+
+char correr_shell(struct shellstr *shell)
+{
+
+	printf("MML>"); // prints out the prompt
+	char *shell->entrada;
+	 // shell->entrada = readline("emul-mips> ");
+    fgets(shell->entrada, MAXSIZE, stdin);
+            
+    if (shell->entrada == NULL)
+    {
+        printf("\n");
+        return 0;    
+    }
+    // add_history(shell->entrada);
+
+
+	if (strlen(shell->entrada) > 1)
+	{
+		shell = parsear_entrada(shell);													
+		shell = analizar(shell); 
+
+		if(shell->report != 0)
+			report(shell->report);
+		shell->report = 0;
+
+		restart(shell);
+	}
+
+	return 0;
+}
 
 
 

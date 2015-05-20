@@ -3,7 +3,8 @@
  * memoria y las carga en el programa en cada inicio del dispositivo.
  *  Tambien configura los registros de las interrupciones
 **/
-#include "headers.h"
+#include "headers_hw.h"
+#include "headers_logic.h"
 #include "configurador.h"
 #include "conversor.h"
 

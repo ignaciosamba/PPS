@@ -1,7 +1,6 @@
 #include "minunit.h"
 #include "../fuentes/headers.h"
 #include "../fuentes/configurador.h"
-#include "test_headers/test_configurador.h"
 
  // int tests_run = 0; 
  // int res;

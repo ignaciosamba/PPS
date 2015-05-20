@@ -1,54 +1,95 @@
 #include "minunit.h"
-#include "../fuentes/headers.h"
-#include "../fuentes/conversor.h"
-#include "../fuentes/configurador.h"
-#include "test_headers/test_conversor.h"
+#include "../fuentes/headers_logic.h"
+#include "../fuentes/conversor_logic.h"
 
- // int tests_run = 0; 
- // int res;
+ int tests_run = 0; 
+ int res;
+ short int bandera_dif;
 
- static char * test_pasar_datos_continuamente() 
-{   
-    f_dato_convertido = 0;
-    while(!f_dato_convertido);
-    // mu_assert("\n     error, nunca convirtio nada\n", 1);
-    return 0;
-}
+struct shellstr *shell;
 
 static char * test_cargar_buffer_single()
 {
-    char bdata buffer = 0;
+    shell->buffer_single = malloc(ARRAYSIZE);
     char dato;
 
     dato = '0';
-    buffer = cargar_buffer_single(&dato);
-    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 0\n", buffer_single ^ 0 == 1);    
+    cargar_buffer_single(shell, &dato);
+    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 0\n", shell->buffer_single[0] == 1);    
     dato = '3';
-    buffer = cargar_buffer_single(&dato);
-    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 4\n", buffer_single ^ 4 == 1);    
+    cargar_buffer_single(shell, &dato);
+    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 3\n", shell->buffer_single[3] == 1);    
+    // dato = '0';
+    // cargar_buffer_single(shell, &dato);
+    // mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", shell->buffer_single[0] == 0);    
+    // dato = '0';
+    // cargar_buffer_single(shell, &dato);
+    // mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", shell->buffer_single[0] == 0);
+    free(shell->buffer_single);
+
+    return 0;
+}
+
+static char * test_cargar_buffer_dif()
+{
+    shell->buffer_single = malloc(ARRAYSIZE);
+    char dato;
+
     dato = '0';
-    buffer = cargar_buffer_single(&dato);
-    mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", buffer_single ^ 0 == 0);    
-    dato = '0';
-    buffer = cargar_buffer_single(&dato);
-    mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", buffer_single ^ 0 == 0);
+    cargar_buffer_dif(shell, &dato);
+    mu_assert("\nla funcion cargar_buffer_dif no cargo en pin 0\n", shell->buffer_single[0] == 2);    
+    dato = '2';
+    cargar_buffer_dif(shell, &dato);
+    mu_assert("\nla funcion cargar_buffer_dif no cargo en pin 2\n", shell->buffer_single[2] == 2);    
+    // dato = '0';
+    // cargar_buffer_dif(shell, &dato);
+    // mu_assert("\nla funcion cargar_buffer_dif cargo en entrada incorrecta\n", shell->buffer_single[0] == 0);    
+    // dato = '0';
+    // cargar_buffer_dif(shell, &dato);
+    // mu_assert("\nla funcion cargar_buffer_dif cargo en entrada incorrecta\n", shell->buffer_single[0] == 0);
+    free(shell->buffer_single);
+
+    return 0;
+}
+
+static char * test_cambiar_pin()
+{
+    int i;
+    shell->buffer_single = malloc(ARRAYSIZE);
+    for (i=0;i<ARRAYSIZE;i++)
+        shell->buffer_single[i] = 0;
+
+    shell->buffer_single[3] = 1;
+    shell->buffer_single[4] = 1;
+    shell->buffer_single[0] = 1;
+    shell->posicion = 1;
+
+    mu_assert("\nla funcion cambiar_pin no cambio al pin 3\n", cambiar_pin(shell) == 3);    
+
+
+    free(shell->buffer_single);
 
     return 0;
 }
  
- static char * all_tests() {
-    iniciar_ADC();
-    printf("test_pasar_datos_continuamente...\n");
-    mu_run_test(test_pasar_datos_continuamente);
-    printf("test_pasar_datos_continuamente_OK\n");
+ static char * all_tests() 
+ {
     printf("test_cargar_buffer_single\n");
     mu_run_test(test_cargar_buffer_single);
     printf("test_cargar_buffer_single_OK\n");
-     return 0;
-
+    printf("test_cargar_buffer_dif\n");
+    mu_run_test(test_cargar_buffer_dif);
+    printf("test_cargar_buffer_dif_OK\n");
+    printf("test_cambiar_pin\n");
+    mu_run_test(test_cambiar_pin);
+    printf("test_cambiar_pin_OK\n");
+    return 0;
  }
  
- int run_test_conversor(void) {
+ int main(void) {
+
+    shell = (struct shellstr *) malloc(sizeof(struct shellstr));
+
 
     char *result = all_tests();
 
@@ -57,7 +98,9 @@ static char * test_cargar_buffer_single()
     }
     else {
       // printf("TEST PASSED\n");
-    } 
+    }
+
+    free(shell);
     return result != 0;
 
  }

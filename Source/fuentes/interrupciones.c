@@ -5,7 +5,8 @@
  * @brief define todas las rutinas de interrupcion
  * @details [long description]
  */
-#include "headers.h"
+#include "headers_hw.h"
+#include "headers_logic.h"
 #include "interrupciones.h"
 
 

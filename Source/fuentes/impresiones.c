@@ -1,4 +1,4 @@
-#include "headers.h"
+#include "headers_logic.h"
 #include "impresiones.h"
 
 

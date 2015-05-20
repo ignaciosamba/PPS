@@ -1,0 +1,6 @@
+#include "minunit.h"
+#include "../fuentes/headers.h"
+#include "../fuentes/interfaz.h"
+#include "../fuentes/configurador.h"
+#include "../fuentes/conversor.h"
+#include "../fuentes/impresiones.h"
