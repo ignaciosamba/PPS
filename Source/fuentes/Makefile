@@ -59,7 +59,7 @@ testconversor: ../test/test_conversor
 
 testinterfaz: ../test/test_interfaz
 	@echo test interfaz iniciado
-	@../test/test_interfaz
+	@../test/test_interfaz < ../test/test_files/test_interfaz_comandos_de_prueba.txt
 	@echo tests de interfaz pasaron
 
 ../test/test_interfaz: $(TEST_INTF_O)
