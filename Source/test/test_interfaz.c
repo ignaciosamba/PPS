@@ -1,6 +1,6 @@
 #include "minunit.h"
 #include "../fuentes/headers_logic.h"
-#include "../fuentes/interfaz_logic.h"
+#include "../fuentes/interfaz.h"
 
  int tests_run = 0; 
  int res;
@@ -44,10 +44,12 @@ static char * test_analizar()
 	shell->comando[0] = 'S';
 	shell->comando[1] = 'S';
 	shell->comando[2] = 'E';
-	shell->n_args = 6;
+	shell->args[0] = 4;
+
+	shell->n_args = 1;
 	shell->errn = 0;
 	analizar(shell);
-	mu_assert("no deberia haber errores, pero si hay", shell->errn == 0);
+	mu_assert("no deberia haber errores, pero si hay", shell->errn == 251);
 	
 	return 0;
 }
@@ -65,6 +67,9 @@ static char * test_analizar()
  int main(void) {
 
     shell = (struct shellstr *) malloc(sizeof(struct shellstr));
+    shell->buffer_single = malloc(ARRAYSIZE);
+    // shell->comando = malloc(TAM_COMANDO);
+    // shell->args = malloc(MAX_ARGS);
 
     shell->errn = 0;
 

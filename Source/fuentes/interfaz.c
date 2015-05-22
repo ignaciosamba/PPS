@@ -81,7 +81,7 @@ struct shellstr *analizar(struct shellstr *shell)
         else if(shell->args[0] < 0 || shell->args[0] > 7)
         {shell->errn = 406; return shell;}
 
-        else cargar_buffer_single(shell, &shell->args[0]);
+        cargar_buffer_single(shell, &shell->args[0]);
     }
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'D') && (shell->comando[2] == 'I'))
     {
