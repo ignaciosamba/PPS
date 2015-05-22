@@ -9,26 +9,38 @@
 #include "headers_logic.h"
 #include "interfaz.h"
 #include "configurador.h"
-#include "conversor.h"
+#include "conversor_hw.h"
+#include "conversor_logic.h"
  
 unsigned long int dato_a_enviar;
 bool f_dato_convertido;
-int buffer_single [TAM_SINGLE]; 
 short int posicion_adc;
 short int bandera_dif;
 
 void main(void)
 {
-	int i = 0;
-   	PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer 
-   	for (i=0 ; i<0 ; i++)
-   		buffer_single[i]=0;
-   	buffer_single [TAM_SINGLE] = malloc(TAM_SINGLE);
+   	struct shellstr *shell; 
+	char i = 0;
+   	PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer
+    shell = (struct shellstr *) malloc(sizeof(struct shellstr));
+   	shell->buffer_single = malloc(TAM_SINGLE);
+
+   	for (i=0 ; i<TAM_SINGLE ; i++)
+   		shell->buffer_single[i]=0;
+
 	iniciar_sysclock();
 	iniciar_puertos();
 	iniciar_UART();
 	iniciar_ADC();
-	correr_menu();
+
+	shell->stop_conf = 1;
+	while(shell->stop_conf == 1)
+	{
+		obtener_entrada(shell);
+		analizar(shell);
+		restart(shell);
+		reportar(shell);
+	}
 
 	AD0INT = 0;							
 	ADC0MD = 0x83;                      // Start continuous conversions
@@ -42,8 +54,8 @@ void main(void)
 			f_dato_convertido = false;
 			dato_a_enviar = convertir();
 			enviar_dato(&dato_a_enviar);
-			posicion_adc = cambiar_pin();
-			seleccionar_puerto(posicion_adc);
+			posicion_adc = cambiar_pin(shell);
+			seleccionar_puerto(&posicion_adc);
 		}
 	}
 }

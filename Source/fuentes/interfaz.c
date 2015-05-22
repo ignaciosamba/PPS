@@ -1,106 +1,123 @@
 #include "headers_logic.h"
+#include "conversor_logic.h"
 #include "interfaz.h"
-#include "configurador.h"
-#include "conversor.h"
-#include "impresiones.h"
 
-
-
-
-void correr_menu(void)
+struct shellstr *obtener_entrada(struct shellstr *shell)
 {
-	char c_opcion;
-	short int opcion = 1;
+    char i = 0;
+	printf("MML>"); // prints out the prompt
+    while((shell->entrada = getchar()) != ',')
+    {
+        if(shell->entrada == '\n') break;
 
-	while(opcion==1)
-	{
-		imprimir_menu();
+        if(i < TAM_COMANDO)
+        {
+            shell->comando[i] = shell->entrada;
+            i++;
+        }
+        else shell->errn = 404;
+    }
 
-		c_opcion = getchar();
-		while (getchar() != '\n');
+    i = 0;
 
-		// printf("%c\n", c_opcion);
-		switch(c_opcion)
-		{
-			case '1': 	
-						imprimir_conf_ADC();
-						c_opcion = getchar(); 
-						while (getchar() != '\n');
-						switch (c_opcion)
-						{
-							case '1':	conf_single_ended(); break;
-							case '2':	conf_dif(); break;
-							case '3':	conf_ganancia(); break;
-							
-						}
-			case '2': imprimir_conf_modos(); break;
-			case '3': imprimir_conf_tipoSerial(); break;
-			case '4': break;
-			case '5': opcion = 0; break;
-			default: printf("default!!\n");
-			break;
-		}
+    if(shell->entrada != '\n')
+    while((shell->entrada = getchar()) != '\n')
+    {
+        if(i < MAX_ARGS)
+        {
+            shell->args[i] = shell->entrada;
+            i++;
+        }
+        else shell->errn = 405;
+    }
 
-	}
+    shell->n_args = i;
+    if(shell->n_args > 7)
+
+    if(shell->entrada != '\n')
+    while (getchar() != '\n');
+
+
+    if(shell->errn != 0)
+    {
+        // printf("dio error!!, error: %hu\n", shell->errn);
+        return 0;
+    }
+    // printf("no dio error!!\n");
+	// shell = parsear_entrada(shell);													
+	// shell = analizar(shell); 
+
+	// if(shell->report != 0)
+	// 	report(shell->report);
+	// shell->report = 0;
+
+	// restart(shell);
+
+	return 0;
 }
 
-void conf_single_ended(void)
-{
-	char c_opcion;
-	imprimir_conf_modo_single_ended();
-	while (1)
-	{
-		c_opcion = getchar();
-		while (getchar() != '\n');
-		// printf("esc\n");
-		if (c_opcion == 'r') 
-				break;
-		/*if (c_opcion > 7)
-			printf("Valor invalido! Ingrese un numero del 0 al 7. \n");*/
-		 cargar_buffer_single(c_opcion);
-		// FLASH_Write(dest, &c_opcion, numbytes);
-	}
-
+void restart(struct shellstr *shell)
+{       
+    int i;
+    for (i = 0; i < MAX_ARGS;i++)
+        shell->args[i] = 0;
+    for (i = 0; i < TAM_COMANDO;i++)
+        shell->comando[i] = 0;
 }
 
-void conf_dif(void)
+struct shellstr *analizar(struct shellstr *shell)
 {
-	char c_opcion;
-
-	imprimir_conf_modo_diferencial();
-	while (1)
-	{
-		c_opcion = getchar();
-		while (getchar() != '\n');
-		// printf("esc\n");
-		if (c_opcion == 'r') 
-			break;
-		/*if (c_opcion > 7)
-			printf("Valor invalido! Ingrese un numero del 0 al 7. \n");*/
-		cargar_buffer_dif(c_opcion);
-		// FLASH_Write(dest, &c_opcion, numbytes);
-	}
-
-}
+    if((shell->comando[0] == 'S') && (shell->comando[1] == 'T'))
+    {
+        shell->stop_conf = 1;
+    }
 
 
-void conf_ganancia(void)
-{
-	char c_opcion;
-	imprimir_conf_ganancia();
-	c_opcion = getchar();
-	switch (c_opcion)
-	{
-		case '1' : printf("Ganancia x1.\n"); ADC0CN = 0x00; break;
-		case '2' : printf("Ganancia x2.\n"); ADC0CN = 0x01; break;
-		case '3' : printf("Ganancia x4.\n"); ADC0CN = 0x02; break;
-		case '4' : printf("Ganancia x8.\n"); ADC0CN = 0x03; break;
-		case '5' : printf("Ganancia x16.\n"); ADC0CN = 0x04; break;
-		case '6' : printf("Ganancia x32.\n"); ADC0CN = 0x05; break;
-		case '7' : printf("Ganancia x64.\n"); ADC0CN = 0x06; break;
-		case '8' : printf("Ganancia x128.\n"); ADC0CN = 0x07; break;
-	}
+    else if((shell->comando[0] == 'S') && (shell->comando[1] == 'S') && (shell->comando[2] == 'E'))
+    {
+        if(shell->n_args == 1)
+        cargar_buffer_single(shell, &shell->args[0]);
+        else shell->errn = 405;
+    }
+	else if((shell->comando[0] == 'S') && (shell->comando[1] == 'D') && (shell->comando[2] == 'I'))
+    {
+        if(shell->n_args == 1)
+        cargar_buffer_dif(shell, &shell->args[0]);
+        else shell->errn = 405;
+    }
+    else shell->errn = 404;
+
+	return shell;
+
 }
 
 
+void reportar(struct shellstr *shell)
+{
+    switch(shell->errn)
+    {   
 
+        case 201: printf("\nACK 201: pin %c configurado exitosamente en modo single_ended\n", shell->args[0]);
+        case 202: printf("\nACK 202: pines %c y %c configurados exitosamente en modo diferencial\n", shell->args[0], shell->args[0] + 1);
+        case 404: printf("\nERROR 404: comando no encontrado\n");
+        case 405: printf("\nERROR 405: demasiados argumentos\n");
+        case 0: break;
+    }
+}
+
+
+
+void printeartodo(struct shellstr *shell)
+{
+    int i;
+
+    for(i = 0; i<TAM_COMANDO; i++)
+    {
+        printf("%c", shell->comando[i]);
+    }
+    for(i = 0; i<shell->n_args; i++)
+    {
+        printf("%c", shell->args[i]);
+    }
+
+}

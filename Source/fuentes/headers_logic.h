@@ -5,7 +5,7 @@ typedef char byte;
 #define ARRAYSIZE 8
 #define MAXSIZE 50
 #define TAM_SINGLE 8 			//define para tamaño de buffer! 
-#define MAX_ARGS 8
+#define MAX_ARGS 4
 #define TAM_COMANDO 3
 
 typedef enum { false, true } bool;
@@ -40,4 +40,8 @@ struct shellstr /// estructura para majejar la entrada de operaciones en la inte
 
 	///numero de error de error
 	short int errn;
+
+
+	///bandera de habilitacion de configuracion
+	char stop_conf;
 };

@@ -1,4 +1,6 @@
-void correr_menu(void);
-void conf_single_ended(void);
-void conf_ganancia(void);
-void conf_dif(void);
+struct shellstr *obtener_entrada(struct shellstr *shell);
+struct shellstr *analizar(struct shellstr *shell);
+void restart(struct shellstr *shell);
+void reportar(struct shellstr *shell);
+
+void printeartodo(struct shellstr *shell);

@@ -6,7 +6,6 @@
 #include "headers_hw.h"
 #include "headers_logic.h"
 #include "configurador.h"
-#include "conversor.h"
 
 
 
@@ -14,9 +13,9 @@ void empezar_adc()
 {
 	ADC0MUX = 0x08;
 }
-void seleccionar_puerto(unsigned short puerto)
+void seleccionar_puerto(unsigned short *puerto)
 {
-	switch (puerto)
+	switch (*puerto)
 	{
 		// ADC0CN = 0x01;
 		case 0:
@@ -24,53 +23,53 @@ void seleccionar_puerto(unsigned short puerto)
 			if (bandera_dif == 1)
 			{
 				bandera_dif = 0;
-				ADC0CN | 0x10;
-				puerto = 0x01;
+				ADC0CN |= 0x10;
+				*puerto = 0x01;
 				break;
 			}
 			else
 			{
-				puerto = 0x08;
+				*puerto = 0x08;
 				break;
 			}
 		case 1:
 			printf("Puerto 0.1: \n");
-			puerto = 0x18;
+			*puerto = 0x18;
 			break;
 		case 2:
 			printf("Puerto 0.2: \n");
 			if (bandera_dif == 1)
 			{
 				bandera_dif = 0;
-				ADC0CN | 0x10;
-				puerto = 0x23;
+				ADC0CN |= 0x10;
+				*puerto = 0x23;
 				break;
 			}
 			else
 			{
-				puerto = 0x28;
+				*puerto = 0x28;
 				break;
 			}
 		case 3: 
 			printf("Puerto 0.3: \n");
-			puerto = 0x38;
+			*puerto = 0x38;
 			break;
 		case 4:
 			printf("Puerto 0.4: \n");
 			if (bandera_dif == 1)
 			{
 				bandera_dif = 0;
-				ADC0CN | 0x10;
-				puerto = 0x45;
+				ADC0CN |= 0x10;
+				*puerto = 0x45;
 				break;
 			}
 			else
 			{
-				puerto = 0x48;
+				*puerto = 0x48;
 				break;
 			}
 		case 5:
-			puerto = 0x58;
+			*puerto = 0x58;
 			printf("Puerto 0.5: \n");
 			break;
 		case 6:
@@ -78,24 +77,24 @@ void seleccionar_puerto(unsigned short puerto)
 			if (bandera_dif == 1)
 			{
 				bandera_dif = 0;
-				ADC0CN | 0x10;
-				puerto = 0x67;
+				ADC0CN |= 0x10;
+				*puerto = 0x67;
 				break;
 			}
 			else
 			{
-				puerto = 0x68;
+				*puerto = 0x68;
 				break;
 			}
 		case 7:
 			printf("Puerto 0.7: \n");
-			puerto = 0x78;
+			*puerto = 0x78;
 			break;
 		default:
 			printf("ESTAMOS EN LA B \n" );
 			break;
 	}
-	ADC0MUX = puerto;
+	ADC0MUX = *puerto;
 }
 
 void iniciar_puertos (void)
@@ -180,24 +179,24 @@ int iniciar_UART(void)
 	return 0;
 }
 
-int iniciar_interrupciones(void)
-{
+// int iniciar_interrupciones(void)
+// {
 	
-	return 0;
-}
+// 	return 0;
+// }
 
-int iniciar_FLASH(void)
-{
+// int iniciar_FLASH(void)
+// {
 	
-	return 0;
-}
+// 	return 0;
+// }
 
-int cargar_configuracionFlash(void)
-{
-	return 0;
-}
+// int cargar_configuracionFlash(void)
+// {
+// 	return 0;
+// }
 
-int guardar_configuracionFlash(void)
-{
-	return 0;
-}
+// int guardar_configuracionFlash(void)
+// {
+// 	return 0;
+// }

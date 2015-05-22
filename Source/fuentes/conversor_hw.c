@@ -1,6 +1,6 @@
 #include "headers_hw.h"
 #include "headers_logic.h"
-#include "conversor.h"
+#include "conversor_hw.h"
 
 
 unsigned long convertir(void)
