@@ -1,5 +1,6 @@
 #include "headers_logic.h"
 #include "conversor_logic.h"
+#include "conversor_hw.h"
 #include "interfaz.h"
 
 struct shellstr *obtener_entrada(struct shellstr *shell)
@@ -75,15 +76,30 @@ struct shellstr *analizar(struct shellstr *shell)
 
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'S') && (shell->comando[2] == 'E'))
     {
-        if(shell->n_args == 1)
-        cargar_buffer_single(shell, &shell->args[0]);
-        else shell->errn = 405;
+        if(shell->n_args > 1)
+        {shell->errn = 405; return shell;}
+        else if(shell->args[0] < 0 || shell->args[0] > 7)
+        {shell->errn = 406; return shell;}
+
+        else cargar_buffer_single(shell, &shell->args[0]);
     }
-	else if((shell->comando[0] == 'S') && (shell->comando[1] == 'D') && (shell->comando[2] == 'I'))
+    else if((shell->comando[0] == 'S') && (shell->comando[1] == 'D') && (shell->comando[2] == 'I'))
     {
-        if(shell->n_args == 1)
-        cargar_buffer_dif(shell, &shell->args[0]);
-        else shell->errn = 405;
+        if(shell->n_args > 1)
+        {shell->errn = 405; return shell;}
+        else if(shell->args[0] < 0 || shell->args[0] > 8)
+        {shell->errn = 406; return shell;}
+
+        else cargar_buffer_dif(shell, &shell->args[0]);
+    }
+	else if((shell->comando[0] == 'G') && (shell->comando[1] == 'A') && (shell->comando[2] == 'S'))
+    {
+        if(shell->n_args > 1)
+        {shell->errn = 405; return shell;}
+        else if(shell->args[0] < 1 || shell->args[0] > 8)
+        {shell->errn = 406; return shell;}
+
+        else conf_ganancia(shell);
     }
     else shell->errn = 404;
 
@@ -97,10 +113,12 @@ void reportar(struct shellstr *shell)
     switch(shell->errn)
     {   
 
-        case 201: printf("\nACK 201: pin %c configurado exitosamente en modo single_ended\n", shell->args[0]);
-        case 202: printf("\nACK 202: pines %c y %c configurados exitosamente en modo diferencial\n", shell->args[0], shell->args[0] + 1);
+        case 251: printf("\nACK 201: pin %c configurado exitosamente en modo single_ended\n", shell->args[0]);
+        case 252: printf("\nACK 202: pines %c y %c configurados exitosamente en modo diferencial\n", shell->args[0], shell->args[0] + 1);
         case 404: printf("\nERROR 404: comando no encontrado\n");
         case 405: printf("\nERROR 405: demasiados argumentos\n");
+        case 406: printf("\nERROR 406: alguno de los argumentos esta fuera de rango\n");
+        case 453: printf("\nERROR 450: error en configuracion de ganancia\n");
         case 0: break;
     }
 }

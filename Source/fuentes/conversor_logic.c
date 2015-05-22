@@ -52,7 +52,7 @@ void cargar_buffer_single(struct shellstr *shell, char *dato)
 		// {
 		// 	printf("%hi\n", shell->buffer_single[i]);
 		// }
-		shell->errn = 201;
+		shell->errn = 251;
 }
 
  void cargar_buffer_dif (struct shellstr *shell, char *dato)
@@ -64,7 +64,7 @@ void cargar_buffer_single(struct shellstr *shell, char *dato)
 	// for (i=0 ; i<8 ; i++)
 	// 	printf("%d\n", shell->buffer_single[i] );
 
-		shell->errn = 202;
+		shell->errn = 252;
 }
 
 short int cambiar_pin(struct shellstr *shell)

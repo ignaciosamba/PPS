@@ -9,10 +9,10 @@
 
 
 
-void empezar_adc()
-{
-	ADC0MUX = 0x08;
-}
+// void empezar_adc()
+// {
+// 	ADC0MUX = 0x08;
+// }
 void seleccionar_puerto(unsigned short *puerto)
 {
 	switch (*puerto)

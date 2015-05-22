@@ -44,3 +44,24 @@ unsigned long convertir(void)
 	return mV;
 
 }
+
+
+struct shellstr *conf_ganancia(struct shellstr *shell)
+{	
+	switch (shell->args[0])
+	{
+		case 1: printf("Ganancia x1.\n"); ADC0CN = 0x00; break;
+		case 2: printf("Ganancia x2.\n"); ADC0CN = 0x01; break;
+		case 3: printf("Ganancia x4.\n"); ADC0CN = 0x02; break;
+		case 4: printf("Ganancia x8.\n"); ADC0CN = 0x03; break;
+		case 5: printf("Ganancia x16.\n"); ADC0CN = 0x04; break;
+		case 6: printf("Ganancia x32.\n"); ADC0CN = 0x05; break;
+		case 7: printf("Ganancia x64.\n"); ADC0CN = 0x06; break;
+		case 8: printf("Ganancia x128.\n"); ADC0CN = 0x07; break;
+
+		default: shell->errn = 407; return shell;
+	}
+	shell->errn = 453;
+	return shell;
+
+}

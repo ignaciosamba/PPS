@@ -14,7 +14,7 @@
  
 unsigned long int dato_a_enviar;
 bool f_dato_convertido;
-short int posicion_adc;
+unsigned short int posicion_adc;
 short int bandera_dif;
 
 void main(void)
