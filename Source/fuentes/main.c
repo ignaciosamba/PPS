@@ -36,8 +36,8 @@ void main(void)
 	shell->stop_conf = 1;
 	while(shell->stop_conf == 1)
 	{
-		obtener_entrada(shell);
-		analizar(shell);
+		shell = obtener_entrada(shell);
+		shell = analizar(shell);
 		restart(shell);
 		reportar(shell);
 	}

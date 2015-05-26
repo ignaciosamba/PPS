@@ -1,16 +1,11 @@
-".\comunicacion.obj",
 ".\configurador.obj",
-".\conversor.obj",
-".\impresiones.obj",
 ".\interfaz.obj",
 ".\interrupciones.obj",
 ".\memoria.obj",
 ".\F350_FlashPrimitives.obj",
 ".\F350_FlashUtils.obj",
-".\test_comunicacion.obj",
-".\test_configurador.obj",
-".\test_conversor.obj",
-".\test_global.obj",
-".\test_memoria.obj" 
+".\main.obj",
+".\conversor_hw.obj",
+".\conversor_logic.obj" 
 TO "Test_embebido" 
 RAMSIZE(256) 

@@ -385,6 +385,16 @@
               <FileType>1</FileType>
               <FilePath>..\Source\fuentes\memoria.c</FilePath>
             </File>
+            <File>
+              <FileName>F350_FlashPrimitives.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\fuentes\flash\F350_FlashPrimitives.c</FilePath>
+            </File>
+            <File>
+              <FileName>F350_FlashUtils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\fuentes\flash\F350_FlashUtils.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -429,6 +439,16 @@
               <FileName>memoria.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Source\fuentes\memoria.h</FilePath>
+            </File>
+            <File>
+              <FileName>F350_FlashPrimitives.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Source\fuentes\flash\F350_FlashPrimitives.h</FilePath>
+            </File>
+            <File>
+              <FileName>F350_FlashUtils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Source\fuentes\flash\F350_FlashUtils.h</FilePath>
             </File>
           </Files>
         </Group>
