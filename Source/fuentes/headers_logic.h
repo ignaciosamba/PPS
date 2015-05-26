@@ -31,18 +31,19 @@ struct shellstr /// estructura para majejar la entrada de operaciones en la inte
 	///comando de la entrada
 	char comando[TAM_COMANDO]; 
 	// char *comando; 
+	
 	///arreglo de argumentos. maximo 8
 	char args[MAX_ARGS]; 
 	// char *args; 
 
 	///array para el conversor
 	char *buffer_single;  
+	
 	///posicion dentro del array 
 	short int posicion;				
 
 	///numero de error de error
 	short int errn;
-
 
 	///bandera de habilitacion de configuracion
 	char stop_conf;

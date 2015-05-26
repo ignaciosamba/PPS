@@ -25,6 +25,12 @@ void main(void)
     shell = (struct shellstr *) malloc(sizeof(struct shellstr));
    	shell->buffer_single = malloc(TAM_SINGLE);
 
+   	if(shell == NULL || shell->buffer_single == NULL)
+   	{
+   		printf("no hay lugar para shell!!\n");
+   		while(1);
+   	}
+
    	for (i=0 ; i<TAM_SINGLE ; i++)
    		shell->buffer_single[i]=0;
 
@@ -34,12 +40,24 @@ void main(void)
 	iniciar_ADC();
 
 	shell->stop_conf = 1;
+
 	while(shell->stop_conf == 1)
 	{
-		shell = obtener_entrada(shell);
-		shell = analizar(shell);
 		restart(shell);
-		reportar(shell);
+
+		obtener_entrada(shell);
+
+		printeartodo(shell);
+
+		if(shell->errn != 0)
+		{
+			reportar(shell);
+		}
+		else
+		{
+			analizar(shell);
+			reportar(shell);
+		}
 	}
 
 	AD0INT = 0;							
@@ -58,4 +76,7 @@ void main(void)
 			seleccionar_puerto(&posicion_adc);
 		}
 	}
+
+	free(shell->buffer_single);
+	free(shell);
 }

@@ -14,44 +14,25 @@ int i ;
  */
 void enviar_dato(unsigned long int *dato)
 {
-	//unsigned long dato2;
-	//dato2=100;
-	printf("voltaje: %u mV\n",*dato);
-	// dato_convertido = dato;
-	// f_enviar_dato = true;
-
-	// if(ADC0MUX == 0x08)
-	//    pin_actual = 0;
-	// else if(ADC0MUX == 0x18)
-	//    pin_actual = 1;
-	// else if(ADC0MUX == 0x28)
-	//    pin_actual = 2;
-	// else if(ADC0MUX == 0x38)
-	//    pin_actual = 3;
-	// else if(ADC0MUX == 0x48)
-	//    pin_actual = 4;
-	// else if(ADC0MUX == 0x58)
-	//    pin_actual = 5;
-	// else if(ADC0MUX == 0x68)
-	//    pin_actual = 6;
-	// else if(ADC0MUX == 0x78)
-	//    pin_actual = 7;
+	printf("voltaje: %lu mV\n",*dato);
 }
 
 void cargar_buffer_single(struct shellstr *shell, char *dato)
 {
-		int i = 0;
-		//printf("sdadasdasdas\n");
+		// int i = 0;
+		// printf("sdadasdasdas\n");
 		// printf("cargue un 1 en la poscion: %c\n", dato );
 		dato_n = *dato - '0';
 	 	// printf("El valor numerico es: %hi\n",dato_n );
 		//if(dato >= 0 && dato < 8)
 
 		shell->buffer_single [dato_n] = 1;
+		
 		// for (i=0; i<8 ; i++)
 		// {
 		// 	printf("%hi\n", shell->buffer_single[i]);
 		// }
+
 		shell->errn = 251;
 }
 
