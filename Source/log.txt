@@ -63,3 +63,9 @@ estoy pensando en un cambio de paradigma de la interfaz con el usuario. como nos
 SOBRE EL ADC: hay que fijar la frecuencia maxima de muestreo.
 
 -lucho
+
+
+
+22/05
+
+arrancamos un paradigma nuevo de como va a configurarse todo.. vamos a usar MML.. la lista de la explicacion de comandos esta en el archivo comandos .txt

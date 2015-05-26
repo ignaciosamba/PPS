@@ -1,0 +1,47 @@
+comando,[n° args]
+
+
+SSE,[1]
+
+descripcion: 
+setea el pin ingresado en modo single ended. 
+
+limitaciones:
+- un solo argumento
+- el argumento es un byte comprendido entre 0 y 7
+
+ejemplo:
+
+SSE,4 //setea el pin 4 del ADC en modo single ended
+
+-------------------------------------------------------
+
+SDI,[1]
+
+descripcion:
+setea el pin ingresado y el pin siguiente a ese en numero en modo diferencial
+
+limitaciones:
+- un solo argumento
+- el argumento es un byte par comprendido entre 0 y 6
+
+ejemplo:
+
+SDI,2 // setea los pines 2 y 3 en modo diferencial  
+
+-------------------------------------------------------
+
+GAS,[1]
+
+descripcion:
+setea la ganancia del ADC segun el argumento a la potencia de 2
+
+limitaciones:
+-un solo argumento
+-el argumento es un byte comprendido entre 0 y 7
+
+ejemplo:
+
+GAS,3 // setea la ganancia en 2^3 = 8x
+
+-------------------------------------------------------
