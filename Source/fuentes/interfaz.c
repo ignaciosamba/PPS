@@ -98,7 +98,7 @@ struct shellstr *analizar(struct shellstr *shell)
     {
         if(shell->n_args > 1)
         {shell->errn = 405; return shell;}
-        else if(shell->args[0] - '0' < 1 || shell->args[0] - '0' > 8)
+        else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 7)
         {shell->errn = 406; return shell;}
 
         else conf_ganancia(shell);

@@ -19,21 +19,21 @@ void enviar_dato(unsigned long int *dato)
 
 void cargar_buffer_single(struct shellstr *shell, char *dato)
 {
-		// int i = 0;
-		// printf("sdadasdasdas\n");
-		// printf("cargue un 1 en la poscion: %c\n", dato );
-		dato_n = *dato - '0';
-	 	// printf("El valor numerico es: %hi\n",dato_n );
-		//if(dato >= 0 && dato < 8)
+	// int i = 0;
+	// printf("sdadasdasdas\n");
+	// printf("cargue un 1 en la poscion: %c\n", dato );
+	dato_n = *dato - '0';
+ 	// printf("El valor numerico es: %hi\n",dato_n );
+	//if(dato >= 0 && dato < 8)
 
-		shell->buffer_single [dato_n] = 1;
-		
-		// for (i=0; i<8 ; i++)
-		// {
-		// 	printf("%hi\n", shell->buffer_single[i]);
-		// }
+	shell->buffer_single [dato_n] = 1;
+	
+	// for (i=0; i<8 ; i++)
+	// {
+	// 	printf("%hi\n", shell->buffer_single[i]);
+	// }
 
-		shell->errn = 251;
+	shell->errn = 251;
 }
 
  void cargar_buffer_dif (struct shellstr *shell, char *dato)
@@ -42,10 +42,11 @@ void cargar_buffer_single(struct shellstr *shell, char *dato)
 	dato_n = *dato - '0';
 	// printf("El valor numerico es: %hi\n",dato_n );
 	shell->buffer_single [dato_n] = 2;
+	// shell->buffer_single [dato_n + 1] = 2;
 	// for (i=0 ; i<8 ; i++)
 	// 	printf("%d\n", shell->buffer_single[i] );
 
-		shell->errn = 252;
+	shell->errn = 252;
 }
 
 short int cambiar_pin(struct shellstr *shell)

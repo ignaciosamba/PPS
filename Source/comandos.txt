@@ -45,3 +45,13 @@ ejemplo:
 GAS,3 // setea la ganancia en 2^3 = 8x
 
 -------------------------------------------------------
+
+ST[0]
+
+descripcion:
+guarda los cambios, sale del modo de configuracion y comienza a correr el programa
+
+limitaciones:
+-no lleva argumentos
+
+-------------------------------------------------------

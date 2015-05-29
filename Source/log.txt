@@ -15,25 +15,21 @@ POR AHORA
 por ahora lo que vamos a hacer, para no romperme la cabeza con la configuracion de los pines. es que lea todos los pines de pecho y pase toda la informacion siempre. despues lo vamos detallando de a poco.
 Entonces por ahora va a haber un primer prototipo.. no tiene un carajo de configuracion. lo conectas y de pecho te entra a mandar informacion de las 8 patas del adc en modo single ended.
 
--lucho
 
 PRIMER PROTOTIPO
 
 va a entregar los datos que reciba de las 8 patas todo el tiempo a una frecuencia fija en modo single-ended. Con una tension de referencia de 2.5V. Cuando tiene el dato listo lo imprime por la UART.
 
--lucho
 
 7/5
 
 ya pudimos hacer andar el primer prototipo con solo el adc andando y tirando la info de todas las patas de manera continua. ahora estamos intentando configurar alguna de las patas.
 
--lucho
 
 8/5
 
 Orlando nos dijo hoy que el gain del adc puede variar segun la temperatura y el tiempo que hace que esta convirtiendo y nos dejo bastante en offside.. hay que hacer algunas pruebas
 
--lucho
 
 14/5
 
@@ -53,7 +49,6 @@ Para escribir en la memoria flash se usa la instruccion MOVX. Por defecto, esta 
 
 Solo se puede escribir en memoria habiendo borrado todo antes. La instruccion de escritura solo puede poner bits en 0
 
--lucho
 
 18/5
 
@@ -62,10 +57,16 @@ estoy pensando en un cambio de paradigma de la interfaz con el usuario. como nos
 
 SOBRE EL ADC: hay que fijar la frecuencia maxima de muestreo.
 
--lucho
 
 
 
 22/05
 
 arrancamos un paradigma nuevo de como va a configurarse todo.. vamos a usar MML.. la lista de la explicacion de comandos esta en el archivo comandos .txt
+
+28/05
+
+PUNTOS CLAVE DE LOS TIMERS
+
+- timer0 y timer1 se pueden usar como contadores de flanco de bajada, contaran como maximo una cantidad de eventos igual al cuarto del clock de sistema actual.
+- los bits T0M y T1M del registro CKCON definen el clock asociado a cada timer. si es 1 el clock es el interno; si es 0 la fuente se indica en los bits de escala en CKCON
