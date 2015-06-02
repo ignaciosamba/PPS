@@ -351,24 +351,9 @@
           <GroupName>Source</GroupName>
           <Files>
             <File>
-              <FileName>comunicacion.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\fuentes\comunicacion.c</FilePath>
-            </File>
-            <File>
               <FileName>configurador.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Source\fuentes\configurador.c</FilePath>
-            </File>
-            <File>
-              <FileName>conversor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\fuentes\conversor.c</FilePath>
-            </File>
-            <File>
-              <FileName>impresiones.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\fuentes\impresiones.c</FilePath>
             </File>
             <File>
               <FileName>interfaz.c</FileName>
@@ -395,16 +380,26 @@
               <FileType>1</FileType>
               <FilePath>..\Source\fuentes\flash\F350_FlashUtils.c</FilePath>
             </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\fuentes\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>conversor_hw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\fuentes\conversor_hw.c</FilePath>
+            </File>
+            <File>
+              <FileName>conversor_logic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Source\fuentes\conversor_logic.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Headers</GroupName>
           <Files>
-            <File>
-              <FileName>comunicacion.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Source\fuentes\comunicacion.h</FilePath>
-            </File>
             <File>
               <FileName>configurador.h</FileName>
               <FileType>5</FileType>
@@ -414,16 +409,6 @@
               <FileName>conversor.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Source\fuentes\conversor.h</FilePath>
-            </File>
-            <File>
-              <FileName>headers.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Source\fuentes\headers.h</FilePath>
-            </File>
-            <File>
-              <FileName>impresiones.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Source\fuentes\impresiones.h</FilePath>
             </File>
             <File>
               <FileName>interfaz.h</FileName>
@@ -436,11 +421,6 @@
               <FilePath>..\Source\fuentes\interrupciones.h</FilePath>
             </File>
             <File>
-              <FileName>memoria.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Source\fuentes\memoria.h</FilePath>
-            </File>
-            <File>
               <FileName>F350_FlashPrimitives.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\Source\fuentes\flash\F350_FlashPrimitives.h</FilePath>
@@ -450,60 +430,25 @@
               <FileType>5</FileType>
               <FilePath>..\Source\fuentes\flash\F350_FlashUtils.h</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Test</GroupName>
-          <Files>
             <File>
-              <FileName>test_comunicacion.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\test\test_comunicacion.c</FilePath>
-            </File>
-            <File>
-              <FileName>test_configurador.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\test\test_configurador.c</FilePath>
-            </File>
-            <File>
-              <FileName>test_conversor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\test\test_conversor.c</FilePath>
-            </File>
-            <File>
-              <FileName>test_global.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\test\test_global.c</FilePath>
-            </File>
-            <File>
-              <FileName>test_memoria.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\test\test_memoria.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Test Headers</GroupName>
-          <Files>
-            <File>
-              <FileName>test_comunicacion.h</FileName>
+              <FileName>conversor_hw.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Source\test\test_headers\test_comunicacion.h</FilePath>
+              <FilePath>..\Source\fuentes\conversor_hw.h</FilePath>
             </File>
             <File>
-              <FileName>test_configurador.h</FileName>
+              <FileName>conversor_logic.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Source\test\test_headers\test_configurador.h</FilePath>
+              <FilePath>..\Source\fuentes\conversor_logic.h</FilePath>
             </File>
             <File>
-              <FileName>test_conversor.h</FileName>
+              <FileName>headers_hw.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Source\test\test_headers\test_conversor.h</FilePath>
+              <FilePath>..\Source\fuentes\headers_hw.h</FilePath>
             </File>
             <File>
-              <FileName>test_memoria.h</FileName>
+              <FileName>headers_logic.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\Source\test\test_headers\test_memoria.h</FilePath>
+              <FilePath>..\Source\fuentes\headers_logic.h</FilePath>
             </File>
           </Files>
         </Group>
