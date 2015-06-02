@@ -26,11 +26,11 @@ void cargar_buffer_single(struct shellstr *shell, char *dato)
  	// printf("El valor numerico es: %hi\n",dato_n );
 	//if(dato >= 0 && dato < 8)
 
-	shell->buffer_single [dato_n] = 1;
+	shell->buffer_adc [dato_n] = 1;
 	
 	// for (i=0; i<8 ; i++)
 	// {
-	// 	printf("%hi\n", shell->buffer_single[i]);
+	// 	printf("%hi\n", shell->buffer_adc[i]);
 	// }
 
 	shell->errn = 251;
@@ -41,10 +41,10 @@ void cargar_buffer_single(struct shellstr *shell, char *dato)
 	// printf("cargue un 1 en la poscion: %c\n", *dato );
 	dato_n = *dato - '0';
 	// printf("El valor numerico es: %hi\n",dato_n );
-	shell->buffer_single [dato_n] = 2;
-	// shell->buffer_single [dato_n + 1] = 2;
+	shell->buffer_adc [dato_n] = 2;
+	// shell->buffer_adc [dato_n + 1] = 2;
 	// for (i=0 ; i<8 ; i++)
-	// 	printf("%d\n", shell->buffer_single[i] );
+	// 	printf("%d\n", shell->buffer_adc[i] );
 
 	shell->errn = 252;
 }
@@ -57,12 +57,12 @@ short int cambiar_pin(struct shellstr *shell)
 		{
 			shell->posicion = 0;
 		}
-		if(shell->buffer_single[shell->posicion] == 1)
+		if(shell->buffer_adc[shell->posicion] == 1)
 		{
 			shell->posicion++;
 			return shell->posicion-1;
 		}
-		else if(shell->buffer_single[shell->posicion] == 2)
+		else if(shell->buffer_adc[shell->posicion] == 2)
 		{
 			// printf("Entre aca al else if. \n" );
 			bandera_dif = 1;

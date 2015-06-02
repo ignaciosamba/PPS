@@ -23,16 +23,16 @@ void main(void)
 	char i = 0;
    	PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer
     shell = (struct shellstr *) malloc(sizeof(struct shellstr));
-   	shell->buffer_single = malloc(TAM_SINGLE);
+   	shell->buffer_adc = malloc(TAM_SINGLE);
 
-   	if(shell == NULL || shell->buffer_single == NULL)
+   	if(shell == NULL || shell->buffer_adc == NULL)
    	{
    		printf("no hay lugar para shell!!\n");
    		while(1);
    	}
 
    	for (i=0 ; i<TAM_SINGLE ; i++)
-   		shell->buffer_single[i]=0;
+   		shell->buffer_adc[i]=0;
 
 	iniciar_sysclock();
 	iniciar_puertos();
@@ -77,6 +77,6 @@ void main(void)
 		}
 	}
 
-	free(shell->buffer_single);
+	free(shell->buffer_adc);
 	free(shell);
 }

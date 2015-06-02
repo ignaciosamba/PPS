@@ -69,4 +69,21 @@ arrancamos un paradigma nuevo de como va a configurarse todo.. vamos a usar MML.
 PUNTOS CLAVE DE LOS TIMERS
 
 - timer0 y timer1 se pueden usar como contadores de flanco de bajada, contaran como maximo una cantidad de eventos igual al cuarto del clock de sistema actual.
-- los bits T0M y T1M del registro CKCON definen el clock asociado a cada timer. si es 1 el clock es el interno; si es 0 la fuente se indica en los bits de escala en CKCON
+- el bit T0/C del registro TMOD especifica si la fuente de pulsos es interna o externa.
+- los bits T0M y T1M del registro CKCON definen el clock asociado a cada timer. si es 1 el clock es el interno; si es 0, usa el prescaler que tambien se indica en CKCON
+
+
+1/6
+
+que se guarda en la flash?
+
+-pines en single ended
+-pines en diferencial
+-ganancia
+-modo de transferencia, y en caso de ser por periodo, el numero de periodo
+-contadores habilitados
+
+
+FRECUENCIAS DEL ADC
+
+estoy leyendo un poco porque me cague perdiendo con el tema de la frecuencia de modulacion, de muestreo y la mar en coche del adc. Hay que saber la frecuencia maxima de muestreo para las 8 entradas y fijar esa como la maxima. 

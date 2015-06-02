@@ -65,3 +65,7 @@ Proyecto Uvision/Embebido.plg
 *.gch
 Proyecto Uvision/Embebido_uvopt.bak
 Proyecto Uvision/Embebido.uvopt
+Proyecto Uvision/contador 16 bit timer0.__i
+Proyecto Uvision/counters
+Proyecto Uvision/counters.hex
+*.bak

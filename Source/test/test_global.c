@@ -5,15 +5,15 @@
 #include "test_headers/test_memoria.h"
 
  bit f_dato_convertido;
- char bdata buffer_single;
- sbit buffer_single_0 = buffer_single ^ 0;
- sbit buffer_single_1 = buffer_single ^ 1;
- sbit buffer_single_2 = buffer_single ^ 2;
- sbit buffer_single_3 = buffer_single ^ 3;
- sbit buffer_single_4 = buffer_single ^ 4;
- sbit buffer_single_5 = buffer_single ^ 5;
- sbit buffer_single_6 = buffer_single ^ 6;
- sbit buffer_single_7 = buffer_single ^ 7;
+ char bdata buffer_adc;
+ sbit buffer_adc_0 = buffer_adc ^ 0;
+ sbit buffer_adc_1 = buffer_adc ^ 1;
+ sbit buffer_adc_2 = buffer_adc ^ 2;
+ sbit buffer_adc_3 = buffer_adc ^ 3;
+ sbit buffer_adc_4 = buffer_adc ^ 4;
+ sbit buffer_adc_5 = buffer_adc ^ 5;
+ sbit buffer_adc_6 = buffer_adc ^ 6;
+ sbit buffer_adc_7 = buffer_adc ^ 7;
 
  
  void main(void) 
@@ -26,7 +26,7 @@
     PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer 
 
     // for (i=0 ; i < 8 ; i++)
-        buffer_single = 0;
+        buffer_adc = 0;
 
     iniciar_puertos();
     iniciar_sysclock();

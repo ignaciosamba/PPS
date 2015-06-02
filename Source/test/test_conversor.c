@@ -10,44 +10,44 @@ struct shellstr *shell;
 
 static char * test_cargar_buffer_single()
 {
-    shell->buffer_single = malloc(ARRAYSIZE);
+    shell->buffer_adc = malloc(ARRAYSIZE);
     char dato;
 
     dato = '0';
-    cargar_buffer_single(shell, &dato);
-    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 0\n", shell->buffer_single[0] == 1);    
+    cargar_buffer_adc(shell, &dato);
+    mu_assert("\nla funcion cargar_buffer_adc no cargo en pin 0\n", shell->buffer_adc[0] == 1);    
     dato = '3';
-    cargar_buffer_single(shell, &dato);
-    mu_assert("\nla funcion cargar_buffer_single no cargo en pin 3\n", shell->buffer_single[3] == 1);    
+    cargar_buffer_adc(shell, &dato);
+    mu_assert("\nla funcion cargar_buffer_adc no cargo en pin 3\n", shell->buffer_adc[3] == 1);    
     // dato = '0';
-    // cargar_buffer_single(shell, &dato);
-    // mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", shell->buffer_single[0] == 0);    
+    // cargar_buffer_adc(shell, &dato);
+    // mu_assert("\nla funcion cargar_buffer_adc cargo en entrada incorrecta\n", shell->buffer_adc[0] == 0);    
     // dato = '0';
-    // cargar_buffer_single(shell, &dato);
-    // mu_assert("\nla funcion cargar_buffer_single cargo en entrada incorrecta\n", shell->buffer_single[0] == 0);
-    free(shell->buffer_single);
+    // cargar_buffer_adc(shell, &dato);
+    // mu_assert("\nla funcion cargar_buffer_adc cargo en entrada incorrecta\n", shell->buffer_adc[0] == 0);
+    free(shell->buffer_adc);
 
     return 0;
 }
 
 static char * test_cargar_buffer_dif()
 {
-    shell->buffer_single = malloc(ARRAYSIZE);
+    shell->buffer_adc = malloc(ARRAYSIZE);
     char dato;
 
     dato = '0';
     cargar_buffer_dif(shell, &dato);
-    mu_assert("\nla funcion cargar_buffer_dif no cargo en pin 0\n", shell->buffer_single[0] == 2);    
+    mu_assert("\nla funcion cargar_buffer_dif no cargo en pin 0\n", shell->buffer_adc[0] == 2);    
     dato = '2';
     cargar_buffer_dif(shell, &dato);
-    mu_assert("\nla funcion cargar_buffer_dif no cargo en pin 2\n", shell->buffer_single[2] == 2);    
+    mu_assert("\nla funcion cargar_buffer_dif no cargo en pin 2\n", shell->buffer_adc[2] == 2);    
     // dato = '0';
     // cargar_buffer_dif(shell, &dato);
-    // mu_assert("\nla funcion cargar_buffer_dif cargo en entrada incorrecta\n", shell->buffer_single[0] == 0);    
+    // mu_assert("\nla funcion cargar_buffer_dif cargo en entrada incorrecta\n", shell->buffer_adc[0] == 0);    
     // dato = '0';
     // cargar_buffer_dif(shell, &dato);
-    // mu_assert("\nla funcion cargar_buffer_dif cargo en entrada incorrecta\n", shell->buffer_single[0] == 0);
-    free(shell->buffer_single);
+    // mu_assert("\nla funcion cargar_buffer_dif cargo en entrada incorrecta\n", shell->buffer_adc[0] == 0);
+    free(shell->buffer_adc);
 
     return 0;
 }
@@ -55,28 +55,28 @@ static char * test_cargar_buffer_dif()
 static char * test_cambiar_pin()
 {
     int i;
-    shell->buffer_single = malloc(ARRAYSIZE);
+    shell->buffer_adc = malloc(ARRAYSIZE);
     for (i=0;i<ARRAYSIZE;i++)
-        shell->buffer_single[i] = 0;
+        shell->buffer_adc[i] = 0;
 
-    shell->buffer_single[3] = 1;
-    shell->buffer_single[4] = 1;
-    shell->buffer_single[0] = 1;
+    shell->buffer_adc[3] = 1;
+    shell->buffer_adc[4] = 1;
+    shell->buffer_adc[0] = 1;
     shell->posicion = 1;
 
     mu_assert("\nla funcion cambiar_pin no cambio al pin 3\n", cambiar_pin(shell) == 3);    
 
 
-    free(shell->buffer_single);
+    free(shell->buffer_adc);
 
     return 0;
 }
  
  static char * all_tests() 
  {
-    printf("test_cargar_buffer_single\n");
-    mu_run_test(test_cargar_buffer_single);
-    printf("test_cargar_buffer_single_OK\n");
+    printf("test_cargar_buffer_adc\n");
+    mu_run_test(test_cargar_buffer_adc);
+    printf("test_cargar_buffer_adc_OK\n");
     printf("test_cargar_buffer_dif\n");
     mu_run_test(test_cargar_buffer_dif);
     printf("test_cargar_buffer_dif_OK\n");

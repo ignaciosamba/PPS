@@ -18,7 +18,7 @@ typedef enum { false, true } bool;
 /*FLAGS globales*/
 
 extern bool f_dato_convertido;
-extern int buffer_single [TAM_SINGLE];
+extern int buffer_adc [TAM_SINGLE];
 extern short int bandera_dif;
 
 
@@ -37,7 +37,7 @@ struct shellstr /// estructura para majejar la entrada de operaciones en la inte
 	// char *args; 
 
 	///array para el conversor
-	char *buffer_single;  
+	char *buffer_adc;  
 	
 	///posicion dentro del array 
 	short int posicion;				

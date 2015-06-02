@@ -67,7 +67,7 @@ static char * test_analizar()
  int main(void) {
 
     shell = (struct shellstr *) malloc(sizeof(struct shellstr));
-    shell->buffer_single = malloc(ARRAYSIZE);
+    shell->buffer_adc = malloc(ARRAYSIZE);
     // shell->comando = malloc(TAM_COMANDO);
     // shell->args = malloc(MAX_ARGS);
 
