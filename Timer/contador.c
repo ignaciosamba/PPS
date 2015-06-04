@@ -56,13 +56,13 @@
                                        // oscillator / 8)
                                        // the internal oscillator has a
                                        // tolerance of +/- 2%
-#define SYSCLK      24500000  
-#define OWR                        20          // Desired Output Word Rate in Hz
-#define BAUDRATE                   115200           // Baudios del UART
+#define SYSCLK                      24500000  
+#define OWR                         20          // Desired Output Word Rate in Hz
+#define BAUDRATE                    115200           // Baudios del UART
 
-#define TIMER_PRESCALER            48  // Based on Timer CKCON settings
+#define TIMER_PRESCALER             48  // Based on Timer CKCON settings
 
-#define LED_TOGGLE_RATE            50  // LED toggle rate in milliseconds
+#define LED_TOGGLE_RATE             50  // LED toggle rate in milliseconds
                                        // if LED_TOGGLE_RATE = 1, the LED will
                                        // be on for 1 millisecond and off for
                                        // 1 millisecond
@@ -126,15 +126,20 @@ void main (void)
 
    while (1){
 
-   
-   rawValue.Byte[Byte3] = 0x00;
-   rawValue.Byte[Byte2] = 0x00;
-   rawValue.Byte[Byte1] = (unsigned char)TH0;
-   rawValue.Byte[Byte0] = (unsigned char)TL0;
+   // printf("holaaaaa\n");
 
-   res = rawValue.result;
+   if(TL0 > 0)
+   {
+      rawValue.Byte[Byte3] = 0x00;
+      rawValue.Byte[Byte2] = 0x00;
+      rawValue.Byte[Byte1] = (unsigned char)TH0;
+      rawValue.Byte[Byte0] = (unsigned char)TL0;
+
+      res = rawValue.result;
+      
+      printf("Contador : %lu\n", res);
+   }
    
-   printf("Contador : %lu\n", res);
    }                          // Loop forever
 }
 
@@ -160,12 +165,17 @@ void main (void)
 //-----------------------------------------------------------------------------
 void Port_Init (void)
 {
-   XBR1 = 0x58;                        // Enable crossbar, and habilitar T0
-   XBR0 = 0x01;                    // Enable UART on P0.4(TX) and P0.5(RX)                     
-   // P0MDIN = 0xFF;                     // Set LED to push-pull
-   P0 = 0xFF;
+   XBR1 = 0x50;                        // Enable crossbar, and habilitar T0
+   XBR0 |= 0x01;                    // Enable UART on P0.4(TX) and P0.5(RX)                     
+   // P0MDIN = 0xFF;                     //
+   // IE |= 0x01;
+   // P0MDOUT = 0x00;					//Pines configurados como salida push-pull. 
+   // P0 = 0xFF;
+   // IE |= 0X01;
+   // IT01CF |= 0x08;
+   // P0SKIP = 0x01;
+   // P0SKIP = 0x00;				//Los pines desde 0.7 a 0.1 lo saltea la crossbar
 }
-
 //-----------------------------------------------------------------------------
 // Timer0_Init
 //-----------------------------------------------------------------------------
@@ -185,10 +195,11 @@ void Timer0_Init(void)
 {
    TH0 = TIMER0_RELOAD_HIGH;           // Init Timer0 High register
    TL0 = TIMER0_RELOAD_LOW ;           // Init Timer0 Low register
-   TMOD = 0x05;                        // Timer0 in 16-bit mode, fuente externa
-   CKCON = 0x00;                      
-   // ET0 = 1;                            // Timer0 interrupt enabled
-   TCON = 0x10;                        // Timer0 ON
+   TMOD |= 0x25;                       // Timer0 in 16-bit mode, fuente externa
+   // CKCON |= 0x00;                      
+   // ET0 = 1;                          // Timer0 interrupt enabled
+   TCON |= 0x50;                        // Timer0 ON
+
 }
 
 
