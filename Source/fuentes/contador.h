@@ -1,0 +1,1 @@
+void get_timer0(void);

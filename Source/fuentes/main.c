@@ -38,6 +38,7 @@ void main(void)
 	iniciar_puertos();
 	iniciar_UART();
 	iniciar_ADC();
+	iniciar_timer0();
 
 	shell->stop_conf = 1;
 
@@ -77,6 +78,6 @@ void main(void)
 		}
 	}
 
-	free(shell->buffer_adc);
-	free(shell);
+	// free(shell->buffer_adc);
+	// free(shell);
 }

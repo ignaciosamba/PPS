@@ -199,7 +199,6 @@ void Timer0_Init(void)
    // CKCON |= 0x00;                      
    // ET0 = 1;                          // Timer0 interrupt enabled
    TCON |= 0x50;                        // Timer0 ON
-
 }
 
 

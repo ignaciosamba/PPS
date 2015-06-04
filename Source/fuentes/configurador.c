@@ -95,21 +95,21 @@ void seleccionar_puerto(unsigned short *puerto)
 
 void iniciar_puertos (void)
 {
-   P0MDOUT |= 0x10;                    // Enable UTX as push-pull output
-   XBR0     = 0x01;                    // Enable UART on P0.4(TX) and P0.5(RX)                     
-   XBR1     = 0x40;                    // Enable crossbar and weak pull-ups
+   P0MDOUT |= 0x10;                    // Habilitar UTX as push-pull output
+   XBR0     = 0x01;                    // Habilitar UART en P0.4(TX) y P0.5(RX)                     
+   XBR1     = 0x50;                    // Habilitar el crossbar, habilitar Timer0
 }
 
 void iniciar_sysclock (void)
 {
    OSCICN |= 0x03;                     // configuracion del oscilador para la maxima frecuencia
-   RSTSRC  = 0x04;                     // Enable missing clock detector
+   RSTSRC  = 0x04;                     // Habilitar missing clock detector
 }
 
 
 int iniciar_ADC(void)
 {
-	REF0CN |= 0x03;                     // Enable internal Vref
+	REF0CN |= 0x03;                     // Habilitar internal Vref
 	ADC0CN = 0x00;                      // Gain = 1, Unipolar mode
 	ADC0CF = 0x00;                      // Interrupts upon SINC3 filter output
 	                                   // and uses internal VREF
@@ -127,8 +127,8 @@ int iniciar_ADC(void)
 	ADC0MD = 0x81;                      // Start internal calibration
 	while(AD0CALC != 1);                // Wait until calibration is complete
 
-	EIE1   |= 0x08;                     // Enable ADC0 Interrupts
-	ADC0MD  = 0x80;                     // Enable the ADC0 (IDLE Mode)
+	EIE1   |= 0x08;                     // Habilitar ADC0 Interrupts
+	ADC0MD  = 0x80;                     // Habilitar the ADC0 (IDLE Mode)
 	
 	return 0;
 }
@@ -173,6 +173,14 @@ int iniciar_UART(void)
 	TI0 = 1;                            // Indicate TX0 ready
 
 	return 0;
+}
+
+void iniciar_timer0(void)
+{
+   TH0 = 0;           // Init Timer0 High register
+   TL0 = 0;           // Init Timer0 Low register
+   TMOD |= 0x25;                       // Timer0 in 16-bit mode, fuente externa                       // Timer0 interrupt enabled
+   TCON |= 0x50;                        // Timer0 ON
 }
 
 // int iniciar_interrupciones(void)
