@@ -104,8 +104,9 @@ typedef union LONGDATA{                // Access LONGDATA as an
 
 
 int iniciar_UART(void);
+void iniciar_osc_externo(void);
 void Port_Init (void);                 // Port initialization routine
-void Timer0_Init (void);               // Timer0 initialization routine
+void Timer2_Init (void);               // Timer0 initialization routine
 void iniciar_sysclock(void);
 
 //-----------------------------------------------------------------------------
@@ -118,27 +119,28 @@ void main (void)
    unsigned long res = 0;
    PCA0MD &= ~0x40;                    // Clear watchdog timer enable
    iniciar_sysclock();
-   Timer0_Init ();                     // Initialize the Timer0
+   iniciar_osc_externo();
+   Timer2_Init ();                     // Initialize the Timer2
    Port_Init ();                       // Init Ports
    iniciar_UART();
-   EA = 1;                             // Enable global interrupts
+   // EA = 1;                             // Enable global interrupts
 
 
    while (1){
 
    // printf("holaaaaa\n");
 
-   if(TL0 > 0)
-   {
+   
+   
       rawValue.Byte[Byte3] = 0x00;
       rawValue.Byte[Byte2] = 0x00;
-      rawValue.Byte[Byte1] = (unsigned char)TH0;
-      rawValue.Byte[Byte0] = (unsigned char)TL0;
+      rawValue.Byte[Byte1] = (unsigned char)TMR2H;
+      rawValue.Byte[Byte0] = (unsigned char)TMR2L;
 
       res = rawValue.result;
       
-      printf("Contador : %lu\n", res);
-   }
+      printf("Contador : %lu\n", res * 8);
+   
    
    }                          // Loop forever
 }
@@ -165,8 +167,9 @@ void main (void)
 //-----------------------------------------------------------------------------
 void Port_Init (void)
 {
-   XBR1 = 0x50;                        // Enable crossbar, and habilitar T0
-   XBR0 |= 0x01;                    // Enable UART on P0.4(TX) and P0.5(RX)                     
+   XBR1 = 0x40;                        // Enable crossbar, and habilitar T0
+   XBR0 |= 0x01;                    // Enable UART on P0.4(TX) and P0.5(RX)  
+   P0MDIN |= 0x08;                   
    // P0MDIN = 0xFF;                     //
    // IE |= 0x01;
    // P0MDOUT = 0x00;					//Pines configurados como salida push-pull. 
@@ -177,7 +180,7 @@ void Port_Init (void)
    // P0SKIP = 0x00;				//Los pines desde 0.7 a 0.1 lo saltea la crossbar
 }
 //-----------------------------------------------------------------------------
-// Timer0_Init
+// Timer2_Init
 //-----------------------------------------------------------------------------
 //
 // Return Value : None
@@ -191,14 +194,11 @@ void Port_Init (void)
 // Note: The Timer0 uses a 1:48 prescaler.  If this setting changes, the
 // TIMER_PRESCALER constant must also be changed.
 //-----------------------------------------------------------------------------
-void Timer0_Init(void)
+void Timer2_Init(void)
 {
-   TH0 = TIMER0_RELOAD_HIGH;           // Init Timer0 High register
-   TL0 = TIMER0_RELOAD_LOW ;           // Init Timer0 Low register
-   TMOD |= 0x25;                       // Timer0 in 16-bit mode, fuente externa
-   // CKCON |= 0x00;                      
-   // ET0 = 1;                          // Timer0 interrupt enabled
-   TCON |= 0x50;                        // Timer0 ON
+   TMR2CN |= 0x05; // T2 en modo 16 bits, TR2 habilitado, clockeado por fuente externa
+   TMR2L = 0;
+   TMR2H = 0;
 }
 
 
@@ -270,4 +270,9 @@ void iniciar_sysclock (void)
 {
    OSCICN |= 0x03;                     // configuracion del oscilador para la maxima frecuencia
    RSTSRC  = 0x04;                     // Enable missing clock detector
+}
+
+void iniciar_osc_externo(void)
+{
+   OSCXCN |= 0x20; // seleccionar oscilador externo en modo CMOS Clock mode. Bits de control de frecuencia 0
 }

@@ -35,10 +35,13 @@ void main(void)
    		shell->buffer_adc[i]=0;
 
 	iniciar_sysclock();
+	iniciar_osc_externo();
 	iniciar_puertos();
 	iniciar_UART();
 	iniciar_ADC();
 	iniciar_timer0();
+	iniciar_timer2();
+	iniciar_timer3();
 
 	shell->stop_conf = 1;
 

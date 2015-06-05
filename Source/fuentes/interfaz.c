@@ -104,12 +104,26 @@ struct shellstr *analizar(struct shellstr *shell)
 
         else conf_ganancia(shell);
     }
-	else if((shell->comando[0] == 'G') && (shell->comando[1] == 'T') && (shell->comando[2] == '0'))
+    else if((shell->comando[0] == 'G') && (shell->comando[1] == 'T') && (shell->comando[2] == '0'))
     {
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
 
         else get_timer0();
+    }
+    else if((shell->comando[0] == 'G') && (shell->comando[1] == 'T') && (shell->comando[2] == '2'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else get_timer2();
+    }
+	else if((shell->comando[0] == 'G') && (shell->comando[1] == 'T') && (shell->comando[2] == '3'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else get_timer3();
     }
     else shell->errn = 404;
 

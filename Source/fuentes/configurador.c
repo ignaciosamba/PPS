@@ -95,9 +95,10 @@ void seleccionar_puerto(unsigned short *puerto)
 
 void iniciar_puertos (void)
 {
-   P0MDOUT |= 0x10;                    // Habilitar UTX as push-pull output
    XBR0     = 0x01;                    // Habilitar UART en P0.4(TX) y P0.5(RX)                     
    XBR1     = 0x50;                    // Habilitar el crossbar, habilitar Timer0
+   P0MDOUT |= 0x10;                    // Habilitar UTX as push-pull output
+   // P0MDIN |= 0x0C;                   // P0.3 y P0.4 tienen que ser entrada digital
 }
 
 void iniciar_sysclock (void)
@@ -182,6 +183,26 @@ void iniciar_timer0(void)
    TMOD |= 0x25;                       // Timer0 in 16-bit mode, fuente externa                       // Timer0 interrupt enabled
    TCON |= 0x50;                        // Timer0 ON
 }
+
+void iniciar_timer2(void)
+{
+   TMR2CN |= 0x05;    // T2 en modo 16 bits, TR2 habilitado, clockeado por fuente externa
+   TMR2L = 0;
+   TMR2H = 0;
+}
+void iniciar_timer3(void)
+{
+   TMR3CN |= 0x05;    // T3 en modo 16 bits, TR3 habilitado, clockeado por fuente externa
+   TMR3L = 0;
+   TMR3H = 0;
+}
+
+void iniciar_osc_externo(void)
+{
+   OSCXCN |= 0x20; // seleccionar oscilador externo en modo CMOS Clock mode. Bits de control de frecuencia 0
+}
+
+
 
 // int iniciar_interrupciones(void)
 // {
