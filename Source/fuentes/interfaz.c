@@ -1,6 +1,8 @@
 #include "headers_logic.h"
 #include "conversor_logic.h"
 #include "conversor_hw.h"
+#include "flash.h"
+#include "contador.h"
 #include "interfaz.h"
 
 struct shellstr *obtener_entrada(struct shellstr *shell)
@@ -83,7 +85,7 @@ struct shellstr *analizar(struct shellstr *shell)
         else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 7)
         {shell->errn = 406; return shell;}
 
-        cargar_buffer_adc(shell, &shell->args[0]);
+        cargar_buffer_single(shell, &shell->args[0]);
     }
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'D') && (shell->comando[2] == 'I'))
     {
@@ -94,7 +96,7 @@ struct shellstr *analizar(struct shellstr *shell)
 
         else cargar_buffer_dif(shell, &shell->args[0]);
     }
-	else if((shell->comando[0] == 'G') && (shell->comando[1] == 'A') && (shell->comando[2] == 'S'))
+	else if((shell->comando[0] == 'S') && (shell->comando[1] == 'G') && (shell->comando[2] == 'A'))
     {
         if(shell->n_args > 1)
         {shell->errn = 405; return shell;}
@@ -117,19 +119,41 @@ struct shellstr *analizar(struct shellstr *shell)
 
         else get_timer2();
     }
-    else if((shell->comando[0] == 'G') && (shell->comando[1] == 'T') && (shell->comando[2] == '3'))
+    else if((shell->comando[0] == 'G') && (shell->comando[1] == 'P') && (shell->comando[2] == 'C'))
     {
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
 
-        else get_timer3();
+        // else get_PCA();
     }
-	else if((shell->comando[0] == 'G') && (shell->comando[1] == 'P') && (shell->comando[2] == 'C'))
+    else if((shell->comando[0] == 'S') && (shell->comando[1] == 'C') && (shell->comando[2] == 'F'))
     {
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
 
-        else get_PCA();
+        else guardar_config(shell);
+    }
+    else if((shell->comando[0] == 'G') && (shell->comando[1] == 'C') && (shell->comando[2] == 'F'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else cargar_config(shell);
+    }
+    else if((shell->comando[0] == 'S') && (shell->comando[1] == 'H') && (shell->comando[2] == 'C'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else mostrar_config_flash();
+    }
+
+	else if((shell->comando[0] == 'S') && (shell->comando[1] == 'H') && (shell->comando[2] == 'A'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else mostrar_config_actual(shell);
     }
 
     else shell->errn = 404;
@@ -156,21 +180,21 @@ void reportar(struct shellstr *shell)
 
 
 
-void printeartodo(struct shellstr *shell)
-{
-    int i;
+// void printeartodo(struct shellstr *shell)
+// {
+//     int i;
 
-    printf("comando: ");
-    for(i = 0; i<TAM_COMANDO; i++)
-    {
-        printf("%c", shell->comando[i]);
-    }
-    printf("\n argumentos: ");
-    for(i = 0; i<shell->n_args; i++)
-    {
-        printf("%c", shell->args[i]);
-    }
+//     printf("comando: ");
+//     for(i = 0; i<TAM_COMANDO; i++)
+//     {
+//         printf("%c", shell->comando[i]);
+//     }
+//     printf("\n argumentos: ");
+//     for(i = 0; i<shell->n_args; i++)
+//     {
+//         printf("%c", shell->args[i]);
+//     }
 
-    printf("\nnumero de error: %hi\n", shell->errn);
+//     printf("\nnumero de error: %hi\n", shell->errn);
 
-}
+// }

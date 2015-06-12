@@ -36,11 +36,12 @@ void main(void)
 
 	iniciar_sysclock();
 	iniciar_puertos();
+	iniciar_osc_externo();
 	iniciar_UART();
 	iniciar_ADC();
 	iniciar_timer0();
 	iniciar_timer2();
-	iniciar_timer3();
+	// iniciar_timer3();
 	// iniciar_PCA();
 
 
@@ -52,7 +53,7 @@ void main(void)
 
 		obtener_entrada(shell);
 
-		printeartodo(shell);
+		// printeartodo(shell);
 
 		if(shell->errn != 0)
 		{

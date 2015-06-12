@@ -1,10 +1,10 @@
 comando,[n° args]
 
 
-SSE,[1]
+SSE,[pin]
 
 descripcion: 
-setea el pin ingresado en modo single ended. 
+setea el pin ingresado en modo single ended. Si el comando se ingresa nuevamente sobre el mismo pin, no hay efecto. Si se setea un pin en modo single ended estando este en modo diferencial con otro pin, se elimina el modo diferencial de ambos pines y se setea a "pin" en modo single ended 
 
 limitaciones:
 - un solo argumento
@@ -14,12 +14,13 @@ ejemplo:
 
 SSE,4 //setea el pin 4 del ADC en modo single ended
 
+
 -------------------------------------------------------
 
-SDI,[1]
+SDI,[pin]
 
 descripcion:
-setea el pin ingresado y el pin siguiente a ese en numero en modo diferencial
+setea el pin ingresado y el pin siguiente a ese en numero en modo diferencial. Si el comando se ingresa nuevamente sobre el mismo pin, no hay efecto. Si se setea un pin en modo diferencial estando este en modo single ended, se elimina el modo single ended del pin y se setea "pin" y "pin + 1" en modo diferencial.
 
 limitaciones:
 - un solo argumento
@@ -31,10 +32,10 @@ SDI,2 // setea los pines 2 y 3 en modo diferencial
 
 -------------------------------------------------------
 
-GAS,[1]
+SGA,[gain]
 
 descripcion:
-setea la ganancia del ADC segun el argumento a la potencia de 2
+setea la ganancia del ADC segun "gain" potenciado a 2
 
 limitaciones:
 -un solo argumento
@@ -42,11 +43,11 @@ limitaciones:
 
 ejemplo:
 
-GAS,3 // setea la ganancia en 2^3 = 8x
+SGA,3 // setea la ganancia en 2^3 = 8x
 
 -------------------------------------------------------
 
-ST[0]
+ST[]
 
 descripcion:
 guarda los cambios, sale del modo de configuracion y comienza a correr el programa
@@ -55,3 +56,38 @@ limitaciones:
 -no lleva argumentos
 
 -------------------------------------------------------
+
+GT0[]
+
+descripcion:
+obtiene el valor actual en el contador de eventos 0
+
+limitaciones:
+-no lleva argumentos
+
+-------------------------------------------------------
+
+GT2[]
+
+descripcion:
+obtiene el valor actual en el contador de eventos 2
+
+limitaciones:
+-no lleva argumentos
+
+-------------------------------------------------------
+
+SCF[]
+
+descripcion:
+guarda la configuracion del conversor y los registros pertinentes en la flash, para que cada vez que se inicie se configure automaticamente
+
+limitaciones:
+-no lleva argumentos
+
+ejemplo:
+SSE,4 //setear el pin 4 en single-ended
+SDF,6 //setear 6 y 7 en modo diferencial
+
+-------------------------------------------------------
+

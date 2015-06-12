@@ -37,7 +37,7 @@ struct shellstr /// estructura para majejar la entrada de operaciones en la inte
 	// char *args; 
 
 	///array para el conversor
-	char *buffer_adc;  
+	unsigned char *buffer_adc;  
 	
 	///posicion dentro del array 
 	short int posicion;				

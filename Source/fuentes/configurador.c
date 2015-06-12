@@ -191,22 +191,16 @@ void iniciar_timer2(void)
    TMR2L = 0;
    TMR2H = 0;
 }
-void iniciar_timer3(void)
-{
-   TMR3CN |= 0x05;    // T3 en modo 16 bits, TR3 habilitado, clockeado por fuente externa
-   TMR3L = 0;
-   TMR3H = 0;
-}
 
-void iniciar_PCA(void)
-{
-	PCA0CN = 0x00;                      // Stop counter; clear all flags
-	PCA0MD = 0x06;                      // la fuente de eventos proviene de flancos de bajada en ECI
-	PCA0H = 0;
-	PCA0L = 0;
-	PCA0CN = 0x40;                      // Habilitar PCA
+// void iniciar_PCA(void)
+// {
+// 	PCA0CN = 0x00;                      // Stop counter; clear all flags
+// 	PCA0MD = 0x06;                      // la fuente de eventos proviene de flancos de bajada en ECI
+// 	PCA0H = 0;
+// 	PCA0L = 0;
+// 	PCA0CN = 0x40;                      // Habilitar PCA
 
-}
+// }
 
 void iniciar_osc_externo(void)
 {
