@@ -2,7 +2,6 @@
 #include "conversor_logic.h"
 #include "conversor_hw.h"
 #include "interfaz.h"
-#include "contador.h"
 
 struct shellstr *obtener_entrada(struct shellstr *shell)
 {
@@ -84,7 +83,7 @@ struct shellstr *analizar(struct shellstr *shell)
         else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 7)
         {shell->errn = 406; return shell;}
 
-        cargar_buffer_single(shell, &shell->args[0]);
+        cargar_buffer_adc(shell, &shell->args[0]);
     }
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'D') && (shell->comando[2] == 'I'))
     {
@@ -95,7 +94,7 @@ struct shellstr *analizar(struct shellstr *shell)
 
         else cargar_buffer_dif(shell, &shell->args[0]);
     }
-    else if((shell->comando[0] == 'S') && (shell->comando[1] == 'G') && (shell->comando[2] == 'A'))
+	else if((shell->comando[0] == 'G') && (shell->comando[1] == 'A') && (shell->comando[2] == 'S'))
     {
         if(shell->n_args > 1)
         {shell->errn = 405; return shell;}
@@ -132,6 +131,7 @@ struct shellstr *analizar(struct shellstr *shell)
 
         else get_PCA();
     }
+
     else shell->errn = 404;
 
 	return shell;

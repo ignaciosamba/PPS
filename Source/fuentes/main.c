@@ -35,7 +35,6 @@ void main(void)
    		shell->buffer_adc[i]=0;
 
 	iniciar_sysclock();
-	iniciar_osc_externo();
 	iniciar_puertos();
 	iniciar_UART();
 	iniciar_ADC();
@@ -43,6 +42,7 @@ void main(void)
 	iniciar_timer2();
 	iniciar_timer3();
 	// iniciar_PCA();
+
 
 	shell->stop_conf = 1;
 

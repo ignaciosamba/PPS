@@ -99,18 +99,19 @@ void iniciar_puertos (void)
    XBR1     = 0x51;                    // Habilitar el crossbar, habilitar Timer0 y PCA
    P0MDOUT |= 0x10;                    // Habilitar UTX como push-pull output
    // P0MDIN |= 0x0C;                  // P0.3 y P0.4 tienen que ser entrada digital
+
 }
 
 void iniciar_sysclock (void)
 {
    OSCICN |= 0x03;                     // configuracion del oscilador para la maxima frecuencia
-   RSTSRC  = 0x04;                     // Habilitar missing clock detector
+   RSTSRC  = 0x04;                     // Enable missing clock detector
 }
 
 
 int iniciar_ADC(void)
 {
-	REF0CN |= 0x03;                     // Habilitar internal Vref
+	REF0CN |= 0x03;                     // Enable internal Vref
 	ADC0CN = 0x00;                      // Gain = 1, Unipolar mode
 	ADC0CF = 0x00;                      // Interrupts upon SINC3 filter output
 	                                   // and uses internal VREF
@@ -128,8 +129,8 @@ int iniciar_ADC(void)
 	ADC0MD = 0x81;                      // Start internal calibration
 	while(AD0CALC != 1);                // Wait until calibration is complete
 
-	EIE1   |= 0x08;                     // Habilitar ADC0 Interrupts
-	ADC0MD  = 0x80;                     // Habilitar the ADC0 (IDLE Mode)
+	EIE1   |= 0x08;                     // Enable ADC0 Interrupts
+	ADC0MD  = 0x80;                     // Enable the ADC0 (IDLE Mode)
 	
 	return 0;
 }
@@ -211,27 +212,3 @@ void iniciar_osc_externo(void)
 {
    OSCXCN |= 0x20; // seleccionar oscilador externo en modo CMOS Clock mode. Bits de control de frecuencia 0
 }
-
-
-
-// int iniciar_interrupciones(void)
-// {
-	
-// 	return 0;
-// }
-
-// int iniciar_FLASH(void)
-// {
-	
-// 	return 0;
-// }
-
-// int cargar_configuracionFlash(void)
-// {
-// 	return 0;
-// }
-
-// int guardar_configuracionFlash(void)
-// {
-// 	return 0;
-// }
