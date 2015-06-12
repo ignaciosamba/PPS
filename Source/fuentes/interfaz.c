@@ -118,12 +118,19 @@ struct shellstr *analizar(struct shellstr *shell)
 
         else get_timer2();
     }
-	else if((shell->comando[0] == 'G') && (shell->comando[1] == 'T') && (shell->comando[2] == '3'))
+    else if((shell->comando[0] == 'G') && (shell->comando[1] == 'T') && (shell->comando[2] == '3'))
     {
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
 
         else get_timer3();
+    }
+	else if((shell->comando[0] == 'G') && (shell->comando[1] == 'P') && (shell->comando[2] == 'C'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else get_PCA();
     }
     else shell->errn = 404;
 

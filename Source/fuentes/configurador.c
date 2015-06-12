@@ -96,9 +96,9 @@ void seleccionar_puerto(unsigned short *puerto)
 void iniciar_puertos (void)
 {
    XBR0     = 0x01;                    // Habilitar UART en P0.4(TX) y P0.5(RX)                     
-   XBR1     = 0x50;                    // Habilitar el crossbar, habilitar Timer0
-   P0MDOUT |= 0x10;                    // Habilitar UTX as push-pull output
-   // P0MDIN |= 0x0C;                   // P0.3 y P0.4 tienen que ser entrada digital
+   XBR1     = 0x51;                    // Habilitar el crossbar, habilitar Timer0 y PCA
+   P0MDOUT |= 0x10;                    // Habilitar UTX como push-pull output
+   // P0MDIN |= 0x0C;                  // P0.3 y P0.4 tienen que ser entrada digital
 }
 
 void iniciar_sysclock (void)
@@ -195,6 +195,16 @@ void iniciar_timer3(void)
    TMR3CN |= 0x05;    // T3 en modo 16 bits, TR3 habilitado, clockeado por fuente externa
    TMR3L = 0;
    TMR3H = 0;
+}
+
+void iniciar_PCA(void)
+{
+	PCA0CN = 0x00;                      // Stop counter; clear all flags
+	PCA0MD = 0x06;                      // la fuente de eventos proviene de flancos de bajada en ECI
+	PCA0H = 0;
+	PCA0L = 0;
+	PCA0CN = 0x40;                      // Habilitar PCA
+
 }
 
 void iniciar_osc_externo(void)

@@ -5,6 +5,7 @@ int iniciar_UART(void);
 void iniciar_timer0(void);
 void iniciar_timer2(void);
 void iniciar_timer3(void);
+void iniciar_PCA(void);
 int cargar_configuracionFlash(void);
 void iniciar_puertos (void);
 void iniciar_sysclock (void);
