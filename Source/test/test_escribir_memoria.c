@@ -16,8 +16,9 @@
     // char *src = malloc(2);
     int src;
     FLADDR dest = 0x1b58;
-    src = 500;
+    src = 8;
 
+    FLASH_Clear(dest, 1);
     FLASH_Write(dest, &src, numbytes);
     printf("la escritura no tuvo errores");
 

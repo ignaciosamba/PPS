@@ -20,9 +20,9 @@
     dest = 0;
 
     FLASH_Read(&dest, src, numbytes);
-    printf("contenido en 0x1000: %d\n", dest);
+    printf("contenido en 0x1b58: %d\n", dest);
 
-    mu_assert("la lectura no dio 500", dest == 500);
+    mu_assert("la lectura no dio 500", dest == 8);
 
     printf("la lectura no tuvo errores");
     return 0;

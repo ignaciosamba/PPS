@@ -6,17 +6,18 @@
 void guardar_config(struct shellstr * shell) 
 {
     char i;
-    unsigned bytes_a_escribir;
+    unsigned bytes_a_escribir = 9;
 	unsigned numbytes = 1;
     char src;
     FLADDR dest = 0x1b58;
 
+
+    FLASH_Clear(dest, bytes_a_escribir);
     for (i= 0 ; i<8 ; i++)
     {
-    	dest = dest + 1;
-    	src = shell->buffer_adc[i];
-        FLASH_Clear(dest, bytes_a_escribir);
-    	FLASH_Write(dest, &src, numbytes);
+        dest = dest + 1;
+        src = shell->buffer_adc[i];
+        FLASH_Write(dest, &src, numbytes);
     }
 
     dest = dest + 1;
@@ -61,7 +62,7 @@ void mostrar_config_flash()
     {
         src = src + 1;
         FLASH_Read(&dest, src, numbytes);
-        printf("%u\n", dest);
+        printf("%u\n", (int)dest);
     }
 }
 
