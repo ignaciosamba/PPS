@@ -15,10 +15,10 @@
     unsigned numbytes = 2;
     // char *src = malloc(2);
     int src;
-    FLADDR dest = 0x1b58;
+    FLADDR dest = 0x1B58;
     src = 8;
 
-    FLASH_Clear(dest, 1);
+    FLASH_PageErase();
     FLASH_Write(dest, &src, numbytes);
     printf("la escritura no tuvo errores");
 

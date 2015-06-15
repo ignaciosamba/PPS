@@ -42,10 +42,10 @@ extern char * FLASH_Read (char *dest, FLADDR src, unsigned numbytes);
 extern void FLASH_Clear (FLADDR addr, unsigned numbytes);
 
 // FLASH update/copy routines
-extern void FLASH_Update (FLADDR dest, char *src, unsigned numbytes);   // copy with destination preservation
+// extern void FLASH_Update (FLADDR dest, char *src, unsigned numbytes);   // copy with destination preservation
 extern void FLASH_Copy (FLADDR dest, FLADDR src, unsigned numbytes);    // low-level FLASH/FLASH byte copy
 
 // FLASH test routines
-extern void FLASH_Fill (FLADDR addr, ULONG length, UCHAR fill);
+// extern void FLASH_Fill (FLADDR addr, ULONG length, UCHAR fill);
 
 #endif // F350_FLASHUTILS_H

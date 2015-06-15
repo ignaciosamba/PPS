@@ -87,3 +87,7 @@ que se guarda en la flash?
 FRECUENCIAS DEL ADC
 
 estoy leyendo un poco porque me cague perdiendo con el tema de la frecuencia de modulacion, de muestreo y la mar en coche del adc. Hay que saber la frecuencia maxima de muestreo para las 8 entradas y fijar esa como la maxima. 
+
+15/6
+
+nos estamos quedando sin lugar en la flash para guardar las opciones de configuracion. al parecer las funciones de la libreria de la flash necesitan una pagina entera + la cantidad de bytes que queres escribir para funcionar,, y encima esos bytes no pueden formar parte de una pagina que tenga codigo adentro, o sea que necesitamos dos paginas enteras. y no nos alcanza ni bosta. lo que estamos pensando ahora es en usar direcamente la UART o el medio que sea para pasarle la configuracion a la raspberry pi o lo que sea que hay del otro lado y qye el lo guarde en su flash si tiene ganas.. habria otra funcion para cargarle la configuracion directamente y que entre por uart digamos. pero no se usaria la flash. se ahorra espacio para codigo ademas porque las iibrerias de la flash son bastante pesadas.

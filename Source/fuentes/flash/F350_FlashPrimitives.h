@@ -39,6 +39,7 @@ typedef unsigned char UCHAR;
 #endif
 
 #ifndef FLASH_TEMP
+// #define FLASH_TEMP 0x1C00
 #define FLASH_TEMP 0x01a00L
 #endif
 

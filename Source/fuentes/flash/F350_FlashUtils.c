@@ -172,14 +172,14 @@ void FLASH_Clear (FLADDR dest, unsigned numbytes)
 // initializing all <dest> bytes to 0xff's prior to copying the bytes from
 // <src> to <dest>. This function accepts <numbytes> up to <FLASH_PAGESIZE>.
 //
-void FLASH_Update (FLADDR dest, char *src, unsigned numbytes)
-{
-   // 1. Erase <numbytes> starting from <dest>
-   FLASH_Clear (dest, numbytes);
+// void FLASH_Update (FLADDR dest, char *src, unsigned numbytes)
+// {
+//    // 1. Erase <numbytes> starting from <dest>
+//    FLASH_Clear (dest, numbytes);
 
-   // 2. Write <numbytes> from <src> to <dest>
-   FLASH_Write (dest, src, numbytes);
-}
+//    // 2. Write <numbytes> from <src> to <dest>
+//    FLASH_Write (dest, src, numbytes);
+// }
 
 
 
@@ -240,14 +240,14 @@ void FLASH_Copy (FLADDR dest, FLADDR src, unsigned numbytes)
 //-----------------------------------------------------------------------------
 //
 // This routine fills the FLASH beginning at <addr> with <lenght> bytes.
-//
-void FLASH_Fill (FLADDR addr, ULONG length, UCHAR fill)
-{
-   FLADDR i;
+// //
+// void FLASH_Fill (FLADDR addr, ULONG length, UCHAR fill)
+// {
+//    FLADDR i;
 
-   for (i = 0; i < length; i++) {
-      FLASH_ByteWrite (addr+i, fill);
-   }
-}
+//    for (i = 0; i < length; i++) {
+//       FLASH_ByteWrite (addr+i, fill);
+//    }
+// }
 
 

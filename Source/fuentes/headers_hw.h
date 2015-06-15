@@ -1,4 +1,5 @@
 #include "C8051F350.h"
+#pragma ot(11, SIZE)
 
 #define SYSCLK      24500000           // SYSCLK Frecuencia del Clock en Hertz
 #define MDCLK         2457600          // Modulator clock in Hz (ideal i

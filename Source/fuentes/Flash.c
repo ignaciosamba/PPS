@@ -3,16 +3,23 @@
 #include "flash/F350_FlashPrimitives.h"
 #include "flash/F350_FlashUtils.h"
 
+
+#define ADDR 0x01F0
+
+
 void guardar_config(struct shellstr * shell) 
 {
     char i;
     unsigned bytes_a_escribir = 9;
 	unsigned numbytes = 1;
     char src;
-    FLADDR dest = 0x1b58;
+    FLADDR dest = ADDR;
+    // FLADDR page = 0x1B00;
 
 
+    // FLASH_PageErase(page);
     FLASH_Clear(dest, bytes_a_escribir);
+    
     for (i= 0 ; i<8 ; i++)
     {
         dest = dest + 1;
@@ -32,7 +39,7 @@ void cargar_config(struct shellstr * shell)
     char i;
 	unsigned numbytes = 1;
     unsigned char dest;
-    FLADDR src = 0x1b58;
+    FLADDR src = ADDR;
     dest = 0;
 
 
@@ -54,7 +61,7 @@ void mostrar_config_flash()
     char i;
     unsigned numbytes = 1;
     unsigned char dest;
-    FLADDR src = 0x1b58;
+    FLADDR src = ADDR;
     dest = 0;
 
 
@@ -71,8 +78,8 @@ void mostrar_config_actual(struct shellstr * shell)
     char i;
        for (i= 0 ; i<8 ; i++)
     {
-        printf("%u\n", (int)shell->buffer_adc[i]/* - '0'*/);
+        printf("ADC[%i]: %u\n", (int)i, (int)shell->buffer_adc[i]/* - '0'*/);
     }
 
-    printf("%c\n", (char)ADC0CN + '0');
+    printf("ADC0CN: 0x%c\n", (char)ADC0CN + '0');
 }
