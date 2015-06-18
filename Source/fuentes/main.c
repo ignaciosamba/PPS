@@ -57,7 +57,6 @@ void main(void)
 		obtener_entrada(shell);
 
 		// printeartodo(shell);
-
 		if(shell->errn != 0)
 		{
 			reportar(shell);

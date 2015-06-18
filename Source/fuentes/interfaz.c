@@ -13,7 +13,7 @@ struct shellstr *obtener_entrada(struct shellstr *shell)
     //recibe el comando
     while((shell->entrada = getchar()) != ',')
     {
-        if(shell->entrada == '\n') {/*shell->errn = 0;*/ break;}
+        if((shell->entrada == '\n') && (i == 0)){ shell->errn = 1000; return shell;}
 
         if(i < TAM_COMANDO)  //la entrada debe ser menor al tamaño maximo de un comando
         {
@@ -22,6 +22,9 @@ struct shellstr *obtener_entrada(struct shellstr *shell)
         }
         else shell->errn = 404;
     }
+
+        // if(shell->comando[0] == '\n')
+        //     {printf("comando0 es n\n"); shell->errn = 1000; return shell;}
 
     i = 0;
 
@@ -162,6 +165,7 @@ void reportar(struct shellstr *shell)
         case 405: printf("\nERROR 405: demasiados argumentos\n"); break;
         case 406: printf("\nERROR 406: alguno de los argumentos esta fuera de rango\n"); break;
         case 0: break; // para el caso donde se apreta enter solo
+        default: break;
     }
 }
 
