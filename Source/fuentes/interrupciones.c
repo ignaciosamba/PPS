@@ -9,6 +9,7 @@
 #include "headers_logic.h"
 #include "interrupciones.h"
 
+sbit LED = P0^7;
 
 void ADC0_ISR (void) interrupt 10
 {
@@ -16,4 +17,5 @@ void ADC0_ISR (void) interrupt 10
    while(!AD0INT);                     // Wait till conversion complete
    AD0INT = 0;                         // Clear ADC0 conversion complete flag
    f_dato_convertido = true;
+   // LED = ~LED;
 }

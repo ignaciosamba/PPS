@@ -8,12 +8,14 @@
 struct shellstr *obtener_entrada(struct shellstr *shell)
 {
     char i = 0;
-	printf("MML>"); // prints out the prompt
+	printf("MML>"); // imprime el prompt
+
+    //recibe el comando
     while((shell->entrada = getchar()) != ',')
     {
-        if(shell->entrada == '\n') break;
+        if(shell->entrada == '\n') {/*shell->errn = 0;*/ break;}
 
-        if(i < TAM_COMANDO)
+        if(i < TAM_COMANDO)  //la entrada debe ser menor al tamaño maximo de un comando
         {
             shell->comando[i] = shell->entrada;
             i++;
@@ -23,6 +25,7 @@ struct shellstr *obtener_entrada(struct shellstr *shell)
 
     i = 0;
 
+    //recibe los argumentos
     if(shell->entrada != '\n')
     while((shell->entrada = getchar()) != '\n')
     {
@@ -39,22 +42,6 @@ struct shellstr *obtener_entrada(struct shellstr *shell)
 
     if(shell->entrada != '\n')
     while (getchar() != '\n');
-
-
-    // if(shell->errn != 0)
-    // {
-    //     // printf("dio error!!, error: %hu\n", shell->errn);
-    //     return 0;
-    // }
-    // printf("no dio error!!\n");
-	// shell = parsear_entrada(shell);													
-	// shell = analizar(shell); 
-
-	// if(shell->report != 0)
-	// 	report(shell->report);
-	// shell->report = 0;
-
-	// restart(shell);
 
 	return shell;
 }
@@ -91,7 +78,7 @@ struct shellstr *analizar(struct shellstr *shell)
     {
         if(shell->n_args > 1)
         {shell->errn = 405; return shell;}
-        else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 8)
+        else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 6)
         {shell->errn = 406; return shell;}
 
         else cargar_buffer_dif(shell, &shell->args[0]);
@@ -168,13 +155,13 @@ void reportar(struct shellstr *shell)
     switch(shell->errn)
     {   
 
-        case 251: printf("\nACK 201: pin %c configurado exitosamente en modo single_ended\n", shell->args[0]); break;
-        case 252: printf("\nACK 202: pines %c y %c configurados exitosamente en modo diferencial\n", shell->args[0], shell->args[0] + 1); break;
+        case 251: printf("\nACK 201: pin %c configurado en modo single_ended\n", shell->args[0]); break;
+        case 252: printf("\nACK 202: pines %c y %c configurados en modo diferencial\n", shell->args[0], shell->args[0] + 1); break;
         case 253: printf("\nACK 253: ganancia configurada en 2^%c\n", shell->args[0]); break;
         case 404: printf("\nERROR 404: comando no encontrado\n"); break;
         case 405: printf("\nERROR 405: demasiados argumentos\n"); break;
         case 406: printf("\nERROR 406: alguno de los argumentos esta fuera de rango\n"); break;
-        case 0: break;
+        case 0: break; // para el caso donde se apreta enter solo
     }
 }
 

@@ -7,7 +7,7 @@
 #include "headers_logic.h"
 #include "configurador.h"
 
-
+sbit LED = P0^7;
 
 void seleccionar_puerto(unsigned short *puerto)
 {
@@ -98,6 +98,7 @@ void iniciar_puertos (void)
    XBR0     = 0x01;                    // Habilitar UART en P0.4(TX) y P0.5(RX)                     
    XBR1     = 0x51;                    // Habilitar el crossbar, habilitar Timer0 y PCA
    P0MDOUT |= 0x10;                    // Habilitar UTX como push-pull output
+   P0MDOUT |= 0x80;                    // Habilitar led P0.7 como push pull
    // P0MDIN |= 0x0C;                  // P0.3 y P0.4 tienen que ser entrada digital
 
 }

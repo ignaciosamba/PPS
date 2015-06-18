@@ -16,9 +16,11 @@ unsigned long int dato_a_enviar;
 bool f_dato_convertido;
 unsigned short int posicion_adc;
 short int bandera_dif;
+sbit LED = P0^7;                          // LED='1' means ON
 
 void main(void)
 {
+
    	struct shellstr *shell; 
 	char i = 0;
    	PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer
@@ -43,6 +45,7 @@ void main(void)
 	iniciar_timer2();
 	// iniciar_timer3();
 	// iniciar_PCA();
+
 
 
 	shell->stop_conf = 1;
@@ -78,6 +81,7 @@ void main(void)
 			f_dato_convertido = false;
 			dato_a_enviar = convertir();
 			enviar_dato(&dato_a_enviar);
+			LED = ~LED;
 			posicion_adc = cambiar_pin(shell);
 			seleccionar_puerto(&posicion_adc);
 		}

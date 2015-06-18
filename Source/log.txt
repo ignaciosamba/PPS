@@ -91,3 +91,10 @@ estoy leyendo un poco porque me cague perdiendo con el tema de la frecuencia de 
 15/6
 
 nos estamos quedando sin lugar en la flash para guardar las opciones de configuracion. al parecer las funciones de la libreria de la flash necesitan una pagina entera + la cantidad de bytes que queres escribir para funcionar,, y encima esos bytes no pueden formar parte de una pagina que tenga codigo adentro, o sea que necesitamos dos paginas enteras. y no nos alcanza ni bosta. lo que estamos pensando ahora es en usar direcamente la UART o el medio que sea para pasarle la configuracion a la raspberry pi o lo que sea que hay del otro lado y qye el lo guarde en su flash si tiene ganas.. habria otra funcion para cargarle la configuracion directamente y que entre por uart digamos. pero no se usaria la flash. se ahorra espacio para codigo ademas porque las iibrerias de la flash son bastante pesadas.
+
+18/06
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+vamos a cambiar el buffer por completo. hasta ahora lo que hacemos es leer una pata del adc SEGUN el buffer. osea recorremos todo el buffer y cuando damos con un pin que coincide con uno de los activos, se cambia el registro AD0MUX. ESO AHORA CAMBIA. lo que vamos a hacer es que haya una funcion muy chiquita que cambie SIEMPRE los canales y cada vez que se mide mandar a analizar el dato convertido y determinar si se manda o no. en vez de recorrer todo el buffer buscando las patas que estan activas, lo que vamos a hacer es convertir a un indice el valor de ADC0MUX actual y usarlo en el buffer_adc para acceder a la pata que se analizo!, de esa forma vemos el valor en buffer_adc y ahi nomas determinamos si se tiene que enviar o se tiene que decrementar o lo que sea. asi el codigo se hace mas chico y 8 veces mas rapido, literalmente.
+
