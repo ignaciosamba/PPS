@@ -14,6 +14,7 @@ struct shellstr *obtener_entrada(struct shellstr *shell)
     while((shell->entrada = getchar()) != ',')
     {
         if((shell->entrada == '\n') && (i == 0)){ shell->errn = 1000; return shell;}
+        if(shell->entrada == '\n'){break;}
 
         if(i < TAM_COMANDO)  //la entrada debe ser menor al tamaño maximo de un comando
         {
