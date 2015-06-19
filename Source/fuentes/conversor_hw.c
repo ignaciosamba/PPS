@@ -8,8 +8,8 @@ unsigned long convertir(void)
 	static LONGDATA rawValue;
 	unsigned long mV;
 	
-	while (!AD0INT);
-	AD0INT = 0;
+	// while (!AD0INT);
+	// AD0INT = 0;
 	//ADC0CN = 0X01;
 	//printf("Entre al convertir\n");
 	   // Copy the output value of the ADC
@@ -63,4 +63,58 @@ struct shellstr *conf_ganancia(struct shellstr *shell)
 	shell->errn = 253;
 	return shell;
 
+}
+
+void cambiar_pin()
+{
+	if((ADC0MUX < 0x78) && ((ADC0MUX & 0x0F) == 0x08))
+	{
+		ADC0CN &= ~0x10;
+		ADC0MUX = ((ADC0MUX & 0xF0) >> 4) | ((ADC0MUX & 0x0F) << 4); //Swapeo los 4 MSB con los 4 LSB para aumentar en uno el LSB
+		ADC0MUX++;
+		ADC0MUX = ((ADC0MUX & 0xF0) >> 4) | ((ADC0MUX & 0x0F) << 4); //Swapeo una vez mas asi me queda incrementado los 4 MSB y asi me movi de puerto. 
+		return;
+	}
+	if(ADC0MUX == 0x78)
+	{
+		ADC0CN |= 0x10;
+		ADC0MUX = 0x10;
+		return;
+	}
+	if((ADC0MUX >= 0x10) && (ADC0MUX < 0x76))
+	{
+		ADC0CN |= 0x10;
+		ADC0MUX = (((ADC0MUX & 0xF0) >> 4) | ((ADC0MUX & 0x0F) << 4)) + 2;
+		return;
+	}
+	if(ADC0MUX >= 0x76)
+	{
+		ADC0CN &= ~0x10;
+		ADC0MUX = 0x08;
+	}
+}
+
+/**
+ * @brief envia datos por la uart
+ * @details [long description]
+ */
+void enviar_dato(unsigned long int *dato)
+{
+	char num_pin;
+	num_pin = (char)ADC0MUX;
+
+	if((num_pin & 0x0F) == 0x08)
+	{
+		printf("pin SE %c", (num_pin >> 4) + '0');
+	}
+	else if((num_pin & 0x0F) < 0x08)
+	{
+		printf("pins dif %c", (num_pin & 0x0F) + '0');
+		printf(",");
+		printf(" %c", ((num_pin & 0xF0) >> 4) + '0');
+	}
+
+
+	printf(",");
+	printf("%lu\n",*dato);
 }

@@ -8,5 +8,4 @@ void iniciar_timer2(void);
 void iniciar_puertos (void);
 void iniciar_sysclock (void);
 void iniciar_osc_externo(void);
-void seleccionar_puerto(unsigned short *puerto);
 void empezar_adc();

@@ -9,90 +9,6 @@
 
 sbit LED = P0^7;
 
-void seleccionar_puerto(unsigned short *puerto)
-{
-	switch (*puerto)
-	{
-		// ADC0CN = 0x01;
-		case 0:
-			printf("Puerto 0.0: \n");
-			if (bandera_dif == 1)
-			{
-				bandera_dif = 0;
-				ADC0CN |= 0x10;
-				*puerto = 0x01;
-				break;
-			}
-			else
-			{
-				*puerto = 0x08;
-				break;
-			}
-		case 1:
-			printf("Puerto 0.1: \n");
-			*puerto = 0x18;
-			break;
-		case 2:
-			printf("Puerto 0.2: \n");
-			if (bandera_dif == 1)
-			{
-				bandera_dif = 0;
-				ADC0CN |= 0x10;
-				*puerto = 0x23;
-				break;
-			}
-			else
-			{
-				*puerto = 0x28;
-				break;
-			}
-		case 3: 
-			printf("Puerto 0.3: \n");
-			*puerto = 0x38;
-			break;
-		case 4:
-			printf("Puerto 0.4: \n");
-			if (bandera_dif == 1)
-			{
-				bandera_dif = 0;
-				ADC0CN |= 0x10;
-				*puerto = 0x45;
-				break;
-			}
-			else
-			{
-				*puerto = 0x48;
-				break;
-			}
-		case 5:
-			*puerto = 0x58;
-			printf("Puerto 0.5: \n");
-			break;
-		case 6:
-			printf("Puerto 0.6: \n");
-			if (bandera_dif == 1)
-			{
-				bandera_dif = 0;
-				ADC0CN |= 0x10;
-				*puerto = 0x67;
-				break;
-			}
-			else
-			{
-				*puerto = 0x68;
-				break;
-			}
-		case 7:
-			printf("Puerto 0.7: \n");
-			*puerto = 0x78;
-			break;
-		default:
-			printf("ESTAMOS EN LA B \n" );
-			break;
-	}
-	ADC0MUX = *puerto;
-}
-
 void iniciar_puertos (void)
 {
    XBR0     = 0x01;                    // Habilitar UART en P0.4(TX) y P0.5(RX)                     
@@ -172,6 +88,7 @@ int iniciar_UART(void)
 	TL1 = TH1;                          // Init Timer1
 	TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
 	TMOD |=  0x20;                       
+	ADC0MUX = 0x08;
 	TR1 = 1;                            // START Timer1
 	TI0 = 1;                            // Indicate TX0 ready
 

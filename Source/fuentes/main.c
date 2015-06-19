@@ -80,9 +80,8 @@ void main(void)
 			f_dato_convertido = false;
 			dato_a_enviar = convertir();
 			enviar_dato(&dato_a_enviar);
-			LED = ~LED;
-			posicion_adc = cambiar_pin(shell);
-			seleccionar_puerto(&posicion_adc);
+			// LED = ~LED;
+			cambiar_pin();
 		}
 	}
 
