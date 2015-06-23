@@ -67,30 +67,29 @@ struct shellstr *conf_ganancia(struct shellstr *shell)
 
 void cambiar_pin()
 {
-	if((ADC0MUX < 0x78) && ((ADC0MUX & 0x0F) == 0x08))
+	if((ADC0MUX & 0x0F) == 0x08)
 	{
+		if(ADC0MUX == 0x78)
+		{
+			ADC0CN |= 0x10;
+			ADC0MUX = 0x10;
+			return;
+		}
 		ADC0CN &= ~0x10;
-		ADC0MUX = ((ADC0MUX & 0xF0) >> 4) | ((ADC0MUX & 0x0F) << 4); //Swapeo los 4 MSB con los 4 LSB para aumentar en uno el LSB
-		ADC0MUX++;
-		ADC0MUX = ((ADC0MUX & 0xF0) >> 4) | ((ADC0MUX & 0x0F) << 4); //Swapeo una vez mas asi me queda incrementado los 4 MSB y asi me movi de puerto. 
+		ADC0MUX = ADC0MUX + 0x10;
 		return;
 	}
-	if(ADC0MUX == 0x78)
+	if((ADC0MUX & 0x0F) < 0x08)
 	{
+		if(ADC0MUX == 0x76)
+		{
+			ADC0CN &= ~0x10;
+			ADC0MUX = 0x08;
+			return;
+		}		
 		ADC0CN |= 0x10;
-		ADC0MUX = 0x10;
+		ADC0MUX = ADC0MUX + 0x22;
 		return;
-	}
-	if((ADC0MUX >= 0x10) && (ADC0MUX < 0x76))
-	{
-		ADC0CN |= 0x10;
-		ADC0MUX = (((ADC0MUX & 0xF0) >> 4) | ((ADC0MUX & 0x0F) << 4)) + 2;
-		return;
-	}
-	if(ADC0MUX >= 0x76)
-	{
-		ADC0CN &= ~0x10;
-		ADC0MUX = 0x08;
 	}
 }
 
@@ -105,16 +104,10 @@ void enviar_dato(unsigned long int *dato)
 
 	if((num_pin & 0x0F) == 0x08)
 	{
-		printf("pin SE %c", (num_pin >> 4) + '0');
+		printf("SE,%c,%lu\n", (num_pin >> 4) + '0',*dato);
 	}
 	else if((num_pin & 0x0F) < 0x08)
 	{
-		printf("pins dif %c", (num_pin & 0x0F) + '0');
-		printf(",");
-		printf(" %c", ((num_pin & 0xF0) >> 4) + '0');
+		printf("DF,%c,%lu\n", (num_pin & 0x0F) + '0',*dato);
 	}
-
-
-	printf(",");
-	printf("%lu\n",*dato);
 }
