@@ -4,9 +4,11 @@
 typedef char byte;
 #define ARRAYSIZE 8
 #define MAXSIZE 50
-#define TAM_SINGLE 8 			//define para tamaño de buffer! 
-#define MAX_ARGS 4
+#define TAM_SINGLE 12 			//define para tamaño de buffer! 
+
+
 #define TAM_COMANDO 3
+#define MAX_ARGS 8
 
 typedef enum { false, true } bool;
 
@@ -36,8 +38,11 @@ struct shellstr /// estructura para majejar la entrada de operaciones en la inte
 	char args[MAX_ARGS]; 
 	// char *args; 
 
-	///array para el conversor
-	unsigned char *buffer_adc;  
+	///array variable para el conversor, al iniciar el adc, es igual a buffer_adc_count
+	unsigned int *buffer_adc;  
+
+	///array estatico que se carga para dar una frecuencia a las salidas del adc con buffer_adc
+	unsigned int *buffer_adc_count;  
 	
 	///posicion dentro del array 
 	short int posicion;				
@@ -47,4 +52,7 @@ struct shellstr /// estructura para majejar la entrada de operaciones en la inte
 
 	///bandera de habilitacion de configuracion
 	char stop_conf;
+
+	///variable auxiliar para el indexado de buffer_adc
+	char var;
 };

@@ -24,8 +24,11 @@ void main(void)
    	struct shellstr *shell; 
 	char i = 0;
    	PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer
+
     shell = (struct shellstr *) malloc(sizeof(struct shellstr));
    	shell->buffer_adc = malloc(TAM_SINGLE);
+   	shell->buffer_adc_count = malloc(TAM_SINGLE);
+   	shell->var = 0;
 
    	if(shell == NULL || shell->buffer_adc == NULL)
    	{
@@ -34,7 +37,7 @@ void main(void)
    	}
 
    	for (i=0 ; i<TAM_SINGLE ; i++)
-   		shell->buffer_adc[i]=0;
+   		shell->buffer_adc_count[i]=0;
 
 	iniciar_sysclock();
 	iniciar_puertos();
@@ -56,7 +59,6 @@ void main(void)
 
 		obtener_entrada(shell);
 
-		// printeartodo(shell);
 		if(shell->errn != 0)
 		{
 			reportar(shell);
@@ -66,12 +68,19 @@ void main(void)
 			analizar(shell);
 			reportar(shell);
 		}
+		// printeartodo(shell);
+	}
+
+	for(i = 0; i < TAM_SINGLE; i++)
+	{
+		shell->buffer_adc[i] = shell->buffer_adc_count[i];
 	}
 
 	AD0INT = 0;							
 	ADC0MD = 0x83;                      // Start continuous conversions
 	EA = 1;                             // Enable global interrupts
 
+	// printeartodo(shell);
 	while(1)
 	{
 		// empezar_adc();
@@ -79,6 +88,8 @@ void main(void)
 		{
 			f_dato_convertido = false;
 			dato_a_enviar = convertir();
+
+			if(analizar_buffer(shell))
 			enviar_dato(&dato_a_enviar);
 			// LED = ~LED;
 			cambiar_pin();

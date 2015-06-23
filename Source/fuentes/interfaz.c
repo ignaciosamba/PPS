@@ -42,7 +42,7 @@ struct shellstr *obtener_entrada(struct shellstr *shell)
     }
 
     shell->n_args = i;
-    if(shell->n_args > 7)
+    // if(shell->n_args > 7)
 
     if(shell->entrada != '\n')
     while (getchar() != '\n');
@@ -71,12 +71,12 @@ struct shellstr *analizar(struct shellstr *shell)
 
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'S') && (shell->comando[2] == 'E'))
     {
-        if(shell->n_args > 1)
+        if(shell->n_args > 6)
         {shell->errn = 405; return shell;}
         else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 7)
         {shell->errn = 406; return shell;}
 
-        cargar_buffer_single(shell, &shell->args[0]);
+        cargar_buffer_single(shell);
     }
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'D') && (shell->comando[2] == 'I'))
     {
@@ -184,8 +184,22 @@ void reportar(struct shellstr *shell)
 //     printf("\n argumentos: ");
 //     for(i = 0; i<shell->n_args; i++)
 //     {
-//         printf("%c", shell->args[i]);
+//         printf("%c, ", shell->args[i]);
 //     }
+//     printf("\n");
+
+//     printf("\n numero de argumentos: %d\n", (int)shell->n_args);
+//     // printf("buffer_adc: \n");
+//     // for(i = 0; i<TAM_SINGLE; i++)
+//     // {
+//     //     printf("buffer_adc[%d] = %c\n", shell->buffer_adc[i], i);
+//     // }
+//     printf("buffer_adc_count: \n");
+//     for(i = 0; i<TAM_SINGLE; i++)
+//     {
+//         printf("buffer_adc_count[%d] = %c\n", i, shell->buffer_adc_count[i]);
+//     }
+
 
 //     printf("\nnumero de error: %hi\n", shell->errn);
 

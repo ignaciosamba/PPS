@@ -64,7 +64,12 @@ struct shellstr *conf_ganancia(struct shellstr *shell)
 	return shell;
 
 }
-
+/**
+ * @brief recorre todas las opciones de los pines tanto single ended como diferencial
+ * @details [long description]
+ * 
+ * @param f [description]
+ */
 void cambiar_pin()
 {
 	if((ADC0MUX & 0x0F) == 0x08)
@@ -96,6 +101,8 @@ void cambiar_pin()
 /**
  * @brief envia datos por la uart
  * @details [long description]
+ * 
+ * @param long [description]
  */
 void enviar_dato(unsigned long int *dato)
 {
@@ -110,4 +117,51 @@ void enviar_dato(unsigned long int *dato)
 	{
 		printf("DF,%c,%lu\n", (num_pin & 0x0F) + '0',*dato);
 	}
+}
+
+/**
+ * @brief devuelve 1 si el pin actual tiene el envio habilitado
+ * @details [long description]
+ * @return [description]
+ */
+char analizar_buffer(struct shellstr *shell)
+{
+	char idx;
+
+	//si el modulo de los 4LSB de ADC0MUX con 8 es mayor a 0, estamos en la parte diferencial de buffer_adc
+	if((((char)(ADC0MUX & 0x04)) % 8) > 0)
+		shell->var++;
+	//si no, estamos en la parte single ended.
+	else shell->var = 0;
+
+	/*
+	// si var es 5, va a sobrepasar el limite de buffer_adc 
+	if(shell->var >= 5)
+		shell->var = 0;*/
+
+	// se restan ambos grupos de 4 de bits de ADC0MUX, se le suma 8, y se le suma la variable auxiliar
+	// que es mayor a 0 unicamente cuando es necesario que el indice recorra la parte diferencial 
+	idx = (char)(ADC0MUX >> 4) - (char)(ADC0MUX & 0x0F) + 8 + shell->var;
+ 	
+	// printf("%d ", (int)idx);
+ 	
+ 	//con esta operacion, idx recorre todos los indices del buffer, teniendo en cuenta el valor de ADC0MUX
+	if(shell->buffer_adc [idx] == 0)
+	{
+		return 0;
+	}
+
+	if(shell->buffer_adc [idx] == 1)
+	{
+		shell->buffer_adc [idx] = shell->buffer_adc_count[idx];
+		return 1;
+	}
+
+	if(shell->buffer_adc [idx] > 1)
+	{
+		shell->buffer_adc[idx]--;
+		return 0;
+	}
+
+	return 0;
 }

@@ -98,3 +98,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 vamos a cambiar el buffer por completo. hasta ahora lo que hacemos es leer una pata del adc SEGUN el buffer. osea recorremos todo el buffer y cuando damos con un pin que coincide con uno de los activos, se cambia el registro AD0MUX. ESO AHORA CAMBIA. lo que vamos a hacer es que haya una funcion muy chiquita que cambie SIEMPRE los canales y cada vez que se mide mandar a analizar el dato convertido y determinar si se manda o no. en vez de recorrer todo el buffer buscando las patas que estan activas, lo que vamos a hacer es convertir a un indice el valor de ADC0MUX actual y usarlo en el buffer_adc para acceder a la pata que se analizo!, de esa forma vemos el valor en buffer_adc y ahi nomas determinamos si se tiene que enviar o se tiene que decrementar o lo que sea. asi el codigo se hace mas chico y 8 veces mas rapido, literalmente.
 
+23/06
+
+nota sobre la funcion analizar_buffer: esta bien que analiza los 12 pines y que el buffer siga siendo de 8 posiciones unicamente. porque si una pata esta en diferencial, no puede estar en single ended y visceversa. es decir que si tengo la pata 2 asignada en 200, ya sea single ended o diferencial, se tiene que decrementar, y si estuviera en diferencial solo la 2 se pone en 200 y no la 3, con eso basta.
