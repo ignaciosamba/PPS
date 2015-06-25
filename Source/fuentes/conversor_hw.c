@@ -80,7 +80,7 @@ void cambiar_pin()
 			ADC0MUX = 0x10;
 			return;
 		}
-		ADC0CN &= ~0x10;
+		// ADC0CN &= ~0x10;
 		ADC0MUX = ADC0MUX + 0x10;
 		return;
 	}
@@ -92,7 +92,7 @@ void cambiar_pin()
 			ADC0MUX = 0x08;
 			return;
 		}		
-		ADC0CN |= 0x10;
+		// ADC0CN |= 0x10;
 		ADC0MUX = ADC0MUX + 0x22;
 		return;
 	}
