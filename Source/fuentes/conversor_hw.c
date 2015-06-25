@@ -127,30 +127,25 @@ void enviar_dato(unsigned long int *dato)
 char analizar_buffer(struct shellstr *shell)
 {
 	char idx;
+	char lsb, msb;
+	lsb = (char)(ADC0MUX & 0x0F);
+	msb = (char)(ADC0MUX >> 4); 
 
 	//si el modulo de los 4LSB de ADC0MUX con 8 es mayor a 0, estamos en la parte diferencial de buffer_adc
-	if((((char)(ADC0MUX & 0x04)) % 8) > 0)
+	if((lsb % 8) > 0)
 		shell->var++;
 	//si no, estamos en la parte single ended.
 	else shell->var = 0;
 
-	/*
-	// si var es 5, va a sobrepasar el limite de buffer_adc 
-	if(shell->var >= 5)
-		shell->var = 0;*/
-
 	// se restan ambos grupos de 4 de bits de ADC0MUX, se le suma 8, y se le suma la variable auxiliar
 	// que es mayor a 0 unicamente cuando es necesario que el indice recorra la parte diferencial 
-	idx = (char)(ADC0MUX >> 4) - (char)(ADC0MUX & 0x0F) + 8 + shell->var;
- 	
-	// printf("%d ", (int)idx);
+	idx = msb - lsb + 8 + shell->var;
  	
  	//con esta operacion, idx recorre todos los indices del buffer, teniendo en cuenta el valor de ADC0MUX
 	if(shell->buffer_adc [idx] == 0)
 	{
 		return 0;
 	}
-
 	if(shell->buffer_adc [idx] == 1)
 	{
 		shell->buffer_adc [idx] = shell->buffer_adc_count[idx];

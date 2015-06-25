@@ -5,7 +5,7 @@
 int cont = 0;
 short int posicion = 0;
 short int dato_n;
-unsigned int num;
+unsigned short int num;
 
 
 
