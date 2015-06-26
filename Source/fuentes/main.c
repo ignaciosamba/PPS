@@ -82,6 +82,7 @@ void main(void)
 	mostrar_config_actual(shell);
 
 	AD0INT = 0;							
+	ADC0MUX = 0x08;
 	ADC0MD = 0x83;                      // Start continuous conversions
 	EA = 1;                             // Enable global interrupts
 

@@ -72,16 +72,19 @@ struct shellstr *conf_ganancia(struct shellstr *shell)
  */
 void cambiar_pin()
 {
+	ADC0MD = 0x80;
 	if((ADC0MUX & 0x0F) == 0x08)
 	{
 		if(ADC0MUX == 0x78)
 		{
 			ADC0CN |= 0x10;
 			ADC0MUX = 0x10;
+			ADC0MD = 0x83;
 			return;
 		}
 		// ADC0CN &= ~0x10;
 		ADC0MUX = ADC0MUX + 0x10;
+		ADC0MD = 0x83;
 		return;
 	}
 	if((ADC0MUX & 0x0F) < 0x08)
@@ -90,10 +93,12 @@ void cambiar_pin()
 		{
 			ADC0CN &= ~0x10;
 			ADC0MUX = 0x08;
+			ADC0MD = 0x83;
 			return;
 		}		
 		// ADC0CN |= 0x10;
 		ADC0MUX = ADC0MUX + 0x22;
+		ADC0MD = 0x83;
 		return;
 	}
 }
