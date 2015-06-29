@@ -48,18 +48,20 @@ unsigned long convertir(void)
 
 struct shellstr *conf_ganancia(struct shellstr *shell)
 {	
+	ADC0MD = 0x80;
 	switch (shell->args[0])
 	{
-		case '0': printf("Ganancia x1.\n"); ADC0CN = 0x00; break;
-		case '1': printf("Ganancia x2.\n"); ADC0CN = 0x01; break;
-		case '2': printf("Ganancia x4.\n"); ADC0CN = 0x02; break;
-		case '3': printf("Ganancia x8.\n"); ADC0CN = 0x03; break;
-		case '4': printf("Ganancia x16.\n"); ADC0CN = 0x04; break;
-		case '5': printf("Ganancia x32.\n"); ADC0CN = 0x05; break;
-		case '6': printf("Ganancia x64.\n"); ADC0CN = 0x06; break;
-		case '7': printf("Ganancia x128.\n"); ADC0CN = 0x07; break;
-		default: shell->errn = 407; return shell;
+		case '0': ADC0CN = (ADC0CN & 0xF0) + 0x00; break;
+		case '1': ADC0CN = (ADC0CN & 0xF0) + 0x01; break;
+		case '2': ADC0CN = (ADC0CN & 0xF0) + 0x02; break;
+		case '3': ADC0CN = (ADC0CN & 0xF0) + 0x03; break;
+		case '4': ADC0CN = (ADC0CN & 0xF0) + 0x04; break;
+		case '5': ADC0CN = (ADC0CN & 0xF0) + 0x05; break;
+		case '6': ADC0CN = (ADC0CN & 0xF0) + 0x06; break;
+		case '7': ADC0CN = (ADC0CN & 0xF0) + 0x07; break;
+		default: shell->errn = 407; ADC0MD = 0x83; return shell;
 	}
+	ADC0MD = 0x83;
 	shell->errn = 253;
 	return shell;
 
@@ -78,7 +80,7 @@ void cambiar_pin()
 		if(ADC0MUX == 0x78)
 		{
 			ADC0CN |= 0x10;
-			ADC0MUX = 0x10;
+			ADC0MUX = 0x01;
 			ADC0MD = 0x83;
 			return;
 		}
@@ -89,7 +91,7 @@ void cambiar_pin()
 	}
 	if((ADC0MUX & 0x0F) < 0x08)
 	{
-		if(ADC0MUX == 0x76)
+		if(ADC0MUX == 0x67)
 		{
 			ADC0CN &= ~0x10;
 			ADC0MUX = 0x08;
@@ -139,29 +141,37 @@ char analizar_buffer(struct shellstr *shell)
 	//si el modulo de los 4LSB de ADC0MUX con 8 es mayor a 0, estamos en la parte diferencial de buffer_adc
 	if((lsb % 8) > 0)
 		shell->var++;
-	//si no, estamos en la parte single ended.
-	else shell->var = 0;
+	else shell->var = 0; //si no, estamos en la parte single ended.
 
 	// se restan ambos grupos de 4 de bits de ADC0MUX, se le suma 8, y se le suma la variable auxiliar
 	// que es mayor a 0 unicamente cuando es necesario que el indice recorra la parte diferencial 
 	idx = msb - lsb + 8 + shell->var;
  	
  	//con esta operacion, idx recorre todos los indices del buffer, teniendo en cuenta el valor de ADC0MUX
-	if(shell->buffer_adc [idx] == 0)
+ 	if(idx < 12)
+ 	{
+		if(shell->buffer_adc [idx] == 0)
+		{
+			return 0;
+		}
+		if(shell->buffer_adc [idx] == 1)
+		{
+			shell->buffer_adc [idx] = shell->buffer_adc_count[idx];
+			return 1;
+		}
+		if(shell->buffer_adc [idx] > 1)
+		{
+			shell->buffer_adc[idx]--;
+			return 0;
+		}
+	}	
+	else
 	{
-		return 0;
+		printf("se detono todo\n");
+		printf("idx: %i\n", (int)idx);
+		printf("ADC0MUX: 0x%x\n", (char)ADC0MUX);
+		printf("var: %i\n", (int)shell->var);
+		return -1;
 	}
-	if(shell->buffer_adc [idx] == 1)
-	{
-		shell->buffer_adc [idx] = shell->buffer_adc_count[idx];
-		return 1;
-	}
-
-	if(shell->buffer_adc [idx] > 1)
-	{
-		shell->buffer_adc[idx]--;
-		return 0;
-	}
-
 	return 0;
 }

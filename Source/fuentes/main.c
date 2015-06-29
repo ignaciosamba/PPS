@@ -72,14 +72,14 @@ void main(void)
 		}
 		// printeartodo(shell);
 	}
-	mostrar_config_actual(shell);
+	// mostrar_config_actual(shell);
 
 	for(i = 0; i < TAM_SINGLE; i++)
 	{
-		printf("buffer_adc_count[%d] = %d\n",(int)i, (int)shell->buffer_adc_count[i]);
+		// printf("buffer_adc_count[%d] = %d\n",(int)i, (int)shell->buffer_adc_count[i]);
 		shell->buffer_adc[i] = shell->buffer_adc_count[i];
 	}
-	mostrar_config_actual(shell);
+	// mostrar_config_actual(shell);
 
 	AD0INT = 0;							
 	ADC0MUX = 0x08;
@@ -100,6 +100,7 @@ void main(void)
 			if(analizar_buffer(shell))
 			{
 				enviar_dato(&dato_a_enviar);
+				// mostrar_config_actual(shell);
 			}
 			// LED = ~LED;
 			cambiar_pin();
