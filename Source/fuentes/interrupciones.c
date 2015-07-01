@@ -19,3 +19,12 @@ void ADC0_ISR (void) interrupt 10
    f_dato_convertido = true;
    // LED = ~LED;
 }
+// void UART_ISR (void) interrupt 4
+// {
+//    if(RI0 == 1)
+//    {                         // Se borra el bit de dato recibido en la UART
+// 		RI0 = 0;
+// 		f_UART = true;
+//    }
+//    // LED = ~LED;
+// }

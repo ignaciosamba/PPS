@@ -58,8 +58,6 @@ estoy pensando en un cambio de paradigma de la interfaz con el usuario. como nos
 SOBRE EL ADC: hay que fijar la frecuencia maxima de muestreo.
 
 
-
-
 22/05
 
 arrancamos un paradigma nuevo de como va a configurarse todo.. vamos a usar MML.. la lista de la explicacion de comandos esta en el archivo comandos .txt
@@ -101,3 +99,41 @@ vamos a cambiar el buffer por completo. hasta ahora lo que hacemos es leer una p
 23/06
 
 nota sobre la funcion analizar_buffer: esta bien que analiza los 12 pines y que el buffer siga siendo de 8 posiciones unicamente. porque si una pata esta en diferencial, no puede estar en single ended y visceversa. es decir que si tengo la pata 2 asignada en 200, ya sea single ended o diferencial, se tiene que decrementar, y si estuviera en diferencial solo la 2 se pone en 200 y no la 3, con eso basta.
+
+1/07
+
+algoritmo para analizar_buffer
+
+lsb: los 4 bits menos significativos de ADC0MUX
+msb: los 4 bits mas significativos de ADC0MUX
+adc[]: buffer con valores variables de la cuenta de cada entrada
+adc_c[]: buffer inicial con valores constantes de la cuenta de cada entrada
+
+var = 0
+idx = 0
+
+if(lsb % 8  >  0)
+	var++
+else var = 0
+
+idx = msb - lsb + 8 + var
+
+if(adc[idx] = 1)
+{
+	adc[idx] = adc_c[idx]
+	return true
+}
+if(adc[idx] = 0)
+{
+	return false
+}
+if(adc[idx] > 1)
+{
+	adc[idx]--
+	return false
+}
+
+
+1/07
+
+subi unas tablas en excel al drive con los datos de las mediciones que hice el otro dia. voy a hacer mas mediciones ahora que esta andando casi todo. pero me quiero ir asi que no voy a medir un carajo ahora. capaz mañana.

@@ -20,6 +20,7 @@ typedef enum { false, true } bool;
 /*FLAGS globales*/
 
 extern bool f_dato_convertido;
+extern bool f_UART;
 extern int buffer_adc [TAM_SINGLE];
 extern short int bandera_dif;
 

@@ -16,6 +16,7 @@
  
 unsigned long int dato_a_enviar;
 bool f_dato_convertido;
+bool f_UART;
 unsigned short int posicion_adc;
 short int bandera_dif;
 sbit LED = P0^7;                          // LED='1' means ON
@@ -55,56 +56,68 @@ void main(void)
 
 	shell->stop_conf = 1;
 
-	while(shell->stop_conf == 1)
-	{
-		restart(shell);
-
-		obtener_entrada(shell);
-
-		if(shell->errn != 0)
-		{
-			reportar(shell);
-		}
-		else
-		{
-			analizar(shell);
-			reportar(shell);
-		}
-		// printeartodo(shell);
-	}
-	// mostrar_config_actual(shell);
-
-	for(i = 0; i < TAM_SINGLE; i++)
-	{
-		// printf("buffer_adc_count[%d] = %d\n",(int)i, (int)shell->buffer_adc_count[i]);
-		shell->buffer_adc[i] = shell->buffer_adc_count[i];
-	}
-	// mostrar_config_actual(shell);
-
-	AD0INT = 0;							
-	ADC0MUX = 0x08;
-	ADC0MD = 0x83;                      // Start continuous conversions
-	EA = 1;                             // Enable global interrupts
-
-	// printeartodo(shell);
-
-	
 	while(1)
 	{
-		// empezar_adc();
-		if(f_dato_convertido)
+		while(shell->stop_conf == 1)
 		{
-			f_dato_convertido = false;
-			dato_a_enviar = convertir();
+			restart(shell);
 
-			if(analizar_buffer(shell))
+			obtener_entrada(shell);
+
+			if(shell->errn != 0)
 			{
-				enviar_dato(&dato_a_enviar);
-				// mostrar_config_actual(shell);
+				reportar(shell);
 			}
-			// LED = ~LED;
-			cambiar_pin();
+			else
+			{
+				analizar(shell);
+				reportar(shell);
+			}
+			// printeartodo(shell);
 		}
+		// mostrar_config_actual(shell);
+
+		for(i = 0; i < TAM_SINGLE; i++)
+		{
+			// printf("buffer_adc_count[%d] = %d\n",(int)i, (int)shell->buffer_adc_count[i]);
+			shell->buffer_adc[i] = shell->buffer_adc_count[i];
+		}
+		// mostrar_config_actual(shell);
+
+		AD0INT = 0;							
+		ADC0MUX = 0x08;
+		ADC0MD = 0x83;                      // Start continuous conversions
+		EA = 1;                             // Enable global interrupts
+		// ES0 = 1; 							// habilitar interrupciones de la UART
+
+		// printeartodo(shell);
+
+		
+		while(1)
+		{
+			// empezar_adc();
+			if(f_dato_convertido)
+			{
+				f_dato_convertido = false;
+				dato_a_enviar = convertir();
+
+				if(analizar_buffer(shell))
+				{
+					enviar_dato(&dato_a_enviar);
+					// mostrar_config_actual(shell);
+				}
+				// LED = ~LED;
+				cambiar_pin();
+			}
+
+			// if(f_UART)
+			// {
+			// 	f_UART = false;
+			// 	printf("uart!!!!\n");
+			// }
+		}
+
+	shell->stop_conf = 0;
 	}
 
 	// free(shell->buffer_adc);
