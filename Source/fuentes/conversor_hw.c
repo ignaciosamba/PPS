@@ -122,7 +122,7 @@ void enviar_dato(unsigned long int *dato)
 	}
 	else if((num_pin & 0x0F) < 0x08)
 	{
-		printf("DF,%c,%lu\n", (num_pin & 0x0F) + '0',*dato);
+		printf("DF,%c,%lu\n", (num_pin >> 4) + '0',*dato);
 	}
 }
 

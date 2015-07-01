@@ -80,12 +80,12 @@ struct shellstr *analizar(struct shellstr *shell)
     }
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'D') && (shell->comando[2] == 'I'))
     {
-        if(shell->n_args > 1)
+        if(shell->n_args > 6)
         {shell->errn = 405; return shell;}
         else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 6)
         {shell->errn = 406; return shell;}
 
-        else cargar_buffer_dif(shell, &shell->args[0]);
+        else cargar_buffer_dif(shell);
     }
 	else if((shell->comando[0] == 'S') && (shell->comando[1] == 'G') && (shell->comando[2] == 'A'))
     {
