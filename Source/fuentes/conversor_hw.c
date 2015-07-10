@@ -1,51 +1,67 @@
+/**
+ * @file conversor_hw.c
+ * @author Sambataro, Ignacio; Mantovani, Luciano
+ * @date 2015
+ * @brief este archivo define el comportamiento de todas las funciones que intervienen en la logica a nivel de
+ * registro del conversor analogico digital.
+ */
+
 #include "headers_hw.h"
 #include "headers_logic.h"
 #include "conversor_hw.h"
 
-
+/**
+ * @brief Esta funcion obtiene un valor de los registros ADC0H, ADC0M, y ADC0L. Que corresponden al valor de la
+ * conversion actual.
+ * @details El valor de conversion tiene un total de 24 bits, y esta repartido en 3 registros de 8 bits.
+ * Para obtener este valor es necesario hacer un calculo teniendo en cuenta la tension de referencia con la que
+ * se trabaja.
+ * @return Devuelve el valor obtenido en los registros
+ */
 unsigned long convertir(void)
 {
 	static LONGDATA rawValue;
 	unsigned long mV;
 	
-	// while (!AD0INT);
-	// AD0INT = 0;
-	//ADC0CN = 0X01;
-	//printf("Entre al convertir\n");
-	   // Copy the output value of the ADC
+   // Copiar el valor del registro de conversion del adc en una variable local
 	rawValue.Byte[Byte3] = 0x00;
 	rawValue.Byte[Byte2] = (unsigned char)ADC0H;
 	rawValue.Byte[Byte1] = (unsigned char)ADC0M;
 	rawValue.Byte[Byte0] = (unsigned char)ADC0L;
 
 	//                           Vref (mV)
-	//   measurement (mV) =   --------------- * result (bits)
+	//   medicion (mV) =   --------------- * result (bits)
 	//                       (2^24)-1 (bits)
 	//
-	//   measurement (mV) =  result (bits) / ((2^24)-1 (bits) / Vref (mV))
+	//   medicion (mV) =  result (bits) / ((2^24)-1 (bits) / Vref (mV))
 	//
 	//
-	//   With a Vref (mV) of 2500:
+	//   Con un voltaje de referencia de 2.5 V:
 	//
-	//   measurement (mV) =  result (bits) / ((2^24)-1 / 2500)
+	//   medicion (mV) =  result (bits) / ((2^24)-1 / 2500)
 	//
-	//   measurement (mV) =  result (bits) / ((2^24)-1 / 2500)
+	//   medicion (mV) =  result (bits) / ((2^24)-1 / 2500)
 	//
-	//   measurement (mV) =  result (bits) / (16777215 / 2500)
+	//   medicion (mV) =  result (bits) / (16777215 / 2500)
 	//
-	//   measurement (mV) =  result (bits) / (6710)
+	//   medicion (mV) =  result (bits) / (6710)
 
-	mV = rawValue.result / 6710;        // Because of bounds issues, this
-	                                   // calculation has been manipulated as
-	                                   // shown above
-	                                   // (i.e. 2500 (VREF) * 2^24 (ADC result)
-	                                   // is greater than 2^32)
+	// se calcula el voltaje medido segun el voltaje de referencia
+	mV = rawValue.result / 6710;        
 
 	return mV;
 
 }
 
-
+/**
+ * @brief Configura la ganancia a la entrada del ADC.
+ * @details La ganancia determina la magnitud de la señal a medir. El valor de amplificacion puede ser de 
+ * un factor de 2 a 128
+ * 
+ * @param shellstr se pasa la direccion de la estructura entera como parametro. El valor de args[0] determina
+ * el factor por el que se potencia a 2 para obtener la ganancia.
+ * @return devuelve la misma estructura
+ */
 struct shellstr *conf_ganancia(struct shellstr *shell)
 {	
 	ADC0MD = 0x80;
@@ -66,50 +82,53 @@ struct shellstr *conf_ganancia(struct shellstr *shell)
 	return shell;
 
 }
+
+
 /**
- * @brief recorre todas las opciones de los pines tanto single ended como diferencial
- * @details [long description]
- * 
- * @param f [description]
+ * @brief Cambia el pin actual medido al siguiente.
+ * @details Cada vez que se llama esta funcion, se analiza el estado actual del registro ADC0MUX, y segun su 
+ * valor, se calcula el valor siguiente. Esta hecha de forma que recorra todos los pines en todos sus modos
+ * posibles en forma de escalera; de forma que si se llama en un ciclo infinito, recorreria todos los pines
+ * en todas sus configuraciones, con una frecuencia igual para cada pin.
  */
 void cambiar_pin()
 {
-	ADC0MD = 0x80;
-	if((ADC0MUX & 0x0F) == 0x08)
+	ADC0MD = 0x80; // ADC en modo idle
+	if((ADC0MUX & 0x0F) == 0x08) // si los 4 LSB de ADC0MUX son 8, estamos en modo single ended
 	{
-		if(ADC0MUX == 0x78)
+		if(ADC0MUX == 0x78) // si estamos en el ultimo pin del modo single ended, hay que pasar a modo diferencial
 		{
-			ADC0CN |= 0x10;
-			ADC0MUX = 0x01;
-			ADC0MD = 0x83;
+			ADC0CN |= 0x10; // se habilita el modo diferencial
+			ADC0MUX = 0x01; // se setean los pines 0 y 1 en modo diferencial
+			ADC0MD = 0x83; // ADC en modo conversion continua
 			return;
 		}
-		// ADC0CN &= ~0x10;
-		ADC0MUX = ADC0MUX + 0x10;
-		ADC0MD = 0x83;
+		ADC0MUX = ADC0MUX + 0x10; // se cambia al pin siguiente
+		ADC0MD = 0x83; // ADC en modo conversion continua
 		return;
 	}
-	if((ADC0MUX & 0x0F) < 0x08)
+	if((ADC0MUX & 0x0F) < 0x08)// si los 4 LSB de ADC0MUX son menores a 8, estamos en modo diferencial
 	{
-		if(ADC0MUX == 0x67)
+		if(ADC0MUX == 0x67) // si estamos en el ultimo par de pines del modo diferencial, hay que pasar a modo single-ended.
 		{
-			ADC0CN &= ~0x10;
-			ADC0MUX = 0x08;
-			ADC0MD = 0x83;
+			ADC0CN &= ~0x10; // se habilita el modo bipolar
+			ADC0MUX = 0x08; // se setea el pin 0 en modo single-ended
+			ADC0MD = 0x83; // ADC en modo conversion continua
 			return;
 		}		
-		// ADC0CN |= 0x10;
-		ADC0MUX = ADC0MUX + 0x22;
-		ADC0MD = 0x83;
+		ADC0MUX = ADC0MUX + 0x22; // se cambia al siguiente par de pines
+		ADC0MD = 0x83; // ADC en modo conversion continua
 		return;
 	}
 }
 
 /**
- * @brief envia datos por la uart
- * @details [long description]
+ * @brief Envia datos por la interfaz serial
+ * @details el formato de envio es: MODO,PIN,VALOR. Donde el modo puede ser SE o DF, siendo single-ended o 
+ * diferencial, respectivamente; el pin es el pin donde se midio, en el caso que sea diferencial, se le debe 
+ * sumar 1 al pin mostrado para tener los pines donde se midio; y el valor es el valor medido.
  * 
- * @param long [description]
+ * @param long El dato a enviar
  */
 void enviar_dato(unsigned long int *dato)
 {
@@ -127,9 +146,15 @@ void enviar_dato(unsigned long int *dato)
 }
 
 /**
- * @brief devuelve 1 si el pin actual tiene el envio habilitado
- * @details [long description]
- * @return [description]
+ * @brief Analiza el buffer de pines para determinar si el envio esta o no habilitado
+ * @details Esta funcion se encarga de verificar si el pin medido esta habilitado para el envio o no.
+ * Esta funcion fue hecha para trabajar en conjunto con la funcion cambiar_pin(). La idea es que se haga un
+ * barrido constante de todos los pines en todos sus modos, pero que se envien solo los que deban enviarse.
+ * La informacion de si se envia o no esta en los buffers "buffer_adc_count" y "buffer_adc". El primero contiene
+ * los valores iniciales de cada pin en cada modo, y el segundo contiene los valores actuales. Cada vez que se 
+ * hace un llamado a esta funcion, el los valores de buffer_adc se decrementan en 1. Cuando un elemento el array
+ * llega a 1, esta habilitado para el envio. Si un elemento tiene valor 0, el pin correspondiente esta deshabilitado.
+ * @return devuelve true si el pin actual esta habilitado para enviar, 0 si no esta habilitado.
  */
 char analizar_buffer(struct shellstr *shell)
 {

@@ -2,8 +2,7 @@
  * @file main.c
  * @author Sambataro, Ignacio; Mantovani, Luciano
  * @date 2015
- * @brief [brief description]
- * @details [long description]
+ * @brief define la funcion principal, define todas las variables globales
  */
 #include "headers_hw.h"
 #include "headers_logic.h"
@@ -11,7 +10,6 @@
 #include "configurador.h"
 #include "conversor_hw.h"
 #include "conversor_logic.h"
-
 #include "flash.h"
  
 unsigned long int dato_a_enviar;
@@ -21,24 +19,26 @@ unsigned short int posicion_adc;
 short int bandera_dif;
 sbit LED = P0^7;                          // LED='1' means ON
 
-void main(void)
-{
 
+/**
+ * @brief funcion principal, inicializa todos los parametros y corre las funciones principales
+ */
+void main()
+{
    	struct shellstr *shell; 
 	char i = 0;
-   	PCA0MD &= ~0x40;                    // WDTE = 0 (clear watchdog timer
+   	PCA0MD &= ~0x40;                    // deshabilitar el watchdog timer
 
     shell = (struct shellstr *) malloc(sizeof(struct shellstr));
-   	// shell->buffer_adc = malloc(TAM_SINGLE);
-   	// shell->buffer_adc_count = malloc(TAM_SINGLE);
-   	shell->var = 0;
+   	shell->var = 0; // inicializar en 0 la variable auxiliar para la funcion analizar_buffer
 
-   	if(shell == NULL || shell->buffer_adc == NULL)
+   	if(shell == NULL)
    	{
    		printf("no hay lugar para shell!!\n");
    		while(1);
    	}
 
+   	//inicializa el buffer de valores estaticos en 0
    	for (i=0 ; i<TAM_SINGLE ; i++)
    		shell->buffer_adc_count[i]=0;
 
@@ -53,71 +53,52 @@ void main(void)
 	// iniciar_PCA();
 
 
+	// comienza ciclo infinito hasta que se de la orden de parar la configuracion	
+	while(shell->stop_conf == 1)
+	{
+		restart(shell);		// reinicia los arreglos de obtencion de comandos
+		obtener_entrada(shell); 
 
-	shell->stop_conf = 1;
+		if(shell->errn != 0) // si hay un error, el comando no se analiza
+		{
+			reportar(shell); 
+		}
+		else
+		{
+			analizar(shell);
+			reportar(shell);  // si hay un error en el analisis, hay que reportarlo
+		}
+	}
+
+	// se inicializa el buffer temporal
+	for(i = 0; i < TAM_SINGLE; i++)
+	{
+		shell->buffer_adc[i] = shell->buffer_adc_count[i];
+	}
+
+	AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC	
+	ADC0MUX = 0x08;  // el primer pin a analizar es el pin 0 en modo single-ended
+	ADC0MD = 0x83;	// Habilitar conversion en modo continuo
+	EA = 1;          // habilitar conversiones globales
+	
+
 
 	while(1)
 	{
-		while(shell->stop_conf == 1)
+		// empezar_adc();
+		if(f_dato_convertido)
 		{
-			restart(shell);
+			f_dato_convertido = false;
+			dato_a_enviar = convertir();
 
-			obtener_entrada(shell);
-
-			if(shell->errn != 0)
+			if(analizar_buffer(shell))
 			{
-				reportar(shell);
+				enviar_dato(&dato_a_enviar);
+				// mostrar_config_actual(shell);
 			}
-			else
-			{
-				analizar(shell);
-				reportar(shell);
-			}
-			// printeartodo(shell);
+			// LED = ~LED;
+			cambiar_pin();
 		}
-		// mostrar_config_actual(shell);
-
-		for(i = 0; i < TAM_SINGLE; i++)
-		{
-			// printf("buffer_adc_count[%d] = %d\n",(int)i, (int)shell->buffer_adc_count[i]);
-			shell->buffer_adc[i] = shell->buffer_adc_count[i];
-		}
-		// mostrar_config_actual(shell);
-
-		AD0INT = 0;							
-		ADC0MUX = 0x08;
-		ADC0MD = 0x83;                      // Start continuous conversions
-		EA = 1;                             // Enable global interrupts
-		// ES0 = 1; 							// habilitar interrupciones de la UART
-
-		// printeartodo(shell);
-
-		
-		while(1)
-		{
-			// empezar_adc();
-			if(f_dato_convertido)
-			{
-				f_dato_convertido = false;
-				dato_a_enviar = convertir();
-
-				if(analizar_buffer(shell))
-				{
-					enviar_dato(&dato_a_enviar);
-					// mostrar_config_actual(shell);
-				}
-				// LED = ~LED;
-				cambiar_pin();
-			}
-
-			// if(f_UART)
-			// {
-			// 	f_UART = false;
-			// 	printf("uart!!!!\n");
-			// }
-		}
-
-	shell->stop_conf = 0;
 	}
 
 	// free(shell->buffer_adc);

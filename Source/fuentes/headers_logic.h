@@ -1,3 +1,12 @@
+/**
+ * @file headers_logic.h
+ * @author Sambataro, Ignacio; Mantovani, Luciano
+ * @date 2015
+ * @brief establece las librerias y define las variables que caen dentro del campo de la logica del codigo, sin\
+ * ningun aspecto correspondiente al hardware. 
+ * @details define algunos nombres, declara variables globales, y declara la estructura shellstr, que es parametro
+ * en casi todas las funciones del programa
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -17,15 +26,12 @@ typedef enum { false, true } bool;
 // unsigned short pin_actual;
 
 
-/*FLAGS globales*/
-
+///bandera de dato convertido
 extern bool f_dato_convertido;
-extern bool f_UART;
-extern int buffer_adc [TAM_SINGLE];
-extern short int bandera_dif;
+// extern bool f_UART;
 
-
-struct shellstr /// estructura para majejar la entrada de operaciones en la interfaz MML 
+/// estructura general del programa que contiene los elementos principales del mismo. Al estar organizado en forma de estructura se facilita el pase de parametros, y mas aun si se inicializa como puntero a estructura
+struct shellstr  
 {   
 	///cantidad de argumentos de la entrada
 	char n_args; 
