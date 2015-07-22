@@ -16,7 +16,6 @@ bool f_UART;
 unsigned short int posicion_adc;
 short int bandera_dif;
 sbit LED = P0^7;                          // LED='1' means ON
-short int flag1 = 0;
 
 /**
  * @brief funcion principal, inicializa todos los parametros y corre las funciones principales
@@ -50,50 +49,57 @@ void main()
 	// iniciar_timer3();
 	// iniciar_PCA();
 
-while (1)
-	{
+	shell->stop_conf = 1;
 
-		// comienza ciclo infinito hasta que se de la orden de parar la configuracion	
-		while(shell->stop_conf == 1)
+	while (1)
 		{
-			restart(shell);		// reinicia los arreglos de obtencion de comandos
-			obtener_entrada(shell); 
 
-			if(shell->errn != 0) // si hay un error, el comando no se analiza
+			// comienza ciclo infinito hasta que se de la orden de parar la configuracion	
+			while(shell->stop_conf == 1)
 			{
-				reportar(shell); 
+				restart(shell);		// reinicia los arreglos de obtencion de comandos
+				obtener_entrada(shell); 
+
+				if(shell->errn != 0) // si hay un error, el comando no se analiza
+				{
+					reportar(shell); 
+				}
+				else
+				{
+					analizar(shell);
+					reportar(shell);  // si hay un error en el analisis, hay que reportarlo
+				}
 			}
-			else
+
+			// se inicializa el buffer temporal
+			for(i = 0; i < TAM_SINGLE; i++)
 			{
-				analizar(shell);
-				reportar(shell);  // si hay un error en el analisis, hay que reportarlo
+				shell->buffer_adc[i] = shell->buffer_adc_count[i];
 			}
-		}
 
-		// se inicializa el buffer temporal
-		for(i = 0; i < TAM_SINGLE; i++)
-		{
-			shell->buffer_adc[i] = shell->buffer_adc_count[i];
-		}
-
-		AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC	
-		ADC0MUX = 0x08;  // el primer pin a analizar es el pin 0 en modo single-ended
-		ADC0MD = 0x83;	// Habilitar conversion en modo continuo
-		EA = 1;          // habilitar conversiones globales
-		
+			AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC	
+			ADC0MUX = 0x08;  // el primer pin a analizar es el pin 0 en modo single-ended
+			ADC0MD = 0x83;	// Habilitar conversion en modo continuo
+			EA = 1;          // habilitar interrupciones globales
+			// ES0 = 1;
 
 
-		while(1)
-		{
-			// empezar_adc();
-			if (f_UART)
-		    {
-		    	ADC0MD = 0x00;
-		    	f_UART = false;
-		    	flag1 = 1;
-		    	printf("uaaart bitch\n");
-		    	break;
-		    }
+
+			while(1)
+			{
+				// empezar_adc();
+			    ES0 = 1;
+				if (f_UART)
+			    {
+			    	ADC0MD = 0x00;
+			    	EA = 0;
+			    	f_UART = false;
+			    	shell->stop_conf = 1;
+			    	printf("STOP\n");
+			    	break;
+			    }
+
+			    ES0 = 0;
 				if(f_dato_convertido)
 				{
 					f_dato_convertido = false;
@@ -108,8 +114,8 @@ while (1)
 					cambiar_pin();
 				}
 
+			}
 		}
-	}
 	// free(shell->buffer_adc);
 	// free(shell);
 }

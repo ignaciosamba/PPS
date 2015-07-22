@@ -53,7 +53,7 @@ typedef enum { false, true } bool;
 
 ///bandera de dato convertido
 extern bool f_dato_convertido;
-// extern bool f_UART;
+extern bool f_UART;
 
 /// estructura general del programa que contiene los elementos principales del mismo. Al estar organizado en forma de estructura se facilita el pase de parametros, y mas aun si se inicializa como puntero a estructura
 struct shellstr  
