@@ -50,6 +50,7 @@ void main()
 	// iniciar_timer3();
 	// iniciar_PCA();
 
+	shell->stop_conf = 1;
 
 	// comienza ciclo infinito hasta que se de la orden de parar la configuracion	
 	while(shell->stop_conf == 1)
