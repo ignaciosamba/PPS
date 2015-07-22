@@ -1,0 +1,8 @@
+C:\Users\Samba\Desktop\Proyecto\PPS\Source\bin\..\fuentes\comunicacion.obj,
+C:\Users\Samba\Desktop\Proyecto\PPS\Source\bin\..\fuentes\configurador.obj,
+C:\Users\Samba\Desktop\Proyecto\PPS\Source\bin\..\fuentes\interfaz.obj,
+C:\Users\Samba\Desktop\Proyecto\PPS\Source\bin\..\fuentes\main.obj,
+C:\Users\Samba\Desktop\Proyecto\PPS\Source\bin\..\fuentes\memoria.obj,
+C:\Users\Samba\Desktop\Proyecto\PPS\Source\bin\..\fuentes\conversor.obj,
+C:\Users\Samba\Desktop\Proyecto\PPS\Source\bin\..\fuentes\control.obj,
+C:\Users\Samba\Desktop\Proyecto\PPS\Source\fuentes\impresiones.obj  TO C:\Users\Samba\Desktop\Proyecto\PPS\Source\bin\..\fuentes\adc RS(256) PL(68) PW(78) 

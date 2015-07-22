@@ -1,0 +1,26 @@
+C51 COMPILER V9.02   COMUNICACION                                                          05/13/2015 14:09:37 PAGE 1   
+
+
+C51 COMPILER V9.02, COMPILATION OF MODULE COMUNICACION
+OBJECT MODULE PLACED IN comunicacion.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Source\fuentes\comunicacion.c BROWSE DEBUG OBJECTEXTEND PRINT(.\comunicacio
+                    -n.lst) OBJECT(comunicacion.obj)
+
+line level    source
+
+   1          #include "headers.h"
+   2          #include "comunicacion.h"
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

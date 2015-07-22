@@ -1,0 +1,148 @@
+eeschema (2013-07-07 BZR 4022)-stable  >> Creation date: 28/05/2015 03:42:32 p.m.
+#Cmp ( order = Reference ) (con SubCmp)
+| +1         C8051F352   
+| C1         0,1micF     
+| C2         0,1micF     
+| C3         0,1micF     
+| C4         0,1micF     
+| C5         0,1micF     
+| C6         0,1micF     
+| C7         0,1micF     
+| C8         0,1micF     
+| C9         0,1micF     
+| C10        0,1micF     
+| C11        1micF       
+| C12        0,1micF     
+| C13        0,1micF     
+| C14        0,1micF     
+| C16        15uF        
+| C17        C           
+| C18        10uF        
+| C30        0,1mF       
+| C31        0,1mF       
+| C32        0,1micF     
+| C33        0,1micF     
+| C34        0,1micF     
+| J1         JACK_2P     
+| JP1        JUMPER      
+| JP2        JUMPER      
+| JP3        JUMPER      
+| JP4        JUMPER      
+| JP5        PINHD-1X1   
+| JP6        PINHD-1X1   
+| JP7        PINHD-1X1   
+| JP8        PINHD-1X1   
+| JP9        JUMPER3     
+| JP10       PINHD-1X1   
+| JP11       PINHD-1X1   
+| JP12       PINHD-1X1   
+| JP13       PINHD-1X1   
+| JP14       PINHD-1X1   
+| JP15       PINHD-1X1   
+| JP16       PINHD-1X1   
+| JP17       PINHD-1X1   
+| JP18       PINHD-1X1   
+| JP19       PINHD-1X1   
+| JP20       PINHD-1X1   
+| PIN1       PINHD-1X1   
+| Prueba1    LED         
+| PWR1       LED         
+| R1         100ohm      
+| R2         100ohm      
+| R3         100ohm      
+| R4         100ohm      
+| R5         100ohm      
+| R6         100ohm      
+| R7         100ohm      
+| R8         100ohm      
+| R9         470         
+| R10        2.0         
+| R11        2.0         
+| R12        2.0         
+| R13        470         
+| U1         MAX232_TID  
+| U2         LM2937      
+| Vref+1     PINHD-1X1   
+| Vref-1     PINHD-1X1   
+| XCTS1      PINHD-1X1   
+| XRTS1      PINHD-1X1   
+| XRX1       PINHD-1X1   
+| XTX1       PINHD-1X1   
+#End Cmp
+
+#Componentes ( orden = Valor ) (con SubCmp)
+| 10uF         C18       Loc /(X=209,550mm, Y=31,750mm)
+| 15uF         C16       Loc /(X=162,560mm, Y=31,750mm)
+| 0,1micF      C1        Loc /(X=31,750mm, Y=38,100mm)
+| 0,1micF      C2        Loc /(X=31,750mm, Y=57,150mm)
+| 0,1micF      C3        Loc /(X=31,750mm, Y=78,740mm)
+| 0,1micF      C4        Loc /(X=31,750mm, Y=101,600mm)
+| 0,1micF      C5        Loc /(X=31,750mm, Y=125,730mm)
+| 0,1micF      C6        Loc /(X=31,750mm, Y=144,780mm)
+| 0,1micF      C7        Loc /(X=31,750mm, Y=165,100mm)
+| 0,1micF      C8        Loc /(X=31,750mm, Y=182,880mm)
+| 0,1micF      C9        Loc /(X=68,580mm, Y=21,590mm)
+| 0,1micF      C10       Loc /(X=76,200mm, Y=21,590mm)
+| 0,1micF      C12       Loc /(X=97,790mm, Y=33,020mm)
+| 0,1micF      C13       Loc /(X=120,650mm, Y=31,750mm)
+| 0,1micF      C14       Loc /(X=129,540mm, Y=31,750mm)
+| 0,1mF        C30       Loc /(X=120,650mm, Y=118,110mm)
+| 0,1mF        C31       Loc /(X=120,650mm, Y=132,080mm)
+| 0,1micF      C32       Loc /(X=189,230mm, Y=120,650mm)
+| 0,1micF      C33       Loc /(X=199,390mm, Y=120,650mm)
+| 0,1micF      C34       Loc /(X=176,530mm, Y=130,810mm)
+| 1micF        C11       Loc /(X=87,630mm, Y=33,020mm)
+| C            C17       Loc /(X=195,580mm, Y=31,750mm)
+| JACK_2P      J1        Loc /(X=261,620mm, Y=29,210mm)
+| PINHD-1X1    JP5       Loc /(X=139,700mm, Y=60,960mm)
+| PINHD-1X1    JP6       Loc /(X=139,700mm, Y=68,580mm)
+| PINHD-1X1    JP7       Loc /(X=76,200mm, Y=170,180mm)
+| PINHD-1X1    JP8       Loc /(X=76,200mm, Y=180,340mm)
+| PINHD-1X1    JP10      Loc /(X=76,200mm, Y=190,500mm)
+| PINHD-1X1    JP11      Loc /(X=90,170mm, Y=170,180mm)
+| PINHD-1X1    JP12      Loc /(X=19,050mm, Y=96,520mm)
+| PINHD-1X1    JP13      Loc /(X=19,050mm, Y=160,020mm)
+| PINHD-1X1    JP14      Loc /(X=20,320mm, Y=33,020mm)
+| PINHD-1X1    JP15      Loc /(X=20,320mm, Y=52,070mm)
+| PINHD-1X1    JP16      Loc /(X=20,320mm, Y=73,660mm)
+| PINHD-1X1    JP17      Loc /(X=20,320mm, Y=120,650mm)
+| PINHD-1X1    JP18      Loc /(X=20,320mm, Y=139,700mm)
+| PINHD-1X1    JP19      Loc /(X=20,320mm, Y=177,800mm)
+| PINHD-1X1    JP20      Loc /(X=44,450mm, Y=191,770mm)
+| JUMPER       JP1       Loc /(X=110,490mm, Y=151,130mm)
+| JUMPER       JP2       Loc /(X=110,490mm, Y=160,020mm)
+| JUMPER       JP3       Loc /(X=110,490mm, Y=168,910mm)
+| JUMPER       JP4       Loc /(X=110,490mm, Y=177,800mm)
+| JUMPER3      JP9       Loc /(X=226,060mm, Y=25,400mm)
+| PINHD-1X1    PIN1      Loc /(X=217,170mm, Y=16,510mm)
+| LED          Prueba1   Loc /(X=203,200mm, Y=83,820mm)
+| LED          PWR1      Loc /(X=144,780mm, Y=46,990mm)
+| 2.0          R10       Loc /(X=143,510mm, Y=25,400mm)
+| 2.0          R11       Loc /(X=149,860mm, Y=19,050mm)
+| 2.0          R12       Loc /(X=149,860mm, Y=22,860mm)
+| 470          R9        Loc /(X=128,270mm, Y=46,990mm)
+| 470          R13       Loc /(X=187,960mm, Y=83,820mm)
+| 100ohm       R1        Loc /(X=43,180mm, Y=33,020mm)
+| 100ohm       R2        Loc /(X=43,180mm, Y=52,070mm)
+| 100ohm       R3        Loc /(X=43,180mm, Y=73,660mm)
+| 100ohm       R4        Loc /(X=43,180mm, Y=96,520mm)
+| 100ohm       R5        Loc /(X=43,180mm, Y=120,650mm)
+| 100ohm       R6        Loc /(X=43,180mm, Y=139,700mm)
+| 100ohm       R7        Loc /(X=43,180mm, Y=160,020mm)
+| 100ohm       R8        Loc /(X=43,180mm, Y=177,800mm)
+| MAX232_TID   U1        Loc /(X=156,210mm, Y=129,540mm)
+| LM2937       U2        Loc /(X=177,800mm, Y=25,400mm)
+| PINHD-1X1    XCTS1     Loc /(X=217,170mm, Y=144,780mm)
+| PINHD-1X1    XRTS1     Loc /(X=217,170mm, Y=165,100mm)
+| PINHD-1X1    XRX1      Loc /(X=217,170mm, Y=134,620mm)
+| C8051F352    +1        Loc /(X=83,820mm, Y=68,580mm)
+| PINHD-1X1    XTX1      Loc /(X=217,170mm, Y=154,940mm)
+| PINHD-1X1    Vref-1    Loc /(X=152,400mm, Y=99,060mm)
+| PINHD-1X1    Vref+1    Loc /(X=151,130mm, Y=91,440mm)
+#Fin Componentes
+
+#Etiquetas y Pins de Jerarquía ( orden = Alfab. ) total = 0
+
+#Fin Etiquetas
+
+#Fin de Lista

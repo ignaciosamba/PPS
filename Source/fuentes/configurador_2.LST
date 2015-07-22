@@ -1,0 +1,188 @@
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/12/2015 17:58:43 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE CONFIGURADOR
+OBJECT MODULE PLACED IN configurador.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe configurador.c DB OE BR INCDIR(C:\SiLabs\MCU\Inc)
+
+line level    source
+
+   1          /** Este archivo actua con la memoria flash y guarda las opciones configuracion
+   2           * cada vez que hubo una configuracionnueva. Tambien saca las configuraciones de la
+   3           * memoria y las carga en el programa en cada inicio del dispositivo.
+   4           *  Tambien configura los registros de las interrupciones
+   5          **/
+   6          
+   7          #include "headers.h"
+   8          #include "configurador.h"
+   9          #include "conversor.h"
+  10          
+  11          void empezar_adc()
+  12          {
+  13   1              ADC0MUX = 0x08;
+  14   1      }
+  15          void seleccionar_puerto(unsigned short puerto)
+  16          {
+  17   1              switch (puerto)
+  18   1              {
+  19   2                      case 0:
+  20   2                              printf("Puerto 0.0: \n");
+  21   2                              puerto = 0x08;
+  22   2                              break;
+  23   2                      case 1:
+  24   2                              printf("Puerto 0.1: \n");
+  25   2                              puerto = 0x18;
+  26   2                              break;
+  27   2                      case 2:
+  28   2                              printf("Puerto 0.2: \n");
+  29   2                              puerto = 0x28;
+  30   2                              break;
+  31   2                      case 3: 
+  32   2                              printf("Puerto 0.3: \n");
+  33   2                              puerto = 0x38;
+  34   2                              break;
+  35   2                      case 4:
+  36   2                              printf("Puerto 0.4: \n");
+  37   2                              puerto = 0x48;
+  38   2                              break;
+  39   2                      case 5:
+  40   2                              puerto = 0x58;
+  41   2                              printf("Puerto 0.5: \n");
+  42   2                              break;
+  43   2                      case 6:
+  44   2                              printf("Puerto 0.6: \n");
+  45   2                              puerto = 0x68;
+  46   2                              break;
+  47   2                      case 7:
+  48   2                              printf("Puerto 0.7: \n");
+  49   2                              puerto = 0x78;
+  50   2                              break;
+  51   2                      default:
+  52   2                              printf("ESTAMOS EN LA B \n" );
+  53   2                              break;
+  54   2              }
+  55   1              ADC0MUX = puerto;
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/12/2015 17:58:43 PAGE 2   
+
+  56   1      }
+  57          
+  58          void iniciar_puertos (void)
+  59          {
+  60   1         P0MDOUT |= 0x10;                    // Enable UTX as push-pull output
+  61   1         XBR0     = 0x01;                    // Enable UART on P0.4(TX) and P0.5(RX)                     
+  62   1         XBR1     = 0x40;                    // Enable crossbar and weak pull-ups
+  63   1      }
+  64          
+  65          void iniciar_sysclock (void)
+  66          {
+  67   1         OSCICN |= 0x03;                     // configuracion del oscilador para la maxima frecuencia
+  68   1         RSTSRC  = 0x04;                     // Enable missing clock detector
+  69   1      }
+  70          
+  71          
+  72          int iniciar_ADC(void)
+  73          {
+  74   1              REF0CN |= 0x03;                     // Enable internal Vref
+  75   1              ADC0CN = 0x00;                      // Gain = 1, Unipolar mode
+  76   1              ADC0CF = 0x00;                      // Interrupts upon SINC3 filter output
+  77   1                                                 // and uses internal VREF
+  78   1      
+  79   1              ADC0CLK = (SYSCLK/MDCLK)-1;         // Generate MDCLK for modulator.
+  80   1                                                 // Ideally MDCLK = 2.4576MHz
+  81   1      
+  82   1              // Program decimation rate for desired OWR
+  83   1              ADC0DEC = ((unsigned long) MDCLK / (unsigned long) OWR /
+  84   1                        (unsigned long) 128) - 1;
+  85   1      
+  86   1              ADC0BUF = 0x00;                     // Turn off Input Buffers
+  87   1              ADC0MUX = 0x08;                     // Select AIN0.2
+  88   1      
+  89   1              ADC0MD = 0x81;                      // Start internal calibration
+  90   1              while(AD0CALC != 1);                // Wait until calibration is complete
+  91   1      
+  92   1              EIE1   |= 0x08;                     // Enable ADC0 Interrupts
+  93   1              ADC0MD  = 0x80;                     // Enable the ADC0 (IDLE Mode)
+  94   1              
+  95   1              return 0;
+  96   1      }
+  97          
+  98          
+  99          int iniciar_UART(void)
+ 100          {
+ 101   1      
+ 102   1              SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
+ 103   1                                                 //        level of STOP bit is ignored
+ 104   1                                                 //        RX enabled
+ 105   1                                                 //        ninth bits are zeros
+ 106   1                                                 //        clear RI0 and TI0 bits
+ 107   1              if (SYSCLK/BAUDRATE/2/256 < 1) 
+ 108   1              {
+ 109   2                      TH1 = -(SYSCLK/BAUDRATE/2);
+ 110   2                      CKCON &= ~0x0B;                  // T1M = 1; SCA1:0 = xx
+ 111   2                      CKCON |=  0x08;
+ 112   2              } 
+ 113   1              else if (SYSCLK/BAUDRATE/2/256 < 4) 
+ 114   1              {
+ 115   2                      TH1 = -(SYSCLK/BAUDRATE/2/4);
+ 116   2                      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01                  
+ 117   2                      CKCON |=  0x01;
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/12/2015 17:58:43 PAGE 3   
+
+ 118   2              } 
+ 119   1              else if (SYSCLK/BAUDRATE/2/256 < 12) 
+ 120   1              {
+ 121   2                      TH1 = -(SYSCLK/BAUDRATE/2/12);
+ 122   2                      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00
+ 123   2              } 
+ 124   1              else 
+ 125   1              {
+ 126   2                      TH1 = -(SYSCLK/BAUDRATE/2/48);
+ 127   2                      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
+ 128   2                      CKCON |=  0x02;
+ 129   2              }
+ 130   1      
+ 131   1              TL1 = TH1;                          // Init Timer1
+ 132   1              TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
+ 133   1              TMOD |=  0x20;                       
+ 134   1              TR1 = 1;                            // START Timer1
+ 135   1              TI0 = 1;                            // Indicate TX0 ready
+ 136   1      
+ 137   1              return 0;
+ 138   1      }
+ 139          
+ 140          int iniciar_interrupciones(void)
+ 141          {
+ 142   1              
+ 143   1              return 0;
+ 144   1      }
+ 145          
+ 146          int iniciar_FLASH(void)
+ 147          {
+ 148   1              
+ 149   1              return 0;
+ 150   1      }
+ 151          
+ 152          int cargar_configuracionFlash(void)
+ 153          {
+ 154   1              return 0;
+ 155   1      }
+ 156          
+ 157          int guardar_configuracionFlash(void)
+ 158          {
+ 159   1              return 0;
+ 160   1      }
+*** WARNING C294 IN LINE 115 OF configurador.c: unreachable code
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    302    ----
+   CONSTANT SIZE    =    130    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,237 @@
+<<<<<<< HEAD
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/08/2015 18:29:44 PAGE 1   
+=======
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/08/2015 17:39:16 PAGE 1   
+>>>>>>> origin/master
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE CONFIGURADOR
+OBJECT MODULE PLACED IN configurador.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe configurador.c DB OE BR INCDIR(C:\SiLabs\MCU\Inc)
+
+line level    source
+
+   1          /** Este archivo actua con la memoria flash y guarda las opciones configuracion
+   2           * cada vez que hubo una configuracionnueva. Tambien saca las configuraciones de la
+   3           * memoria y las carga en el programa en cada inicio del dispositivo.
+   4           *  Tambien configura los registros de las interrupciones
+   5          **/
+   6          
+   7          #include "headers.h"
+   8          #include "configurador.h"
+   9          #include "control.h"
+*** ERROR C129 IN LINE 1 OF control.h: missing ';' before 'void'
+  10          
+  11          
+  12          
+  13          void iniciar_puertos (void)
+  14          {
+  15             P0MDOUT |= 0x10;                    // Enable UTX as push-pull output
+  16             XBR0     = 0x01;                    // Enable UART on P0.4(TX) and P0.5(RX)                     
+  17             XBR1     = 0x40;                    // Enable crossbar and weak pull-ups
+  18          }
+  19          
+  20          void iniciar_sysclock (void)
+  21          {
+  22             OSCICN |= 0x03;                     // configuracion del oscilador para la maxima frecuencia
+  23             RSTSRC  = 0x04;                     // Enable missing clock detector
+  24          }
+  25          
+  26          
+  27          void seleccionar_puerto(int puerto)
+  28          {
+<<<<<<< HEAD
+  29                  switch (puerto)
+  30                  {
+  31                          case 0:
+  32                                  puerto = 0x08;
+  33                                  break;
+  34                          case 1:
+  35                                  puerto = 0x18;
+  36                                  printf("elegi el puerto 2\n");
+  37                                  break;
+  38                          case 2:
+  39                                  puerto = 0x28;
+  40                                  break;
+  41                          case 3: 
+  42                                  puerto = 0x38;
+  43                                  break;
+  44                          case 4:
+  45                                  puerto = 0x48;
+  46                                  break;
+  47                          case 5:
+  48                                  puerto = 0x58;
+  49                                  break;
+  50                          case 9:
+  51                                  puerto = 0x68;
+  52                                  break;
+  53                          case 7:
+  54                                  printf("elegi el puerto 7\n");
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/08/2015 18:29:44 PAGE 2   
+=======
+  29   1              switch (puerto)
+  30   1              {
+  31   2                      case 0:
+  32   2                              puerto = 0x08;
+  33   2                              break;
+  34   2                      case 1:
+  35   2                              puerto = 0x18;
+  36   2                              printf("elegi el puerto 2\n");
+  37   2                              break;
+  38   2                      case 2:
+  39   2                              puerto = 0x28;
+  40   2                              break;
+  41   2                      case 3: 
+  42   2                              puerto = 0x38;
+  43   2                              break;
+  44   2                      case 4:
+  45   2                              puerto = 0x48;
+  46   2                              break;
+  47   2                      case 5:
+  48   2                              puerto = 0x58;
+  49   2                              break;
+  50   2                      case 9:
+  51   2                              puerto = 0x68;
+  52   2                              break;
+  53   2                      case 7:
+  54   2                              printf("elegi el puerto 7\n");
+  55   2                              puerto = 0x78;
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/08/2015 17:39:16 PAGE 2   
+>>>>>>> origin/master
+
+  55                                  puerto = 0x78;
+  56                                  break;
+  57                          default:
+  58                                  printf("ESTAMOS EN LA B \n" );
+  59                                  break;
+  60                  }
+  61                  ADC0MUX = puerto;
+  62          }
+  63          
+  64          
+  65          int iniciar_ADC()
+  66          {
+  67                  printf("Entre a lo loco aca iniciar_ADC\n");
+  68          
+  69                  REF0CN |= 0x03;                     // Enable internal Vref
+  70                  ADC0CN = 0x00;                      // Gain = 1, Unipolar mode
+  71                  ADC0CF = 0x00;                      // Interrupts upon SINC3 filter output
+  72                                                     // and uses internal VREF
+  73          
+  74                  ADC0CLK = (SYSCLK/MDCLK)-1;         // Generate MDCLK for modulator.
+  75                                                     // Ideally MDCLK = 2.4576MHz
+  76          
+  77                  // Program decimation rate for desired OWR
+  78                  ADC0DEC = ((unsigned long) MDCLK / (unsigned long) OWR /
+  79                            (unsigned long) 128) - 1;
+  80          
+  81                  ADC0BUF = 0x00;                     // Turn off Input Buffers
+  82          
+  83                  ADC0MUX = 0x08;                     // Select AIN0.0
+  84          
+  85                  ADC0MD = 0x81;                      // Start internal calibration
+  86                  while(AD0CALC != 1);                // Wait until calibration is complete
+  87          
+  88                  EIE1   |= 0x08;                     // Enable ADC0 Interrupts
+  89                  ADC0MD  = 0x80;                     // Enable the ADC0 (IDLE Mode)
+  90                  
+  91                  return 0;
+  92          }
+  93          
+  94          
+  95          int iniciar_UART(void)
+  96          {
+<<<<<<< HEAD
+  97          
+  98                  SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
+  99                                                     //        level of STOP bit is ignored
+ 100                                                     //        RX enabled
+ 101                                                     //        ninth bits are zeros
+ 102                                                     //        clear RI0 and TI0 bits
+ 103                  if (SYSCLK/BAUDRATE/2/256 < 1) 
+ 104                  {
+ 105                          TH1 = -(SYSCLK/BAUDRATE/2);
+ 106                          CKCON &= ~0x0B;                  // T1M = 1; SCA1:0 = xx
+ 107                          CKCON |=  0x08;
+ 108                  } 
+ 109                  else if (SYSCLK/BAUDRATE/2/256 < 4) 
+ 110                  {
+ 111                          TH1 = -(SYSCLK/BAUDRATE/2/4);
+ 112                          CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01                  
+ 113                          CKCON |=  0x01;
+ 114                  } 
+ 115                  else if (SYSCLK/BAUDRATE/2/256 < 12) 
+ 116                  {
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/08/2015 18:29:44 PAGE 3   
+=======
+  97   1      
+  98   1              SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
+  99   1                                                 //        level of STOP bit is ignored
+ 100   1                                                 //        RX enabled
+ 101   1                                                 //        ninth bits are zeros
+ 102   1                                                 //        clear RI0 and TI0 bits
+ 103   1              if (SYSCLK/BAUDRATE/2/256 < 1) 
+ 104   1              {
+ 105   2                      TH1 = -(SYSCLK/BAUDRATE/2);
+ 106   2                      CKCON &= ~0x0B;                  // T1M = 1; SCA1:0 = xx
+ 107   2                      CKCON |=  0x08;
+ 108   2              } 
+ 109   1              else if (SYSCLK/BAUDRATE/2/256 < 4) 
+ 110   1              {
+ 111   2                      TH1 = -(SYSCLK/BAUDRATE/2/4);
+ 112   2                      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01                  
+ 113   2                      CKCON |=  0x01;
+ 114   2              } 
+ 115   1              else if (SYSCLK/BAUDRATE/2/256 < 12) 
+ 116   1              {
+ 117   2                      TH1 = -(SYSCLK/BAUDRATE/2/12);
+C51 COMPILER V9.53.0.0   CONFIGURADOR                                                      05/08/2015 17:39:16 PAGE 3   
+>>>>>>> origin/master
+
+ 117                          TH1 = -(SYSCLK/BAUDRATE/2/12);
+ 118                          CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00
+ 119                  } 
+ 120                  else 
+ 121                  {
+ 122                          TH1 = -(SYSCLK/BAUDRATE/2/48);
+ 123                          CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
+ 124                          CKCON |=  0x02;
+ 125                  }
+ 126          
+ 127                  TL1 = TH1;                          // Init Timer1
+ 128                  TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
+ 129                  TMOD |=  0x20;                       
+ 130                  TR1 = 1;                            // START Timer1
+ 131                  TI0 = 1;                            // Indicate TX0 ready
+ 132          
+ 133                  return 0;
+ 134          }
+ 135          
+ 136          int iniciar_interrupciones(void)
+ 137          {
+ 138                  
+ 139                  return 0;
+ 140          }
+ 141          
+ 142          int iniciar_FLASH(void)
+ 143          {
+ 144                  
+ 145                  return 0;
+ 146          }
+ 147          
+ 148          int cargar_configuracionFlash(void)
+ 149          {
+ 150                  return 0;
+ 151          }
+ 152          
+ 153          int guardar_configuracionFlash(void)
+ 154          {
+ 155                  return 0;
+ 156          }
+ 157          
+ 158          void configurar_single_ended (char puerto)
+ 159          {
+ 160          
+ 161          }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

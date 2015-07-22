@@ -1,0 +1,105 @@
+C51 COMPILER V9.53.0.0   INTERFAZ                                                          05/12/2015 17:58:43 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE INTERFAZ
+OBJECT MODULE PLACED IN interfaz.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe interfaz.c DB OE BR INCDIR(C:\SiLabs\MCU\Inc)
+
+line level    source
+
+   1          #include "headers.h"
+   2          #include "interfaz.h"
+   3          #include "configurador.h"
+   4          #include "conversor.h"
+   5          #include "impresiones.h"
+   6          
+   7          int cont1 = 1;
+   8          
+   9          
+  10          void correr_menu(void)
+  11          {
+  12   1              char c_opcion;
+  13   1              short int opcion = 1;
+  14   1      
+  15   1              while(opcion)
+  16   1              {
+  17   2                      imprimir_menu();
+  18   2      
+  19   2                      c_opcion = getchar();
+  20   2                      while (getchar() != '\n');
+  21   2      
+  22   2                      // printf("%c\n", c_opcion);
+  23   2                      switch(c_opcion)
+  24   2                      {
+  25   3                              case '1':       
+  26   3                                                      imprimir_conf_ADC();
+  27   3                                                      c_opcion = getchar(); 
+  28   3                                                      while (getchar() != '\n');
+  29   3      
+  30   3                                                      switch (c_opcion)
+  31   3                                                      {
+  32   4                                                              case '1':       conf_single_ended(); break;
+  33   4                                                              case '3':       conf_ganancia(); break;
+  34   4                                                              
+  35   4                                                      }
+  36   3                              case '2': imprimir_conf_modos(); break;
+  37   3                              case '3': imprimir_conf_tipoSerial(); break;
+  38   3                              case '4': break;
+  39   3                              case '5': opcion = 0; break;
+  40   3                              default: printf("default!!\n");
+  41   3                              break;
+  42   3                      }
+  43   2      
+  44   2              }
+  45   1      }
+  46          
+  47          void conf_single_ended(void)
+  48          {
+  49   1              char c_opcion;
+  50   1      
+  51   1              imprimir_conf_modo_single_ended();
+  52   1              while (1)
+  53   1              {
+  54   2                      c_opcion = getchar();
+  55   2                      while (getchar() != '\n');
+C51 COMPILER V9.53.0.0   INTERFAZ                                                          05/12/2015 17:58:43 PAGE 2   
+
+  56   2                      // printf("esc\n");
+  57   2                      if (c_opcion == 'r') 
+  58   2                              break;
+  59   2                      /*if (c_opcion > 7)
+  60   2                              printf("Valor invalido! Ingrese un numero del 0 al 7. \n");*/
+  61   2                      cargar_buffer_single(c_opcion);
+  62   2              }
+  63   1      
+  64   1      }
+  65          
+  66          void conf_ganancia(void)
+  67          {
+  68   1              char c_opcion;
+  69   1      
+  70   1              imprimir_conf_ganancia();
+  71   1              c_opcion = getchar();
+  72   1              switch (c_opcion)
+  73   1              {
+  74   2                      case 1 : printf("Ganancia x1.\n"); ADC0CN = 0x00; break;
+  75   2                      case 2 : printf("Ganancia x2.\n"); ADC0CN = 0x01; break;
+  76   2                      case 3 : printf("Ganancia x4.\n"); ADC0CN = 0x02; break;
+  77   2                      case 4 : printf("Ganancia x8.\n"); ADC0CN = 0x03; break;
+  78   2              }
+  79   1      }
+  80          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    207    ----
+   CONSTANT SIZE    =     67    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

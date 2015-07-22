@@ -1,0 +1,55 @@
+C51 COMPILER V9.53.0.0   TEST_COMUNICACION                                                 05/08/2015 17:39:17 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE TEST_COMUNICACION
+OBJECT MODULE PLACED IN test_comunicacion.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe test_comunicacion.c DB OE BR INCDIR(C:\SiLabs\MCU\Inc)
+
+line level    source
+
+   1          #include "minunit.h"
+   2          #include "../fuentes/headers.h"
+   3          #include "../fuentes/configurador.h"
+   4          #include "test_headers/test_comunicacion.h"
+   5          
+   6           int tests_run = 0; 
+   7           int res;
+   8          
+   9           static char * test_UART() 
+  10          { 
+  11   1          mu_assert("\n     error, iniciar_UART no devolvio 0\n", 1);
+  12   1          return 0;
+  13   1      }
+  14           
+  15           
+  16           static char * all_tests() {
+  17   1          mu_run_test(test_UART);
+  18   1           return 0;
+  19   1      
+  20   1       }
+  21           
+  22           int run_test_comunicacion(void) {
+  23   1      
+  24   1           char *result = all_tests();
+  25   1           if (result != 0) {
+  26   2               printf("%s\n", result);
+  27   2           }
+  28   1           else {
+  29   2                // printf("TEST PASSED\n");
+  30   2           } 
+  31   1           return result != 0;
+  32   1       }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     87    ----
+   CONSTANT SIZE    =     45    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4       6
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

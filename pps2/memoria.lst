@@ -1,0 +1,24 @@
+C51 COMPILER V9.51   MEMORIA                                                               05/13/2015 19:13:14 PAGE 1   
+
+
+C51 COMPILER V9.51, COMPILATION OF MODULE MEMORIA
+OBJECT MODULE PLACED IN .\memoria.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ..\Source\fuentes\memoria.c BROWSE DEBUG OBJECTEXTEND PRINT(.\memoria.ls
+                    -t) TABS(2) OBJECT(.\memoria.obj)
+
+line level    source
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

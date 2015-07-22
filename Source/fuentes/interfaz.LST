@@ -1,0 +1,125 @@
+<<<<<<< HEAD
+C51 COMPILER V9.53.0.0   INTERFAZ                                                          05/08/2015 18:29:44 PAGE 1   
+=======
+C51 COMPILER V9.53.0.0   INTERFAZ                                                          05/08/2015 17:39:16 PAGE 1   
+>>>>>>> origin/master
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE INTERFAZ
+OBJECT MODULE PLACED IN interfaz.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.exe interfaz.c DB OE BR INCDIR(C:\SiLabs\MCU\Inc)
+
+line level    source
+
+   1          #include "headers.h"
+   2          #include "interfaz.h"
+   3          #include "coonfigurador.h"
+*** WARNING C318 IN LINE 3 OF interfaz.c: can't open file 'coonfigurador.h'
+   4          #include "control.h"
+*** ERROR C129 IN LINE 1 OF control.h: missing ';' before 'void'
+   5          
+   6          
+   7          ///MENU DE CONFIGURACION
+   8          void imprimir_menu(void)
+   9          {
+  10                  printf("\n Menú de configuracion\n");
+  11                  printf("1. Configuración de ADC\n");
+  12                  printf("2. Modos de transmision de datos\n");
+  13                  printf("3. Tipo de comunicacion serial\n");
+  14                  printf("4. Guardar la configuracion\n");
+  15                  printf("5. Salir e iniciar\n");
+  16          }
+  17          
+  18          ///CONFIGURACION DEL ADC
+  19          
+  20          void imprimir_conf_ADC(void)
+  21          {
+  22                  printf("\n1. Configurar pins en modo single-ended\n");
+  23                  printf("2. Configurar pins en modo diferencial\n");
+  24                  printf("3. Configurar ganancia\n");
+  25                  printf("4. Volver al menu anterior\n");
+  26          }
+  27          
+  28          void imprimir_conf_modo_single_ended(void)
+  29          {
+  30                  printf("\nIngresar los numeros de los pines separados por la tecla 'enter'\n");
+  31                  printf("Al terminar, ingrese la tecla 'r'\n");
+  32          
+  33          }
+  34          
+  35          void imprimir_conf_modo_diferencial(void)
+  36          {
+  37                  printf("\nIngresar, de a dos, los pares de los pines desados, separando los grupos con la tecla 'enter'\n
+             -");
+  38                  printf("Al terminar, ingrese la tecla 'r'\n");
+  39          }
+  40          
+  41          ///CONFIGURACION DE MODOS DE TRANSMISION DE DATOS
+  42          
+  43          void imprimir_conf_modos(void)
+  44          {
+  45                  printf("\n1. Por peticion de dispositivo externo\n");
+  46                  printf("2. Flujo constante\n");
+  47                  printf("3. Por vencimiento de temporarizador\n");
+  48                  printf("4. Volver al menu anterior\n");
+  49          }
+  50          
+  51          void imprimir_conf_tipoSerial(void)
+  52          {
+<<<<<<< HEAD
+C51 COMPILER V9.53.0.0   INTERFAZ                                                          05/08/2015 18:29:44 PAGE 2   
+=======
+  53   1              printf("\n1. RS232\n");
+C51 COMPILER V9.53.0.0   INTERFAZ                                                          05/08/2015 17:39:16 PAGE 2   
+>>>>>>> origin/master
+
+  53                  printf("\n1. RS232\n");
+  54                  printf("2. I2C (no implementado)\n");   
+  55          }
+  56          
+  57          
+  58          void correr_menu(void)
+  59          {
+  60                  char c_opcion;
+  61                  int opcion;
+  62                  char numeropuerto;
+  63          
+  64                  imprimir_menu();
+  65          
+  66                  c_opcion = getchar();
+  67                          // printf("%c\n", c_opcion);
+  68          /*              if(c_opcion == '1')
+  69                                  printf("YEAH\n");
+  70                          else printf("FUCK\n");*/
+  71                  
+  72                  switch(c_opcion)
+  73                  {
+  74                          case '1': 
+  75                                                  imprimir_conf_ADC(); 
+  76                                                  c_opcion = getchar();
+  77                                                  switch (c_opcion)
+  78                                                  {
+  79                                                          case '1': //MODO SINGLE ENDED, ACA SE METE LOS PUERTOS A MEDIR.
+  80                                                                          imprimir_conf_modo_single_ended();
+  81                                                                          while (numeropuerto == "r")
+  82                                                                          {
+  83                                                                                  numeropuerto = getchar();
+  84                                                                                  printf("numero de puerto: %c \n", numeropuerto );
+  85                                                                                  if (getchar() == 13) 
+  86                                                                                  cargar_buffer_single(numeropuerto);
+  87                                                                          }
+  88                                                                          break;
+  89                                                          default: printf("default\n");
+  90                                                  }
+  91                                                  break;
+  92                          case '2': imprimir_conf_modos(); break;
+  93                          case '3': imprimir_conf_tipoSerial(); break;
+  94                  
+  95                          case '5': printf("entre al 5 \n" ); iniciar_ADC(); break;
+  96                          default: printf("default!!\n");
+  97                          break;
+  98                  }
+  99          
+ 100          }
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  1 ERROR(S)
