@@ -1,5 +1,4 @@
-#include "headers_hw.h"
-#include "headers_logic.h"
+#include "headers.h"
 #include "flash/F350_FlashPrimitives.h"
 #include "flash/F350_FlashUtils.h"
 

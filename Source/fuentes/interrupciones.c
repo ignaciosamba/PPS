@@ -5,8 +5,7 @@
  * @brief define todas las rutinas de interrupcion
  * @details [long description]
  */
-#include "headers_hw.h"
-#include "headers_logic.h"
+#include "headers.h"
 #include "interrupciones.h"
 
 sbit LED = P0^7;

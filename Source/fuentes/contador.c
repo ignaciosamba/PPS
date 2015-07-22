@@ -1,5 +1,4 @@
-#include "headers_hw.h"
-#include "headers_logic.h"
+#include "headers.h"
 #include "contador.h"
 
 void get_timer0(void)

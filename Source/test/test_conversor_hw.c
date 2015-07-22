@@ -1,7 +1,6 @@
 #include "minunit.h"
-#include "../fuentes/headers_hw.h"
-#include "../fuentes/headers_logic.h"
-#include "../fuentes/conversor_hw.h"
+#include "../fuentes/headers.h"
+#include "../fuentes/conversor.h"
 
 int tests_run = 0; 
 int res;

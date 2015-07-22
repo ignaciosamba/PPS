@@ -3,8 +3,7 @@
  * memoria y las carga en el programa en cada inicio del dispositivo.
  *  Tambien configura los registros de las interrupciones
 **/
-#include "headers_hw.h"
-#include "headers_logic.h"
+#include "headers.h"
 #include "configurador.h"
 
 sbit LED = P0^7;

@@ -4,12 +4,10 @@
  * @date 2015
  * @brief define la funcion principal, define todas las variables globales
  */
-#include "headers_hw.h"
-#include "headers_logic.h"
+#include "headers.h"
 #include "interfaz.h"
 #include "configurador.h"
-#include "conversor_hw.h"
-#include "conversor_logic.h"
+#include "conversor.h"
 #include "flash.h"
  
 unsigned long int dato_a_enviar;

@@ -1,6 +1,5 @@
 #include "minunit.h"
-#include "../fuentes/headers_hw.h"
-#include "../fuentes/headers_logic.h"
+#include "../fuentes/headers.h"
 #include "../fuentes/configurador.h"
 
  int tests_run = 0; 
