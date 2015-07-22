@@ -1,6 +1,5 @@
-#include "headers_logic.h"
-#include "conversor_logic.h"
-#include "conversor_hw.h"
+#include "headers.h"
+#include "conversor.h"
 #include "flash.h"
 #include "contador.h"
 #include "interfaz.h"
@@ -71,8 +70,10 @@ struct shellstr *analizar(struct shellstr *shell)
 
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'S') && (shell->comando[2] == 'E'))
     {
-        if(shell->n_args > 6)
+        if(shell->n_args > 7)
         {shell->errn = 405; return shell;}
+        else if(shell->args[1] != ',' )
+        {shell->errn = 406; return shell;}
         else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 7)
         {shell->errn = 406; return shell;}
 
@@ -158,7 +159,6 @@ void reportar(struct shellstr *shell)
 {
     switch(shell->errn)
     {   
-
         case 251: printf("\nACK 201: pin %c configurado en modo single_ended\n", shell->args[0]); break;
         case 252: printf("\nACK 202: pines %c y %c configurados en modo diferencial\n", shell->args[0], shell->args[0] + 1); break;
         case 253: printf("\nACK 253: ganancia configurada en 2^%c\n", shell->args[0]); break;
