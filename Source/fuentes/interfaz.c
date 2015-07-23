@@ -1,9 +1,28 @@
+/**
+ * @file interfaz.c
+ * @author Sambataro, Ignacio; Mantovani, Luciano
+ * @date 2015
+ * @brief Funciones de interfaz de usuario e interpretacion de comandos
+ * @details Este archivo contiene las funciones correspondientes a la obtencion y el procesado de los comandos
+ * ingresados por el usuario
+ */
+
 #include "headers.h"
 #include "conversor.h"
 #include "flash.h"
 #include "contador.h"
 #include "interfaz.h"
 
+/**
+ * @brief Obtiene un comando
+ * @details Se imprime un prompt, y luego de eso se espera que el usuario ingrese un comando con sus argumentos, 
+ * si los hubiere. Tanto el comando como los argumentos son arreglos que pertenecen a la estructura shell, 
+ * y son modificados y analizados por separado a nivel de caracter. Para la obtencion de ambos, se utiliza la 
+ * funcion getchar()
+ * 
+ * @param shellstr la estructura de datos general. Utiliza los campos entrada, comando[], args[], y n_args
+ * @return devuelve la misma estructura modificada.
+ */
 struct shellstr *obtener_entrada(struct shellstr *shell)
 {
     char i = 0;
@@ -49,21 +68,22 @@ struct shellstr *obtener_entrada(struct shellstr *shell)
 	return shell;
 }
 
-void restart(struct shellstr *shell)
-{       
-    int i;
-    for (i = 0; i < MAX_ARGS;i++)
-        shell->args[i] = 0;
-    for (i = 0; i < TAM_COMANDO;i++)
-        shell->comando[i] = 0;
-    shell->errn = 0;
-}
-
+/**
+ * @brief Analiza el comando y toma una accion segun el mismo
+ * @details Esta funcion debe ser ejecutada luego de "obtener_entrada". Cuando se ingresa el comando y los 
+ * argumentos si los hubiere, y se ejecuta esta funcion, se analiza el contenido del comando y se ejecuta
+ * la funcion correspondiente, asegurandose antes de que no haya errores en los argumentos, siempre que los
+ * haya
+ * 
+ * @param shellstr la estructura de datos general. Utiliza los campos comando[], args[], n_args y errn
+ * @return devuelve la misma estructura modificada.
+ */
 struct shellstr *analizar(struct shellstr *shell)
 {
         // printf("lalalalalal\n");
     if((shell->comando[0] == 'S') && (shell->comando[1] == 'T'))
     {
+        shell->errn = 254;
         shell->stop_conf = 0;
     }
 
@@ -88,7 +108,7 @@ struct shellstr *analizar(struct shellstr *shell)
 
         else cargar_buffer_dif(shell);
     }
-	else if((shell->comando[0] == 'S') && (shell->comando[1] == 'G') && (shell->comando[2] == 'A'))
+    else if((shell->comando[0] == 'S') && (shell->comando[1] == 'G') && (shell->comando[2] == 'A'))
     {
         if(shell->n_args > 1)
         {shell->errn = 405; return shell;}
@@ -140,7 +160,7 @@ struct shellstr *analizar(struct shellstr *shell)
         else mostrar_config_flash();
     }
 
-	else if((shell->comando[0] == 'S') && (shell->comando[1] == 'H') && (shell->comando[2] == 'A'))
+    else if((shell->comando[0] == 'S') && (shell->comando[1] == 'H') && (shell->comando[2] == 'A'))
     {
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
@@ -150,7 +170,7 @@ struct shellstr *analizar(struct shellstr *shell)
 
     else shell->errn = 404;
 
-	return shell;
+    return shell;
 
 }
 
@@ -159,9 +179,10 @@ void reportar(struct shellstr *shell)
 {
     switch(shell->errn)
     {   
-        case 251: printf("\nACK 201: pin %c configurado en modo single_ended\n", shell->args[0]); break;
-        case 252: printf("\nACK 202: pines %c y %c configurados en modo diferencial\n", shell->args[0], shell->args[0] + 1); break;
+        case 251: printf("\nACK 251: pin %c configurado en modo single_ended\n", shell->args[0]); break;
+        case 252: printf("\nACK 252: pines %c y %c configurados en modo diferencial\n", shell->args[0], shell->args[0] + 1); break;
         case 253: printf("\nACK 253: ganancia configurada en 2^%c\n", shell->args[0]); break;
+        case 254: printf("\nACK 254: inicio de conversion y envio de datos. para volver al menu presione 's'"); break;
         case 404: printf("\nERROR 404: comando no encontrado\n"); break;
         case 405: printf("\nERROR 405: demasiados argumentos\n"); break;
         case 406: printf("\nERROR 406: alguno de los argumentos esta fuera de rango\n"); break;
@@ -171,6 +192,15 @@ void reportar(struct shellstr *shell)
 }
 
 
+void restart(struct shellstr *shell)
+{       
+    int i;
+    for (i = 0; i < MAX_ARGS;i++)
+        shell->args[i] = 0;
+    for (i = 0; i < TAM_COMANDO;i++)
+        shell->comando[i] = 0;
+    shell->errn = 0;
+}
 
 // void printeartodo(struct shellstr *shell)
 // {
