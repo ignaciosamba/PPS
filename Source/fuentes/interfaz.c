@@ -174,7 +174,13 @@ struct shellstr *analizar(struct shellstr *shell)
 
 }
 
-
+/**
+ * @brief Reporte de errores
+ * @details Esta funcion analiza el estado de la variable errn, que esta dentro de la estructura shell, y 
+ * segun ese valor imprime un mensaje en la pantalla, ya sea por un error o un acknowledge
+ * 
+ * @param shellstr la estructura general del programa, usa el parametro errn
+ */
 void reportar(struct shellstr *shell)
 {
     switch(shell->errn)

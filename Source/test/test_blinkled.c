@@ -4,7 +4,7 @@
 
  int tests_run = 0; 
 
-sbit LED = P0^7;
+sbit LED = P1^1;
 unsigned int aux;
 unsigned int aux2;
 
