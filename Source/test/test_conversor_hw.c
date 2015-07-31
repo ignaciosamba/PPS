@@ -170,6 +170,8 @@ static char * test_analizar_buffer()
     return 0;
 } 
 
+
+
 static char * test_OWR()
 {
     unsigned long int dato_a_enviar;

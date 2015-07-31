@@ -11,6 +11,7 @@
 
 short int dato_n;
 unsigned short int num;
+unsigned long dato_conversor;
 
 /**
  * @brief Esta funcion obtiene un valor de los registros ADC0H, ADC0M, y ADC0L. Que corresponden al valor de la
@@ -269,4 +270,44 @@ void cargar_buffer_dif (struct shellstr *shell)
 	shell->buffer_adc_count[dato_n] = num;
 
 	shell->errn = 252;
+}
+
+/**
+ * @brief devuelve el valor de una medicion en el momento que se ingresa la instruccion
+ * @details 
+ * 
+ * @param shellstr [description]
+ */
+void get_single_ended(struct shellstr *shell)
+{
+
+	AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC	
+	ADC0MD = 0x83;	// Habilitar conversion en modo continuo
+	EA = 1;          // habilitar interrupciones globales
+
+	ADC0MUX = (shell->opt << 4) + 8;
+
+	dato_conversor = convertir();
+	enviar_dato(dato_conversor);
+
+    ADC0MD = 0x00;
+	EA = 0;
+
+}
+
+void get_differential(struct shellstr *shell)
+{
+
+	AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC	
+	ADC0MD = 0x83;	// Habilitar conversion en modo continuo
+	EA = 1;          // habilitar interrupciones globales
+
+	ADC0MUX = (shell->opt << 4) + shell->opt + 1;
+
+	dato_conversor = convertir();
+	enviar_dato(dato_conversor);
+
+    ADC0MD = 0x00;
+	EA = 0;
+	
 }

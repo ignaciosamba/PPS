@@ -5,3 +5,5 @@ void enviar_dato(unsigned long int *);
 char analizar_buffer(struct shellstr *shell);
 void cargar_buffer_single(struct shellstr *shell);
 void cargar_buffer_dif (struct shellstr *shell);
+void get_single_ended(struct shellstr *shell);
+void get_differential(struct shellstr *shell);

@@ -87,4 +87,7 @@ struct shellstr
 
 	///variable auxiliar para el indexado de buffer_adc
 	char var;
+
+	///variable auxiliar para las funciones get_single_ended y get_differential
+	char opt;
 };
