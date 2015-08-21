@@ -288,7 +288,7 @@ void get_single_ended(struct shellstr *shell)
 	ADC0MUX = (shell->opt << 4) + 8;
 
 	dato_conversor = convertir();
-	enviar_dato(dato_conversor);
+	enviar_dato(&dato_conversor);
 
     ADC0MD = 0x00;
 	EA = 0;
@@ -305,7 +305,7 @@ void get_differential(struct shellstr *shell)
 	ADC0MUX = (shell->opt << 4) + shell->opt + 1;
 
 	dato_conversor = convertir();
-	enviar_dato(dato_conversor);
+	enviar_dato(&dato_conversor);
 
     ADC0MD = 0x00;
 	EA = 0;

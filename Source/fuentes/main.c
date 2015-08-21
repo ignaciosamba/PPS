@@ -11,12 +11,13 @@
 #include "flash.h"
  
 unsigned long int dato_a_enviar;
-bool f_dato_convertido;
-bool f_UART;
 unsigned short int posicion_adc;
 short int bandera_dif;
 sbit LED = P0^7;                          // LED='1' means ON
 
+bool f_dato_convertido;
+bool f_UART;
+bool f_contRPM;
 /**
  * @brief funcion principal, inicializa todos los parametros y corre las funciones principales
  */
@@ -46,6 +47,7 @@ void main()
 	iniciar_ADC();
 	iniciar_timer0();
 	iniciar_timer2();
+	iniciar_contadorRPM();
 	// iniciar_timer3();
 	// iniciar_PCA();
 
@@ -88,18 +90,18 @@ void main()
 			while(1)
 			{
 				// empezar_adc();
-			    ES0 = 1;
+			    ES0 = 1; // habilitar interrupcion de UART
 				if (f_UART)
 			    {
-			    	ADC0MD = 0x00;
-			    	EA = 0;
+			    	ADC0MD = 0x00; // conversion inhabilitada
+			    	EA = 0; // inhabilitar interrupciones globales
 			    	f_UART = false;
 			    	shell->stop_conf = 1;
 			    	printf("STOP\n");
 			    	break;
 			    }
 
-			    ES0 = 0;
+			    ES0 = 0; // deshabilitar interrupcion de UART
 				if(f_dato_convertido)
 				{
 					f_dato_convertido = false;

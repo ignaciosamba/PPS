@@ -15,7 +15,6 @@ void iniciar_puertos (void)
    P0MDOUT |= 0x10;                    // Habilitar UTX como push-pull output
    P0MDOUT |= 0x80;                    // Habilitar led P0.7 como push pull
    // P0MDIN |= 0x0C;                  // P0.3 y P0.4 tienen que ser entrada digital
-
 }
 
 void iniciar_sysclock (void)
@@ -98,7 +97,7 @@ void iniciar_timer0(void)
 {
    TH0 = 0;           // Init Timer0 High register
    TL0 = 0;           // Init Timer0 Low register
-   TMOD |= 0x25;                       // Timer0 in 16-bit mode, fuente externa                       // Timer0 interrupt enabled
+   TMOD |= 0x25;                       // Timer0 in 16-bit mode, fuente externa    // Timer0 interrupt enabled
    TCON |= 0x50;                        // Timer0 ON
 }
 
@@ -107,6 +106,18 @@ void iniciar_timer2(void)
    TMR2CN |= 0x05;    // T2 en modo 16 bits, TR2 habilitado, clockeado por fuente externa
    TMR2L = 0;
    TMR2H = 0;
+}
+
+void iniciar_contadorRPM(void) // usa timer3
+{
+	TMR3CN |= 0x82; //flag de overflow habilitada, timer3 habilitado
+    EIE1 |= 0x80; //habilitar interrupcion de timer3
+
+	TMR3L = 0;
+    TMR3H = 0;
+
+    TMR3RLL = 0; //parte alta y baja del valor de retorno de timer3. seteado para 500ms aproximadamente
+    TMR3RLH = 0;
 }
 
 // void iniciar_PCA(void)

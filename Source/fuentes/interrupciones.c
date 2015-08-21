@@ -36,3 +36,9 @@ void ADC0_ISR (void) interrupt 10
     }
     //LED = ~LED;
  }
+
+ void T3_ISR(void) interrupt 14
+ {
+ 	TMR3CN &= ~0x80; // volver a 0 la bandera de interrupcion
+ 	f_contRPM = true; // se hablilita la bandera del timer
+ }

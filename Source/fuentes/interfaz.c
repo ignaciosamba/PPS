@@ -188,6 +188,14 @@ struct shellstr *analizar(struct shellstr *shell)
         else mostrar_config_actual(shell);
     }
 
+    else if((shell->comando[0] == 'G') && (shell->comando[1] == 'R') && (shell->comando[2] == 'P'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else contar_RPM();
+    }
+
     else shell->errn = 404;
 
     return shell;

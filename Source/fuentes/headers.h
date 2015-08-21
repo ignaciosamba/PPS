@@ -50,10 +50,16 @@ typedef enum { false, true } bool;
 // unsigned long dato_convertido;
 // unsigned short pin_actual;
 
+//////////-----BANDERAS------///////////
 
 ///bandera de dato convertido
 extern bool f_dato_convertido;
+
+///bandera de interrupcion de UART
 extern bool f_UART;
+
+///bandera de interrupcion de Timer3 (contador de RPM)
+extern bool f_contRPM;
 
 /// estructura general del programa que contiene los elementos principales del mismo. Al estar organizado en forma de estructura se facilita el pase de parametros, y mas aun si se inicializa como puntero a estructura
 struct shellstr  
