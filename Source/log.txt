@@ -137,3 +137,8 @@ if(adc[idx] > 1)
 1/07
 
 subi unas tablas en excel al drive con los datos de las mediciones que hice el otro dia. voy a hacer mas mediciones ahora que esta andando casi todo. pero me quiero ir asi que no voy a medir un carajo ahora. capaz mañana.
+
+
+24/8
+
+acabamos de ver que el contador de eventos cuenta por flanco de bajada.

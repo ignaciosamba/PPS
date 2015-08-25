@@ -110,13 +110,17 @@ void iniciar_timer2(void)
 
 void iniciar_contadorRPM(void) // usa timer3
 {
-	TMR3CN |= 0x82; //flag de overflow habilitada, timer3 habilitado
+	TMR3CN |= (1 << 7); //flag de overflow habilitada
+	TMR3CN |= (1 << 2); //timer3 habilitado
+	//clock interno, en modo 16 bit auto-reload
+
     EIE1 |= 0x80; //habilitar interrupcion de timer3
+    EIP1 |= 0x80; // dar prioridad a interrupcion de timer3
 
 	TMR3L = 0;
     TMR3H = 0;
 
-    TMR3RLL = 0; //parte alta y baja del valor de retorno de timer3. seteado para 500ms aproximadamente
+    TMR3RLL = 0; //parte alta y baja del valor de retorno de timer3.
     TMR3RLH = 0;
 }
 

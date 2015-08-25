@@ -230,7 +230,7 @@ void cargar_buffer_single(struct shellstr *shell)
 	}
 
 	dato_n = shell->args[0] - '0';
-	if(dato_n > 0 && dato_n < 8)
+	if(dato_n >= 0 && dato_n < 8)
 	shell->buffer_adc_count[dato_n] = num;
 
 	shell->errn = 251;

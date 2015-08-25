@@ -90,20 +90,46 @@ struct shellstr *analizar(struct shellstr *shell)
 
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'S') && (shell->comando[2] == 'E'))
     {
-        if(shell->n_args > 7)
+        if(shell->n_args > 5)
         {shell->errn = 405; return shell;}
-        else if(shell->args[1] != ',' )
-        {shell->errn = 406; return shell;}
+        else if(shell->args[1] != ',' && shell->n_args < 2)
+        {shell->errn = 407; return shell;}
+        else if(shell->args[1] != ',' && shell->n_args >= 2)
+        {shell->errn = 408; return shell;}
+        else if(shell->args[1] == ',' && shell->n_args < 3)
+        {shell->errn = 408; return shell;}
         else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 7)
+        {shell->errn = 406; return shell;}
+        else if( shell->n_args > 3 && (shell->args[2] - '0' < 0 || shell->args[2] - '0' > 9))
+        {shell->errn = 406; return shell;}
+        else if( shell->n_args > 4 && (shell->args[3] - '0' < 0 || shell->args[3] - '0' > 9))
+        {shell->errn = 406; return shell;}
+        else if( shell->n_args > 5 && (shell->args[4] - '0' < 0 || shell->args[4] - '0' > 9))
+        {shell->errn = 406; return shell;}
+        else if( shell->n_args > 5 && shell->args[2] - '0' + shell->args[3] - '0' + shell->args[4] - '0' > 255)
         {shell->errn = 406; return shell;}
 
         cargar_buffer_single(shell);
     }
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'D') && (shell->comando[2] == 'I'))
     {
-        if(shell->n_args > 6)
+        if(shell->n_args > 5)
         {shell->errn = 405; return shell;}
+        else if(shell->args[1] != ',' && shell->n_args < 2)
+        {shell->errn = 407; return shell;}
+        else if(shell->args[1] != ',' && shell->n_args >= 2)
+        {shell->errn = 408; return shell;}
+        else if(shell->args[1] == ',' && shell->n_args < 3)
+        {shell->errn = 408; return shell;}
         else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 6 || (shell->args[0] & 1))
+        {shell->errn = 406; return shell;}
+        else if( shell->n_args > 3 && (shell->args[2] - '0' < 0 || shell->args[2] - '0' > 9))
+        {shell->errn = 406; return shell;}
+        else if( shell->n_args > 4 && (shell->args[3] - '0' < 0 || shell->args[3] - '0' > 9))
+        {shell->errn = 406; return shell;}
+        else if( shell->n_args > 5 && (shell->args[4] - '0' < 0 || shell->args[4] - '0' > 9))
+        {shell->errn = 406; return shell;}
+        else if( shell->n_args > 5 && shell->args[2] - '0' + shell->args[3] - '0' + shell->args[4] - '0' > 255)
         {shell->errn = 406; return shell;}
 
         cargar_buffer_dif(shell);
@@ -220,6 +246,8 @@ void reportar(struct shellstr *shell)
         case 404: printf("\nERROR 404: comando no encontrado\n"); break;
         case 405: printf("\nERROR 405: demasiados argumentos\n"); break;
         case 406: printf("\nERROR 406: alguno de los argumentos esta fuera de rango\n"); break;
+        case 407: printf("\nERROR 407: faltan argumentos\n"); break;
+        case 408: printf("\nERROR 408: error de sintaxis \n"); break;
         case 0: break; // para el caso donde se apreta enter solo
         default: break;
     }

@@ -39,6 +39,7 @@ void ADC0_ISR (void) interrupt 10
 
  void T3_ISR(void) interrupt 14
  {
- 	TMR3CN &= ~0x80; // volver a 0 la bandera de interrupcion
+ 	TMR3CN &= ~(1 << 7); // volver a 0 la bandera de interrupcion del byte superior
+ 	TMR3CN &= ~(1 << 6); // volver a 0 la bandera de interrupcion del byte inferior
  	f_contRPM = true; // se hablilita la bandera del timer
  }
