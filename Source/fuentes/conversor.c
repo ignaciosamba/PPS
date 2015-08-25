@@ -311,3 +311,15 @@ void get_differential(struct shellstr *shell)
 	EA = 0;
 	
 }
+
+
+void mostrar_config_actual(struct shellstr * shell)
+{
+    char i;
+       for (i= 0 ; i<TAM_SINGLE ; i++)
+    {
+        printf("ADC[%i]: %u\n", (int)i, shell->buffer_adc_count[i]/* - '0'*/);
+    }
+
+    printf("ADC0CN: 0x%c\n", (char)ADC0CN + '0');
+}

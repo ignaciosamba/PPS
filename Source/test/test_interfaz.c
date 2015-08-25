@@ -1,6 +1,7 @@
 #include "minunit.h"
-#include "../fuentes/headers_logic.h"
+#include "../fuentes/headers.h"
 #include "../fuentes/interfaz.h"
+#include "../fuentes/configurador.h"
 
  int tests_run = 0; 
  int res;
@@ -15,31 +16,31 @@ static char * test_obtener_entrada()
 	//cada vez que se corre la funcion aca, agarra una linea nueva del archivo test_interfaz_comandos_de_prueba.txt
     printf("Ingrese los caracteres a medida que se piden. Al finalizar presione la tecla 'enter'\n");
 
-    printf("SSE,245\n", );
+    printf("SSE,245\n");
 	obtener_entrada(shell);
 	mu_assert("Error. hubo errores y no deberia haber", shell->errn == 0);	
     shell->errn = 0;
     restart(shell);
 
-    printf("ABCD,123\n", );
+    printf("ABCD,123\n");
 	obtener_entrada(shell);
 	mu_assert("Error. el comando esta mal, pero igual no deberia haber errores", shell->errn == 0);
     shell->errn = 0;
     restart(shell);
 
-    printf("ABCDEFG\n", );
+    printf("ABCDEFG\n");
 	obtener_entrada(shell);
 	mu_assert("Error. deberia haber error 404 y no hay(1)", shell->errn == 404);
     shell->errn = 0;
     restart(shell);
 
-    printf("AAA,123456789\n", );
+    printf("AAA,123456789\n");
 	obtener_entrada(shell);
 	mu_assert("Error. deberia haber error 404 y no hay(2)", shell->errn == 404);
     shell->errn = 0;
     restart(shell);
 
-    printf("SSE,245\n", );
+    printf("SSE,245\n");
 	obtener_entrada(shell);
 	mu_assert("Error. deberia haber error 405 y no hay", shell->errn == 405);
 
@@ -176,9 +177,9 @@ static char * test_SSE()
     printf("test_obtener_entrada\n");
     mu_run_test(test_obtener_entrada);
     printf("\ntest_obtener_entrada_OK\n");
-    printf("test_analizar\n");
-    mu_run_test(test_analizar);
-    printf("\ntest_analizar_OK\n");
+    printf("test_SSE\n");
+    mu_run_test(test_SSE);
+    printf("\ntest_SSE_OK\n");
     printf("------------------FIN TESTS DE LA INTERFAZ----------------------\n");
 
     return 0;
@@ -186,26 +187,27 @@ static char * test_SSE()
  
  int main(void) {
 
+    char *result;
+    PCA0MD &= ~0x40;   // WDTE = 0 (clear watchdog timer
+
     shell = (struct shellstr *) malloc(sizeof(struct shellstr));
-    shell->buffer_adc = malloc(ARRAYSIZE);
-    // shell->comando = malloc(TAM_COMANDO);
-    // shell->args = malloc(MAX_ARGS);
 
-    shell->errn = 0;
+    iniciar_sysclock ();
+    iniciar_puertos ();
+    iniciar_UART();
 
-    // freopen("test_files/test_interfaz_comandos_de_prueba.txt", "r", stdin);
+    result = all_tests();
+
+     if (result != 0) {
+         printf("%s\n", result);
+     }
+     else {
+          // printf("TEST PASSED\n");
+     } 
+
+     while(1);
 
 
-    char *result = all_tests();
-
-    if (result != 0) {
-     printf("%s\n", result);
-    }
-    else {
-      // printf("TEST PASSED\n");
-    }
-
-    free(shell);
-    return result != 0;
+     return result != 0;
 
  }

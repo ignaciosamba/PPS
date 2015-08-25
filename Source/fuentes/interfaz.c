@@ -9,7 +9,6 @@
 
 #include "headers.h"
 #include "conversor.h"
-#include "flash.h"
 #include "contador.h"
 #include "interfaz.h"
 
@@ -184,28 +183,6 @@ struct shellstr *analizar(struct shellstr *shell)
 
         // else get_PCA();
     }
-    else if((shell->comando[0] == 'S') && (shell->comando[1] == 'C') && (shell->comando[2] == 'F'))
-    {
-        if(shell->n_args > 0)
-        {shell->errn = 405; return shell;}
-
-        else guardar_config(shell);
-    }
-    else if((shell->comando[0] == 'G') && (shell->comando[1] == 'C') && (shell->comando[2] == 'F'))
-    {
-        if(shell->n_args > 0)
-        {shell->errn = 405; return shell;}
-
-        else cargar_config(shell);
-    }
-    else if((shell->comando[0] == 'S') && (shell->comando[1] == 'H') && (shell->comando[2] == 'C'))
-    {
-        if(shell->n_args > 0)
-        {shell->errn = 405; return shell;}
-
-        else mostrar_config_flash();
-    }
-
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'H') && (shell->comando[2] == 'A'))
     {
         if(shell->n_args > 0)

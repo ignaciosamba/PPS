@@ -8,7 +8,6 @@
 #include "interfaz.h"
 #include "configurador.h"
 #include "conversor.h"
-#include "flash.h"
  
 unsigned long int dato_a_enviar;
 unsigned short int posicion_adc;
