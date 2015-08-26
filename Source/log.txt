@@ -141,4 +141,8 @@ subi unas tablas en excel al drive con los datos de las mediciones que hice el o
 
 24/8
 
+el commit en el que "llegamos a las 100 horas" es fc2f2cbbdec1329eebf01bc7659c95251c960cbb. se llama "TIMER2 Y TIMER3". porque me pinto digamos. pero esta bien es mas o menos a los 3 meses de haber arrancado.
+
+
+
 acabamos de ver que el contador de eventos cuenta por flanco de bajada.

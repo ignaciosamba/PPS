@@ -8,6 +8,7 @@
  */
 
 #include "headers.h"
+#include "sensorCE/funciones_sensor.h"
 #include "conversor.h"
 #include "contador.h"
 #include "interfaz.h"
