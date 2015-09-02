@@ -1,7 +1,7 @@
 int iniciar_ADC(void);
 int iniciar_interrupciones(void);
 int iniciar_FLASH(void);
-int iniciar_UART(void);
+void iniciar_UART(void);
 void iniciar_timer0(void);
 void iniciar_timer2(void);
 void iniciar_contadorRPM(void);

@@ -13,7 +13,7 @@ void iniciar_puertos (void)
    XBR0     = 0x01;                    // Habilitar UART en P0.4(TX) y P0.5(RX)                     
    XBR1     = 0x51;                    // Habilitar el crossbar, habilitar Timer0 y PCA
    P0MDOUT |= 0x10;                    // Habilitar UTX como push-pull output
-   P0MDOUT |= 0x80;                    // Habilitar led P0.7 como push pull
+	 P1MDOUT |= 0x02;										 // Habilitar led P1.1 como push pull
    // P0MDIN |= 0x0C;                  // P0.3 y P0.4 tienen que ser entrada digital
 }
 
@@ -50,48 +50,55 @@ int iniciar_ADC(void)
 	return 0;
 }
 
-
-int iniciar_UART(void)
+void iniciar_UART(void)
 {
 
-	SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
-	                                   //        level of STOP bit is ignored
-	                                   //        RX enabled
-	                                   //        ninth bits are zeros
-	                                   //        clear RI0 and TI0 bits
-	if (SYSCLK/BAUDRATE/2/256 < 1) 
-	{
-		TH1 = -(SYSCLK/BAUDRATE/2);
-		CKCON &= ~0x0B;                  // T1M = 1; SCA1:0 = xx
-		CKCON |=  0x08;
-	} 
-	else if (SYSCLK/BAUDRATE/2/256 < 4) 
-	{
-		TH1 = -(SYSCLK/BAUDRATE/2/4);
-		CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01                  
-		CKCON |=  0x01;
-	} 
-	else if (SYSCLK/BAUDRATE/2/256 < 12) 
-	{
-		TH1 = -(SYSCLK/BAUDRATE/2/12);
-		CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00
-	} 
-	else 
-	{
-		TH1 = -(SYSCLK/BAUDRATE/2/48);
-		CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
-		CKCON |=  0x02;
-	}
+//-----------------------------------------------------------------------------
+// UART0_Init
+//-----------------------------------------------------------------------------
+//
+// Configure the UART0 using Timer1, for <BAUDRATE> and 8-N-1.
+//
+   
+   XBR0     = 0x01;                    // Enable UART to Pins P0.4, P0.5
+   XBR1     = 0x40;                    // Enable Crossbar 
 
-	TL1 = TH1;                          // Init Timer1
-	TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
-	TMOD |=  0x20;                       
-	ADC0MUX = 0x08;
-	TR1 = 1;                            // START Timer1
-	TI0 = 1;                            // Indicate TX0 ready
+   P0SKIP   = 0x00;                    // Skip No Port Pins
+   P0MDOUT |= 0x10;                    // Enable UTX as push-pull output
+   P0MDIN  |= 0x20;					   // Enable URX pin as digital input.
+   
+   
+   
+   SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
+                                       //        level of STOP bit is ignored
+                                       //        RX enabled
+                                       //        ninth bits are zeros
+                                       //        clear RI0 and TI0 bits
+   if (SYSCLK/BAUDRATE/2/256 < 1) {
+      TH1 = -(SYSCLK/BAUDRATE/2);
+      CKCON |=  0x08;                  // T1M = 1; SCA1:0 = xx
+   } else if (SYSCLK/BAUDRATE/2/256 < 4) {
+      TH1 = -(SYSCLK/BAUDRATE/2/4);
+      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01                  
+      CKCON |=  0x01;
+   } else if (SYSCLK/BAUDRATE/2/256 < 12) {
+      TH1 = -(SYSCLK/BAUDRATE/2/12);
+      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00
+   } else {
+      TH1 = -(SYSCLK/BAUDRATE/2/48);
+      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
+      CKCON |=  0x02;
+   }
 
-	return 0;
+   TL1 = TH1;                          // init Timer1
+   TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
+   TMOD |=  0x20;                       
+   TR1 = 1;                            // START Timer1
+   TI0 = 1;                            // Indicate TX0 ready
+
+
 }
+
 
 void iniciar_timer0(void)
 {
@@ -112,7 +119,7 @@ void iniciar_contadorRPM(void) // usa timer3
 {
 	TMR3CN |= (1 << 7); //flag de overflow habilitada
 	TMR3CN |= (1 << 2); //timer3 habilitado
-	//clock interno, en modo 16 bit auto-reload
+	//clock interno / 12, en modo 16 bit auto-reload
 
     EIE1 |= 0x80; //habilitar interrupcion de timer3
     EIP1 |= 0x80; // dar prioridad a interrupcion de timer3
@@ -138,3 +145,47 @@ void iniciar_osc_externo(void)
 {
    OSCXCN |= 0x20; // seleccionar oscilador externo en modo CMOS Clock mode. Bits de control de frecuencia 0
 }
+
+
+
+// int iniciar_UART(void)
+// {
+
+// 	SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
+// 	                                   //        level of STOP bit is ignored
+// 	                                   //        RX enabled
+// 	                                   //        ninth bits are zeros
+// 	                                   //        clear RI0 and TI0 bits
+// 	if (SYSCLK/BAUDRATE/2/256 < 1) 
+// 	{
+// 		TH1 = -(SYSCLK/BAUDRATE/2);
+// 		CKCON &= ~0x0B;                  // T1M = 1; SCA1:0 = xx
+// 		CKCON |=  0x08;
+// 	} 
+// 	else if (SYSCLK/BAUDRATE/2/256 < 4) 
+// 	{
+// 		TH1 = -(SYSCLK/BAUDRATE/2/4);
+// 		CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01                  
+// 		CKCON |=  0x01;
+// 	} 
+// 	else if (SYSCLK/BAUDRATE/2/256 < 12) 
+// 	{
+// 		TH1 = -(SYSCLK/BAUDRATE/2/12);
+// 		CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00
+// 	} 
+// 	else 
+// 	{
+// 		TH1 = -(SYSCLK/BAUDRATE/2/48);
+// 		CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
+// 		CKCON |=  0x02;
+// 	}
+
+// 	TL1 = TH1;                          // Init Timer1
+// 	TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
+// 	TMOD |=  0x20;                       
+// 	ADC0MUX = 0x08;
+// 	TR1 = 1;                            // START Timer1
+// 	TI0 = 1;                            // Indicate TX0 ready
+
+// 	return 0;
+// }

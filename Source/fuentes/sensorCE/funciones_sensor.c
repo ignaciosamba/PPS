@@ -57,3 +57,22 @@ void contar_RPM(void) // utiliza timer0
 	}
 
 }
+
+char getchar_pasivo()
+{
+	unsigned char res;
+
+	ES0 = 1; // habilitar interrupcion de UART
+	if (f_UART)
+	{
+		EA = 0; // inhabilitar interrupciones globales
+		f_UART = false;
+		printf("STOP\n");
+		break;
+	}
+	ES0 = 0;
+
+	res = (unsigned char)SBUF0; // obtengo el caracter leido accediendo al registro asociado a la UART
+
+	return res;
+}

@@ -146,3 +146,10 @@ el commit en el que "llegamos a las 100 horas" es fc2f2cbbdec1329eebf01bc7659c95
 
 
 acabamos de ver que el contador de eventos cuenta por flanco de bajada.
+
+
+28/08
+
+bueno vamos a hablar un poco del pwm que se usa para arrancar el motor..
+
+por lo que parece, el programa que arranca el motor es un generador de pulsos. usa un timer del micro para generar los tiempos necesarios que dan las frecuencias que hacen arrancar al motor. hay una frecuencia de arranque, y 
