@@ -12,6 +12,7 @@
 sfr16 TMR2RL = 0xCA;                   // Timer2 reload value   
 sfr16 TMR2 = 0xCC;                     // Timer2 counter   
 sfr16 ADC0DEC = 0x9A;                  // ADC0 Decimation Ratio Register   
+sbit LED = P0^6;                          // LED='1' means ON
    
 //-----------------------------------------------------------------------------   
 // Global CONSTANTS   
@@ -45,6 +46,7 @@ void Oscillator_Init (void);
 void Port_Init (void);   
 void UART0_Init (void);   
 void ADC0_Init(void);   
+void Timer3_Init(int counts);
    
 //-----------------------------------------------------------------------------   
 // MAIN Routine   
@@ -58,6 +60,9 @@ void main (void)
    Port_Init();                        // Initialize Crossbar and GPIO   
    UART0_Init();                       // Initialize UART0 for printf's   
    ADC0_Init();                        // Initialize ADC0   
+
+
+   Timer3_Init (SYSCLK / 12 / 1);        // Init Timer3 to generate
    
    AD0INT = 0;   
    ADC0MD = 0x82;                      // Start continuous conversions   
@@ -108,8 +113,8 @@ void Oscillator_Init (void)
 //-----------------------------------------------------------------------------   
 void Port_Init (void)   
 {   
-   XBR0 = 0x01;                        // UART0 Selected   
-   XBR1 = 0x40;                        // Enable crossbar and weak pull-ups   
+   XBR0 |= 0x01;                        // UART0 Selected   
+   XBR1 |= 0x40;                        // Enable crossbar and weak pull-ups   
    P0MDOUT |= 0xD0;                    // TX, LEDs = Push-pull   
 }   
    
@@ -123,38 +128,76 @@ void Port_Init (void)
 // Configure the UART0 using Timer1, for <BAUDRATE> and 8-N-1.   
 //   
 //-----------------------------------------------------------------------------   
-void UART0_Init (void)   
-{   
-   SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate   
-                                       //        level of STOP bit is ignored   
-                                       //        RX enabled   
-                                       //        ninth bits are zeros   
-                                       //        clear RI0 and TI0 bits   
-   if (SYSCLK/BAUDRATE/2/256 < 1) {   
-      TH1 = -(SYSCLK/BAUDRATE/2);   
-      CKCON |=  0x08;                  // T1M = 1; SCA1:0 = xx   
-   } else if (SYSCLK/BAUDRATE/2/256 < 4) {   
-      TH1 = -(SYSCLK/BAUDRATE/2/4);   
-      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01   
-      CKCON |=  0x01;   
-   } else if (SYSCLK/BAUDRATE/2/256 < 12) {   
-      TH1 = -(SYSCLK/BAUDRATE/2/12);   
-      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00   
-   } else if (SYSCLK/BAUDRATE/2/256 < 48) {   
-      TH1 = -(SYSCLK/BAUDRATE/2/48);   
-      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10   
-      CKCON |=  0x02;   
-   } else {   
-      while (1);                       // Error.  Unsupported baud rate   
-   }   
+void UART0_Init (void)
+{
+
+//-----------------------------------------------------------------------------
+// UART0_Init
+//-----------------------------------------------------------------------------
+//
+// Configure the UART0 using Timer1, for <BAUDRATE> and 8-N-1.
+//
    
-   TL1 = TH1;                          // Init Timer1   
-   TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload   
-   TMOD |=  0x20;   
-   TR1 = 1;                            // START Timer1   
-   TI0 = 1;                            // Indicate TX0 ready   
-}   
+   XBR0     |= 0x01;                    // Enable UART to Pins P0.4, P0.5
+   XBR1     |= 0x40;                    // Enable Crossbar 
+
+   P0SKIP   = 0x00;                    // Skip No Port Pins
+   P0MDOUT |= 0x10;                    // Enable UTX as push-pull output
+   P0MDIN  |= 0x20;                 // Enable URX pin as digital input.
    
+   
+   
+   SCON0 = 0x13;                       // SCON0: 8-bit variable bit rate
+                                       //        level of STOP bit is ignored
+                                       //        RX enabled
+                                       //        ninth bits are zeros
+                                       //        clear RI0 and TI0 bits
+   if (SYSCLK/BAUDRATE/2/256 < 1) {
+      TH1 = -(SYSCLK/BAUDRATE/2);
+      CKCON |=  0x08;                  // T1M = 1; SCA1:0 = xx
+   } else if (SYSCLK/BAUDRATE/2/256 < 4) {
+      TH1 = -(SYSCLK/BAUDRATE/2/4);
+      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01                  
+      CKCON |=  0x01;
+   } else if (SYSCLK/BAUDRATE/2/256 < 12) {
+      TH1 = -(SYSCLK/BAUDRATE/2/12);
+      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00
+   } else {
+      TH1 = -(SYSCLK/BAUDRATE/2/48);
+      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
+      CKCON |=  0x02;
+   }
+
+   TL1 = TH1;                          // init Timer1
+   TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
+   TMOD |=  0x20;                       
+   TR1 = 1;                            // START Timer1
+   TI0 = 1;                            // Indicate TX0 ready
+
+
+
+}
+
+
+ void Timer3_Init (int counts)
+{
+   TMR3CN  = 0x00;                        // Stop Timer3; Clear TF3;
+                                          // use SYSCLK/13 as timebase
+   CKCON  &= ~0x60;                       // Timer3 clocked based on T3XCLK;
+
+   TMR3RL  = -counts;                     // Init reload values
+   TMR3    = 0xffff;                      // set to reload immediately
+   ET3     = 1;                           // enable Timer3 interrupts
+   TR3     = 1;                           // start Timer3
+}
+
+
+void Timer3_ISR (void) interrupt 5
+{
+   TF3H = 0;                              // clear Timer3 interrupt flag
+   LED = ~LED;                            // change state of LED
+}
+
 //-----------------------------------------------------------------------------   
 // ADC0_Init   
 //-----------------------------------------------------------------------------   

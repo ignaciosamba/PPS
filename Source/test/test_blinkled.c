@@ -76,21 +76,23 @@ static char * test_BLINKLED()
  }
 
 
- void Timer2_Init (int counts)
+ void Timer3_Init (int counts)
 {
-   TMR2CN  = 0x00;                        // Stop Timer2; Clear TF2;
-                                          // use SYSCLK/12 as timebase
-   CKCON  &= ~0x60;                       // Timer2 clocked based on T2XCLK;
+   TMR3CN  = 0x00;                        // Stop Timer3; Clear TF3;
+                                          // use SYSCLK/13 as timebase
+   CKCON  &= ~0xC0;                       // Timer3 clocked based on T3XCLK;
 
-   TMR2RL  = -counts;                     // Init reload values
-   TMR2    = 0xffff;                      // set to reload immediately
-   ET2     = 1;                           // enable Timer2 interrupts
-   TR2     = 1;                           // start Timer2
+   TMR3RLH  = -counts & 0xFF000000;                     // Init reload values
+   TMR3RLL  = -counts & 0x000000FF;                     // Init reload values
+   TMR3H    = 0xff;                      // set to reload immediately
+   TMR3L    = 0xff;                      // set to reload immediately
+   ET3     = 1;                           // enable Timer3 interrupts
+   TMR3CN |= 0x04;                           // TR3 = 1,  start Timer3
 }
 
 
-void Timer2_ISR (void) interrupt 5
+void Timer3_ISR (void) interrupt 5
 {
-   TF2H = 0;                              // clear Timer2 interrupt flag
+   TF3H = 0;                              // clear Timer3 interrupt flag
    LED = ~LED;                            // change state of LED
 }

@@ -60,8 +60,8 @@ void iniciar_UART(void)
 // Configure the UART0 using Timer1, for <BAUDRATE> and 8-N-1.
 //
    
-   XBR0     = 0x01;                    // Enable UART to Pins P0.4, P0.5
-   XBR1     = 0x40;                    // Enable Crossbar 
+   XBR0     |= 0x01;                    // Enable UART to Pins P0.4, P0.5
+   XBR1     |= 0x40;                    // Enable Crossbar 
 
    P0SKIP   = 0x00;                    // Skip No Port Pins
    P0MDOUT |= 0x10;                    // Enable UTX as push-pull output
@@ -102,6 +102,7 @@ void iniciar_UART(void)
 
 void iniciar_timer0(void)
 {
+   XBR1 |= 0x50;
    TH0 = 0;           // Init Timer0 High register
    TL0 = 0;           // Init Timer0 Low register
    TMOD |= 0x25;                       // Timer0 in 16-bit mode, fuente externa    // Timer0 interrupt enabled
