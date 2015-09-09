@@ -87,49 +87,84 @@ void iniciar_sysclock (void)
 void iniciar_arrancaMotor(void) // usa timer2
 {
 	TMR2CN |= (1 << 7); //flag de overflow habilitada
-	TMR2CN |= (1 << 2); //timer2 habilitado
-	//clock interno, en modo 16 bit auto-reload
+	// interrupciones de low byte deshabilitadas
+	// en modo 16 bit auto-reload
+	TMR2CN &=~ (1 << 0); //clock interno / 12
 
-    EIE1 |= 0x80; //habilitar interrupcion de timer2
-    EIP1 |= 0x80; // dar prioridad a interrupcion de timer2
+	CKCON  &=~ (1 << 5);
+	CKCON  &=~ (1 << 4); // registros alto y bajo de timer2 definidos por T2XCLK (sysclock / 12)
+
+    IE |= (1 << 5); //habilitar interrupcion de timer2
+    IP |= (1 << 5); // dar prioridad a interrupcion de timer2
 
 	TMR2L = 0;
     TMR2H = 0;
 
-    //seteamos en 32758 el reload value para obtener mayor versatilidad en los tiempos de interrupcion
-    TMR2RLL = 0; //parte baja del valor de retorno de timer2.
-    TMR2RLH = 0x80; //parte alta del valor de retorno de timer2.
+    //se calculo un valor de retorno de 65536 - 64 = 65280
+    TMR2RLL = 0x00; //parte baja del valor de retorno de timer2.
+    TMR2RLH = 0xFF; //parte alta del valor de retorno de timer2.
 
+	TMR2CN |= (1 << 2); //timer2 habilitado
 }
 
 /**
  * @brief define cada cuanto se envia un pulso por la salida
  * @details setea el valor de frecuencia de envio de pulsos segun un numero ingresado que representa los microsegundos
  */
-void set_cantInt(short int microsegundos)
+void set_cantInt(int microsegundos)
 {
-	cantInt = 16129/microsegundos;
+	cantInt = microsegundos / 31;
  /*
- *	siendo X = cantidad de veces que se interrumpe hasta que se levanta la bandera
- *	siendo Y = valor de retorno de timer2, fijo en 32768
- *	siendo Z = valor en uS del periodo para el generador de pulsos
+ *  EXPLICACION DE ESTA FUNCION
+ *  ----------------------------
+ *  
+ *	usando timer2 en modo 16 bits con registros de autoreload y clockeado por sysclock / 12
+ *	
+ *	se tiene que 
+ *	
+ *			 SYSCLOK / 12
+ *			--------------  = cantidad de interrupciones / segundo
+ *			 65536 - RLV
+ *	
+ *	con RLV el valor de retorno de los registros de reload de timer2
  *
- *	se tiene que:
+ *	siendo la fuente del timer2, SYSCLCK / 12 = 2041666 y el valor de reload = 0, 
+ *	actualmente hay 2041666 / 65536 = 31 interrupciones / segundo. Este valor se puede usar para calcular el 
+ *	periodo minimo del PWM, ya que contando interrupciones, se puede alargar el periodo. 
+ *	
+ *	Si no se cuenta ninguna interrupcion, es decir, si se toman todas, tenemos un periodo de 32 ms, y este es el
+ *	periodo minimo que se puede obtener para este valor de retorno de los registros de reload. Lo cual no cumple
+ *	con el periodo minimo para dar arranque al motor. es necesario aumentar el valor de los registros de reload
+ *	de timer2.
+ *	
+ *	
+ *	
+ *	con un valor de regarga de 65536 - 256 = 65280, se tiene que hay 
+ *	
+ *	2041666 / 256 = 7975 interrupciones / segundo
+ *	
+ *	lo cual da un periodo minimo de 125 uS, lo cual es bastante aceptable.
+ *	
+ *	
+ *	por esto entonces se fija el valor de retorno de los registros de timer2 en 65280, y, teniendo en cuenta
+ *	esto, se tiene que
+ *	
+ *	siendo Y = cantidad de veces que se interrumpe hasta que se levanta la bandera
+ *	siendo X = valor en uS del periodo para el generador de pulsos
+ *	
+ *	y tomando X como el parametro de entrada en la funcion, e Y como la salida
+ *	
+ *	se obtiene Y sabiendo que el periodo minimo es 31 uS:
  *
- *	 	   10^6
- *   ------------------ = Z
- *   (SYSCLOCK / Y) * X
- *
- *   en esta funcion, Z se ingresa como parametro, y se obtiene X; y como Y = 32768,
- *     _______________
- *	  |               |
- *    |  X = 16129/Z  | 
- *    |_______________|
+ *	   		 _______________
+ *	  		|               |
+ *    ==>	|  Y = X/125     | 
+ *    		|_______________|
  *    
  */
 }
 
-void modificarPwm(short int microsegundos)
+void modificarPwm(int microsegundos)
 {
 	set_cantInt(microsegundos); // cambio el valor de cantInt, y despues lo uso para contar las interrupciones y saber en cual me salgo.
 	veces_pwm = 20000/microsegundos;
@@ -151,8 +186,10 @@ void arrancar_motor(void)
  void T2_ISR(void) interrupt 5
  {
  	TMR2CN &= ~(1 << 7); // volver a 0 la bandera de interrupcion del byte superior
- 	TMR2CN &= ~(1 << 6); // volver a 0 la bandera de interrupcion del byte inferior
+ 	// TMR2CN &= ~(1 << 6); // volver a 0 la bandera de interrupcion del byte inferior
  	f_PWM = true; // se hablilita la bandera del timer
+	printf( "LOW: 0x%x\n", (char)TMR2L);
+	printf( "HIGH: 0x%x\n", (char)TMR2H);
  }
 
 void UART_ISR (void) interrupt 4
@@ -168,6 +205,7 @@ void UART_ISR (void) interrupt 4
 void main()
 {
    	int i = 0;
+   	int j = 0;
    	PCA0MD &= ~0x40;                    // deshabilitar el watchdog timer
    	iniciar_sysclock();
    	iniciar_puertos();
@@ -176,17 +214,23 @@ void main()
    	iniciar_arrancaMotor();
    	printf("lala\n");
 
-   	// set_cantInt(1000);
+   	 set_cantInt(1000000);
 
-   	//NO ESTA INTERRUMPIENDO.
+   	EA = 1; //habilitar interrupciones globales
 
-   	while(1);
+   	while(1)
    	{
    		if(f_PWM)
    		{
-   			LED = ~LED;
-   			printf("interrupcion\n");
-   		}
+	   		i++;
+	   		f_PWM = false;
+	   		if(i > 1000000)
+	   		{
+	   			LED = ~LED;
+	   			printf("interrupcion %i\n", ++j);
+	   			i = 0;
+	   		}
+	   	}
    	}
 
   //  	arrancar_motor();
