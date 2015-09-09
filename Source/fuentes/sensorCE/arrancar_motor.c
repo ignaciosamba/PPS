@@ -4,7 +4,7 @@
 #define PINCELDA 3
 #define PINMOTOR 12
 #define SETPOINT 40
-#define PWMDEARRANQUE 1340
+#define PWMDEARRANQUE 1800
 
 sbit PIN_PWM = P1^1;
 sbit LED = P0^6;
@@ -86,25 +86,23 @@ void iniciar_sysclock (void)
 
 void iniciar_arrancaMotor(void) // usa timer2
 {
-	TMR2CN |= (1 << 7); //flag de overflow habilitada
-	// interrupciones de low byte deshabilitadas
-	// en modo 16 bit auto-reload
-	TMR2CN &=~ (1 << 0); //clock interno / 12
 
-	CKCON  &=~ (1 << 5);
-	CKCON  &=~ (1 << 4); // registros alto y bajo de timer2 definidos por T2XCLK (sysclock / 12)
+	TMR2CN |= (1 << 6); //flag de overflow habilitada
+	TMR2CN |= (1 << 5); // habilito interrupcion de byte inferior
+	TMR2CN |= (1 << 3); // modo split
+
+	//clock interno / 12
+
+	// CKCON  &=~ (1 << 5);
+	CKCON  &=~ (1 << 4); // registro bajo de timer2 definido por T2XCLK (sysclock / 12)
 
     IE |= (1 << 5); //habilitar interrupcion de timer2
     IP |= (1 << 5); // dar prioridad a interrupcion de timer2
 
 	TMR2L = 0;
-    TMR2H = 0;
 
     //se calculo un valor de retorno de 65536 - 64 = 65280
-    TMR2RLL = 0x00; //parte baja del valor de retorno de timer2.
-    TMR2RLH = 0xFF; //parte alta del valor de retorno de timer2.
-
-	TMR2CN |= (1 << 2); //timer2 habilitado
+    TMR2RLL = 0; //parte baja del valor de retorno de timer2.
 }
 
 /**
@@ -113,7 +111,7 @@ void iniciar_arrancaMotor(void) // usa timer2
  */
 void set_cantInt(int microsegundos)
 {
-	cantInt = microsegundos / 31;
+	cantInt = microsegundos / 125;
  /*
  *  EXPLICACION DE ESTA FUNCION
  *  ----------------------------
@@ -124,37 +122,26 @@ void set_cantInt(int microsegundos)
  *	
  *			 SYSCLOK / 12
  *			--------------  = cantidad de interrupciones / segundo
- *			 65536 - RLV
+ *			 256 - RLV
  *	
  *	con RLV el valor de retorno de los registros de reload de timer2
  *
  *	siendo la fuente del timer2, SYSCLCK / 12 = 2041666 y el valor de reload = 0, 
- *	actualmente hay 2041666 / 65536 = 31 interrupciones / segundo. Este valor se puede usar para calcular el 
+ *	actualmente hay 2041666 / 256 = 7975 interrupciones / segundo. Este valor se puede usar para calcular el 
  *	periodo minimo del PWM, ya que contando interrupciones, se puede alargar el periodo. 
  *	
- *	Si no se cuenta ninguna interrupcion, es decir, si se toman todas, tenemos un periodo de 32 ms, y este es el
- *	periodo minimo que se puede obtener para este valor de retorno de los registros de reload. Lo cual no cumple
- *	con el periodo minimo para dar arranque al motor. es necesario aumentar el valor de los registros de reload
- *	de timer2.
+ *	Si no se cuenta ninguna interrupcion, es decir, si se toman todas, tenemos un periodo de 125 us, y este es el
+ *	periodo minimo que se puede obtener para este valor de retorno de los registros de reload. 
  *	
  *	
- *	
- *	con un valor de regarga de 65536 - 256 = 65280, se tiene que hay 
- *	
- *	2041666 / 256 = 7975 interrupciones / segundo
- *	
- *	lo cual da un periodo minimo de 125 uS, lo cual es bastante aceptable.
- *	
- *	
- *	por esto entonces se fija el valor de retorno de los registros de timer2 en 65280, y, teniendo en cuenta
- *	esto, se tiene que
+ *	teniendo en cuenta esto, se tiene que
  *	
  *	siendo Y = cantidad de veces que se interrumpe hasta que se levanta la bandera
  *	siendo X = valor en uS del periodo para el generador de pulsos
  *	
  *	y tomando X como el parametro de entrada en la funcion, e Y como la salida
  *	
- *	se obtiene Y sabiendo que el periodo minimo es 31 uS:
+ *	se obtiene Y sabiendo que el periodo minimo es 125 uS:
  *
  *	   		 _______________
  *	  		|               |
@@ -176,20 +163,20 @@ void arrancar_motor(void)
 
 	modificarPwm(1150);
 	for(i = 1.5 * SYSCLK; i > 0; i--);
-	modificarPwm(1299);
+	modificarPwm(1200);
 	for(i = 1.5 * SYSCLK; i > 0; i--);
-	modificarPwm(PWMDEARRANQUE);
+	modificarPwm(velocidad);
 	for(i = 1.5 * SYSCLK; i > 0; i--);
 }
 
 //rutina de interrupcion de timer2
  void T2_ISR(void) interrupt 5
  {
- 	TMR2CN &= ~(1 << 7); // volver a 0 la bandera de interrupcion del byte superior
- 	// TMR2CN &= ~(1 << 6); // volver a 0 la bandera de interrupcion del byte inferior
+	// printf( "LOW: 0x%x\n", (char)TMR2L);
+ 	// TMR2CN &= ~(1 << 7); // volver a 0 la bandera de interrupcion del byte superior
+ 	TMR2CN &= ~(1 << 6); // volver a 0 la bandera de interrupcion del byte inferior
  	f_PWM = true; // se hablilita la bandera del timer
-	printf( "LOW: 0x%x\n", (char)TMR2L);
-	printf( "HIGH: 0x%x\n", (char)TMR2H);
+	// printf( "HIGH: 0x%x\n", (char)TMR2H);
  }
 
 void UART_ISR (void) interrupt 4
@@ -214,63 +201,63 @@ void main()
    	iniciar_arrancaMotor();
    	printf("lala\n");
 
-   	 set_cantInt(1000000);
-
    	EA = 1; //habilitar interrupciones globales
+
+   	// while(1)
+   	// {
+   	// 	if(f_PWM)
+   	// 	{
+	   // 		i++;
+	   // 		f_PWM = false;
+	   // 		if(i > cantInt)
+	   // 		{
+	   // 			LED = ~LED;
+	   // 			printf("interrupcion %i\n", ++j);
+	   // 			i = 0;
+	   // 		}
+	   // 	}
+   	// }
+
+   	arrancar_motor();
 
    	while(1)
    	{
+
+   		ES0 = 1; // habilitar interrupcion de UART
+		if (f_UART)
+	    {
+	    	EA = 0; // inhabilitar interrupciones globales
+	    	f_UART = 0;
+	    	velocidad = velocidad + 20;
+   			modificarPwm(velocidad);
+   			printf("%d\n", velocidad);
+	    	EA = 1; // habilitar interrupciones globales
+	    }
+	    ES0 = 0;
+
    		if(f_PWM)
    		{
-	   		i++;
-	   		f_PWM = false;
-	   		if(i > 1000000)
-	   		{
-	   			LED = ~LED;
-	   			printf("interrupcion %i\n", ++j);
-	   			i = 0;
-	   		}
-	   	}
+   			i++;
+ 			f_PWM = 0; // se deshablilita la bandera del timer}
+ 			if(i >= cantInt)
+ 			{
+ 				i = 0;
+
+ 				  if(cont_pwm==(veces_pwm))
+				  {
+				      PIN_PWM = 1;
+				      cont_pwm=0; 
+				  }
+				  else
+				  {
+				      PIN_PWM = 0;
+				  }
+				  cont_pwm++;
+ 			}
+
+
+   		}   	
    	}
-
-  //  	arrancar_motor();
-
-  //  	while(1)
-  //  	{
-
-  //  		ES0 = 1; // habilitar interrupcion de UART
-		// if (f_UART)
-	 //    {
-	 //    	EA = 0; // inhabilitar interrupciones globales
-	 //    	f_UART = 0;
-	 //    	velocidad =+ 20;
-  //  			modificarPwm(velocidad);	
-	 //    }
-	 //    ES0 = 0;
-
-  //  		if(f_PWM)
-  //  		{
-  //  			i++;
- 	// 		f_PWM = 0; // se deshablilita la bandera del timer}
- 	// 		if(i >= cantInt)
- 	// 		{
- 	// 			i = 0;
-
- 	// 			  if(cont_pwm==(veces_pwm))
-		// 		  {
-		// 		      PIN_PWM = 1;
-		// 		      cont_pwm=0; 
-		// 		  }
-		// 		  else
-		// 		  {
-		// 		      PIN_PWM = 0;
-		// 		  }
-		// 		  cont_pwm++;
- 	// 		}
-
-
-  //  		}   	
-  //  	}
 
 
 
