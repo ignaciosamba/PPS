@@ -66,9 +66,12 @@ unsigned int CEX0_Compare_Value;       // Holds current PCA compare value
 // main() Routine
 //-----------------------------------------------------------------------------
 
+void set_Pwm(unsigned int num);
+void delay(int tiempo);
+
 void main (void) 
 {
-   unsigned char delay_count;          // Used to implement a delay
+   unsigned int delay_count;          // Used to implement a delay
    bit duty_direction = 0;             // 0 = Decrease; 1 = Increase
 
    PCA0MD = 0x00;                      // Disable watchdog timer
@@ -77,44 +80,54 @@ void main (void)
    OSCILLATOR_Init ();                 // Initialize oscillator
    PCA0_Init ();                       // Initialize PCA0
 
-   EA = 1;                             // Globally enable interrupts
+   // EA = 1;                             // Globally enable interrupts
 
-   while (1)
-   {
-      // Wait a little while
-      for (delay_count = 120; delay_count > 0; delay_count--);
+   set_Pwm(10000);
 
-      if (duty_direction == 1)         // Direction = Increase
-      {
-         // First, check the ECOM0 bit
-         if ((PCA0CPM0 & 0x40) == 0x00)
-         {
-            PCA0CPM0 |= 0x40;          // Set ECOM0 if it is '0'
-         }
-         else                          // Increase duty cycle otherwise
-         {
-            CEX0_Compare_Value--;      // Increase duty cycle
+   delay(380);
+   set_Pwm(20000);
+   delay(380);
+   set_Pwm(30000);
+while(1);
+   // for (delay_count = 50000; delay_count > 0; delay_count--);
 
-            if (CEX0_Compare_Value == 0x0000)
-            {
-               duty_direction = 0;     // Change direction for next time
-            }
-         }
-      }
-      else                             // Direction = Decrease
-      {
-         if (CEX0_Compare_Value == 0xFFFF)
-         {
-            PCA0CPM0 &= ~0x40;         // Clear ECOM0
-            duty_direction = 1;        // Change direction for next time
-         }
-         else
-         {
-            CEX0_Compare_Value++;      // Decrease duty cycle
-         }
-      }
 
-   };
+   // while (1)
+   // {
+   //    // Wait a little while
+   //    for (delay_count = 120; delay_count > 0; delay_count--);
+
+   //    if (duty_direction == 1)         // Direction = Increase
+   //    {
+   //       // First, check the ECOM0 bit
+   //       if ((PCA0CPM0 & 0x40) == 0x00)
+   //       {
+   //          PCA0CPM0 |= 0x40;          // Set ECOM0 if it is '0'
+   //       }
+   //       else                          // Increase duty cycle otherwise
+   //       {
+   //          CEX0_Compare_Value--;      // Increase duty cycle
+
+   //          if (CEX0_Compare_Value == 0x0000)
+   //          {
+   //             duty_direction = 0;     // Change direction for next time
+   //          }
+   //       }
+   //    }
+   //    else                             // Direction = Decrease
+   //    {
+   //       if (CEX0_Compare_Value == 0xFFFF)
+   //       {
+   //          PCA0CPM0 &= ~0x40;         // Clear ECOM0
+   //          duty_direction = 1;        // Change direction for next time
+   //       }
+   //       else
+   //       {
+   //          CEX0_Compare_Value++;      // Decrease duty cycle
+   //       }
+   //    }
+
+   // };
 }
 
 
@@ -157,7 +170,7 @@ void OSCILLATOR_Init (void)
 void PORT_Init (void)
 {
    XBR0    = 0x00;
-   XBR1    = 0x41;                     // Route CEX0 to P0.0,
+   XBR1    = 0x41;                     // rutea CEX0 segun las prioridades del Xbar, por ahora P0.0
                                        // Enable crossbar and weak pull-ups
 
    P0MDOUT |= 0x01;                    // Set CEX0 (P0.0) to push-pull
@@ -236,17 +249,41 @@ void PCA0_Init (void)
                                        // enable Module 0 Match and Interrupt
                                        // Flags
 
-   // Configure initial PWM duty cycle = 50%
-   CEX0_Compare_Value = 65536 - (65536 * 0.5);
-
-   PCA0CPL0 = (CEX0_Compare_Value & 0x00FF);
-   PCA0CPH0 = (CEX0_Compare_Value & 0xFF00)>>8;
-
    EIE1 |= 0x10;                       // Enable PCA interrupts
 
    // Start PCA counter
    CR = 1;
 }
+
+/**
+ * @brief cambia el ciclo de trabajo del PWM
+ * @details con esta funcion se puede cambiar el ciclo de trabajo del pwm usando el registro PCA0CPL0 del PCA.
+ * Cambia segun la funcion
+ * 
+ *  cdt = (65536 - PCA0CPn) / 65536
+ * 
+ * @param int [description]
+ */
+void set_Pwm(unsigned int num)
+{
+
+   EA = 1;
+   while(CCF0 != 0);       // espera que termine el ciclo de trabajo
+   EA = 0;
+
+   // luego setea los valores
+   PCA0CPL0 = (num & 0x00FF);
+   PCA0CPH0 = (num & 0xFF00)>>8;
+
+
+}
+
+
+
+//-----------------------------------------------------------------------------
+// End Of File
+//-----------------------------------------------------------------------------
+
 
 //-----------------------------------------------------------------------------
 // PCA0_ISR
@@ -260,15 +297,25 @@ void PCA0_Init (void)
 // the global variable "CEX0_Compare_Value".
 //
 //-----------------------------------------------------------------------------
-void PCA0_ISR (void) interrupt 11
+// void PCA0_ISR (void) interrupt 11
+// {
+//    CCF0 = 0;                           // Clear module 0 interrupt flag.
+
+//    PCA0CPL0 = (CEX0_Compare_Value & 0x00FF);
+//    PCA0CPH0 = (CEX0_Compare_Value & 0xFF00)>>8;
+// }
+
+
+void delay(int tiempo)
 {
-   CCF0 = 0;                           // Clear module 0 interrupt flag.
-
-   PCA0CPL0 = (CEX0_Compare_Value & 0x00FF);
-   PCA0CPH0 = (CEX0_Compare_Value & 0xFF00)>>8;
+	int i = 0;
+	EA = 1;
+	while(1)
+	if(CCF0)
+	{
+		CCF0 = 0;
+		i++;
+		if(i >= tiempo) break;
+	}
+	EA = 0;
 }
-
-
-//-----------------------------------------------------------------------------
-// End Of File
-//-----------------------------------------------------------------------------
