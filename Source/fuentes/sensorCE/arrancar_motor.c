@@ -4,7 +4,7 @@
 #define PINCELDA 3
 #define PINMOTOR 12
 #define SETPOINT 40
-#define PWMDEARRANQUE 1800
+#define PWMDEARRANQUE 1340
 
 sbit PIN_PWM = P1^1;
 sbit LED = P0^6;
@@ -16,6 +16,18 @@ short int variable=1000;
 short int cantInt;
 char f_PWM;
 bool f_UART;
+
+void delay(int microsegundos)
+{
+	int i = 0;
+	while(1)
+	if(f_PWM)
+	{
+		f_PWM = false;
+		i++;
+		if(i < microsegundos/125) break;	
+	}
+}
 
 void iniciar_UART(void)
 {
@@ -145,7 +157,7 @@ void set_cantInt(int microsegundos)
  *
  *	   		 _______________
  *	  		|               |
- *    ==>	|  Y = X/125     | 
+ *    ==>	|  Y = X/125    | 
  *    		|_______________|
  *    
  */
@@ -159,14 +171,15 @@ void modificarPwm(int microsegundos)
 
 void arrancar_motor(void)
 {
-	int i;
-
+	printf(".\n");
 	modificarPwm(1150);
-	for(i = 1.5 * SYSCLK; i > 0; i--);
+	delay(1500000);
+	printf("..\n");
 	modificarPwm(1200);
-	for(i = 1.5 * SYSCLK; i > 0; i--);
+	delay(1500000);
+	printf("...\n");
 	modificarPwm(velocidad);
-	for(i = 1.5 * SYSCLK; i > 0; i--);
+	delay(1500000);
 }
 
 //rutina de interrupcion de timer2
@@ -193,32 +206,19 @@ void main()
 {
    	int i = 0;
    	int j = 0;
+   	char done = 0;
    	PCA0MD &= ~0x40;                    // deshabilitar el watchdog timer
    	iniciar_sysclock();
    	iniciar_puertos();
    	iniciar_UART();
-   	printf("HOLA\n");
+   	// printf("HOLA\n");
    	iniciar_arrancaMotor();
-   	printf("lala\n");
+   	// printf("lala\n");
 
    	EA = 1; //habilitar interrupciones globales
 
-   	// while(1)
-   	// {
-   	// 	if(f_PWM)
-   	// 	{
-	   // 		i++;
-	   // 		f_PWM = false;
-	   // 		if(i > cantInt)
-	   // 		{
-	   // 			LED = ~LED;
-	   // 			printf("interrupcion %i\n", ++j);
-	   // 			i = 0;
-	   // 		}
-	   // 	}
-   	// }
-
    	arrancar_motor();
+   	printf("arranca\n");
 
    	while(1)
    	{
@@ -235,9 +235,14 @@ void main()
 	    }
 	    ES0 = 0;
 
+
+
    		if(f_PWM)
    		{
    			i++;
+   			if(!done)
+   				j++;
+
  			f_PWM = 0; // se deshablilita la bandera del timer}
  			if(i >= cantInt)
  			{
@@ -255,6 +260,19 @@ void main()
 				  cont_pwm++;
  			}
 
+ 			if(j == 16000)
+ 			{
+ 				printf("SUBE\n");
+   				modificarPwm(1700);
+ 			}
+ 			if(j == 24000)
+ 			{
+ 				printf("estable\n");
+   				modificarPwm(1499);
+   				done = 1;
+   				j = 0;
+ 			}
+
 
    		}   	
    	}
@@ -263,3 +281,4 @@ void main()
 
 
 }
+
