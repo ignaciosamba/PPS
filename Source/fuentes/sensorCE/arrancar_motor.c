@@ -82,52 +82,19 @@ void main (void)
 
    // EA = 1;                             // Globally enable interrupts
 
-   set_Pwm(10000);
+   set_Pwm(42200);
+   delay(600);
+   set_Pwm(42100);
+   delay(600);
+   set_Pwm(33264);
+   delay(600);
+   set_Pwm(33000);
+   // delay(600);
+   // set_Pwm(32000);
+   
 
-   delay(380);
-   set_Pwm(20000);
-   delay(380);
-   set_Pwm(30000);
 while(1);
-   // for (delay_count = 50000; delay_count > 0; delay_count--);
 
-
-   // while (1)
-   // {
-   //    // Wait a little while
-   //    for (delay_count = 120; delay_count > 0; delay_count--);
-
-   //    if (duty_direction == 1)         // Direction = Increase
-   //    {
-   //       // First, check the ECOM0 bit
-   //       if ((PCA0CPM0 & 0x40) == 0x00)
-   //       {
-   //          PCA0CPM0 |= 0x40;          // Set ECOM0 if it is '0'
-   //       }
-   //       else                          // Increase duty cycle otherwise
-   //       {
-   //          CEX0_Compare_Value--;      // Increase duty cycle
-
-   //          if (CEX0_Compare_Value == 0x0000)
-   //          {
-   //             duty_direction = 0;     // Change direction for next time
-   //          }
-   //       }
-   //    }
-   //    else                             // Direction = Decrease
-   //    {
-   //       if (CEX0_Compare_Value == 0xFFFF)
-   //       {
-   //          PCA0CPM0 &= ~0x40;         // Clear ECOM0
-   //          duty_direction = 1;        // Change direction for next time
-   //       }
-   //       else
-   //       {
-   //          CEX0_Compare_Value++;      // Decrease duty cycle
-   //       }
-   //    }
-
-   // };
 }
 
 
