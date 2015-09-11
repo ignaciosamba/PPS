@@ -88,7 +88,7 @@ void main (void)
    delay(600);
    set_Pwm(33264);
    delay(600);
-   set_Pwm(33000);
+   set_Pwm(36000);
    // delay(600);
    // set_Pwm(32000);
    
