@@ -44,11 +44,11 @@ void main()
 	iniciar_puertos();
 	iniciar_osc_externo();
 	iniciar_UART();
+	iniciar_PCA();
 	iniciar_ADC();
 	iniciar_timer0();
 	// iniciar_timer2();
 	iniciar_contadorRPM();
-	iniciar_PCA();
 	// iniciar_timer3();
 
 	shell->stop_conf = 1;
