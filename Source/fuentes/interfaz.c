@@ -200,6 +200,14 @@ struct shellstr *analizar(struct shellstr *shell)
         else contar_RPM();
     }
 
+    else if((shell->comando[0] == 'P') && (shell->comando[1] == 'W') && (shell->comando[2] == 'M'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else arrancar_motor();
+    }
+
     else shell->errn = 404;
 
     return shell;

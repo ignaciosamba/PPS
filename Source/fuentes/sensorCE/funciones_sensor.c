@@ -58,6 +58,70 @@ void contar_RPM(void) // utiliza timer0
 
 }
 
+/**
+ * @brief arranca el motor usando el pwm de la placa
+ * @details [long description]
+ */
+void arrancar_motor(void) 
+{
+   printf("\nFase 1...\n");
+   set_Pwm(42200);
+   delay(600);
+   printf("Fase 2...\n");
+   set_Pwm(42100);
+   delay(600);
+   printf("Arranque...\n");
+   set_Pwm(33264);
+   delay(600);
+   printf("Nivel estable\n");
+   set_Pwm(36000);
+}
+
+/**
+ * @brief cambia el ciclo de trabajo del PWM
+ * @details con esta funcion se puede cambiar el ciclo de trabajo del pwm usando el registro PCA0CPL0 del PCA.
+ * Cambia segun la funcion
+ * 
+ *  cdt = (65536 - PCA0CPn) / 65536
+ * 
+ * @param int [description]
+ */
+void set_Pwm(unsigned int num)
+{
+
+   EA = 1;
+   while(CCF0 != 0);       // espera que termine el ciclo de trabajo
+   EA = 0;
+
+   // luego setea los valores
+   PCA0CPL0 = (num & 0x00FF);
+   PCA0CPH0 = (num & 0xFF00)>>8;
+
+
+}
+
+/**
+ * @brief este delay esta hecho exclusivamente para el pwm y no puede usarse en otro lado porque puede interferir
+ * con el funcionamiento del mismo
+ * 
+ * @details [long description]
+ * 
+ * @param tiempo [description]
+ */
+void delay(int tiempo)
+{
+	int i = 0;
+	EA = 1;
+	while(1)
+	if(CCF0)
+	{
+		CCF0 = 0;
+		i++;
+		if(i >= tiempo) break;
+	}
+	EA = 0;
+}
+
 // char getchar_pasivo()
 // {
 // 	unsigned char res;

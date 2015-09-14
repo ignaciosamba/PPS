@@ -11,7 +11,7 @@ sbit LED = P0^7;
 void iniciar_puertos (void)
 {
    XBR0     = 0x01;                    // Habilitar UART en P0.4(TX) y P0.5(RX)                     
-   XBR1     = 0x51;                    // Habilitar el crossbar, habilitar Timer0 y PCA
+   XBR1     = 0x51;                    // Habilitar el crossbar, habilitar Timer0 y PCA, deberia rutearlo a P0.2
    P0MDOUT |= 0x10;                    // Habilitar UTX como push-pull output
 	 P1MDOUT |= 0x02;										 // Habilitar led P1.1 como push pull
    // P0MDIN |= 0x0C;                  // P0.3 y P0.4 tienen que ser entrada digital
@@ -21,6 +21,8 @@ void iniciar_sysclock (void)
 {
    OSCICN |= 0x03;                     // configuracion del oscilador para la maxima frecuencia
    RSTSRC  = 0x04;                     // Enable missing clock detector
+   CLKSEL = 0x00;                      // selecciona el clock interno como fuente para SYSCLK
+
 }
 
 
@@ -48,6 +50,26 @@ int iniciar_ADC(void)
 	ADC0MD  = 0x80;                     // Enable the ADC0 (IDLE Mode)
 	
 	return 0;
+}
+
+/**
+ * @brief inicia el PCA para el PWM
+ * @details 
+ */
+void iniciar_PCA (void)
+{
+   // Configure PCA time base; overflow interrupt disabled
+   PCA0CN = 0x00;                      // Stop counter; clear all flags
+   PCA0MD = 0x08;                      // Use SYSCLK as time base
+
+   PCA0CPM0 = 0xCB;                    // Module 0 = 16-bit PWM mode and
+                                       // enable Module 0 Match and Interrupt
+                                       // Flags
+
+   EIE1 |= 0x10;                       // Enable PCA interrupts
+
+   // Start PCA counter
+   CR = 1;
 }
 
 void iniciar_UART(void)
@@ -109,12 +131,12 @@ void iniciar_timer0(void)
    TCON |= 0x50;                        // Timer0 ON
 }
 
-void iniciar_timer2(void)
-{
-   TMR2CN |= 0x05;    // T2 en modo 16 bits, TR2 habilitado, clockeado por fuente externa
-   TMR2L = 0;
-   TMR2H = 0;
-}
+// void iniciar_timer2(void)
+// {
+//    TMR2CN |= 0x05;    // T2 en modo 16 bits, TR2 habilitado, clockeado por fuente externa
+//    TMR2L = 0;
+//    TMR2H = 0;
+// }
 
 void iniciar_contadorRPM(void) // usa timer3
 {

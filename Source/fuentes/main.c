@@ -48,8 +48,8 @@ void main()
 	iniciar_timer0();
 	// iniciar_timer2();
 	iniciar_contadorRPM();
+	iniciar_PCA();
 	// iniciar_timer3();
-	// iniciar_PCA();
 
 	shell->stop_conf = 1;
 
