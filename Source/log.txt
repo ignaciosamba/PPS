@@ -7,22 +7,149 @@ la plataforma de tests esta hecha. la idea es que test_global corre todos los ot
 
 IDEAS DE TESTS
 
--para testear al adc, que inicie la configuracion y analice el registro en el que se activa el bit de end of conversion, si se activa, el adc anda por lo menos. Ya mas tarde cuando esten bien hechas las funciones de configuracion, hay que testear valores esperados para el adc dada una configuracion.
+-para testear al adc, que iniciamos la configuracion y analizamos el registro en el que se activa el bit de end of conversion, si se activa, el adc anda por lo menos. Ya mas tarde cuando esten bien hechas las funciones de configuracion, hay que testear valores esperados para el adc dada una configuracion.
 
 
 POR AHORA
 
-por ahora lo que voy a hacer, para no romperme la cabeza con la configuracion de los pines. es que lea todos los pines de pecho y pase toda la informacion siempre. despues lo voy detallando de a poco.
+por ahora lo que vamos a hacer, para no romperme la cabeza con la configuracion de los pines. es que lea todos los pines de pecho y pase toda la informacion siempre. despues lo vamos detallando de a poco.
 Entonces por ahora va a haber un primer prototipo.. no tiene un carajo de configuracion. lo conectas y de pecho te entra a mandar informacion de las 8 patas del adc en modo single ended.
+
 
 PRIMER PROTOTIPO
 
 va a entregar los datos que reciba de las 8 patas todo el tiempo a una frecuencia fija en modo single-ended. Con una tension de referencia de 2.5V. Cuando tiene el dato listo lo imprime por la UART.
 
+
 7/5
 
 ya pudimos hacer andar el primer prototipo con solo el adc andando y tirando la info de todas las patas de manera continua. ahora estamos intentando configurar alguna de las patas.
 
+
 8/5
 
 Orlando nos dijo hoy que el gain del adc puede variar segun la temperatura y el tiempo que hace que esta convirtiendo y nos dejo bastante en offside.. hay que hacer algunas pruebas
+
+
+14/5
+
+PUNTOS CLAVE DE UTILIZACION DE LA FLASH
+
+- El monitor de VDD tiene que estar habilitado cuando se esta escribiendo o borrando la flash
+- Deshabilitar las interrpupciones globales antes de setear PSWE a 1
+- Hay que tener cuidado con los modelos de memoria Large y Compact, porque usan xdata y pdata para variables de usuario, y ambos generan codigos de escritura MOVX
+- Secuencias Lock y Key deben generarse antes de cada operacion de escritura o borrado. 
+- intentos de escritura, lectura o borrado de secciones de memoria localizadas en espacio reservado generaran un reset del dispositivo
+- El CPU se detiene en las operaciones de lectura y escritura de la flash, pero los dispositivos perifericos siguen andando
+- Las interrupciones que surgen durante una operacion de escritura o borrado se pospondran hasta que se complete la operacion
+- La pagina de la flash que contiene el o los bytes del Lock no se pueden borrar desde el codigo de aplicacion
+
+
+Para escribir en la memoria flash se usa la instruccion MOVX. Por defecto, esta instruccion carga datos en la XRAM, pero cambiando el registro PSCTL se puede modificar para que escriba en la Flash. Las instrucciones MOVX se neran en C usando punteros de memoria de tipo xdata o pdata.
+
+Solo se puede escribir en memoria habiendo borrado todo antes. La instruccion de escritura solo puede poner bits en 0
+
+
+18/5
+
+estoy pensando en un cambio de paradigma de la interfaz con el usuario. como nos estamos quedando sin memoria una buena alternativa es usar MML, que nos permitiria directamente ingresarle comandos al sistema y que el haga bobamente lo que dicen las instrucciones de pechaso, de esa forma tendriamos nomas un case gigante con todas las instrucciones y esas instrucciones llaman funciones que segun los argumentos que tengan las instrucciones hacen lo que queremos. es un lenguaje osea es burdamente crear una especie de mini assembler para el sistema.
+
+
+SOBRE EL ADC: hay que fijar la frecuencia maxima de muestreo.
+
+
+22/05
+
+arrancamos un paradigma nuevo de como va a configurarse todo.. vamos a usar MML.. la lista de la explicacion de comandos esta en el archivo comandos .txt
+
+28/05
+
+PUNTOS CLAVE DE LOS TIMERS
+
+- timer0 y timer1 se pueden usar como contadores de flanco de bajada, contaran como maximo una cantidad de eventos igual al cuarto del clock de sistema actual.
+- el bit T0/C del registro TMOD especifica si la fuente de pulsos es interna o externa.
+- los bits T0M y T1M del registro CKCON definen el clock asociado a cada timer. si es 1 el clock es el interno; si es 0, usa el prescaler que tambien se indica en CKCON
+
+
+1/6
+
+que se guarda en la flash?
+
+-pines en single ended
+-pines en diferencial
+-ganancia
+-modo de transferencia, y en caso de ser por periodo, el numero de periodo
+-contadores habilitados
+
+
+FRECUENCIAS DEL ADC
+
+estoy leyendo un poco porque me cague perdiendo con el tema de la frecuencia de modulacion, de muestreo y la mar en coche del adc. Hay que saber la frecuencia maxima de muestreo para las 8 entradas y fijar esa como la maxima. 
+
+15/6
+
+nos estamos quedando sin lugar en la flash para guardar las opciones de configuracion. al parecer las funciones de la libreria de la flash necesitan una pagina entera + la cantidad de bytes que queres escribir para funcionar,, y encima esos bytes no pueden formar parte de una pagina que tenga codigo adentro, o sea que necesitamos dos paginas enteras. y no nos alcanza ni bosta. lo que estamos pensando ahora es en usar direcamente la UART o el medio que sea para pasarle la configuracion a la raspberry pi o lo que sea que hay del otro lado y qye el lo guarde en su flash si tiene ganas.. habria otra funcion para cargarle la configuracion directamente y que entre por uart digamos. pero no se usaria la flash. se ahorra espacio para codigo ademas porque las iibrerias de la flash son bastante pesadas.
+
+18/06
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+vamos a cambiar el buffer por completo. hasta ahora lo que hacemos es leer una pata del adc SEGUN el buffer. osea recorremos todo el buffer y cuando damos con un pin que coincide con uno de los activos, se cambia el registro AD0MUX. ESO AHORA CAMBIA. lo que vamos a hacer es que haya una funcion muy chiquita que cambie SIEMPRE los canales y cada vez que se mide mandar a analizar el dato convertido y determinar si se manda o no. en vez de recorrer todo el buffer buscando las patas que estan activas, lo que vamos a hacer es convertir a un indice el valor de ADC0MUX actual y usarlo en el buffer_adc para acceder a la pata que se analizo!, de esa forma vemos el valor en buffer_adc y ahi nomas determinamos si se tiene que enviar o se tiene que decrementar o lo que sea. asi el codigo se hace mas chico y 8 veces mas rapido, literalmente.
+
+23/06
+
+nota sobre la funcion analizar_buffer: esta bien que analiza los 12 pines y que el buffer siga siendo de 8 posiciones unicamente. porque si una pata esta en diferencial, no puede estar en single ended y visceversa. es decir que si tengo la pata 2 asignada en 200, ya sea single ended o diferencial, se tiene que decrementar, y si estuviera en diferencial solo la 2 se pone en 200 y no la 3, con eso basta.
+
+1/07
+
+algoritmo para analizar_buffer
+
+lsb: los 4 bits menos significativos de ADC0MUX
+msb: los 4 bits mas significativos de ADC0MUX
+adc[]: buffer con valores variables de la cuenta de cada entrada
+adc_c[]: buffer inicial con valores constantes de la cuenta de cada entrada
+
+var = 0
+idx = 0
+
+if(lsb % 8  >  0)
+	var++
+else var = 0
+
+idx = msb - lsb + 8 + var
+
+if(adc[idx] = 1)
+{
+	adc[idx] = adc_c[idx]
+	return true
+}
+if(adc[idx] = 0)
+{
+	return false
+}
+if(adc[idx] > 1)
+{
+	adc[idx]--
+	return false
+}
+
+
+1/07
+
+subi unas tablas en excel al drive con los datos de las mediciones que hice el otro dia. voy a hacer mas mediciones ahora que esta andando casi todo. pero me quiero ir asi que no voy a medir un carajo ahora. capaz mañana.
+
+
+24/8
+
+el commit en el que "llegamos a las 100 horas" es fc2f2cbbdec1329eebf01bc7659c95251c960cbb. se llama "TIMER2 Y TIMER3". porque me pinto digamos. pero esta bien es mas o menos a los 3 meses de haber arrancado.
+
+
+
+acabamos de ver que el contador de eventos cuenta por flanco de bajada.
+
+
+28/08
+
+bueno vamos a hablar un poco del pwm que se usa para arrancar el motor..
+
+por lo que parece, el programa que arranca el motor es un generador de pulsos. usa un timer del micro para generar los tiempos necesarios que dan las frecuencias que hacen arrancar al motor. hay una frecuencia de arranque, y 

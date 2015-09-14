@@ -1,3 +1,9 @@
 unsigned long convertir(void);
-void enviar_dato(unsigned long);
-void cambiar_pin (void);
+struct shellstr *conf_ganancia(struct shellstr *shell);
+void cambiar_pin(void);
+void enviar_dato(unsigned long int *);
+char analizar_buffer(struct shellstr *shell);
+void cargar_buffer_single(struct shellstr *shell);
+void cargar_buffer_dif (struct shellstr *shell);
+void get_single_ended(struct shellstr *shell);
+void get_differential(struct shellstr *shell);

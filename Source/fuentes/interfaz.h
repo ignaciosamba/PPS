@@ -1,5 +1,6 @@
-void imprimir_menu(void);
-void imprimir_conf_ADC(void);
-void imprimir_conf_modos(void);
-void imprimir_conf_tipoSerial(void);
-void correr_menu(void);
+struct shellstr *obtener_entrada(struct shellstr *shell);
+struct shellstr *analizar(struct shellstr *shell);
+void restart(struct shellstr *shell);
+void reportar(struct shellstr *shell);
+
+// void printeartodo(struct shellstr *shell);
