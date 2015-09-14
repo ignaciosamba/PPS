@@ -88,14 +88,24 @@ void arrancar_motor(void)
  */
 void set_Pwm(unsigned int num)
 {
+	char aux1, aux2;
+	aux1 = (char)IE;
+	aux2 = (char)EIE1;
+	IE = 0;
+	EIE1 = 0x10; // dejamos habilitada unicamente la interrupcion del PCA
 
-   EA = 1;
-   while(CCF0 != 0);       // espera que termine el ciclo de trabajo
-   EA = 0;
-
-   // luego setea los valores
-   PCA0CPL0 = (num & 0x00FF);
-   PCA0CPH0 = (num & 0xFF00)>>8;
+	printf("a\n");
+	EA = 1;
+	printf("b\n");
+	while(CCF0 != 0);       // espera que termine el ciclo de trabajo
+	EA = 0;
+	IE = aux1;
+	EIE1 = aux2; // reestablecemos los valores del registro de interrupcion.
+	
+	printf("pasa el while\n");
+	// luego setea los valores
+	PCA0CPL0 = (num & 0x00FF);
+	PCA0CPH0 = (num & 0xFF00)>>8;
 
 
 }
@@ -110,7 +120,14 @@ void set_Pwm(unsigned int num)
  */
 void delay(int tiempo)
 {
+
 	int i = 0;
+	char aux1, aux2;
+	aux1 = (char)IE;
+	aux2 = (char)EIE1;
+	IE = 0;
+	EIE1 = 0x10; // dejamos habilitada unicamente la interrupcion del PCA
+
 	EA = 1;
 	while(1)
 	if(CCF0)
@@ -120,6 +137,10 @@ void delay(int tiempo)
 		if(i >= tiempo) break;
 	}
 	EA = 0;
+
+	IE = aux1;
+	EIE1 = aux2; // reestablecemos los valores del registro de interrupcion.
+
 }
 
 // char getchar_pasivo()
