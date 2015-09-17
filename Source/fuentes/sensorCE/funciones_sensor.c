@@ -1,7 +1,13 @@
 #include "../headers.h"
 #include "funciones_sensor.h"
 
+#define V_FASE_1 42200
+#define V_FASE_2 42100
+#define V_ARRANQUE 33264
+#define V_ESTABLE 36000
 
+
+short int velocidad = V_ESTABLE;
 
 void contar_RPM(void) // utiliza timer0
 {
@@ -48,6 +54,7 @@ void contar_RPM(void) // utiliza timer0
 				// esto da una precision de 30 rpm. osea que cada resultado es +-30
 
 				printf("%lu +-30 rpm\n", rpm);
+				control_RPM(rpm,V_ESTABLE);
 			  	
 				TH0 = 0;           // Resetear valor de timer0
 				TL0 = 0;           
@@ -57,6 +64,24 @@ void contar_RPM(void) // utiliza timer0
 	}
 
 }
+/**
+ * @brief agrega una histeresis al funcionamiento del motor que evita el desvio de las RPM
+ * @details [long description]
+ */
+void control_RPM(short int rpm_real, short int rpm_ideal)
+{
+	if(rpm_real > rpm_ideal + 50) // si las rpm son muy altas
+	{
+		set_Pwm(velocidad - 100); // se sube la velocidad relativa
+		printf("se controlo para que vaya mas despacio\n");
+	}
+
+	if(rpm_real < rpm_ideal - 50) // si las rpm son muy bajas
+	{
+		set_Pwm(velocidad + 100); // se baja la velocidad relativa
+		printf("se controlo para que vaya mas rapido\n");
+	}
+}
 
 /**
  * @brief arranca el motor usando el pwm de la placa
@@ -64,23 +89,17 @@ void contar_RPM(void) // utiliza timer0
  */
 void arrancar_motor(void) 
 {
-	EIE1 |= 0x10;                       // Enable PCA interrupts
-	EA = 1;
-
 	printf("\nFase 1...\n");
-	set_Pwm(42200);
+	set_Pwm(V_FASE_1);
 	delay(600);
 	printf("Fase 2...\n");
-	set_Pwm(42100);
+	set_Pwm(V_FASE_2);
 	delay(600);
 	printf("Arranque...\n");
-	set_Pwm(33264);
+	set_Pwm(V_ARRANQUE);
 	delay(600);
 	printf("Nivel estable\n");
-	set_Pwm(36000);
-	
-	EA = 0;
-	EIE1 &= ~0x10;                       // Disable PCA interrupts
+	set_Pwm(V_ESTABLE);
 }
 
 /**
@@ -94,26 +113,17 @@ void arrancar_motor(void)
  */
 void set_Pwm(unsigned int num)
 {
-	// char aux1, aux2;
-	// aux1 = (char)IE;
-	// aux2 = (char)EIE1;
-	// IE = 0;
-	// EIE1 = 0x10; // dejamos habilitada unicamente la interrupcion del PCA
+	EIE1 |= 0x10;                       // Enable PCA interrupts
+	EA = 1;
 
-	// printf("a\n");
-	// EA = 1;
-	// printf("b\n");
 	while(CCF0 != 0);       // espera que termine el ciclo de trabajo
-	// EA = 0;
-	// IE = aux1;
-	// EIE1 = aux2; // reestablecemos los valores del registro de interrupcion.
-	
-	// printf("pasa el while\n");
+
 	// luego setea los valores
 	PCA0CPL0 = (num & 0x00FF);
 	PCA0CPH0 = (num & 0xFF00)>>8;
 
-
+	EA = 0;
+	EIE1 &= ~0x10;       
 }
 
 /**
@@ -128,13 +138,10 @@ void delay(int tiempo)
 {
 
 	int i = 0;
-	// char aux1, aux2;
-	// aux1 = (char)IE;
-	// aux2 = (char)EIE1;
-	// IE = 0;
-	// EIE1 = 0x10; // dejamos habilitada unicamente la interrupcion del PCA
 
+	EIE1 |= 0x10;                       // Enable PCA interrupts
 	EA = 1;
+
 	while(1)
 	if(CCF0)
 	{
@@ -142,8 +149,9 @@ void delay(int tiempo)
 		i++;
 		if(i >= tiempo) break;
 	}
-	EA = 0;
 
+	EA = 0;
+	EIE1 &= ~0x10;     
 	// IE = aux1;
 	// EIE1 = aux2; // reestablecemos los valores del registro de interrupcion.
 
