@@ -84,7 +84,6 @@ Proyecto Uvision/contador 16 bit timer0.__i
 Proyecto Uvision/counters
 Proyecto Uvision/counters.hex
 *.bak
-*.hex
 Placa/prueba1.bak
 Placa/prueba1.lst
 Placa/pinhead-1X01.kicad_mod

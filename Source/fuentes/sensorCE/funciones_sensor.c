@@ -64,17 +64,23 @@ void contar_RPM(void) // utiliza timer0
  */
 void arrancar_motor(void) 
 {
-   printf("\nFase 1...\n");
-   set_Pwm(42200);
-   delay(600);
-   printf("Fase 2...\n");
-   set_Pwm(42100);
-   delay(600);
-   printf("Arranque...\n");
-   set_Pwm(33264);
-   delay(600);
-   printf("Nivel estable\n");
-   set_Pwm(36000);
+	EIE1 |= 0x10;                       // Enable PCA interrupts
+	EA = 1;
+
+	printf("\nFase 1...\n");
+	set_Pwm(42200);
+	delay(600);
+	printf("Fase 2...\n");
+	set_Pwm(42100);
+	delay(600);
+	printf("Arranque...\n");
+	set_Pwm(33264);
+	delay(600);
+	printf("Nivel estable\n");
+	set_Pwm(36000);
+	
+	EA = 0;
+	EIE1 &= ~0x10;                       // Disable PCA interrupts
 }
 
 /**
@@ -97,7 +103,7 @@ void set_Pwm(unsigned int num)
 	// printf("a\n");
 	// EA = 1;
 	// printf("b\n");
-	// while(CCF0 != 0);       // espera que termine el ciclo de trabajo
+	while(CCF0 != 0);       // espera que termine el ciclo de trabajo
 	// EA = 0;
 	// IE = aux1;
 	// EIE1 = aux2; // reestablecemos los valores del registro de interrupcion.
