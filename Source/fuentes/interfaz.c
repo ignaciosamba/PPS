@@ -205,7 +205,11 @@ struct shellstr *analizar(struct shellstr *shell)
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
 
-        else arrancar_motor();
+        else 
+        {
+            // iniciar_PCA();
+            arrancar_motor();
+        }
     }
 
     else shell->errn = 404;

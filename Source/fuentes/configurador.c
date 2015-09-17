@@ -10,8 +10,7 @@ sbit LED = P0^7;
 
 void iniciar_puertos (void)
 {
-   XBR0     = 0x01;                    // Habilitar UART en P0.4(TX) y P0.5(RX)                     
-   XBR1     = 0x51;                    // Habilitar el crossbar, habilitar Timer0 y PCA, deberia rutearlo a P0.2
+   XBR1     |= 0x40;                    // Habilitar el crossbar
    P0MDOUT |= 0x10;                    // Habilitar UTX como push-pull output
 	 P1MDOUT |= 0x02;										 // Habilitar led P1.1 como push pull
    // P0MDIN |= 0x0C;                  // P0.3 y P0.4 tienen que ser entrada digital
@@ -52,25 +51,7 @@ int iniciar_ADC(void)
 	return 0;
 }
 
-/**
- * @brief inicia el PCA para el PWM
- * @details 
- */
-void iniciar_PCA (void)
-{
-   // Configure PCA time base; overflow interrupt disabled
-   PCA0CN = 0x00;                      // Stop counter; clear all flags
-   PCA0MD = 0x08;                      // Use SYSCLK as time base
 
-   PCA0CPM0 = 0xCB;                    // Module 0 = 16-bit PWM mode and
-                                       // enable Module 0 Match and Interrupt
-                                       // Flags
-
-   EIE1 |= 0x10;                       // Enable PCA interrupts
-
-   // Start PCA counter
-   CR = 1;
-}
 
 void iniciar_UART(void)
 {
@@ -124,7 +105,7 @@ void iniciar_UART(void)
 
 void iniciar_timer0(void)
 {
-   XBR1 |= 0x50;
+   XBR1 |= 0x10; // habilitar timer0 en el crossbar
    TH0 = 0;           // Init Timer0 High register
    TL0 = 0;           // Init Timer0 Low register
    TMOD |= 0x25;                       // Timer0 in 16-bit mode, fuente externa    // Timer0 interrupt enabled
@@ -212,3 +193,27 @@ void iniciar_osc_externo(void)
 
 // 	return 0;
 // }
+
+
+
+
+/**
+ * @brief inicia el PCA para el PWM
+ * @details 
+ */
+void iniciar_PCA (void)
+{
+   XBR1 |= 0x01; // habilitar CEX0 en el crossbar
+   // Configure PCA time base; overflow interrupt disabled
+   PCA0CN = 0x00;                      // Stop counter; clear all flags
+   PCA0MD = 0x08;                      // Use SYSCLK as time base
+
+   PCA0CPM0 = 0xCB;                    // Module 0 = 16-bit PWM mode and
+                                       // enable Module 0 Match and Interrupt
+                                       // Flags
+
+   // EIE1 |= 0x10;                       // Enable PCA interrupts
+
+   // Start PCA counter
+   CR = 1;
+}
