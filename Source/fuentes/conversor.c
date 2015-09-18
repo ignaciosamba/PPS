@@ -28,7 +28,8 @@ unsigned long convertir(void)
 	
    // Copiar el valor del registro de conversion del adc en una variable local
 	rawValue.Byte[Byte3] = 0x00;
-	rawValue.Byte[Byte2] = (unsigned char)ADC0H;
+	rawValue.Byte[Byte2] = 0x00;
+	// rawValue.Byte[Byte2] = (unsigned char)ADC0H;
 	rawValue.Byte[Byte1] = (unsigned char)ADC0M;
 	rawValue.Byte[Byte0] = (unsigned char)ADC0L;
 
@@ -36,21 +37,25 @@ unsigned long convertir(void)
 	//   medicion (mV) =   --------------- * result (bits)
 	//                       (2^24)-1 (bits)
 	//
-	//   medicion (mV) =  result (bits) / ((2^24)-1 (bits) / Vref (mV))
+	//   medicion (mV) =  result (bits) / ((2^resolucion)-1 (bits) / Vref (mV))
 	//
 	//
 	//   Con un voltaje de referencia de 2.5 V:
 	//
-	//   medicion (mV) =  result (bits) / ((2^24)-1 / 2500)
+	//   medicion (mV) =  result (bits) / ((2^resolucion)-1 / 2500)
 	//
-	//   medicion (mV) =  result (bits) / ((2^24)-1 / 2500)
+	//   medicion (mV) =  result (bits) / ((2^resolucion)-1 / 2500)
 	//
-	//   medicion (mV) =  result (bits) / (16777215 / 2500)
+	//   medicion (mV) =  result (bits) / (16777215 / 2500)   para 24 bits
+	//   medicion (mV) =  result (bits) / (65535 / 2500)   para 16 bits
 	//
-	//   medicion (mV) =  result (bits) / (6710)
+	//   medicion (mV) =  result (bits) / (6710)  para 24 bits
+	//   medicion (mV) =  result (bits) / (26)   para 16 bits
 
 	// se calcula el voltaje medido segun el voltaje de referencia
-	mV = rawValue.result / 6710;        
+
+	// mV = rawValue.result / 6710; // para adc de 24 bits
+	mV = rawValue.result / 26; // para adc de 16 bits        
 
 	return mV;
 
