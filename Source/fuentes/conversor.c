@@ -29,9 +29,9 @@ unsigned long convertir(void)
    // Copiar el valor del registro de conversion del adc en una variable local
 	rawValue.Byte[Byte3] = 0x00;
 	rawValue.Byte[Byte2] = 0x00;
-	// rawValue.Byte[Byte2] = (unsigned char)ADC0H;
-	rawValue.Byte[Byte1] = (unsigned char)ADC0M;
-	rawValue.Byte[Byte0] = (unsigned char)ADC0L;
+	rawValue.Byte[Byte1] = (unsigned char)ADC0H;
+	rawValue.Byte[Byte0] = (unsigned char)ADC0M;
+	// rawValue.Byte[Byte0] = (unsigned char)ADC0L;
 
 	//                           Vref (mV)
 	//   medicion (mV) =   --------------- * result (bits)

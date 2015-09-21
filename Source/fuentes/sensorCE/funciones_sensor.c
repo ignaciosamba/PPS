@@ -89,6 +89,10 @@ void control_RPM(short int rpm_real, short int rpm_ideal)
  */
 void arrancar_motor(void) 
 {
+
+	// EIE1 |= 0x10;                       // Enable PCA interrupts
+	// EA = 1;
+	
 	printf("\nFase 1...\n");
 	set_Pwm(V_FASE_1);
 	delay(600);
@@ -100,6 +104,9 @@ void arrancar_motor(void)
 	delay(600);
 	printf("Nivel estable\n");
 	set_Pwm(V_ESTABLE);
+
+	// EA = 0;
+	// EIE1 &= ~0x10;      
 }
 
 /**
@@ -113,17 +120,17 @@ void arrancar_motor(void)
  */
 void set_Pwm(unsigned int num)
 {
-	EIE1 |= 0x10;                       // Enable PCA interrupts
-	EA = 1;
+	// EIE1 |= 0x10;                       // Enable PCA interrupts
+	// EA = 1;
 
-	while(CCF0 != 0);       // espera que termine el ciclo de trabajo
+	// while(CCF0 != 0);       // espera que termine el ciclo de trabajo
 
 	// luego setea los valores
 	PCA0CPL0 = (num & 0x00FF);
 	PCA0CPH0 = (num & 0xFF00)>>8;
 
-	EA = 0;
-	EIE1 &= ~0x10;       
+	// EA = 0;
+	// EIE1 &= ~0x10;       
 }
 
 /**
@@ -139,8 +146,8 @@ void delay(int tiempo)
 
 	int i = 0;
 
-	EIE1 |= 0x10;                       // Enable PCA interrupts
-	EA = 1;
+	// EIE1 |= 0x10;                       // Enable PCA interrupts
+	// EA = 1;
 
 	while(1)
 	if(CCF0)
@@ -150,8 +157,8 @@ void delay(int tiempo)
 		if(i >= tiempo) break;
 	}
 
-	EA = 0;
-	EIE1 &= ~0x10;     
+	// EA = 0;
+	// EIE1 &= ~0x10;     
 	// IE = aux1;
 	// EIE1 = aux2; // reestablecemos los valores del registro de interrupcion.
 
