@@ -290,7 +290,7 @@ void get_single_ended(struct shellstr *shell)
 	ADC0MD = 0x83;	// Habilitar conversion en modo continuo
 	EA = 1;          // habilitar interrupciones globales
 
-	ADC0MUX = (shell->opt << 4) + 8;
+	ADC0MUX = (shell->args[0] << 4) + 8;
 
 	dato_conversor = convertir();
 	enviar_dato(&dato_conversor);
@@ -302,12 +302,13 @@ void get_single_ended(struct shellstr *shell)
 
 void get_differential(struct shellstr *shell)
 {
-
+	short int var;
+	var = shell->args[0] - '0';
 	AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC	
 	ADC0MD = 0x83;	// Habilitar conversion en modo continuo
 	EA = 1;          // habilitar interrupciones globales
 
-	ADC0MUX = (shell->opt << 4) + shell->opt + 1;
+	ADC0MUX = (var << 4) + var + 1;
 
 	dato_conversor = convertir();
 	enviar_dato(&dato_conversor);
