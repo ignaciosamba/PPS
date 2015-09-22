@@ -27,8 +27,8 @@ unsigned long convertir(void)
 	unsigned long mV;
 	
    // Copiar el valor del registro de conversion del adc en una variable local
-	rawValue.Byte[Byte3] = 0x00;
-	rawValue.Byte[Byte2] = 0x00;
+	// rawValue.Byte[Byte3] = 0x00;
+	// rawValue.Byte[Byte2] = 0x00;
 	rawValue.Byte[Byte1] = (unsigned char)ADC0H;
 	rawValue.Byte[Byte0] = (unsigned char)ADC0M;
 	// rawValue.Byte[Byte0] = (unsigned char)ADC0L;
@@ -54,8 +54,8 @@ unsigned long convertir(void)
 
 	// se calcula el voltaje medido segun el voltaje de referencia
 
-	// mV = rawValue.result / 6710; // para adc de 24 bits
-	mV = rawValue.result / 26; // para adc de 16 bits        
+	mV = rawValue.result / 6710; // para adc de 24 bits
+	// mV = rawValue.result / 26; // para adc de 16 bits        
 
 	return mV;
 
