@@ -138,8 +138,8 @@ struct shellstr *analizar(struct shellstr *shell)
     {
         if(shell->n_args > 7)
         {shell->errn = 405; return shell;}
-        else if(shell->args[1] != ',' )
-        {shell->errn = 406; return shell;}
+        // else if(shell->args[1] != ',' )
+        // {shell->errn = 406; return shell;}
         else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 7)
         {shell->errn = 406; return shell;}
 
@@ -147,7 +147,7 @@ struct shellstr *analizar(struct shellstr *shell)
     }
     else if((shell->comando[0] == 'G') && (shell->comando[1] == 'D') && (shell->comando[2] == 'I'))
     {
-        if(shell->n_args > 6 || shell->n_args % 2 != 0)
+        if(shell->n_args > 6/* || shell->n_args % 2 != 0*/)
         {shell->errn = 405; return shell;}
         else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 6)
         {shell->errn = 406; return shell;}
@@ -205,7 +205,11 @@ struct shellstr *analizar(struct shellstr *shell)
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
 
-        else arrancar_motor();
+        else 
+        {
+            // iniciar_PCA();
+            arrancar_motor();
+        }
     }
 
     else shell->errn = 404;
