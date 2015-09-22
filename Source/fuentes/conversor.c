@@ -261,7 +261,7 @@ void cargar_buffer_single(struct shellstr *shell)
  */
 void cargar_buffer_dif (struct shellstr *shell)
 {
-	num = (unsigned)(atoi(shell->args + 1));
+	num = (unsigned)(atoi(shell->args + 2));
 
 	switch(shell->args[0])
 	{
@@ -302,13 +302,18 @@ void get_single_ended(struct shellstr *shell)
 
 void get_differential(struct shellstr *shell)
 {
-	short int var;
-	var = shell->args[0] - '0';
 	AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC	
 	ADC0MD = 0x83;	// Habilitar conversion en modo continuo
 	EA = 1;          // habilitar interrupciones globales
 
-	ADC0MUX = (var << 4) + var + 1;
+	switch(shell->args[0])
+	{
+		case '0': ADC0MUX = 0x01; break;
+		case '2': ADC0MUX = 0x23; break;
+		case '4': ADC0MUX = 0x45; break;
+		case '6': ADC0MUX = 0x67; break;
+		default: shell->errn = 406; return; 
+	}
 
 	dato_conversor = convertir();
 	enviar_dato(&dato_conversor);

@@ -1,93 +1,104 @@
 comando,[n° args]
 
 
-SSE,[pin]
+SSE,[pin],[periodo]
 
-descripcion: 
-setea el pin ingresado en modo single ended. Si el comando se ingresa nuevamente sobre el mismo pin, no hay efecto. Si se setea un pin en modo single ended estando este en modo diferencial con otro pin, se elimina el modo diferencial de ambos pines y se setea a "pin" en modo single ended 
+Descripcion: 
+Establece el pin ingresado en modo single-ended con un periodo especifico que determinara la tasa de salida de envio de los datos convertidos. La tasa puede ir de 1 a 65536, siendo 1 la tasa mas rapida y 65536 la mas lenta.  
 
-limitaciones:
-- un solo argumento
-- el argumento es un byte comprendido entre 0 y 7
+Limitaciones:
+- Un solo argumento
+- El argumento es un byte comprendido entre 0 y 7
+- Si se establece con periodo 0, no se enviaran datos (pin deshabilitado).
+- Si se establece un pin en modo single ended estando este en modo diferencial con otro pin, se elimina el modo diferencial de ambos pines y se establece al primero en modo single ended 
 
-ejemplo:
+Ejemplo:
 
-SSE,4 //setea el pin 4 del ADC en modo single ended
+SSE,4,1 -establece el pin 4 del ADC en modo single ended con periodo 1
 
 
 -------------------------------------------------------
 
-SDI,[pin]
+SDI,[pin],[periodo]
 
-descripcion:
-setea el pin ingresado y el pin siguiente a ese en numero en modo diferencial. Si el comando se ingresa nuevamente sobre el mismo pin, no hay efecto. Si se setea un pin en modo diferencial estando este en modo single ended, se elimina el modo single ended del pin y se setea "pin" y "pin + 1" en modo diferencial.
+Descripcion:
+Establece el pin ingresado y el pin siguiente en numero en modo diferencial con un periodo especifico que determinara la tasa de salida de envio de los datos convertidos. La tasa puede ir de 1 a 65536, siendo 1 la tasa mas rapida y 65536 la mas lenta.  
 
-limitaciones:
-- un solo argumento
-- el argumento es un byte par comprendido entre 0 y 6
+Limitaciones:
+- Un solo argumento
+- El argumento es un byte par comprendido entre 0 y 6, ingresar un numero impar comprendido entre 0 y 6 dara como resultado un error de argumento fuera de rango.
+- Si se establece con periodo 0, no se enviaran datos (pines deshabilitados).
+- Si se establece un pin "N" en modo diferencial estando este en modo single ended, se elimina el modo single ended del pin y se establecen los pines "N" y "N + 1" en modo diferencial.
 
-ejemplo:
+Ejemplo:
 
-SDI,2 // setea los pines 2 y 3 en modo diferencial  
+SDI,2,240 - establece los pines 2 y 3 en modo diferencial con periodo 240
 
 -------------------------------------------------------
 
 SGA,[gain]
 
-descripcion:
-setea la ganancia del ADC segun "gain" potenciado a 2
+Descripcion:
+Establece la ganancia del ADC segun el argumento en potencia de 2
 
-limitaciones:
--un solo argumento
+Limitaciones:
+-Un solo argumento
 -el argumento es un byte comprendido entre 0 y 7
 
-ejemplo:
+Ejemplo:
 
-SGA,3 // setea la ganancia en 2^3 = 8x
+SGA,3 - establece la ganancia en 2^3 = 8x
 
 -------------------------------------------------------
 
 ST[]
 
-descripcion:
-guarda los cambios, sale del modo de configuracion y comienza a correr el programa
+Descripcion:
+Guarda los cambios, sale del modo de configuracion y comienza a correr el programa
 
-limitaciones:
--no lleva argumentos
+Limitaciones:
+-No lleva argumentos
 
 -------------------------------------------------------
 
 GT0[]
 
-descripcion:
-obtiene el valor actual en el contador de eventos 0
+Descripcion:
+Obtiene el valor actual en el contador de eventos 0
 
-limitaciones:
--no lleva argumentos
-
--------------------------------------------------------
-
-GT2[]
-
-descripcion:
-obtiene el valor actual en el contador de eventos 2
-
-limitaciones:
--no lleva argumentos
+Limitaciones:
+-No lleva argumentos
 
 -------------------------------------------------------
 
-SCF[]
+GSE[pin]
 
-descripcion:
-guarda la configuracion del conversor y los registros pertinentes en la flash, para que cada vez que se inicie se configure automaticamente
+Descripcion:
+Obtiene la medicion actual en modo single-ended de un pin.
 
-limitaciones:
--no lleva argumentos
+Limitaciones:
+- Un solo argumento
+- El argumento es un byte comprendido entre 0 y 7
 
-ejemplo:
-SSE,4 //setear el pin 4 en single-ended
-SDF,6 //setear 6 y 7 en modo diferencial
+Ejemplo:
+
+GSE,4 - Obtiene una medicion en modo single-ended del pin 4 del ADC
 
 -------------------------------------------------------
+
+GDI[pin]
+
+Descripcion:
+Obtiene la medicion actual en modo diferencial del par de pines que comprende al pin ingresado mas el siguiente en numero.
+
+Limitaciones:
+- Un solo argumento
+- El argumento es un byte par comprendido entre 0 y 6, ingresar un numero impar comprendido entre 0 y 6 dara como resultado un error de argumento fuera de rango.
+
+Ejemplo:
+
+GSE,4 - Obtiene una medicion en modo diferencial de los pines 4 y 5 del ADC
+
+-------------------------------------------------------
+
 

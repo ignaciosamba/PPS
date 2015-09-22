@@ -10,43 +10,6 @@
 
 struct shellstr *shell;
 
-static char * test_obtener_entrada()
-{
-    flag = false;
-	//cada vez que se corre la funcion aca, agarra una linea nueva del archivo test_interfaz_comandos_de_prueba.txt
-    printf("Ingrese los caracteres a medida que se piden. Al finalizar presione la tecla 'enter'\n");
-
-    printf("SSE,245\n");
-	obtener_entrada(shell);
-	mu_assert("Error. hubo errores y no deberia haber", shell->errn == 0);	
-    shell->errn = 0;
-    restart(shell);
-
-    printf("ABCD,123\n");
-	obtener_entrada(shell);
-	mu_assert("Error. el comando esta mal, pero igual no deberia haber errores", shell->errn == 0);
-    shell->errn = 0;
-    restart(shell);
-
-    printf("ABCDEFG\n");
-	obtener_entrada(shell);
-	mu_assert("Error. deberia haber error 404 y no hay(1)", shell->errn == 404);
-    shell->errn = 0;
-    restart(shell);
-
-    printf("AAA,123456789\n");
-	obtener_entrada(shell);
-	mu_assert("Error. deberia haber error 404 y no hay(2)", shell->errn == 404);
-    shell->errn = 0;
-    restart(shell);
-
-    printf("SSE,245\n");
-	obtener_entrada(shell);
-	mu_assert("Error. deberia haber error 405 y no hay", shell->errn == 405);
-
-	return 0;
-}
-
 static char * test_SSE()
 {	
 	shell->errn = 0;
@@ -63,7 +26,8 @@ static char * test_SSE()
 
     shell->n_args = 5;
     analizar(shell);
-    mu_assert("no deberia haber errores, pero si hay", shell->errn == 251);
+    mu_assert(" SSE, args: 4,100  \nNo deberia haber errores, pero si hay", shell->errn == 251);
+    printf("SSE, args: 4,100  -------  OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -75,7 +39,8 @@ static char * test_SSE()
 
     shell->n_args = 1;
     analizar(shell);
-    mu_assert("deberia dar error 407 y no hay", shell->errn == 407);
+    mu_assert(" SSE, args: 4  \nDeberia dar error 407 y no hay", shell->errn == 407);
+    printf("SSE, args: 4  -------  OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -87,8 +52,9 @@ static char * test_SSE()
     shell->args[1] = ',';
 
     shell->n_args = 2;
-    analizar(shell);
-    mu_assert("deberia dar error 408 y no hay", shell->errn == 407);
+    analizar(shell);    
+    mu_assert(" SSE, args: 4,  \ndeberia dar error 408 y no hay", shell->errn == 408);
+    printf("SSE, args: 4,  -------  OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -99,7 +65,8 @@ static char * test_SSE()
 
     shell->n_args = 10;
     analizar(shell);
-    mu_assert("deberia dar error 408 y no hay", shell->errn == 407);
+    mu_assert(" SSE, args: 10 argumentos  \ndeberia dar error 407 y no hay", shell->errn == 405);
+    printf("SSE, args: 10 argumentos  -------  OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -115,7 +82,8 @@ static char * test_SSE()
 
     shell->n_args = 5;
     analizar(shell);
-    mu_assert("deberia dar error 406 y no hay", shell->errn == 407);
+    mu_assert(" SSE, args: 4,r88  \ndeberia dar error 406 y no hay", shell->errn == 406);
+    printf("SSE, args: 4,r88  -------  OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -131,7 +99,8 @@ static char * test_SSE()
 
     shell->n_args = 5;
     analizar(shell);
-    mu_assert("deberia dar error 406 y no hay", shell->errn == 407);
+    mu_assert(" SSE, args: 4,8r8  \ndeberia dar error 406 y no hay", shell->errn == 406);
+    printf("SSE, args: 4,8r8  -------  OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -147,7 +116,8 @@ static char * test_SSE()
 
     shell->n_args = 5;
     analizar(shell);
-    mu_assert("deberia dar error 406 y no hay", shell->errn == 407);
+    mu_assert(" SSE, args: 4,88r  \ndeberia dar error 406 y no hay", shell->errn == 406);
+    printf("SSE, args: 4,88r  -------  OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -158,12 +128,14 @@ static char * test_SSE()
     shell->args[0] = '4';
     shell->args[1] = ',';
     shell->args[2] = '8';
-    shell->args[3] = '8';
-    shell->args[4] = '8';
+    shell->args[3] = '0';
+    shell->args[4] = '0';
 
     shell->n_args = 5;
 	analizar(shell);
-	mu_assert("deberia dar error 406 y no hay", shell->errn == 407);
+    // printf("%d\n",(shell->args[2] - '0')*100 + (shell->args[3] - '0')*10 + shell->args[4] - '0');
+    mu_assert(" SSE, args: 4,800  \ndeberia dar error 406 y no hay", shell->errn == 406);
+    printf("SSE, args: 4,800  -------  OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -173,14 +145,9 @@ static char * test_SSE()
 }
  static char * all_tests() 
  {
-    printf("------------------TESTS DE LA INTERFAZ----------------------\n");
-    printf("test_obtener_entrada\n");
-    mu_run_test(test_obtener_entrada);
-    printf("\ntest_obtener_entrada_OK\n");
-    printf("test_SSE\n");
+    printf("------------------TESTS PARA COMANDO SSE----------------------\n");
     mu_run_test(test_SSE);
-    printf("\ntest_SSE_OK\n");
-    printf("------------------FIN TESTS DE LA INTERFAZ----------------------\n");
+    printf("------------------FIN TESTS PARA COMANDO SSE----------------------\n");
 
     return 0;
  }

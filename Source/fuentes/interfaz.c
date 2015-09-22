@@ -27,6 +27,7 @@ struct shellstr *obtener_entrada(struct shellstr *shell)
 {
     char i = 0;
 	printf("MML>"); // imprime el prompt
+    shell->errn = 0;
 
     //recibe el comando
     while((shell->entrada = getchar()) != ',')
@@ -92,7 +93,7 @@ struct shellstr *analizar(struct shellstr *shell)
     {
         if(shell->n_args > 5)
         {shell->errn = 405; return shell;}
-        else if(shell->args[1] != ',' && shell->n_args < 2)
+        else if(shell->args[1] != ',' && shell->n_args < 2 || shell->n_args == 0)
         {shell->errn = 407; return shell;}
         else if(shell->args[1] != ',' && shell->n_args >= 2)
         {shell->errn = 408; return shell;}
@@ -100,13 +101,13 @@ struct shellstr *analizar(struct shellstr *shell)
         {shell->errn = 408; return shell;}
         else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 7)
         {shell->errn = 406; return shell;}
-        else if( shell->n_args > 3 && (shell->args[2] - '0' < 0 || shell->args[2] - '0' > 9))
+        else if( shell->n_args > 2 && (shell->args[2] - '0' < 0 || shell->args[2] - '0' > 9))
         {shell->errn = 406; return shell;}
-        else if( shell->n_args > 4 && (shell->args[3] - '0' < 0 || shell->args[3] - '0' > 9))
+        else if( shell->n_args > 3 && (shell->args[3] - '0' < 0 || shell->args[3] - '0' > 9))
         {shell->errn = 406; return shell;}
-        else if( shell->n_args > 5 && (shell->args[4] - '0' < 0 || shell->args[4] - '0' > 9))
+        else if( shell->n_args > 4 && (shell->args[4] - '0' < 0 || shell->args[4] - '0' > 9))
         {shell->errn = 406; return shell;}
-        else if( shell->n_args > 5 && shell->args[2] - '0' + shell->args[3] - '0' + shell->args[4] - '0' > 255)
+        else if( shell->n_args > 4 && ((unsigned)(atoi(shell->args + 2)) > 255))
         {shell->errn = 406; return shell;}
 
         cargar_buffer_single(shell);
@@ -136,10 +137,8 @@ struct shellstr *analizar(struct shellstr *shell)
     }
     else if((shell->comando[0] == 'G') && (shell->comando[1] == 'S') && (shell->comando[2] == 'E'))
     {
-        if(shell->n_args > 7)
+        if(shell->n_args > 1)
         {shell->errn = 405; return shell;}
-        // else if(shell->args[1] != ',' )
-        // {shell->errn = 406; return shell;}
         else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 7)
         {shell->errn = 406; return shell;}
 
@@ -177,13 +176,13 @@ struct shellstr *analizar(struct shellstr *shell)
 
         else get_timer2();
     }
-    else if((shell->comando[0] == 'G') && (shell->comando[1] == 'P') && (shell->comando[2] == 'C'))
-    {
-        if(shell->n_args > 0)
-        {shell->errn = 405; return shell;}
+    // else if((shell->comando[0] == 'G') && (shell->comando[1] == 'P') && (shell->comando[2] == 'C'))
+    // {
+    //     if(shell->n_args > 0)
+    //     {shell->errn = 405; return shell;}
 
-        // else get_PCA();
-    }
+    //     // else get_PCA();
+    // }
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'H') && (shell->comando[2] == 'A'))
     {
         if(shell->n_args > 0)
@@ -234,7 +233,7 @@ void reportar(struct shellstr *shell)
         case 253: printf("\nACK 253: ganancia configurada en 2^%c\n", shell->args[0]); break;
         case 254: printf("\nACK 254: inicio de conversion y envio de datos. para volver al menu presione 's'"); break;
         case 404: printf("\nERROR 404: comando no encontrado\n"); break;
-        case 405: printf("\nERROR 405: demasiados argumentos\n"); break;
+        case 405: printf("\nERROR 405: demasiados argumentos o argumento fuera de rango\n"); break;
         case 406: printf("\nERROR 406: alguno de los argumentos esta fuera de rango\n"); break;
         case 407: printf("\nERROR 407: faltan argumentos\n"); break;
         case 408: printf("\nERROR 408: error de sintaxis \n"); break;
