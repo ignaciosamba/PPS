@@ -54,8 +54,8 @@ unsigned long convertir(void)
 
 	// se calcula el voltaje medido segun el voltaje de referencia
 
-	mV = rawValue.result / 6710; // para adc de 24 bits
-	// mV = rawValue.result / 26; // para adc de 16 bits        
+	// mV = rawValue.result / 6710; // para adc de 24 bits
+	mV = rawValue.result / 26; // para adc de 16 bits        
 
 	return mV;
 
