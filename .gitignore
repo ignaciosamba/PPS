@@ -89,3 +89,10 @@ Placa/prueba1.lst
 Placa/pinhead-1X01.kicad_mod
 Placa/pinhead-1X01.kicad_mod
 Placa/prueba1.bak
+*.aux
+*.bbl
+*.blg
+*.idx
+*.ilg
+*.ind
+*.log
