@@ -206,7 +206,7 @@ Habiendo hecho este analisis, se decidio optar por utilizar el microcontrolador 
 
 
 
-
+\clearpage
 
 \section{Silicon Labs \emph{C8051F352}}
 En esta seccion se explicaran brevemente las funcionalidades que se utilizaron del microcontrolador elegido. Para informacion mas detallada referirse al datasheet del microcontrolador. \cite{bib:datasheet}
@@ -248,7 +248,7 @@ El C8051F352 cuenta con dos protocolos de transferencia serial de datos: SMBus y
 \subsection{Flash}
 Incluye una memoria Flash de 8 Kilobytes reprogramable dentro del chip para almacenamiento de datos no volatil. Es programable mediante interfaz C2 o por software
 
-\section{Diseño}
+\section{Diseño de Software}
 
 Luego de la eleccion de un microcontrolador, se inicio el proceso de diseño. las figuras , , , muestran los diagramas que describen el sistema segun los requerimientos.
 
@@ -309,6 +309,14 @@ El diagrama \ref{fig:secuencia3} muestra una obtencion y un guardado de datos de
   \includegraphics[width=0.60\textwidth, height = 8cm]{Secuencia3}
   \caption{Diagrama de secuencia 3}\label{fig:secuencia3}
 \end{figure}
+
+\clearpage
+
+\section{Diseño de Hardware}
+Una vez seleccionado el microcontrolador, se inició el diseño. Gracias a que en el Laboratorio se encontraba la placa de Silicon Labs (C8051F350DK), con el micro que seleccionamos para trabajar. Procedimos a buscar y analizar el diagrama esquematico de la placa.
+Una vez determinado los bloques necesarios para nuestra placa, procedimos a realizar nuestro diagrama esquematico. Para esto se utilizó un programa llamado KiCad, ya que nos exporta los archivos (Gerbers) que posteriormente nos serviran para poder imprimir la placa en la fresadora. 
+\subsection{Diagrama Esquematico}
+En la Figura NUMERO se muestra el esquematico del total a desarrollar. Podemos ver que la placa en principio tendria un microcontrolador C8051F352, que trabaja con un nivel de tension de 3,3V. La entrada de alimentacion tiene un Jack Power al que se le conectara una fuente de 9 voltios y 500 miliAmeperes, entonces se le agrega a la placa un regulador de tension LM2937. Desde el regulador sacamos 3 lineas distintas (con el mismo valor de tensión) de alimentación, una irá hacía Vdd del 8051, otra hacia AV del 8051 y una tercera que se utilizara para alimentacion de un MAX232 y un Led. 
 
 \section{Avances con respecto al diseño de software}
 En las primeras 100 horas no fue posible cubrir los requerimientos principales. Los avances obtenidos hasta hoy son los siguientes
@@ -375,7 +383,6 @@ Este archivo define las rutinas de interrupcion para aquellas funcionalidades qu
 \begin{appendices}
    \addappheadtotoc
    \appendixpage
-
 
 \section{Instrucciones MML}\label{ap:instrucciones}
 
