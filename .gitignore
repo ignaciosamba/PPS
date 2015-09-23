@@ -96,3 +96,5 @@ Placa/prueba1.bak
 *.ilg
 *.ind
 *.log
+*.synctex
+*.pdf

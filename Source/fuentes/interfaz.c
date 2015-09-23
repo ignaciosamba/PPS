@@ -124,13 +124,13 @@ struct shellstr *analizar(struct shellstr *shell)
         {shell->errn = 408; return shell;}
         else if(shell->args[0] - '0' < 0 || shell->args[0] - '0' > 6 || (shell->args[0] & 1))
         {shell->errn = 406; return shell;}
-        else if( shell->n_args > 3 && (shell->args[2] - '0' < 0 || shell->args[2] - '0' > 9))
+        else if( shell->n_args > 2 && (shell->args[2] - '0' < 0 || shell->args[2] - '0' > 9))
         {shell->errn = 406; return shell;}
-        else if( shell->n_args > 4 && (shell->args[3] - '0' < 0 || shell->args[3] - '0' > 9))
+        else if( shell->n_args > 3 && (shell->args[3] - '0' < 0 || shell->args[3] - '0' > 9))
         {shell->errn = 406; return shell;}
-        else if( shell->n_args > 5 && (shell->args[4] - '0' < 0 || shell->args[4] - '0' > 9))
+        else if( shell->n_args > 4 && (shell->args[4] - '0' < 0 || shell->args[4] - '0' > 9))
         {shell->errn = 406; return shell;}
-        else if( shell->n_args > 5 && shell->args[2] - '0' + shell->args[3] - '0' + shell->args[4] - '0' > 255)
+        else if( shell->n_args > 4 && ((unsigned)(atoi(shell->args + 2)) > 255))
         {shell->errn = 406; return shell;}
 
         cargar_buffer_dif(shell);

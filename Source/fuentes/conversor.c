@@ -298,6 +298,8 @@ void get_single_ended(struct shellstr *shell)
     ADC0MD = 0x00;
 	EA = 0;
 
+	shell->errn = 0;
+
 }
 
 void get_differential(struct shellstr *shell)
@@ -321,6 +323,7 @@ void get_differential(struct shellstr *shell)
     ADC0MD = 0x00;
 	EA = 0;
 	
+	shell->errn = 0;
 }
 
 

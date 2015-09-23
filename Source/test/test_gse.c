@@ -15,14 +15,10 @@ static char * test_SSE()
 	shell->errn = 0;
 
 // forma correcta
-    shell->comando[0] = 'S';
+    shell->comando[0] = 'G';
     shell->comando[1] = 'S';
     shell->comando[2] = 'E';
     shell->args[0] = '4';
-    shell->args[1] = ',';
-    shell->args[2] = '1';
-    shell->args[3] = '0';
-    shell->args[4] = '0';
 
     shell->n_args = 5;
     analizar(shell);
@@ -32,12 +28,10 @@ static char * test_SSE()
     restart(shell);
 
     // argumento mayor al permitido
-    shell->comando[0] = 'S';
+    shell->comando[0] = 'G';
     shell->comando[1] = 'S';
     shell->comando[2] = 'E';
     shell->args[0] = '9';
-    shell->args[1] = ',';
-    shell->args[2] = '4';
 
     shell->n_args = 3;
     analizar(shell);
@@ -47,7 +41,7 @@ static char * test_SSE()
     restart(shell);
 
 // sin especificar frecuencia
-    shell->comando[0] = 'S';
+    shell->comando[0] = 'G';
     shell->comando[1] = 'S';
     shell->comando[2] = 'E';
     shell->args[0] = '4';
@@ -60,11 +54,10 @@ static char * test_SSE()
     restart(shell);
 
 // con coma y sin sgeundo argumento
-    shell->comando[0] = 'S';
+    shell->comando[0] = 'G';
     shell->comando[1] = 'S';
     shell->comando[2] = 'E';
     shell->args[0] = '4';
-    shell->args[1] = ',';
 
     shell->n_args = 2;
     analizar(shell);    
@@ -74,7 +67,7 @@ static char * test_SSE()
     restart(shell);
 
 // demasiados argumentos
-    shell->comando[0] = 'S';
+    shell->comando[0] = 'G';
     shell->comando[1] = 'S';
     shell->comando[2] = 'E';
 
@@ -86,14 +79,10 @@ static char * test_SSE()
     restart(shell);
 
 // argumento fuera de rango
-    shell->comando[0] = 'S';
+    shell->comando[0] = 'G';
     shell->comando[1] = 'S';
     shell->comando[2] = 'E';
     shell->args[0] = '4';
-    shell->args[1] = ',';
-    shell->args[2] = 'r';
-    shell->args[3] = '8';
-    shell->args[4] = '8';
 
     shell->n_args = 5;
     analizar(shell);
@@ -103,14 +92,10 @@ static char * test_SSE()
     restart(shell);
 
 // argumento fuera de rango
-    shell->comando[0] = 'S';
+    shell->comando[0] = 'G';
     shell->comando[1] = 'S';
     shell->comando[2] = 'E';
     shell->args[0] = '4';
-    shell->args[1] = ',';
-    shell->args[2] = '8';
-    shell->args[3] = 'r';
-    shell->args[4] = '8';
 
     shell->n_args = 5;
     analizar(shell);
@@ -120,14 +105,10 @@ static char * test_SSE()
     restart(shell);
 
 // argumento fuera de rango
-    shell->comando[0] = 'S';
+    shell->comando[0] = 'G';
     shell->comando[1] = 'S';
     shell->comando[2] = 'E';
     shell->args[0] = '4';
-    shell->args[1] = ',';
-    shell->args[2] = '8';
-    shell->args[3] = '8';
-    shell->args[4] = 'r';
 
     shell->n_args = 5;
     analizar(shell);
@@ -137,18 +118,13 @@ static char * test_SSE()
     restart(shell);
 
 // argumento fuera de rango
-    shell->comando[0] = 'S';
+    shell->comando[0] = 'G';
     shell->comando[1] = 'S';
     shell->comando[2] = 'E';
     shell->args[0] = '4';
-    shell->args[1] = ',';
-    shell->args[2] = '8';
-    shell->args[3] = '0';
-    shell->args[4] = '0';
 
     shell->n_args = 5;
 	analizar(shell);
-    // printf("%d\n",(shell->args[2] - '0')*100 + (shell->args[3] - '0')*10 + shell->args[4] - '0');
     mu_assert(" SSE, args: 4,800  \ndeberia dar error 406 y no da", shell->errn == 406);
     printf("SSE, args: 4,800  -------  OK\n");
     shell->errn = 0;
