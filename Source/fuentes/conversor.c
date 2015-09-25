@@ -146,16 +146,17 @@ void enviar_dato(unsigned long int *dato)
 
 	if((num_pin & 0x0F) == 0x08)
 	{
-		printf("SE,%c,%lu\n", (num_pin >> 4) + '0',*dato);
+		// printf("SE,%c,%lu,z", (num_pin >> 4) + '0',*dato);
+		printf("%05luz",*dato);
 	}
 	else if((num_pin & 0x0F) < 0x08)
 	{
 		if(*dato < 1250)
 			// printf("DF,%c,+%lu\n", (num_pin >> 4) + '0',(*dato)*2);
-			printf("+%04lu\n",(*dato)*2);
+			printf("+%04lu,z",(*dato)*2);
 		else
 			// printf("DF,%c,-%lu\n", (num_pin >> 4) + '0',(2520 - *dato)*2);
-			printf("-%04lu\n",(2520 - *dato)*2);
+			printf("-%04lu,z",(2520 - *dato)*2);
 		/**
 		 * hay toda una explicacion que duro bastante tiempo de porque pasa
 		 */

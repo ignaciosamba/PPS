@@ -96,20 +96,26 @@ void arrancar_motor(void)
 	// EIE1 |= 0x10;                       // Enable PCA interrupts
 	// EA = 1;
 	
-	printf("\nFase 1...\n");
+	//printf("\nFase 1...\n");
 	set_Pwm(V_FASE_1);
 	delay(600);
-	printf("Fase 2...\n");
+	//printf("Fase 2...\n");
 	set_Pwm(V_FASE_2);
 	delay(600);
-	printf("Arranque...\n");
+	//printf("Arranque...\n");
 	set_Pwm(V_ARRANQUE);
 	delay(600);
-	printf("Nivel estable\n");
+	//printf("Nivel estable\n");
 	set_Pwm(V_ESTABLE);
 
 	// EA = 0;
 	// EIE1 &= ~0x10;      
+}
+
+void apagar_motor(void) 
+{
+	//printf("01011\n");
+	set_Pwm(VELOCIDAD_ESTABLE);
 }
 
 /**

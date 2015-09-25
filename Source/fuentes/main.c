@@ -52,7 +52,7 @@ void main()
 	// iniciar_timer3();
 
 	shell->stop_conf = 1;
-	printf("00000");
+	//printf("00000");
 
 	while (1)
 		{

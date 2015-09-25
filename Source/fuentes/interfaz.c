@@ -30,7 +30,7 @@ struct shellstr *obtener_entrada(struct shellstr *shell)
     shell->errn = 0;
 
     //recibe el comando
-    while((shell->entrada = getchar()) != ',')
+    while((shell->entrada = getchar()) != 'x')
     {
         if((shell->entrada == '\n') && (i == 0)){ shell->errn = 1000; return shell;}
         if(shell->entrada == '\n'){break;}
@@ -212,6 +212,18 @@ struct shellstr *analizar(struct shellstr *shell)
         }
     }
 
+    else if((shell->comando[0] == 'N') && (shell->comando[1] == 'T') && (shell->comando[2] == 'P'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else 
+        {
+            // iniciar_PCA();
+            apagar_motor();
+        }
+    }
+
     else shell->errn = 404;
 
     return shell;
@@ -229,15 +241,15 @@ void reportar(struct shellstr *shell)
 {
     switch(shell->errn)
     {   
-        case 251: printf("%05d", 251); break;
-        case 252: printf("%05d", 252); break;
-        case 253: printf("%05d", 253); break;
-        case 254: printf("%05d", 254); break;
-        case 404: printf("%05d", 404); break;
-        case 405: printf("%05d", 405); break;
-        case 406: printf("%05d", 406); break;
-        case 407: printf("%05d", 407); break;
-        case 408: printf("%05d", 408); break;
+        case 251: printf("%05d,z", 251); break;
+        case 252: printf("%05d,z", 252); break;
+        case 253: printf("%05d,z", 253); break;
+        case 254: printf("%05d,z", 254); break;
+        case 404: printf("%05d,z", 404); break;
+        case 405: printf("%05d,z", 405); break;
+        case 406: printf("%05d,z", 406); break;
+        case 407: printf("%05d,z", 407); break;
+        case 408: printf("%05d,z", 408); break;
         case 0: break; // para el caso donde se apreta enter solo
         default: break;
     }
