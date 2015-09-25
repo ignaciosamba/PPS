@@ -5,9 +5,10 @@
 #define V_FASE_2 42100
 #define V_ARRANQUE 33264
 #define V_ESTABLE 36000
+#define VELOCIDAD_ESTABLE 3600
 
 
-short int velocidad = V_ESTABLE;
+unsigned short int velocidad = V_ESTABLE;
 
 void contar_RPM(void) // utiliza timer0
 {
@@ -54,7 +55,7 @@ void contar_RPM(void) // utiliza timer0
 				// esto da una precision de 30 rpm. osea que cada resultado es +-30
 
 				printf("%lu +-30 rpm\n", rpm);
-				control_RPM(rpm,V_ESTABLE);
+				control_RPM(rpm,(unsigned)VELOCIDAD_ESTABLE);
 			  	
 				TH0 = 0;           // Resetear valor de timer0
 				TL0 = 0;           
@@ -68,17 +69,19 @@ void contar_RPM(void) // utiliza timer0
  * @brief agrega una histeresis al funcionamiento del motor que evita el desvio de las RPM
  * @details [long description]
  */
-void control_RPM(short int rpm_real, short int rpm_ideal)
+void control_RPM(unsigned short rpm_real, unsigned short rpm_ideal)
 {
 	if(rpm_real > rpm_ideal + 50) // si las rpm son muy altas
 	{
-		set_Pwm(velocidad - 100); // se sube la velocidad relativa
-		printf("se controlo para que vaya mas despacio\n");
+		velocidad +=50;
+		set_Pwm(velocidad); // se sube la velocidad relativa
+		printf("se controlo para que vaya mas despacio\nrpm_ideal = %d\nrpm_real = %d", rpm_ideal, rpm_real);
 	}
 
 	if(rpm_real < rpm_ideal - 50) // si las rpm son muy bajas
 	{
-		set_Pwm(velocidad + 100); // se baja la velocidad relativa
+		velocidad -=50;
+		set_Pwm(velocidad); // se baja la velocidad relativa
 		printf("se controlo para que vaya mas rapido\n");
 	}
 }

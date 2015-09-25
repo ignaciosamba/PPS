@@ -1,14 +1,16 @@
 #include "minunit.h"
 #include "../fuentes/headers.h"
 #include "../fuentes/interfaz.h"
-#include "../fuentes/configurador.h"
 
  int tests_run = 0; 
  int res;
- short int flag;
- short int bandera_dif;
 
 struct shellstr *shell;
+
+void iniciar_sysclock (void);
+void iniciar_puertos (void);
+void iniciar_UART(void);
+
 
 static char * test_SDI()
 {	
@@ -26,8 +28,8 @@ static char * test_SDI()
 
     shell->n_args = 5;
     analizar(shell);
-    mu_assert("SDI, args: 4,100  \nNo deberia haber errores, pero si hay", shell->errn == 252);
-    printf("SDI, args: 4,100  -------  OK\n");
+    mu_assert("Forma correcta  \nNo deberia haber errores, pero si hay", shell->errn == 252);
+    printf("Forma correcta - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -41,8 +43,8 @@ static char * test_SDI()
 
     shell->n_args = 3;
     analizar(shell);
-    mu_assert("SSE, args: 9,4  \nDeberia dar error 406 y no da", shell->errn == 406);
-    printf("SSE, args: 4,9  -------  OK\n");
+    mu_assert("Argumento mayor al permitido  \nDeberia dar error 406 y no da", shell->errn == 406);
+    printf("Argumento mayor al permitido - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -56,8 +58,8 @@ static char * test_SDI()
 
     shell->n_args = 3;
     analizar(shell);
-    mu_assert("SSE, args: 3,4  \nDeberia dar error 406 y no da", shell->errn == 406);
-    printf("SSE, args: 3,4  -------  OK\n");
+    mu_assert("Argumento impar  \nDeberia dar error 406 y no da", shell->errn == 406);
+    printf("Argumento impar - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -69,8 +71,8 @@ static char * test_SDI()
 
     shell->n_args = 1;
     analizar(shell);
-    mu_assert("SDI, args: 4  \nDeberia dar error 407 y no hay", shell->errn == 407);
-    printf("SDI, args: 4  -------  OK\n");
+    mu_assert("No especifica frecuencia  \nDeberia dar error 407 y no hay", shell->errn == 407);
+    printf("No especifica frecuencia - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -83,8 +85,8 @@ static char * test_SDI()
 
     shell->n_args = 2;
     analizar(shell);    
-    mu_assert("SDI, args: 4,  \ndeberia dar error 408 y no hay", shell->errn == 408);
-    printf("SDI, args: 4,  -------  OK\n");
+    mu_assert("Error de sintaxis  \ndeberia dar error 408 y no hay", shell->errn == 408);
+    printf("Error de sintaxis - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -95,8 +97,8 @@ static char * test_SDI()
 
     shell->n_args = 10;
     analizar(shell);
-    mu_assert("SDI, args: 10 argumentos  \ndeberia dar error 407 y no hay", shell->errn == 405);
-    printf("SDI, args: 10 argumentos  -------  OK\n");
+    mu_assert("Demasiados Argumentos  \ndeberia dar error 407 y no hay", shell->errn == 405);
+    printf("Demasiados Argumentos - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -112,8 +114,8 @@ static char * test_SDI()
 
     shell->n_args = 5;
     analizar(shell);
-    mu_assert("SDI, args: 4,r88  \ndeberia dar error 406 y no hay", shell->errn == 406);
-    printf("SDI, args: 4,r88  -------  OK\n");
+    mu_assert("Argumento fuera de rango 1  \ndeberia dar error 406 y no hay", shell->errn == 406);
+    printf("Argumento fuera de rango 1 - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -129,8 +131,8 @@ static char * test_SDI()
 
     shell->n_args = 5;
     analizar(shell);
-    mu_assert("SDI, args: 4,8r8  \ndeberia dar error 406 y no hay", shell->errn == 406);
-    printf("SDI, args: 4,8r8  -------  OK\n");
+    mu_assert("Argumento fuera de rango 2  \ndeberia dar error 406 y no hay", shell->errn == 406);
+    printf("Argumento fuera de rango 2 - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -146,8 +148,8 @@ static char * test_SDI()
 
     shell->n_args = 5;
     analizar(shell);
-    mu_assert("SDI, args: 4,88r  \ndeberia dar error 406 y no hay", shell->errn == 406);
-    printf("SDI, args: 4,88r  -------  OK\n");
+    mu_assert("Argumento fuera de rango 3  \ndeberia dar error 406 y no hay", shell->errn == 406);
+    printf("Argumento fuera de rango 3 - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -164,8 +166,8 @@ static char * test_SDI()
     shell->n_args = 5;
 	analizar(shell);
     // printf("%d\n",(shell->args[2] - '0')*100 + (shell->args[3] - '0')*10 + shell->args[4] - '0');
-    mu_assert("SDI, args: 4,800  \ndeberia dar error 406 y no hay", shell->errn == 406);
-    printf("SDI, args: 4,800  -------  OK\n");
+    mu_assert("Argumento fuera de rango 4  \ndeberia dar error 406 y no hay", shell->errn == 406);
+    printf("Argumento fuera de rango 4 - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -208,3 +210,68 @@ static char * test_SDI()
      return result != 0;
 
  }
+
+ void iniciar_UART(void)
+{
+
+//-----------------------------------------------------------------------------
+// UART0_Init
+//-----------------------------------------------------------------------------
+//
+// Configure the UART0 using Timer1, for <BAUDRATE> and 8-N-1.
+//
+   
+   XBR0     |= 0x01;                    // Enable UART to Pins P0.4, P0.5
+   XBR1     |= 0x40;                    // Enable Crossbar 
+
+   P0SKIP   = 0x00;                    // Skip No Port Pins
+   P0MDOUT |= 0x10;                    // Enable UTX as push-pull output
+   P0MDIN  |= 0x20;                    // Enable URX pin as digital input.
+   
+   
+   
+   SCON0 = 0x10;                       // SCON0: 8-bit variable bit rate
+                                       //        level of STOP bit is ignored
+                                       //        RX enabled
+                                       //        ninth bits are zeros
+                                       //        clear RI0 and TI0 bits
+   if (SYSCLK/BAUDRATE/2/256 < 1) {
+      TH1 = -(SYSCLK/BAUDRATE/2);
+      CKCON |=  0x08;                  // T1M = 1; SCA1:0 = xx
+   } else if (SYSCLK/BAUDRATE/2/256 < 4) {
+      TH1 = -(SYSCLK/BAUDRATE/2/4);
+      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 01                  
+      CKCON |=  0x01;
+   } else if (SYSCLK/BAUDRATE/2/256 < 12) {
+      TH1 = -(SYSCLK/BAUDRATE/2/12);
+      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 00
+   } else {
+      TH1 = -(SYSCLK/BAUDRATE/2/48);
+      CKCON &= ~0x0B;                  // T1M = 0; SCA1:0 = 10
+      CKCON |=  0x02;
+   }
+
+   TL1 = TH1;                          // init Timer1
+   TMOD &= ~0xf0;                      // TMOD: timer 1 in 8-bit autoreload
+   TMOD |=  0x20;                       
+   TR1 = 1;                            // START Timer1
+   TI0 = 1;                            // Indicate TX0 ready
+
+
+}
+
+void iniciar_puertos (void)
+{
+   XBR1     |= 0x40;                    // Habilitar el crossbar
+   P0MDOUT |= 0x10;                    // Habilitar UTX como push-pull output
+     P1MDOUT |= 0x02;                                        // Habilitar led P1.1 como push pull
+   // P0MDIN |= 0x0C;                  // P0.3 y P0.4 tienen que ser entrada digital
+}
+
+void iniciar_sysclock (void)
+{
+   OSCICN |= 0x03;                     // configuracion del oscilador para la maxima frecuencia
+   RSTSRC  = 0x04;                     // Enable missing clock detector
+   CLKSEL = 0x00;                      // selecciona el clock interno como fuente para SYSCLK
+
+}

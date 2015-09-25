@@ -5,9 +5,7 @@
 
  int tests_run = 0; 
  int res;
- short int flag;
- short int bandera_dif;
-
+ 
 struct shellstr *shell;
 
 static char * test_SSE()
@@ -26,8 +24,8 @@ static char * test_SSE()
 
     shell->n_args = 5;
     analizar(shell);
-    mu_assert(" SSE, args: 4,100  \nNo deberia dar errores, pero si da", shell->errn == 251);
-    printf("SSE, args: 4,100  -------  OK\n");
+    mu_assert("Forma correcta  \nNo deberia dar errores, pero si da", shell->errn == 251);
+    printf("Forma correcta - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -41,8 +39,8 @@ static char * test_SSE()
 
     shell->n_args = 3;
     analizar(shell);
-    mu_assert(" SSE, args: 9,4  \nDeberia dar error 406 y no da", shell->errn == 406);
-    printf("SSE, args: 4,9  -------  OK\n");
+    mu_assert("Argumento mayor al permitido  \nDeberia dar error 406 y no da", shell->errn == 406);
+    printf("Argumento mayor al permitido - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -54,8 +52,8 @@ static char * test_SSE()
 
     shell->n_args = 1;
     analizar(shell);
-    mu_assert(" SSE, args: 4  \nDeberia dar error 407 y no da", shell->errn == 407);
-    printf("SSE, args: 4  -------  OK\n");
+    mu_assert("Sin especificar frecuencia  \nDeberia dar error 407 y no da", shell->errn == 407);
+    printf("Sin especificar frecuencia - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -68,8 +66,8 @@ static char * test_SSE()
 
     shell->n_args = 2;
     analizar(shell);    
-    mu_assert(" SSE, args: 4,  \ndeberia dar error 408 y no da", shell->errn == 408);
-    printf("SSE, args: 4,  -------  OK\n");
+    mu_assert("Error de sintaxis  \ndeberia dar error 408 y no da", shell->errn == 408);
+    printf("Error de sintaxis - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -80,8 +78,8 @@ static char * test_SSE()
 
     shell->n_args = 10;
     analizar(shell);
-    mu_assert(" SSE, args: 10 argumentos  \ndeberia dar error 407 y no da", shell->errn == 405);
-    printf("SSE, args: 10 argumentos  -------  OK\n");
+    mu_assert("Demasiados argumentos  \ndeberia dar error 407 y no da", shell->errn == 405);
+    printf("Demasiados argumentos - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -97,8 +95,8 @@ static char * test_SSE()
 
     shell->n_args = 5;
     analizar(shell);
-    mu_assert(" SSE, args: 4,r88  \ndeberia dar error 406 y no da", shell->errn == 406);
-    printf("SSE, args: 4,r88  -------  OK\n");
+    mu_assert("Argumento fuera de rango 1  \ndeberia dar error 406 y no da", shell->errn == 406);
+    printf("Argumento fuera de rango 1 - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -114,8 +112,8 @@ static char * test_SSE()
 
     shell->n_args = 5;
     analizar(shell);
-    mu_assert(" SSE, args: 4,8r8  \ndeberia dar error 406 y no da", shell->errn == 406);
-    printf("SSE, args: 4,8r8  -------  OK\n");
+    mu_assert("Argumento fuera de rango 2  \ndeberia dar error 406 y no da", shell->errn == 406);
+    printf("Argumento fuera de rango 2 - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -131,8 +129,8 @@ static char * test_SSE()
 
     shell->n_args = 5;
     analizar(shell);
-    mu_assert(" SSE, args: 4,88r  \ndeberia dar error 406 y no da", shell->errn == 406);
-    printf("SSE, args: 4,88r  -------  OK\n");
+    mu_assert("Argumento fuera de rango 3  \ndeberia dar error 406 y no da", shell->errn == 406);
+    printf("Argumento fuera de rango 3 - OK\n");
     shell->errn = 0;
     restart(shell);
 
@@ -149,13 +147,11 @@ static char * test_SSE()
     shell->n_args = 5;
 	analizar(shell);
     // printf("%d\n",(shell->args[2] - '0')*100 + (shell->args[3] - '0')*10 + shell->args[4] - '0');
-    mu_assert(" SSE, args: 4,800  \ndeberia dar error 406 y no da", shell->errn == 406);
-    printf("SSE, args: 4,800  -------  OK\n");
+    mu_assert("Argumento fuera de rango 4  \ndeberia dar error 406 y no da", shell->errn == 406);
+    printf("Argumento fuera de rango 4 - OK\n");
     shell->errn = 0;
     restart(shell);
 
-
-	
 	return 0;
 }
  static char * all_tests() 

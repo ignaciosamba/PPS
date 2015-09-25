@@ -10,14 +10,14 @@
 
 struct shellstr *shell;
 
-static char * test_GSE()
+static char * test_SGA()
 {	
 	shell->errn = 0;
 
 // forma correcta
-    shell->comando[0] = 'G';
-    shell->comando[1] = 'S';
-    shell->comando[2] = 'E';
+    shell->comando[0] = 'S';
+    shell->comando[1] = 'G';
+    shell->comando[2] = 'A';
     shell->args[0] = '4';
 
     shell->n_args = 1;
@@ -28,9 +28,9 @@ static char * test_GSE()
     restart(shell);
 
     // argumento mayor al permitido
-    shell->comando[0] = 'G';
-    shell->comando[1] = 'S';
-    shell->comando[2] = 'E';
+    shell->comando[0] = 'S';
+    shell->comando[1] = 'G';
+    shell->comando[2] = 'A';
     shell->args[0] = '9';
 
     shell->n_args = 1;
@@ -41,9 +41,9 @@ static char * test_GSE()
     restart(shell);
 
 // demasiados argumentos
-    shell->comando[0] = 'G';
-    shell->comando[1] = 'S';
-    shell->comando[2] = 'E';
+    shell->comando[0] = 'S';
+    shell->comando[1] = 'G';
+    shell->comando[2] = 'A';
 
     shell->n_args = 10;
     analizar(shell);
@@ -56,9 +56,9 @@ static char * test_GSE()
 }
  static char * all_tests() 
  {
-    printf("------------------TESTS PARA COMANDO GSE----------------------\n");
-    mu_run_test(test_GSE);
-    printf("------------------FIN TESTS PARA COMANDO GSE----------------------\n");
+    printf("------------------TESTS PARA COMANDO SGA----------------------\n");
+    mu_run_test(test_SGA);
+    printf("------------------FIN TESTS PARA COMANDO SGA----------------------\n");
 
     return 0;
  }
@@ -80,7 +80,7 @@ static char * test_GSE()
          printf("%s\n", result);
      }
      else {
-          // printf("TEST PAGSED\n");
+          // printf("TEST PASGAD\n");
      } 
 
      while(1);
