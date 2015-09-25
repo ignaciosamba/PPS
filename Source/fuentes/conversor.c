@@ -151,9 +151,11 @@ void enviar_dato(unsigned long int *dato)
 	else if((num_pin & 0x0F) < 0x08)
 	{
 		if(*dato < 1250)
-			printf("DF,%c,%lu\n", (num_pin >> 4) + '0',(*dato)*2);
+			// printf("DF,%c,+%lu\n", (num_pin >> 4) + '0',(*dato)*2);
+			printf("+%04lu\n",(*dato)*2);
 		else
-			printf("DF,%c,-%lu\n", (num_pin >> 4) + '0',(2520 - *dato)*2);
+			// printf("DF,%c,-%lu\n", (num_pin >> 4) + '0',(2520 - *dato)*2);
+			printf("-%04lu\n",(2520 - *dato)*2);
 		/**
 		 * hay toda una explicacion que duro bastante tiempo de porque pasa
 		 */
@@ -295,8 +297,8 @@ void get_single_ended(struct shellstr *shell)
 	ADC0MUX = (shell->args[0] << 4) + 8;
 
 	AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC.	
-	ADC0CF = 0x10;  // se usa el FAST FILTER.
-	ADC0MD = 0x83;	// Habilitar conversion en modo continuo.
+	ADC0CF = 0x00;  // se usa el FAST FILTER.
+	ADC0MD = 0x82;	// Habilitar conversion en modo continuo.
 
 	EA = 1;          // habilitar interrupciones globales
 
@@ -327,7 +329,7 @@ void get_differential(struct shellstr *shell)
 	
 	AD0INT = 0;		 // se inicializa en 0 el bit de conversion completa del ADC	
 	ADC0CN |= 0x00;  // se habilita el modo diferencial
-	ADC0MD = 0x83;	 // Habilitar conversion en modo continuo
+	ADC0MD = 0x82;	 // Habilitar conversion en modo continuo
 	EA = 1;          // habilitar interrupciones globales
 
 	while (!f_dato_convertido);

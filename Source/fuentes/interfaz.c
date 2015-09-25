@@ -26,7 +26,7 @@
 struct shellstr *obtener_entrada(struct shellstr *shell)
 {
     char i = 0;
-	printf("MML>"); // imprime el prompt
+	// printf("0MML>"); // imprime el prompt
     shell->errn = 0;
 
     //recibe el comando
@@ -229,15 +229,15 @@ void reportar(struct shellstr *shell)
 {
     switch(shell->errn)
     {   
-        case 251: printf("%02d", 1); break;
-        case 252: printf("%02d", 1); break;
-        case 253: printf("%02d", 1); break;
-        case 254: printf("%02d", 1); break;
-        case 404: printf("%02d", 0); break;
-        case 405: printf("%02d", 0); break;
-        case 406: printf("%02d", 0); break;
-        case 407: printf("%02d", 0); break;
-        case 408: printf("%02d", 0); break;
+        case 251: printf("%05d", 251); break;
+        case 252: printf("%05d", 252); break;
+        case 253: printf("%05d", 253); break;
+        case 254: printf("%05d", 254); break;
+        case 404: printf("%05d", 404); break;
+        case 405: printf("%05d", 405); break;
+        case 406: printf("%05d", 406); break;
+        case 407: printf("%05d", 407); break;
+        case 408: printf("%05d", 408); break;
         case 0: break; // para el caso donde se apreta enter solo
         default: break;
     }
