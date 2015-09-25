@@ -229,15 +229,15 @@ void reportar(struct shellstr *shell)
 {
     switch(shell->errn)
     {   
-        case 251: printf("\nACK 251: pin %c configurado en modo single_ended\n", shell->args[0]); break;
-        case 252: printf("\nACK 252: pines %c y %c configurados en modo diferencial\n", shell->args[0], shell->args[0] + 1); break;
-        case 253: printf("\nACK 253: ganancia configurada en 2^%c\n", shell->args[0]); break;
-        case 254: printf("\nACK 254: inicio de conversion y envio de datos. para volver al menu presione 's'"); break;
-        case 404: printf("\nERROR 404: comando no encontrado\n"); break;
-        case 405: printf("\nERROR 405: demasiados argumentos o argumento fuera de rango\n"); break;
-        case 406: printf("\nERROR 406: alguno de los argumentos esta fuera de rango\n"); break;
-        case 407: printf("\nERROR 407: faltan argumentos\n"); break;
-        case 408: printf("\nERROR 408: error de sintaxis \n"); break;
+        case 251: printf("%02d", 1); break;
+        case 252: printf("%02d", 1); break;
+        case 253: printf("%02d", 1); break;
+        case 254: printf("%02d", 1); break;
+        case 404: printf("%02d", 0); break;
+        case 405: printf("%02d", 0); break;
+        case 406: printf("%02d", 0); break;
+        case 407: printf("%02d", 0); break;
+        case 408: printf("%02d", 0); break;
         case 0: break; // para el caso donde se apreta enter solo
         default: break;
     }
