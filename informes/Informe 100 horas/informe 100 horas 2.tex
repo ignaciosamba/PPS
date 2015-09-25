@@ -314,12 +314,52 @@ El diagrama \ref{fig:secuencia3} muestra una obtencion y un guardado de datos de
 
 \section{Diseño de Hardware}
 Una vez seleccionado el microcontrolador, se inició el diseño. Gracias a que en el Laboratorio se encontraba la placa de Silicon Labs (C8051F350DK), con el micro que seleccionamos para trabajar. Procedimos a buscar y analizar el diagrama esquematico de la placa.
-Una vez determinado los bloques necesarios para nuestra placa, procedimos a realizar nuestro diagrama esquematico. Para esto se utilizó un programa llamado KiCad, ya que nos exporta los archivos (Gerbers) que posteriormente nos serviran para poder imprimir la placa en la fresadora. 
+Una vez determinado los bloques necesarios para nuestra placa, procedimos a realizar nuestro diagrama esquematico. Para esto se utilizó un programa llamado KiCad, ya que nos exporta los archivos (Gerbers) que posteriormente nos serviran para poder imprimir la placa en la fresadora.
+
 \subsection{Diagrama Esquematico}
-En la Figura NUMERO se muestra el esquematico del total a desarrollar. Podemos ver que la placa en principio tendria un microcontrolador C8051F352, que trabaja con un nivel de tension de 3,3V. La entrada de alimentacion tiene un Jack Power al que se le conectara una fuente de 9 voltios y 500 miliAmeperes, entonces se le agrega a la placa un regulador de tension LM2937. Desde el regulador sacamos 3 lineas distintas (con el mismo valor de tensión) de alimentación, una irá hacía Vdd del 8051, otra hacia AV del 8051 y una tercera que se utilizara para alimentacion de un MAX232 y un Led. 
+En la Figura 6 se muestra el esquemático de la plataforma total a desarrollar. Podemos ver que en principio tendría un microcontrolador C8051F352, que trabaja con un nivel de tension de 3,3 voltios. La entrada de alimentación tiene un Jack Power al que se le conectará una fuente de 9 voltios y 500 miliAmeperes, entonces se le agrega a la placa un regulador de tensión. Desde el regulador sacamos 3 lineas distintas (con el mismo valor de tensión) de alimentación, una irá hacía Vdd del C8051, otra hacia Av del C8051 y una tercera que se utilizará para alimentación de un chip-driver y un Led.
+Además se usa un chip-driver para transmitir la señal de salida y entrada (Tx y Rx) del microcontrolador a través de un conector serial. Se colocan antes del driver 4 jumpers para poder utilizar el microcontrolador con salida UART sin necesidad de el chip.
+Ademas tenemos las entradas/salidas tanto de los puertos digiteles como los analogicos (la idea es que se realice con pines machos). En las entradas/salidas analogicos tiene implementados filtros RC, para disminuir el ruido en la señal de entrada (así mejoramos la medición que puede realizar el ADC del C8051F352).
+Por último vemos que tenemos un array de 2x5 pines que sirven para conectar el debugger de silicon labs y un botón que servirá de reset del microcontrolador.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.80\textwidth, height = 9cm]{Schematic}
+  \caption{Diagrama Esquematico}\label{fig:Schematic}
+\end{figure}
+
+\subsection{Selección de los Componentes}
+
+Se seleccionaron los siguientes componentes para trabajar, su elección fue tanto por disponibilidad como por tamaños convenientes:
+
+\begin{itemize}
+  \item Resistencias: SMD1206
+  \item Capacitores: SMD1206
+  \item Regulador de Tensión: 78033LS 
+  \item Chip-Driver: MAX232
+  \item LEDs : Led 3mm
+  \item Conector Serial : RS-232 
+\end{itemize}
+
+\subsection{Diseño PCB}
+Una vez realizado el diagrama esquemático y seleccionados los componentes y empaquetados, se diseña el PCB (Printed Circuit Board). En donde se dibuja precisamente como se imprimira la placa. En este paso se acomodan los componentes y se realizan las pistas que los interconectan. Es la imagen de como quedara la placa una vez ya impresa y con sus componentes soldados. En la Figura 7 se muestra el diseño de PCB elaborado para la placa que contiene el microcontrolado C8051F352. En la Figura 8 se muestra el diseño PCB elaborado para realizar el interfaz entre el debugger Silicon Labs y la plataforma con el C8051F352.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.80\textwidth, height = 9cm]{PCB1}
+  \caption{PCB de la plataforma}\label{fig:PCB1}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.30\textwidth, height = 4cm]{PCB2}
+  \caption{PCB de la interfaz debugger}\label{fig:PCB2}
+\end{figure}
+
+Como se ve en ambas figuras 7 y 8, podemos ver el color verde, que significa que el diseño esta hecho en la capa inferior de la placa. Los caminos verdes entre componentes son denominados pistas. El resto del rellenado verde es la referencia a masa. La linea amarilla de que 'envuelve' a la plataforma es la linea de corte (delimita la placa).
 
 \section{Avances con respecto al diseño de software}
-En las primeras 100 horas no fue posible cubrir los requerimientos principales. Los avances obtenidos hasta hoy son los siguientes
+En las primeras 100 horas no fue posible cubrir los requerimientos principales. Los avances obtenidos hasta hoy son los siguientes:
 
 \begin{itemize}
   \item Es posible configurar las entradas del ADC en modo single-ended y bipolar
@@ -327,6 +367,28 @@ En las primeras 100 horas no fue posible cubrir los requerimientos principales. 
   \item Es posible contar eventos con dos contadores distintos
   \item Es posible modificar la tasa de envio de datos por UART para cada señal convertida por separado
 \end{itemize}
+
+\section{Avances con respecto al diseño del Hardware}
+En las primeras 100 horas no fue posible cubrir los requerimientos principales. Los avances obtenidos hasta hoy son los siguientes:
+
+\begin{itemize}
+  \item Diagrama Esquemático de la plataforma.
+  \item Selección de componentes y empaquetados de los mismos.
+  \item Diseño del PCB, tanto para la placa con microcontrolador, como para el debugger.
+  \item Impresion de la placa.
+\end{itemize}
+\clearpage
+
+\section{Construccion del Hardware}
+La construccion de la plataforma comenzó con el estudio del programa 'Circuit Pro' que es el que la se utilizó para poder manejar la fresadora (LPKF E33). Una vez realizado esto, se importaron los archivos (Gerbers) y se realizó el proceso de impresion de la plataforma.
+En la figura 9 se muestra la plataforma ya impresa.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.80\textwidth, height = 9cm]{placa1}
+  \caption{Plataforma Impresa}\label{fig:placa1}
+\end{figure}
+
 
 \section{Estructura del software}
 El programa esta dividido en 6 modulos que en la mayoria de los casos corresponde a cada bloque en el que esta dividido el sistema, como se muestra en la figura \ref{fig:bloques1}
