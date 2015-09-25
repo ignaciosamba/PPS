@@ -107,6 +107,7 @@ void cambiar_pin()
 		if(ADC0MUX == 0x78) // si estamos en el ultimo pin del modo single ended, hay que pasar a modo diferencial
 		{
 			ADC0CN |= 0x10; // se habilita el modo diferencial
+			// ADC0DAC |= 0xBF;
 			ADC0MUX = 0x01; // se setean los pines 0 y 1 en modo diferencial
 			ADC0MD = 0x83; // ADC en modo conversion continua
 			return;
@@ -149,7 +150,13 @@ void enviar_dato(unsigned long int *dato)
 	}
 	else if((num_pin & 0x0F) < 0x08)
 	{
-		printf("DF,%c,%lu\n", (num_pin >> 4) + '0',*dato);
+		if(*dato < 1250)
+			printf("DF,%c,%lu\n", (num_pin >> 4) + '0',(*dato)*2);
+		else
+			printf("DF,%c,-%lu\n", (num_pin >> 4) + '0',(2520 - *dato)*2);
+		/**
+		 * hay toda una explicacion que duro bastante tiempo de porque pasa
+		 */
 	}
 }
 
@@ -285,12 +292,17 @@ void cargar_buffer_dif (struct shellstr *shell)
  */
 void get_single_ended(struct shellstr *shell)
 {
+	ADC0MUX = (shell->args[0] << 4) + 8;
 
-	AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC	
-	ADC0MD = 0x83;	// Habilitar conversion en modo continuo
+	AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC.	
+	ADC0CF = 0x10;  // se usa el FAST FILTER.
+	ADC0MD = 0x83;	// Habilitar conversion en modo continuo.
+
 	EA = 1;          // habilitar interrupciones globales
 
-	ADC0MUX = (shell->args[0] << 4) + 8;
+
+	while (!f_dato_convertido);
+	f_dato_convertido = false;
 
 	dato_conversor = convertir();
 	enviar_dato(&dato_conversor);
@@ -304,20 +316,23 @@ void get_single_ended(struct shellstr *shell)
 
 void get_differential(struct shellstr *shell)
 {
-	AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC	
-	ADC0MD = 0x83;	// Habilitar conversion en modo continuo
-	EA = 1;          // habilitar interrupciones globales
-
 	switch(shell->args[0])
 	{
-		case '0': ADC0MUX = 0x01; break;
-		case '2': ADC0MUX = 0x23; break;
-		case '4': ADC0MUX = 0x45; break;
-		case '6': ADC0MUX = 0x67; break;
+		case '0': ADC0CN |= 0x10; ADC0MUX = 0x01; break;
+		case '2': ADC0CN |= 0x10; ADC0MUX = 0x23; break;
+		case '4': ADC0CN |= 0x10; ADC0MUX = 0x45; break;
+		case '6': ADC0CN |= 0x10; ADC0MUX = 0x67; break;
 		default: shell->errn = 406; return; 
 	}
+	
+	AD0INT = 0;		 // se inicializa en 0 el bit de conversion completa del ADC	
+	ADC0CN |= 0x00;  // se habilita el modo diferencial
+	ADC0MD = 0x83;	 // Habilitar conversion en modo continuo
+	EA = 1;          // habilitar interrupciones globales
 
-	dato_conversor = convertir();
+	while (!f_dato_convertido);
+	f_dato_convertido = false;
+	dato_conversor = convertir();	
 	enviar_dato(&dato_conversor);
 
     ADC0MD = 0x00;
