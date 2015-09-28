@@ -36,6 +36,9 @@ void contar_RPM(void) // utiliza timer0
 			i++;
 			f_contRPM = false; // se pone en falso la bandera del timer
 
+			// el timer2 esta clockeado por clock/12, que es 24.5MHz/12 = 2041666
+			// timer2 es de 16 bits, por lo que en un segundo, timer2 interrumpe 2041666/65536 = 31 veces
+			
 			if(i > 15) // cada 15 interrupciones se llega a los 500 ms aproximadamente.
 			{
 
@@ -46,11 +49,17 @@ void contar_RPM(void) // utiliza timer0
 
 				res = rawValue.result;
 
-				rpm = res * 30; 
+				// rpm = res * 30; 
+				rpm = res * 150; 
 				// 4 eventos del timer0 son 1 vuelta del motor al tener este 4 aspas
 				// cantidad de vueltas en 500 ms * 120 = vueltas por minuto.
 				// (vueltas / 4) * 120 = rpm
 				// vueltas * 30 = rpm
+
+				// la misma logica con 100 ms
+				// cantidad de vueltas en 100 ms * 10 * 60 = vueltas por minuto.
+				// (vueltas / 4) * 600 = rpm
+				// vueltas * 150 = rpm
 
 				// esto da una precision de 30 rpm. osea que cada resultado es +-30
 
@@ -73,14 +82,14 @@ void control_RPM(unsigned short rpm_real, unsigned short rpm_ideal)
 {
 	if(rpm_real > rpm_ideal + 50) // si las rpm son muy altas
 	{
-		velocidad +=50;
+		velocidad +=20;
 		set_Pwm(velocidad); // se sube la velocidad relativa
 		printf("se controlo para que vaya mas despacio\nrpm_ideal = %d\nrpm_real = %d", rpm_ideal, rpm_real);
 	}
 
 	if(rpm_real < rpm_ideal - 50) // si las rpm son muy bajas
 	{
-		velocidad -=50;
+		velocidad -=20;
 		set_Pwm(velocidad); // se baja la velocidad relativa
 		printf("se controlo para que vaya mas rapido\n");
 	}

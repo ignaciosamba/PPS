@@ -116,7 +116,7 @@ void cambiar_pin()
 		ADC0MD = 0x83; // ADC en modo conversion continua
 		return;
 	}
-	if((ADC0MUX & 0x0F) < 0x08)// si los 4 LSB de ADC0MUX son menores a 8, estamos en modo diferencial
+	else if((ADC0MUX & 0x0F) < 0x08)// si los 4 LSB de ADC0MUX son menores a 8, estamos en modo diferencial
 	{
 		if(ADC0MUX == 0x67) // si estamos en el ultimo par de pines del modo diferencial, hay que pasar a modo single-ended.
 		{
@@ -170,7 +170,7 @@ void enviar_dato(unsigned long int *dato)
  * barrido constante de todos los pines en todos sus modos, pero que se envien solo los que deban enviarse.
  * La informacion de si se envia o no esta en los buffers "buffer_adc_count" y "buffer_adc". El primero contiene
  * los valores iniciales de cada pin en cada modo, y el segundo contiene los valores actuales. Cada vez que se 
- * hace un llamado a esta funcion, el los valores de buffer_adc se decrementan en 1. Cuando un elemento el array
+ * hace un llamado a esta funcion, el los valores de buffer_adc se decrementan en 1. Cuando un elemento del array
  * llega a 1, esta habilitado para el envio. Si un elemento tiene valor 0, el pin correspondiente esta deshabilitado.
  * @return devuelve true si el pin actual esta habilitado para enviar, 0 si no esta habilitado.
  */
