@@ -197,7 +197,7 @@ struct shellstr *analizar(struct shellstr *shell)
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
 
-        else contar_RPM();
+        else RPM_instantaneo();
     }
 
     else if((shell->comando[0] == 'P') && (shell->comando[1] == 'W') && (shell->comando[2] == 'M'))

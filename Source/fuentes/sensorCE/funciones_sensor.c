@@ -6,16 +6,21 @@
 #define V_ARRANQUE 33264
 #define V_ESTABLE 36000
 #define VELOCIDAD_APAGADO 65500
-#define VELOCIDAD_ESTABLE 37000
+#define VELOCIDAD_ESTABLE_RPM 3700
 
 
 unsigned short int velocidad = V_ESTABLE;
+unsigned long rpm;
+
+void RPM_instantaneo()
+{
+	printf("%lu +-30 rpm\n", rpm);
+}
 
 void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de timer3
 {
 	static LONGDATA rawValue;
 	unsigned long res = 0;
-	unsigned long rpm;
 
 	rawValue.Byte[Byte3] = 0x00;
 	rawValue.Byte[Byte2] = 0x00;
@@ -39,8 +44,7 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
 
 	// esto da una precision de 30 rpm. osea que cada resultado es +-30
 
-	// printf("%lu +-30 rpm\n", rpm);
-	control_RPM(rpm,(unsigned)VELOCIDAD_ESTABLE);
+	control_RPM(rpm,(unsigned)VELOCIDAD_ESTABLE_RPM);
   	
 	TH0 = 0;           // Resetear valor de timer0
 	TL0 = 0;    
@@ -52,30 +56,30 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
  */
 void control_RPM(unsigned short rpm_real, unsigned short rpm_ideal)
 {
-	static short int correcciones_mas;
-	static short int correcciones_menos;
-	if(rpm_real > rpm_ideal + 50) // si las rpm son muy altas
+	// static short int correcciones_mas;
+	// static short int correcciones_menos;
+	if(rpm_real > rpm_ideal + 200) // si las rpm son muy altas
 	{
-		velocidad +=10;
+		velocidad +=50;
 		set_Pwm(velocidad); // se sube la velocidad relativa
 		// printf("se controlo para que vaya mas despacio\nrpm_ideal = %d\nrpm_real = %d", rpm_ideal, rpm_real);
-		correcciones_menos++;
+		// correcciones_menos++;
 	}
 
-	if(rpm_real < rpm_ideal - 50) // si las rpm son muy bajas
+	if(rpm_real < rpm_ideal - 200) // si las rpm son muy bajas
 	{
-		velocidad -=10;
+		velocidad -=50;
 		set_Pwm(velocidad); // se baja la velocidad relativa
-		correcciones_mas++;
+		// correcciones_mas++;
 		// printf("se controlo para que vaya mas rapido\n");
 	}
 
-	if(correcciones_mas + correcciones_menos >= 10)
-	{
-		printf("se corrigio 10 veces..\n%d de mas\n%d de menos\n", correcciones_mas, correcciones_menos);
-		correcciones_menos = 0;
-		correcciones_mas = 0;
-	}
+	// if(correcciones_mas + correcciones_menos >= 10)
+	// {
+	// 	printf("se corrigio 10 veces..\n%d de mas\n%d de menos\n", correcciones_mas, correcciones_menos);
+	// 	correcciones_menos = 0;
+	// 	correcciones_mas = 0;
+	// }
 }
 
 /**
