@@ -6,6 +6,7 @@
  * @details [long description]
  */
 #include "headers.h"
+#include "sensorCE/funciones_sensor.h"
 #include "interrupciones.h"
 
 sbit LED = P0^7;
@@ -39,7 +40,17 @@ void ADC0_ISR (void) interrupt 10
 
  void T3_ISR(void) interrupt 14
  {
+	static short int i = 0;
+
  	TMR3CN &= ~(1 << 7); // volver a 0 la bandera de interrupcion del byte superior
  	TMR3CN &= ~(1 << 6); // volver a 0 la bandera de interrupcion del byte inferior
- 	f_contRPM = true; // se hablilita la bandera del timer
+
+	// timer2 es de 16 bits, por lo que en un segundo, timer2 interrumpe 2041666/65536 = 31 veces
+	// si i == 3, pasaron aproximadamente 100 ms
+  	if(i >= 3)
+ 	{
+		contar_RPM(); 
+ 		i = 0;
+ 	}
+	i++;
  }

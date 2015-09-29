@@ -4,3 +4,5 @@ void delay(int tiempo);
 void arrancar_motor(void);
 void apagar_motor(void);
 void control_RPM(unsigned short rpm_real, unsigned short rpm_ideal);
+
+

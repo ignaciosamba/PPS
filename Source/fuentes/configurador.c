@@ -45,7 +45,6 @@ int iniciar_ADC(void)
 	ADC0MD = 0x81;                      // Start internal calibration
 	while(AD0CALC != 1);                // Wait until calibration is complete
 
-	EIE1   |= 0x08;                     // Enable ADC0 Interrupts
 	ADC0MD  = 0x80;                     // Enable the ADC0 (IDLE Mode)
 	
 	return 0;

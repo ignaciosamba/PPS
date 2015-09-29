@@ -301,6 +301,7 @@ void get_single_ended(struct shellstr *shell)
 	ADC0CF = 0x00;  // se usa el FAST FILTER.
 	ADC0MD = 0x82;	// Habilitar conversion en modo continuo.
 
+	EIE1 |= 0x08;    // Enable ADC0 Interrupts
 	EA = 1;          // habilitar interrupciones globales
 
 
@@ -313,6 +314,7 @@ void get_single_ended(struct shellstr *shell)
     ADC0MD = 0x00;
 	EA = 0;
 
+	EIE1 &= ~0x08;    // Disable ADC0 Interrupts
 	shell->errn = 0;
 
 }
@@ -331,6 +333,7 @@ void get_differential(struct shellstr *shell)
 	AD0INT = 0;		 // se inicializa en 0 el bit de conversion completa del ADC	
 	ADC0CN |= 0x00;  // se habilita el modo diferencial
 	ADC0MD = 0x82;	 // Habilitar conversion en modo continuo
+	EIE1 |= 0x08;    // Enable ADC0 Interrupts
 	EA = 1;          // habilitar interrupciones globales
 
 	while (!f_dato_convertido);
@@ -341,6 +344,7 @@ void get_differential(struct shellstr *shell)
     ADC0MD = 0x00;
 	EA = 0;
 	
+	EIE1 &= ~0x08;    // Disable ADC0 Interrupts
 	shell->errn = 0;
 }
 

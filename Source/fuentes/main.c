@@ -83,6 +83,7 @@ void main()
 			AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC	
 			ADC0MUX = 0x08;  // el primer pin a analizar es el pin 0 en modo single-ended
 			ADC0MD = 0x83;	// Habilitar conversion en modo continuo
+			EIE1 |= 0x08;    // Enable ADC0 Interrupts
 			EA = 1;          // habilitar interrupciones globales
 			// ES0 = 1;
 
