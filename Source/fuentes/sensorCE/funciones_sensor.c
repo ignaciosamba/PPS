@@ -6,18 +6,18 @@
 #define V_ARRANQUE 33264
 #define V_ESTABLE 36000
 #define VELOCIDAD_APAGADO 65500
-#define VELOCIDAD_ESTABLE_RPM 3700
+#define VELOCIDAD_ESTABLE_RPS 3700
 
 
 unsigned short int velocidad = V_ESTABLE;
-unsigned long rpm;
+unsigned long rps;
 
-void RPM_instantaneo()
+void RPS_instantaneo()
 {
-	printf("%lu +-30 rpm\n", rpm);
+	printf("%lu +-30 rps\n", rps);
 }
 
-void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de timer3
+void contar_RPS(void) // utiliza timer0 y timer3. llamada por interrupcion de timer3
 {
 	static LONGDATA rawValue;
 	unsigned long res = 0;
@@ -29,44 +29,44 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
 
 	res = rawValue.result;
 
-	// rpm = res * 30; 
-	rpm = res * 150; 
+	// rps = res * 30; 
+	rps = res * 10; 
 
 	// 4 eventos del timer0 son 1 vuelta del motor al tener este 4 aspas
-	// cantidad de vueltas en 500 ms * 120 = vueltas por minuto.
-	// (vueltas / 4) * 120 = rpm
-	// vueltas * 30 = rpm
+	// cantidad de vueltas en 500 ms * 2 = vueltas por segundo.
+	// (vueltas / 4) * 120 = rps
+	// vueltas * 30 = rps
 
 	// la misma logica con 100 ms
-	// cantidad de vueltas en 100 ms * 10 * 60 = vueltas por minuto.
-	// (vueltas / 4) * 600 = rpm
-	// vueltas * 150 = rpm
+	// cantidad de vueltas en 100 ms = vueltas por segundo.
+	// (cuenta / 4) * 10 = rps
+	// cuenta * 150 = rps
 
-	// esto da una precision de 30 rpm. osea que cada resultado es +-30
+	// esto da una precision de 30 rps. osea que cada resultado es +-30
 
-	control_RPM(rpm,(unsigned)VELOCIDAD_ESTABLE_RPM);
+	control_RPS(rps,(unsigned)VELOCIDAD_ESTABLE_RPS);
   	
 	TH0 = 0;           // Resetear valor de timer0
 	TL0 = 0;    
 
 }
 /**
- * @brief agrega una histeresis al funcionamiento del motor que evita el desvio de las RPM
+ * @brief agrega una histeresis al funcionamiento del motor que evita el desvio de las RPS
  * @details [long description]
  */
-void control_RPM(unsigned short rpm_real, unsigned short rpm_ideal)
+void control_RPS(unsigned short rps_real, unsigned short rps_ideal)
 {
 	// static short int correcciones_mas;
 	// static short int correcciones_menos;
-	if(rpm_real > rpm_ideal + 200) // si las rpm son muy altas
+	if(rps_real > rps_ideal + 200) // si las rps son muy altas
 	{
 		velocidad +=50;
 		set_Pwm(velocidad); // se sube la velocidad relativa
-		// printf("se controlo para que vaya mas despacio\nrpm_ideal = %d\nrpm_real = %d", rpm_ideal, rpm_real);
+		// printf("se controlo para que vaya mas despacio\nrps_ideal = %d\nrps_real = %d", rps_ideal, rps_real);
 		// correcciones_menos++;
 	}
 
-	if(rpm_real < rpm_ideal - 200) // si las rpm son muy bajas
+	if(rps_real < rps_ideal - 200) // si las rps son muy bajas
 	{
 		velocidad -=50;
 		set_Pwm(velocidad); // se baja la velocidad relativa
