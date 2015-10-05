@@ -7,6 +7,8 @@
 #include "configurador.h"
 
 sbit LED = P0^7;
+char int_aux1;
+char int_aux2;
 
 void iniciar_puertos (void)
 {
@@ -174,4 +176,53 @@ void iniciar_PCA (void)
 
    // Start PCA counter
    CR = 1;
+}
+
+/**
+ * @brief Establece el sistema en modo de bajo consumo
+ * @details deja el clock interno activo y las interrupciones
+ * pendientes, pero gastando mucha menos energia. El modo de bajo consumo se desactiva al momento de la llegada
+ * de una interrupcion. Esta funcion hace que la unica interrupcion que hace volver al micro a su estado de consumo
+ * normal es una interrupcion por UART, de manera que no se dispare automaticamente con una interrupcion de algun
+ * timer. Para volver del modo bajo consumo, es necesario llamar a la funcion "deshabilitar_modo_bajo_consumo", ya 
+ * que los parametros inhabilitados en esta funcion se vuelven a establecer en dicha funcion.
+ * 
+ * @return no devuelve ningun valor, pero si hace un envio por UART indicando que se inicio el modo de bajo consumo
+ * 
+ */
+void habilitar_modo_bajo_consumo(void)
+{
+   int_aux1 = (char)IE;
+   int_aux2 = (char)EIE1; //guardar los estados de los registros de interrupciones
+   IE = 0;
+   EIE1 = 0; // inhabilitar todas las interrupciones
+
+   ES0 = 1; // habilitar interrupcion de UART
+   EA = 1; // habilitar interrupciones
+
+   printf("%05d,z", 800); // ack de modo de bajo consumo activado
+
+   PCON |= 1;
+}
+
+/**
+ * @brief vuelve del modo de bajo consumo y establece los registros de interrupcion inhabilitados antes de iniciar
+ *  el modo de bajo consumo
+ * 
+ * @details El modo de bajo consumo se desactiva cuando el modulo de UART recibe un caracter, ya que se dejan habilitadas
+ * las interrupciones del mismo, pero es necesario que se llame esta funcion para volver a establecer los parametros
+ * necesarios con los que el sistema funciona, de otra manera el comportamiento se torna impredecible.
+ * 
+ * @return no devuelve ningun valor, pero si hace un envio por UART indicando que se desactivo el modo de bajo consumo
+ * 
+ */
+void deshabilitar_modo_bajo_consumo(void)
+{
+   EA &= ~1; // deshabilitar interrupciones
+   ES0 &= ~1; // deshabilitar interrupcion de UART
+
+   IE = int_aux1;
+   EIE1 = int_aux2; // reestablecemos los estados originales de los registros de interrupciones
+
+   printf("%05d,z", 801); // ack de modo de bajo consumo desactivado
 }

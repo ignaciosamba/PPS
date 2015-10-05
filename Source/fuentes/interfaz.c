@@ -12,6 +12,7 @@
 #include "conversor.h"
 #include "contador.h"
 #include "interfaz.h"
+#include "configurador.h"
 
 /**
  * @brief Obtiene un comando
@@ -221,6 +222,26 @@ struct shellstr *analizar(struct shellstr *shell)
         {
             // iniciar_PCA();
             apagar_motor();
+        }
+    }
+    else if((shell->comando[0] == 'S') && (shell->comando[1] == 'L') && (shell->comando[2] == 'P'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else 
+        {
+            habilitar_modo_bajo_consumo();
+        }
+    }
+    else if((shell->comando[0] == 'W') && (shell->comando[1] == 'K') && (shell->comando[2] == 'P'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else 
+        {
+            deshabilitar_modo_bajo_consumo();
         }
     }
 
