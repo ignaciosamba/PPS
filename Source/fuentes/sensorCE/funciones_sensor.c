@@ -8,11 +8,12 @@
 #define VELOCIDAD_APAGADO 65500
 #define VUELTAS_CADA_100MS 18 //para una velocidad ideal de 3600 rpm. valor explicado en la funcion contar_RPM
 #define HISTERESIS 2
-#define CORRECCION 5
+#define CORRECCION 50
 
 
 unsigned short int velocidad = V_ESTABLE;
-unsigned long rps;
+unsigned long eventos;
+sbit HABILITAR_MOTOR = P0^2;
 
 void RPM_instantaneo()
 {
@@ -24,9 +25,9 @@ void RPM_instantaneo()
 
 	// la misma logica con 100 ms
 	// cantidad de vueltas en 100 ms = vueltas por segundo.
-	// (cuenta / 4) * 10 = rps
-	// cuenta * 150 = rps
-	printf("%lu +-150 rps\n", rps*150);
+	// (eventos / 4) * 10 = rpm
+	// eventos * 150 = rpm
+	printf("%lu +-150 rps\n", eventos*150);
 }
 
 void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de timer3
@@ -41,7 +42,7 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
 
 	res = rawValue.result;
 
-	rps = res;
+	eventos = res;
 
 	//res tiene la cantidad de vueltas en 100 ms teniendo en cuenta que esta funcion se llama cada 3 interrupciones
 	//del timer3 que son aprox 100ms.
@@ -55,7 +56,7 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
 	//como esta funcion se llama cada 100 milisegundos, se controla acorde colocando una velocidad estable
 
 
-	control_RPM(rps,(unsigned)VUELTAS_CADA_100MS);
+	control_RPM(eventos,(unsigned)VUELTAS_CADA_100MS);
   	
 	TH0 = 0;           // Resetear valor de timer0
 	TL0 = 0;    
@@ -65,22 +66,22 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
  * @brief agrega una histeresis al funcionamiento del motor que evita el desvio de las RPM
  * @details [long description]
  */
-void control_RPM(unsigned short rps_real, unsigned short rps_ideal)
+void control_RPM(unsigned short eventos_real, unsigned short eventos_ideal)
 {
 	static short int correcciones_mas;
 	static short int correcciones_menos;
-	if(rps_real > rps_ideal + HISTERESIS) // si las rps son muy altas
+	if(eventos_real > eventos_ideal + HISTERESIS) // si las eventos son muy altas
 	{
-		velocidad +=CORRECCION;
-		set_Pwm(velocidad); // se sube la velocidad relativa
-		// printf("se controlo para que vaya mas despacio\nrps_ideal = %d\nrps_real = %d", rps_ideal, rps_real);
+		velocidad +=CORRECCION; //parece que se baja pero restarla es subirla
+		set_Pwm(velocidad); // se baja la velocidad relativa
+		// printf("se controlo para que vaya mas despacio\neventos_ideal = %d\neventos_real = %d", eventos_ideal, eventos_real);
 		correcciones_menos++;
 	}
 
-	if(rps_real < rps_ideal - HISTERESIS) // si las rps son muy bajas
+	if(eventos_real < eventos_ideal - HISTERESIS) // si las eventos son muy bajas
 	{
-		velocidad -=CORRECCION;
-		set_Pwm(velocidad); // se baja la velocidad relativa
+		velocidad -=CORRECCION; //parece que se baja pero restarla es subirla
+		set_Pwm(velocidad); // se sube la velocidad relativa
 		correcciones_mas++;
 		// printf("se controlo para que vaya mas rapido\n");
 	}
@@ -91,6 +92,9 @@ void control_RPM(unsigned short rps_real, unsigned short rps_ideal)
 		correcciones_menos = 0;
 		correcciones_mas = 0;
 	}
+
+	if(velocidad < V_ARRANQUE)
+		apagar_motor();			//si llega a ir demasiado rapido, se apaga por seguridad.
 }
 
 /**
@@ -102,6 +106,8 @@ void arrancar_motor(void)
 
 	// EIE1 |= 0x10;                       // Enable PCA interrupts
 	// EA = 1;
+	HABILITAR_MOTOR = 1;
+	delay(1000);
 	
 	//printf("\nFase 1...\n");
 	set_Pwm(V_FASE_1);
@@ -127,6 +133,7 @@ void apagar_motor(void)
 	//printf("01011\n");
     EIE1 &= ~0x80; //deshabilitar interrupcion de timer3
 	set_Pwm(VELOCIDAD_APAGADO);
+	HABILITAR_MOTOR = 0;
 }
 
 /**
