@@ -68,30 +68,30 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
  */
 void control_RPM(unsigned short eventos_real, unsigned short eventos_ideal)
 {
-	static short int correcciones_mas;
-	static short int correcciones_menos;
+	// static short int correcciones_mas;
+	// static short int correcciones_menos;
 	if(eventos_real > eventos_ideal + HISTERESIS) // si las eventos son muy altas
 	{
 		velocidad +=CORRECCION; //parece que se baja pero restarla es subirla
 		set_Pwm(velocidad); // se baja la velocidad relativa
 		// printf("se controlo para que vaya mas despacio\neventos_ideal = %d\neventos_real = %d", eventos_ideal, eventos_real);
-		correcciones_menos++;
+		// correcciones_menos++;
 	}
 
 	if(eventos_real < eventos_ideal - HISTERESIS) // si las eventos son muy bajas
 	{
 		velocidad -=CORRECCION; //parece que se baja pero restarla es subirla
 		set_Pwm(velocidad); // se sube la velocidad relativa
-		correcciones_mas++;
+		// correcciones_mas++;
 		// printf("se controlo para que vaya mas rapido\n");
 	}
 
-	if(correcciones_mas + correcciones_menos >= 10)
-	{
-		printf("se corrigio 10 veces..\n%d de mas\n%d de menos\n", correcciones_mas, correcciones_menos);
-		correcciones_menos = 0;
-		correcciones_mas = 0;
-	}
+	// if(correcciones_mas + correcciones_menos >= 10)
+	// {
+		// printf("se corrigio 10 veces..\n%d de mas\n%d de menos\n", correcciones_mas, correcciones_menos);
+	// 	correcciones_menos = 0;
+	// 	correcciones_mas = 0;
+	// }
 
 	if(velocidad < V_ARRANQUE)
 		apagar_motor();			//si llega a ir demasiado rapido, se apaga por seguridad.

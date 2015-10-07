@@ -200,7 +200,7 @@ void habilitar_modo_bajo_consumo(void)
    ES0 = 1; // habilitar interrupcion de UART
    EA = 1; // habilitar interrupciones
 
-   printf("%05d,z", 800); // ack de modo de bajo consumo activado
+   printf("%05d", 800); // ack de modo de bajo consumo activado
 
    PCON |= 1;
 }
@@ -224,5 +224,5 @@ void deshabilitar_modo_bajo_consumo(void)
    IE = int_aux1;
    EIE1 = int_aux2; // reestablecemos los estados originales de los registros de interrupciones
 
-   printf("%05d,z", 801); // ack de modo de bajo consumo desactivado
+   printf("%05d", 801); // ack de modo de bajo consumo desactivado
 }

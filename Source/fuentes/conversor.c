@@ -27,12 +27,13 @@ unsigned long convertir(void)
 	unsigned long mV;
 	
    // Copiar el valor del registro de conversion del adc en una variable local
-	// rawValue.Byte[Byte3] = 0x00;
-	// rawValue.Byte[Byte2] = 0x00;
-	rawValue.Byte[Byte1] = (unsigned char)ADC0H;
-	rawValue.Byte[Byte0] = (unsigned char)ADC0M;
-	// rawValue.Byte[Byte0] = (unsigned char)ADC0L;
+	rawValue.Byte[Byte3] = 0x00;
+	rawValue.Byte[Byte2] = (unsigned char)ADC0H; // para ADC de 24 bits
+	rawValue.Byte[Byte1] = (unsigned char)ADC0M; // para ADC de 24 bits
+	rawValue.Byte[Byte0] = (unsigned char)ADC0L; // para ADC de 24 bits
 
+	// rawValue.Byte[Byte1] = (unsigned char)ADC0H; // para ADC de 16 bits
+	// rawValue.Byte[Byte0] = (unsigned char)ADC0M; // para ADC de 16 bits
 	//                           Vref (mV)
 	//   medicion (mV) =   --------------- * result (bits)
 	//                       (2^24)-1 (bits)
@@ -54,8 +55,8 @@ unsigned long convertir(void)
 
 	// se calcula el voltaje medido segun el voltaje de referencia
 
-	// mV = rawValue.result / 6710; // para adc de 24 bits
-	mV = rawValue.result / 26; // para adc de 16 bits        
+	mV = rawValue.result / 6710; // para adc de 24 bits
+	// mV = rawValue.result / 26; // para adc de 16 bits        
 
 	return mV;
 
@@ -147,16 +148,16 @@ void enviar_dato(unsigned long int *dato)
 	if((num_pin & 0x0F) == 0x08)
 	{
 		// printf("SE,%c,%lu,z", (num_pin >> 4) + '0',*dato);
-		printf("%05luz",*dato);
+		printf("%05lu",*dato);
 	}
 	else if((num_pin & 0x0F) < 0x08)
 	{
 		if(*dato < 1250)
 			// printf("DF,%c,+%lu\n", (num_pin >> 4) + '0',(*dato)*2);
-			printf("+%04lu,z",(*dato)*2);
+			printf("+%04lu",(*dato)*2);
 		else
 			// printf("DF,%c,-%lu\n", (num_pin >> 4) + '0',(2520 - *dato)*2);
-			printf("-%04lu,z",(2520 - *dato)*2);
+			printf("-%04lu",(2520 - *dato)*2);
 		/**
 		 * hay toda una explicacion que duro bastante tiempo de porque pasa
 		 */
