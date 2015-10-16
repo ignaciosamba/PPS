@@ -1,0 +1,11 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}introduccion}{1}{section.1}
+\contentsline {section}{\numberline {2}haciendo andar el sensor}{1}{section.2}
+\contentsline {section}{\numberline {3}funcionamiento del sensor}{1}{section.3}
+\contentsline {section}{\numberline {4}alimentacion del motor}{1}{section.4}
+\contentsline {section}{\numberline {5}paso desde el 555 al arduino}{2}{section.5}
+\contentsline {section}{\numberline {6}conteo de rpm del motor}{2}{section.6}
+\contentsline {section}{\numberline {7}de la se\~nal del optoacoplador, a la silicon labs}{2}{section.7}
+\contentsline {section}{\numberline {8}estabilidad del motor}{2}{section.8}
+\contentsline {section}{\numberline {9}porque es necesario que el motor se mantenga estable?}{3}{section.9}
+\contentsline {section}{\numberline {10}como se trabaja la se\~nal que sale del sensor??}{3}{section.10}

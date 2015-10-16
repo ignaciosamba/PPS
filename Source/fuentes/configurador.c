@@ -192,6 +192,8 @@ void iniciar_PCA (void)
  */
 void habilitar_modo_bajo_consumo(void)
 {
+   printf("%05d", 800); // ack de modo de bajo consumo activado
+   
    int_aux1 = (char)IE;
    int_aux2 = (char)EIE1; //guardar los estados de los registros de interrupciones
    IE = 0;
@@ -200,7 +202,7 @@ void habilitar_modo_bajo_consumo(void)
    ES0 = 1; // habilitar interrupcion de UART
    EA = 1; // habilitar interrupciones
 
-   printf("%05d", 800); // ack de modo de bajo consumo activado
+   f_sleep = 1;
 
    PCON |= 1;
 }

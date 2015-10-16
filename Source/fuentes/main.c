@@ -18,6 +18,7 @@ sbit LED = P0^7;                          // LED='1' means ON
 bool f_dato_convertido;
 bool f_UART;
 bool f_contRPM;
+bool f_sleep;
 /**
  * @brief funcion principal, inicializa todos los parametros y corre las funciones principales
  */
@@ -39,6 +40,9 @@ void main()
    	//inicializa el buffer de valores estaticos en 0
    	for (i=0 ; i<TAM_SINGLE ; i++)
    		shell->buffer_adc_count[i]=0;
+
+   	//inicializa la bandera de sleep en 0
+   	f_sleep = 0;
 
 	iniciar_sysclock();
 	iniciar_puertos();

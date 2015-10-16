@@ -14,7 +14,7 @@
 #define SYSCLK      24500000           // SYSCLK Frecuencia del Clock en Hertz
 #define MDCLK         2457600          // Frecuencia del clock del modulador (ideal = 2,4576 MHz)
 #define OWR                300          // Output Word Rate deseado
-#define BAUDRATE        115200           // Tasa de baudios de la UART
+#define BAUDRATE        9600          // Tasa de baudios de la UART
 //-----------------------------------------------------------------------------
 // 16-bit SFR Definitions for 'F35x
 //-----------------------------------------------------------------------------
@@ -61,6 +61,8 @@ extern bool f_UART;
 ///bandera de interrupcion de Timer3 (contador de RPM)
 extern bool f_contRPM;
 
+///bandera de sleep
+extern bool f_sleep;
 /// estructura general del programa que contiene los elementos principales del mismo. Al estar organizado en forma de estructura se facilita el pase de parametros, y mas aun si se inicializa como puntero a estructura
 struct shellstr  
 {   

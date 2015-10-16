@@ -8,6 +8,7 @@
 #include "headers.h"
 #include "sensorCE/funciones_sensor.h"
 #include "interrupciones.h"
+#include "configurador.h"
 
 sbit LED = P0^7;
 
@@ -34,7 +35,15 @@ void ADC0_ISR (void) interrupt 10
     {                         // Se borra el bit de dato recibido en la UART
 		RI0 = 0;
  		f_UART = true;
+ 		
+	    if(f_sleep)
+	    {
+	    	f_sleep = 0;
+	    	deshabilitar_modo_bajo_consumo();
+	    }
+
     }
+
     //LED = ~LED;
  }
 
