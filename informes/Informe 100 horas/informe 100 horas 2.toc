@@ -1,40 +1,42 @@
 \select@language {spanish}
-\contentsline {section}{\numberline {1}Introducci\'on}{3}{section.1}
-\contentsline {section}{\numberline {2}Requerimientos}{3}{section.2}
-\contentsline {subsection}{\numberline {2.1}Principales}{3}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Secundarios}{3}{subsection.2.2}
-\contentsline {section}{\numberline {3}Investigacion}{3}{section.3}
-\contentsline {subsection}{\numberline {3.1}Parametros tenidos en cuenta en la seleccion del microcontrolador}{5}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Selecci\'on}{5}{subsection.3.2}
-\contentsline {section}{\numberline {4}Silicon Labs \emph {C8051F352}}{5}{section.4}
-\contentsline {subsection}{\numberline {4.1}Conversor Analogico-Digital}{6}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}Modos de medicion}{6}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}Modos de conversion}{6}{subsubsection.4.1.2}
-\contentsline {subsection}{\numberline {4.2}Contadores}{6}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Interfaz Serial}{6}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Flash}{6}{subsection.4.4}
-\contentsline {section}{\numberline {5}Dise\~no}{7}{section.5}
-\contentsline {subsection}{\numberline {5.1}Descripcion grafica del sistema}{7}{subsection.5.1}
-\contentsline {subsubsection}{\numberline {5.1.1}Diagrama de bloques}{7}{subsubsection.5.1.1}
-\contentsline {paragraph}{}{7}{section*.2}
-\contentsline {paragraph}{}{7}{section*.3}
-\contentsline {subsubsection}{\numberline {5.1.2}Diagramas de caso de uso}{8}{subsubsection.5.1.2}
-\contentsline {subsubsection}{\numberline {5.1.3}Diagramas de secuencia}{8}{subsubsection.5.1.3}
-\contentsline {section}{\numberline {6}Avances con respecto al dise\~no de software}{10}{section.6}
-\contentsline {section}{\numberline {7}Estructura del software}{11}{section.7}
-\contentsline {subsection}{\numberline {7.1}Partes que conforman el software}{11}{subsection.7.1}
-\contentsline {paragraph}{}{11}{section*.4}
-\contentsline {subsubsection}{\numberline {7.1.1}Configurador}{11}{subsubsection.7.1.1}
-\contentsline {subsubsection}{\numberline {7.1.2}Principal}{11}{subsubsection.7.1.2}
-\contentsline {subsubsection}{\numberline {7.1.3}Conversor}{11}{subsubsection.7.1.3}
-\contentsline {subsubsection}{\numberline {7.1.4}Interfaz de usuario}{12}{subsubsection.7.1.4}
-\contentsline {subsubsection}{\numberline {7.1.5}Contador}{12}{subsubsection.7.1.5}
-\contentsline {subsubsection}{\numberline {7.1.6}Interrupciones}{12}{subsubsection.7.1.6}
-\contentsline {section}{Ap\'{e}ndice Appendices}{13}{section*.5}
-\contentsline {section}{Ap\'{e}ndice \numberline {A}Instrucciones MML}{13}{Ap\penalty \@M \hskip \z@skip \unhbox \voidb@x \bgroup \let \unhbox \voidb@x \setbox \@tempboxa \hbox {e\global \mathchardef \accent@spacefactor \spacefactor }\accent 19 e\egroup \spacefactor \accent@spacefactor \penalty \@M \hskip \z@skip \setbox \@tempboxa \hbox {e\global \mathchardef \accent@spacefactor \spacefactor }\spacefactor \accent@spacefactor ndice.alph1.Alph1}
-\contentsline {subsection}{\numberline {A.1}SSE (Set Single Ended)}{13}{subsection.alph1.Alph1.1}
-\contentsline {subsection}{\numberline {A.2}SDI (Set Diferencial)}{13}{subsection.alph1.Alph1.2}
-\contentsline {subsection}{\numberline {A.3}SGA (Set Ganancia)}{13}{subsection.alph1.Alph1.3}
-\contentsline {subsection}{\numberline {A.4}GT0 (Get Timer 0)}{13}{subsection.alph1.Alph1.4}
-\contentsline {subsection}{\numberline {A.5}GT2 (Get Timer 2)}{13}{subsection.alph1.Alph1.5}
-\contentsline {subsection}{\numberline {A.6}ST (Start)}{14}{subsection.alph1.Alph1.6}
+\contentsline {section}{\numberline {1}Introduccion}{3}
+\contentsline {section}{\numberline {2}Requerimientos}{3}
+\contentsline {subsection}{\numberline {2.1}Principales}{3}
+\contentsline {subsection}{\numberline {2.2}Secundarios}{3}
+\contentsline {section}{\numberline {3}Investigacion}{3}
+\contentsline {subsection}{\numberline {3.1}Parametros tenidos en cuenta en la seleccion del microcontrolador}{5}
+\contentsline {subsection}{\numberline {3.2}Selecci\'on}{5}
+\contentsline {section}{\numberline {4}Silicon Labs \emph {C8051F352}}{6}
+\contentsline {subsection}{\numberline {4.1}Conversor Analogico-Digital}{6}
+\contentsline {subsubsection}{\numberline {4.1.1}Modos de medicion}{6}
+\contentsline {subsubsection}{\numberline {4.1.2}Modos de conversion}{6}
+\contentsline {subsection}{\numberline {4.2}Contadores}{6}
+\contentsline {subsection}{\numberline {4.3}Interfaz Serial}{6}
+\contentsline {subsection}{\numberline {4.4}Flash}{7}
+\contentsline {section}{\numberline {5}Dise\~no de Software}{7}
+\contentsline {subsection}{\numberline {5.1}Descripcion grafica del sistema}{7}
+\contentsline {subsubsection}{\numberline {5.1.1}Diagrama de bloques}{7}
+\contentsline {paragraph}{}{7}
+\contentsline {paragraph}{}{7}
+\contentsline {subsubsection}{\numberline {5.1.2}Diagramas de caso de uso}{8}
+\contentsline {subsubsection}{\numberline {5.1.3}Diagramas de secuencia}{9}
+\contentsline {section}{\numberline {6}Dise\~no de Hardware}{11}
+\contentsline {subsection}{\numberline {6.1}Diagrama Esquematico}{11}
+\contentsline {section}{\numberline {7}Avances con respecto al dise\~no de software}{11}
+\contentsline {section}{\numberline {8}Estructura del software}{11}
+\contentsline {subsection}{\numberline {8.1}Partes que conforman el software}{11}
+\contentsline {paragraph}{}{11}
+\contentsline {subsubsection}{\numberline {8.1.1}Configurador}{12}
+\contentsline {subsubsection}{\numberline {8.1.2}Principal}{12}
+\contentsline {subsubsection}{\numberline {8.1.3}Conversor}{12}
+\contentsline {subsubsection}{\numberline {8.1.4}Interfaz de usuario}{12}
+\contentsline {subsubsection}{\numberline {8.1.5}Contador}{12}
+\contentsline {subsubsection}{\numberline {8.1.6}Interrupciones}{13}
+\contentsline {section}{Appendices}{14}
+\contentsline {section}{\numberline {A}Instrucciones MML}{14}
+\contentsline {subsection}{\numberline {A.1}SSE (Set Single Ended)}{14}
+\contentsline {subsection}{\numberline {A.2}SDI (Set Diferencial)}{14}
+\contentsline {subsection}{\numberline {A.3}SGA (Set Ganancia)}{14}
+\contentsline {subsection}{\numberline {A.4}GT0 (Get Timer 0)}{14}
+\contentsline {subsection}{\numberline {A.5}GT2 (Get Timer 2)}{14}
+\contentsline {subsection}{\numberline {A.6}ST (Start)}{15}

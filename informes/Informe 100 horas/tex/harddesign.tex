@@ -1,0 +1,15 @@
+\section{Dise\~no de Hardware}
+Una vez seleccionado el microcontrolador, se inici\'o el dise\~no. Gracias a que en el Laboratorio se encontraba la placa de Silicon Labs (C8051F350DK), con el micro que seleccionamos para trabajar. Procedimos a buscar y analizar el diagrama esquematico de la placa.
+Una vez determinado los bloques necesarios para nuestra placa, procedimos a realizar nuestro diagrama esquematico. Para esto se utiliz\'o un programa llamado KiCad, ya que nos exporta los archivos (Gerbers) que posteriormente nos serviran para poder imprimir la placa en la fresadora. 
+\subsection{Diagrama Esquematico}
+En la Figura NUMERO se muestra el esquematico del total a desarrollar. Podemos ver que la placa en principio tendria un microcontrolador C8051F352, que trabaja con un nivel de tension de 3,3V. La entrada de alimentacion tiene un Jack Power al que se le conectara una fuente de 9 voltios y 500 miliAmeperes, entonces se le agrega a la placa un regulador de tension LM2937. Desde el regulador sacamos 3 lineas distintas (con el mismo valor de tensi\'on) de alimentaci\'on, una ir\'a hacía Vdd del 8051, otra hacia AV del 8051 y una tercera que se utilizara para alimentacion de un MAX232 y un Led. 
+
+\section{Avances con respecto al dise\~no de software}
+En las primeras 100 horas no fue posible cubrir los requerimientos principales. Los avances obtenidos hasta hoy son los siguientes
+
+\begin{itemize}
+  \item Es posible configurar las entradas del ADC en modo single-ended y bipolar
+  \item Es posible dar una ganancia de 2 a 128 para cada entrada del conversor
+  \item Es posible contar eventos con dos contadores distintos
+  \item Es posible modificar la tasa de envio de datos por UART para cada se\~nal convertida por separado
+\end{itemize}

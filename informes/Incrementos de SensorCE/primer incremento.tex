@@ -119,24 +119,13 @@ El adaptador de impedancia copia a la salida lo que tiene a la entrada, pero eli
 \section*{como se trabaja la señal que sale del optoacoplador??}
 la placa cuenta con un contador de eventos. lo que hace un contador de eventos es basicamente contar cada vez que aparece un flanco de subida en uno de los pines de entrada. Tiene una precision de 16 bits, por lo que cuando llega a 65536 se resetea y vuelve a 0. La señal del optoacoplador va directo a la entrada del contador de eventos.
 
-\section*{que es un PWM}
-un pwm es un alskdjpaisjdpsajd
+\section*{que es un PWM?}
+La modulacion por ancho de pulso, en ingles \textbf{Pulse Width Modulator}, es una tecnica en la cual se modifica el ciclo de trabajo de una señal de una señal periodica para distintos propositos. Para este caso, el PWM se utiliza como entrada para un driver de un motor trifasico junto con una señal de 12 V que hacen que se mueva el motor.
 
 \section*{arranque del motor con la señal de pwm}
-el driver del motor pasa de la señal de un pwm a una señal trifasica que alimenta el motor. Es necesario que para el arranque, se le suministre una secuencia con un ancho de pulso especifico creciente, que provoca que el motor arranque. una vez que arranca ya se puede modificar el ancho de pulso a gusto para que ande a velocidades distintas. 
+el driver del motor pasa de la señal de un pwm a una señal trifasica que alimenta el motor. Es necesario que para el arranque, se le suministre una secuencia con un ancho de pulso especifico creciente, que provoca que el motor arranque. una vez que arranca ya se puede modificar el ancho de pulso a gusto para que ande a velocidades distintas.
 
 La frecuencia del PWM es de 380Hz, y necesita 3 anchos de pulso distintos en 3 periodos de 600ms cada uno. Luego de eso se le da una velocidad de arranque que corresponde a un ancho de pulso bastante ancho, y despues se baja a uno mas tranqui para darle una velocidad estable. luego de eso se le aplica el control de velocidad que actua directamente sobre el valor del ciclo de trabajo teniendo en cuenta la velocidad medida con el sistema que detecta la velocidad del motor que explique en la otra seccion
 
 
-
-
-
-
-
-
-
-
-
 \end{document}
-
-

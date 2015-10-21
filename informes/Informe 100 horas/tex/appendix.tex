@@ -1,0 +1,96 @@
+%\appendix
+%\begin{appendices}
+%   \addappheadtotoc
+%   \appendixpage
+
+\section{Instrucciones MML}\label{ap:instrucciones}
+
+\subsection{SSE (Set Single Ended)}
+
+\textbf{Formato:} SSE,[1]
+
+\textbf{Descripcion:}
+Establece el pin ingresado en modo single ended.
+
+\textbf{Limitaciones:}
+\begin{itemize}
+  \item Un solo argumento
+  \item El argumento es un byte par comprendido entre 0 y 7
+\end{itemize}
+
+\textbf{Ejemplo:}
+
+SSE,4: Establece el pin 4 del ADC en modo single ended
+
+\subsection{SDI (Set Diferencial)}
+
+\textbf{Formato:} SDI,[1]
+
+\textbf{Descripcion:}
+Establece el pin ingresado y el pin siguiente a ese en numero en modo diferencial
+
+\textbf{limitaciones:}
+\begin{itemize}
+  \item un solo argumento
+  \item el argumento es un byte par comprendido entre 0 y 6
+\end{itemize}
+
+\textbf{ejemplo:}
+
+SDI,2: setea los pines 2 y 3 en modo diferencial
+
+\subsection{SGA (Set Ganancia)}
+
+\textbf{Formato:} SGA,[1]
+
+\textbf{descripcion:}
+Establece la ganancia del ADC segun el argumento a la potencia de 2
+
+\textbf{Limitaciones:}
+\begin{itemize}
+  \item Un solo argumento
+  \item El argumento es un byte comprendido entre 0 y 7
+\end{itemize}
+
+\textbf{Ejemplo:}
+
+SGA,3: Establece la ganancia en $2^{3} = 8$
+
+
+\subsection{GT0 (Get Timer 0)}
+
+\textbf{Formato:} GT0[0]
+
+\textbf{Descripcion:}
+Obtiene el valor actual de la cuenta de los eventos digitales monitoreados por timer0
+
+\textbf{Limitaciones:}
+\begin{itemize}
+  \item No lleva argumentos
+
+
+\end{itemize}\subsection{GT2 (Get Timer 2)}
+
+\textbf{Formato:} GT2[0]
+
+\textbf{descripcion:}
+Obtiene el valor actual de la cuenta de los eventos digitales monitoreados por timer2
+
+\textbf{Limitaciones:}
+\begin{itemize}
+  \item No lleva argumentos
+\end{itemize}
+
+\subsection{ST (Start)}
+
+\textbf{Formato:} ST[0]
+
+\textbf{Descripcion:}
+Guarda los cambios, sale del modo de configuracion y comienza a correr el programa
+
+\textbf{Limitaciones:}
+\begin{itemize}
+  \item No lleva argumentos
+\end{itemize}
+
+%\end{appendices} 

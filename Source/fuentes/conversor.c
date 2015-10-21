@@ -196,16 +196,16 @@ char analizar_buffer(struct shellstr *shell)
  	{
 		if(shell->buffer_adc [idx] == 0)
 		{
-			return 0;
+			return 0; // canal deshabilitado
 		}
 		if(shell->buffer_adc [idx] == 1)
 		{
-			shell->buffer_adc [idx] = shell->buffer_adc_count[idx];
+			shell->buffer_adc [idx] = shell->buffer_adc_count[idx]; // canal habilitado listo para imprimir. se resetea al valor inicial
 			return 1;
 		}
 		if(shell->buffer_adc [idx] > 1)
 		{
-			shell->buffer_adc[idx]--;
+			shell->buffer_adc[idx]--; // canal habilitado aun no listo para imprimir. se decrementa
 			return 0;
 		}
 	}	
