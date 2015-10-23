@@ -1,0 +1,94 @@
+%--------------------------------------------------------------
+%     Ejemplo de un artículo con LaTeX
+%--------------------------------------------------------------
+\documentclass[a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+
+%para usar hipertexto en las referencias
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+%para incluir graficos
+\usepackage{graphicx}
+%para permitir que la imagen este donde yo quiero y no en otro lugar
+\usepackage{float}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Año 2015}
+\lhead{Proyecto Integrador}
+\rfoot{Pagina \thepage}
+
+
+
+%--------------------------------------------------------------------------
+\title{\underline{Practica Profesional Supervisada} \\
+\large \underline{Informe de las 100 horas} \\
+\huge \textbf{ \\ Plataforma concentradora de sensores y eventos digitales} \\ }
+\author{Autores: Ignacio Sambataro, Luciano Mantovani\\ \\
+  \large Tutor: PhD. Ing. Orlando Micolini \\
+  \large Supervisor: Ing. Maximiliano Eschoyez \\ \\
+  \small Laboratorio de Arquitectura de Computadoras\\
+  \small Facultad de Ciencias Exactas, Fisicas y Naturales\\
+  \small Universidad Nacional de Cordoba\\
+  \date{A\~no 2015}
+}
+
+
+%\makeindex
+\begin{document}
+\maketitle
+
+%resumen
+\abstract{Este informe contiene un resumen de las actividades realizadas para la practica profesional
+supervisada en las primeras 100 horas de trabajo. El proyecto a realizar es una plataforma concentradora
+de sensores y eventos digitales}
+
+\thispagestyle{empty}
+
+%salto de pagina
+\clearpage
+
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+
+%introduccion
+\input{./tex/introduccion.tex}
+
+%requerimientos
+\input{./tex/requerimientos.tex}
+
+%investigacion
+\input{./tex/investigacion.tex}
+
+%Silicon Labs C8051F352
+\input{./tex/siliconlabs.tex}
+
+%Diseño de Software
+\input{./tex/softdesign.tex}
+
+%Diseño de Hardware
+\input{./tex/harddesign.tex}
+
+%Estructura de Software
+\input{./tex/softstruct.tex}
+
+%Apendice
+\input{./tex/appendix.tex}
+
+%Bibliografia
+\input{./tex/bibliografia.tex}
+
+\end{document} 

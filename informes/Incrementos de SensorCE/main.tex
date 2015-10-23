@@ -1,0 +1,130 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Plantilla para un artículo en LaTeX en espa\~nol.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+
+
+% Esto es para poder escribir acentos directamente:
+\usepackage[latin1]{inputenc}
+% Esto es para que el LaTeX sepa que el texto está en espa\~nol:
+\usepackage[spanish]{babel}
+% Esto es para que se pueda crear el indice
+%\usepackage{makeidx}
+% Paquetes de la AMS:
+\usepackage{amsmath, amsthm, amsfonts}
+% para poder poner una hoja apaisada
+\usepackage{lscape}
+%para incluir graficos
+\usepackage{graphicx}
+%para permitir que la imagen este donde yo quiero y no en otro lugar
+\usepackage{float}
+% para hipertexto
+\usepackage{url}
+% para poder envolver imagenes con texto
+\usepackage{wrapfig}
+%para los apendices
+\usepackage[titletoc]{appendix}
+% Esto es para poder modificar las dimensiones del texto
+\usepackage{geometry}
+\geometry{a4paper}
+
+% Paquetes de la AMS:
+\usepackage{amsmath, amsthm, amsfonts}
+
+\graphicspath{ {Imagenes/} }
+
+% Teoremas
+%--------------------------------------------------------------------------
+\newtheorem{thm}{Teorema}[section]
+\newtheorem{cor}[thm]{Corolario}
+\newtheorem{lem}[thm]{Lema}
+\newtheorem{prop}[thm]{Proposición}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definición}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Observación}
+
+% Atajos.
+% Se pueden definir comandos nuevos para acortar cosas que se usan
+% frecuentemente. Como ejemplo, aquí se definen la R y la Z dobles que
+% suelen representar a los conjuntos de números reales y enteros.
+%--------------------------------------------------------------------------
+
+\def\RR{\mathbb{R}}
+\def\ZZ{\mathbb{Z}}
+
+% De la misma forma se pueden definir comandos con argumentos. Por
+% ejemplo, aquí definimos un comando para escribir el valor absoluto
+% de algo más fácilmente.
+%--------------------------------------------------------------------------
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\summary}[1]{\addtocontents{toc}{#1\par}}
+
+% Operadores.
+% Los operadores nuevos deben definirse como tales para que aparezcan
+% correctamente. Como ejemplo definimos en jacobiano:
+%--------------------------------------------------------------------------
+\DeclareMathOperator{\Jac}{Jac}
+
+%--------------------------------------------------------------------------
+\title{\underline{Practica Profesional Supervisada} \\
+\large \underline{Informe de las 100 horas} \\
+\huge \textbf{ \\ Plataforma concentradora de sensores y eventos digitales} \\ }
+\author{Autores: Ignacio Sambataro, Luciano Mantovani\\ \\
+  \large Tutor: PhD. Ing. Orlando Micolini \\
+  \large Supervisor: Ing. Maximiliano Eschoyez
+ % \small Facultad de Ciencias Exactas, Fisicas y Naturales\\
+ % \small Laboratorio de Arquitectura de Computadoras\\
+ % \small Universidad Nacional de Cordoba\\
+  \date{}
+}
+
+
+
+%\makeindex
+\begin{document}
+\maketitle
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm, height = 3.2cm]{Escudo}
+\end{figure}
+
+\begin{center}
+\small Facultad de Ciencias Exactas, Fisicas y Naturales \\
+\small Laboratorio de Arquitectura de Computadoras \\
+\end{center}
+\begin{center}
+\small \textbf{A\~no 2015} \\
+\end{center}
+
+
+
+\clearpage
+%resumen
+% \abstract{
+% lalalla
+% }
+
+\input{./tex/introduccion}
+
+\input{./tex/marco_teorico}
+
+%salto de pagina
+\thispagestyle{empty}
+\clearpage
+
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+
+\setcounter{page}{1}
+
+
+
+
+
+
+\end{document}
