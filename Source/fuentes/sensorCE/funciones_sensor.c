@@ -3,7 +3,8 @@
 
 #define V_FASE_1 42200
 #define V_FASE_2 42100
-#define V_ARRANQUE 33264
+// #define V_ARRANQUE 33264
+#define V_ARRANQUE 33000
 #define V_ESTABLE 36000
 #define VELOCIDAD_APAGADO 65500
 #define VUELTAS_CADA_100MS 18 //para una velocidad ideal de 3600 rpm. valor explicado en la funcion contar_RPM
