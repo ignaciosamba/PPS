@@ -252,7 +252,44 @@ void configurar_motor(void)
 		}
 	}
 
-} 
+}
+
+void prueba()
+{
+	static short unsigned int suma = 100;
+	char opt = 0;
+	char pre = 0;
+	while(1)
+	{
+		printf("subi o baja\n");
+		opt = getchar();
+
+		if(opt == 's')
+			break;
+
+		else if(opt == '+')
+			velocidad += suma;
+		else if(opt == '-')
+			velocidad -= suma;
+
+		else if(opt == 'p')
+		{
+			printf("set Presicion: m: x10, l: /10\n");
+			pre = getchar();
+			
+			if(pre == 'm')
+				suma *= 10;
+			else if(pre == 'l')
+				suma /= 10;
+
+			printf("presicion = %u\n", suma);
+		}
+
+		printf("%u\n", velocidad);
+		set_Pwm(velocidad);
+	}
+
+}
 
 
 

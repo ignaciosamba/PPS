@@ -153,3 +153,18 @@ acabamos de ver que el contador de eventos cuenta por flanco de bajada.
 bueno vamos a hablar un poco del pwm que se usa para arrancar el motor..
 
 por lo que parece, el programa que arranca el motor es un generador de pulsos. usa un timer del micro para generar los tiempos necesarios que dan las frecuencias que hacen arrancar al motor. hay una frecuencia de arranque, y 
+
+
+
+
+29/10
+
+CALIBRANDO EL MOTOR
+
+para calibrarlo hay que saber cuales son los anchos de pulso de nuestro pwm que dan con los microsegundos de ancho de pulso para configurar el driver del motor.. son 700 uS y 2000 uS..
+
+midiendo..
+
+set_PWM(48200) ===> cdt = 700uS
+
+set_PWM(16000) ===> cdt = 2000uS
