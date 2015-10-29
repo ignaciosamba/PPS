@@ -254,26 +254,6 @@ struct shellstr *analizar(struct shellstr *shell)
             configurar_motor();
         }
     }
-    else if((shell->comando[0] == 'P') && (shell->comando[1] == 'P') && (shell->comando[2] == 'P'))
-    {
-        if(shell->n_args > 0)
-        {shell->errn = 405; return shell;}
-
-        else 
-        {
-            prueba();
-        }
-    }
-    // else if((shell->comando[0] == 'W')/* && (shell->comando[1] == 'K') && (shell->comando[2] == 'P')*/)
-    // {
-    //     if(shell->n_args > 0)
-    //     {shell->errn = 405; return shell;}
-
-    //     else 
-    //     {
-    //         deshabilitar_modo_bajo_consumo();
-    //     }
-    // }
 
     else shell->errn = 404;
 

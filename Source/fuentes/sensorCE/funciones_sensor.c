@@ -2,11 +2,13 @@
 #include "funciones_sensor.h"
 
 
-#define V_FASE_1 42200
-#define V_FASE_2 42100
-#define V_ARRANQUE 33264
-#define V_ESTABLE 36000
-#define VELOCIDAD_APAGADO 65500
+// #define V_FASE_1 42200
+#define V_FASE_1 48200 // 700uS
+// #define V_FASE_2 42100
+#define V_FASE_2 42800 // 900uS
+#define V_MAXIMA 33264
+#define V_ESTABLE 37800 // 1100uS 
+#define VELOCIDAD_APAGADO 48200  // 700uS
 #define VUELTAS_CADA_100MS 18 //para una velocidad ideal de 3600 rpm. valor explicado en la funcion contar_RPM
 #define HISTERESIS 2
 #define CORRECCION 50
@@ -95,7 +97,7 @@ void control_RPM(unsigned short eventos_real, unsigned short eventos_ideal)
 	// 	correcciones_mas = 0;
 	// }
 
-	if(velocidad < V_ARRANQUE)
+	if(velocidad < V_MAXIMA)
 		apagar_motor();			//si llega a ir demasiado rapido, se apaga por seguridad.
 }
 
@@ -113,17 +115,17 @@ void arrancar_motor(void)
 	
 	printf("\nFase 1...\n");
 	set_Pwm(V_FASE_1);
-	delay(600);
+	delay(800);
 	printf("Fase 2...\n");
 	set_Pwm(V_FASE_2);
-	delay(600);
+	delay(800);
 
 	// printf("Fase 3...\n");
 	// set_Pwm(V_FASE_3);
 	// delay(600);
-	printf("Arranque...\n");
-	set_Pwm(V_ARRANQUE);
-	delay(600);
+	// printf("Arranque...\n");
+	// set_Pwm(V_ARRANQUE);
+	// delay(600);
 	printf("Nivel estable\n");
 	set_Pwm(V_ESTABLE);
 
@@ -148,11 +150,13 @@ void apagar_motor(void)
  * Cambia segun la funcion
  * 
  *  cdt = (65536 - PCA0CPn) / 65536
+ *  
  * 
  * @param int [description]
  */
 void set_Pwm(unsigned int num)
 {
+
 	// EIE1 |= 0x10;                       // Enable PCA interrupts
 	// EA = 1;
 
@@ -231,7 +235,7 @@ void resetear_motor(void)
 
 void configurar_motor(void)
 {
-	unsigned long int opcion = 0;
+	unsigned long int opcion = 48200;
 	printf("configuracion del motor.. cualquier tecla hace toggle en la aceleracion de 0 a 100. 's' sale\n");
 	HABILITAR_MOTOR = 1;
 	// delay(1000);
@@ -240,54 +244,22 @@ void configurar_motor(void)
 	{
 		set_Pwm(opcion);
 
-		if(opcion == 0)
+		if(opcion == 48200)
 		{	
-			printf("PWM = '1'\n");
-			opcion = 65536;
+			printf("PWM = '700uS'\n");
+			opcion = 16000;
 		}
-		else 
+		else if(opcion == 16000) 
 		{
-			printf("PWM = '0'\n");
-			opcion = 0;
+			printf("PWM = '2000uS'\n");
+			opcion = 48200;
 		}
 	}
 
-}
+	printf("fin de configuracion del motor\n");
 
-void prueba()
-{
-	static short unsigned int suma = 100;
-	char opt = 0;
-	char pre = 0;
-	while(1)
-	{
-		printf("subi o baja\n");
-		opt = getchar();
-
-		if(opt == 's')
-			break;
-
-		else if(opt == '+')
-			velocidad += suma;
-		else if(opt == '-')
-			velocidad -= suma;
-
-		else if(opt == 'p')
-		{
-			printf("set Presicion: m: x10, l: /10\n");
-			pre = getchar();
-			
-			if(pre == 'm')
-				suma *= 10;
-			else if(pre == 'l')
-				suma /= 10;
-
-			printf("presicion = %u\n", suma);
-		}
-
-		printf("%u\n", velocidad);
-		set_Pwm(velocidad);
-	}
+	
+	HABILITAR_MOTOR = 0;
 
 }
 

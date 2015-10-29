@@ -8,4 +8,3 @@ void RPM_instantaneo(void);
 void resetear_motor(void);
 void configurar_motor(void);
 
-void prueba();

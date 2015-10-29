@@ -165,6 +165,10 @@ para calibrarlo hay que saber cuales son los anchos de pulso de nuestro pwm que 
 
 midiendo..
 
-set_PWM(48200) ===> cdt = 700uS
+set_PWM(48200) ===> cdt = 700uS  ===>(esto sale del calculo matematico teorico) (48200 =~ 65535 - (65536/2600) * 700)
 
-set_PWM(16000) ===> cdt = 2000uS
+set_PWM(16000) ===> cdt = 2000uS  ===>(esto sale del calculo matematico teorico)(16000 =~ 65535 - (65536/2600) * 2000)
+
+formulita para sacarlo matematicamente
+
+valorPWM = 65536 - 25,2 * valoruS ==> para un ciclo de trabajo en uS, se obtiene el valor a colocar en valorPWM
