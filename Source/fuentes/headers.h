@@ -50,6 +50,7 @@ typedef enum { false, true } bool;
 // unsigned long dato_convertido;
 // unsigned short pin_actual;
 
+
 //////////-----BANDERAS------///////////
 
 ///bandera de dato convertido

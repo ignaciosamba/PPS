@@ -15,6 +15,7 @@ void iniciar_puertos (void)
    XBR1     |= 0x40;                    // Habilitar el crossbar
    P0MDOUT |= 0x10;                    // Habilitar UTX como push-pull output
    P1MDOUT |= 0x02;                              // Habilitar led P1.1 como push pull
+   P0MDOUT |= 0x80;                              // Habilitar led P0.7 como push pull
    // P0MDIN |= 0x0C;                  // P0.3 y P0.4 tienen que ser entrada digital
    
    P0MDOUT |= 0x04;                  // habilitar P0.2 como push pull para el rele mecanico

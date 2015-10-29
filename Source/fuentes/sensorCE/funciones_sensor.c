@@ -1,10 +1,10 @@
 #include "../headers.h"
 #include "funciones_sensor.h"
 
+
 #define V_FASE_1 42200
 #define V_FASE_2 42100
-// #define V_ARRANQUE 33264
-#define V_ARRANQUE 33000
+#define V_ARRANQUE 33264
 #define V_ESTABLE 36000
 #define VELOCIDAD_APAGADO 65500
 #define VUELTAS_CADA_100MS 18 //para una velocidad ideal de 3600 rpm. valor explicado en la funcion contar_RPM
@@ -15,6 +15,7 @@
 unsigned short int velocidad = V_ESTABLE;
 unsigned long eventos;
 sbit HABILITAR_MOTOR = P0^2;
+sbit LED = P0^6;                          // LED='1' means ON
 
 void RPM_instantaneo()
 {
@@ -110,16 +111,20 @@ void arrancar_motor(void)
 	HABILITAR_MOTOR = 1;
 	delay(1000);
 	
-	//printf("\nFase 1...\n");
+	printf("\nFase 1...\n");
 	set_Pwm(V_FASE_1);
 	delay(600);
-	//printf("Fase 2...\n");
+	printf("Fase 2...\n");
 	set_Pwm(V_FASE_2);
 	delay(600);
-	//printf("Arranque...\n");
+
+	// printf("Fase 3...\n");
+	// set_Pwm(V_FASE_3);
+	// delay(600);
+	printf("Arranque...\n");
 	set_Pwm(V_ARRANQUE);
 	delay(600);
-	//printf("Nivel estable\n");
+	printf("Nivel estable\n");
 	set_Pwm(V_ESTABLE);
 
     EIE1 |= 0x80; //habilitar interrupcion de timer3
@@ -178,7 +183,7 @@ void delay(int tiempo)
 	// EA = 1;
 
 	while(1)
-	if(CCF0)
+	if(CCF0) // bandera de interrupciones del contador del PCA. Se cuentan interrupciones para generar el delay
 	{
 		CCF0 = 0;
 		i++;
@@ -191,6 +196,65 @@ void delay(int tiempo)
 	// EIE1 = aux2; // reestablecemos los valores del registro de interrupcion.
 
 }
+
+
+void resetear_motor(void) 
+{
+	long unsigned int k = 0;
+
+	// EIE1 |= 0x10;                       // Enable PCA interrupts
+	// EA = 1;
+	HABILITAR_MOTOR = 1;
+	delay(1000);
+	printf("reestableciando valores del motor\n");
+	//printf("\nFase 1...\n");
+	// for(i = 0; i < 20000; i = i + 100)
+	while(k < 30000)
+	{
+		printf("%lu\n", 53000 - k);
+		
+		LED = 1;
+		set_Pwm(53000 - k);
+		delay(80);
+		LED = 0;
+		delay(80);
+
+		k = k + 500;
+	}
+
+    EIE1 |= 0x80; //habilitar interrupcion de timer3
+	EA = 1; // habilitar interrupciones globales para hacer que interrumpa timer3 para realizar el control
+
+	// EA = 0;
+	// EIE1 &= ~0x10;      
+}
+
+void configurar_motor(void)
+{
+	unsigned long int opcion = 0;
+	printf("configuracion del motor.. cualquier tecla hace toggle en la aceleracion de 0 a 100. 's' sale\n");
+	HABILITAR_MOTOR = 1;
+	// delay(1000);
+
+	while(getchar() != 's')
+	{
+		set_Pwm(opcion);
+
+		if(opcion == 0)
+		{	
+			printf("PWM = '1'\n");
+			opcion = 65536;
+		}
+		else 
+		{
+			printf("PWM = '0'\n");
+			opcion = 0;
+		}
+	}
+
+} 
+
+
 
 // char getchar_pasivo()
 // {

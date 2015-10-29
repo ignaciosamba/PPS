@@ -234,6 +234,26 @@ struct shellstr *analizar(struct shellstr *shell)
             habilitar_modo_bajo_consumo();
         }
     }
+    else if((shell->comando[0] == 'E') && (shell->comando[1] == 'S') && (shell->comando[2] == 'C'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else 
+        {
+            resetear_motor();
+        }
+    }
+    else if((shell->comando[0] == 'C') && (shell->comando[1] == 'N') && (shell->comando[2] == 'F'))
+    {
+        if(shell->n_args > 0)
+        {shell->errn = 405; return shell;}
+
+        else 
+        {
+            configurar_motor();
+        }
+    }
     // else if((shell->comando[0] == 'W')/* && (shell->comando[1] == 'K') && (shell->comando[2] == 'P')*/)
     // {
     //     if(shell->n_args > 0)
