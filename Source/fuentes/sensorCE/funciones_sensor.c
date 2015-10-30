@@ -201,7 +201,6 @@ void delay(int tiempo)
 
 }
 
-
 void resetear_motor(void) 
 {
 	long unsigned int k = 0;
@@ -216,7 +215,7 @@ void resetear_motor(void)
 	while(k < 30000)
 	{
 		printf("%lu\n", 53000 - k);
-		
+
 		LED = 1;
 		set_Pwm(53000 - k);
 		delay(80);
@@ -262,7 +261,6 @@ void configurar_motor(void)
 	HABILITAR_MOTOR = 0;
 
 }
-
 
 
 // char getchar_pasivo()

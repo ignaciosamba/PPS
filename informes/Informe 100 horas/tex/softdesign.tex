@@ -1,9 +1,15 @@
-\section{Dise\~no de Software}
+\section{Dise\~no de Software} % (fold)
+\label{sec:dise~no_de_software}
+
 
 Luego de la eleccion de un microcontrolador, se inicio el proceso de dise\~no. las figuras , , , muestran los diagramas que describen el sistema segun los requerimientos.
 
-\subsection{Descripcion grafica del sistema}
-\subsubsection{Diagrama de bloques}
+\subsection{Descripcion grafica del sistema} % (fold)
+\label{sub:descripcion_grafica_del_sistema}
+
+\subsubsection{Diagrama de bloques} % (fold)
+\label{ssub:diagrama_de_bloques}
+
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.80\textwidth, height = 9cm]{Bloques1}
@@ -25,7 +31,11 @@ El sistema esta compuesto por 7 bloques o modulos separados, manejados por un mo
   \item El \textbf{Bloque Flash} Maneja la unidad de memoria no volatil del sistema. Se utiliza para guardar y cargar configuraciones hechas por el usuario, de forma que puedan cargarse automaticamente al inicio del sistema sin necesidad de volver a configurarlo cada vez que se inicia.
 \end{itemize}
 
-\subsubsection{Diagramas de caso de uso}
+% subsubsection diagrama_de_bloques (end)
+
+\subsubsection{Diagramas de caso de uso} % (fold)
+\label{ssub:diagramas_de_caso_de_uso}
+
 En la figura \ref{fig:casouso1} se muestra un diagrama de caso de uso del sistema. Los casos de uso son bastante intuitivos, el usuario debe poder configurar todos los aspectos claves del sistema. Este diagrama muestra a grandes rasgos las acciones posibles que pueden hacerse sobre el sistema desde el punto de vista del usuario.
 
 \begin{figure}[h]
@@ -34,7 +44,11 @@ En la figura \ref{fig:casouso1} se muestra un diagrama de caso de uso del sistem
   \caption{Caso de uso 1}\label{fig:casouso1}
 \end{figure}
 
-\subsubsection{Diagramas de secuencia}
+% subsubsection diagramas_de_caso_de_uso (end)
+
+\subsubsection{Diagramas de secuencia} % (fold)
+\label{ssub:diagramas_de_secuencia}
+
 Los diagramas de secuencia modelan distintas interacciones entre los componentes de un sistema. En este caso, los dos componentes mas importantes del sistema son el usuario, y el programa principal que recibe las peticiones del usuario a traves de la interfaz grafica, y procesa los pedidos llamando a funciones de otros bloques del sistema. En el primer diagrama (figura \ref{fig:secuencia1}) se modelo una configuracion de un pin especifico para medir una entrada analogica. El programa principal, en este caso, debe llamar a funciones del bloque conversor para configurar el pedido del usuario. Luego, el usuario habilita el comienzo de conversion para que el sistema envie los datos ya digitales por interfaz serial.
 
 \begin{figure}[h]
@@ -60,4 +74,9 @@ El diagrama \ref{fig:secuencia3} muestra una obtencion y un guardado de datos de
   \caption{Diagrama de secuencia 3}\label{fig:secuencia3}
 \end{figure}
 
+% subsubsection diagramas_de_secuencia (end)
+
 \clearpage
+% subsection descripcion_grafica_del_sistema (end)
+
+% section dise~no_de_software (end)
