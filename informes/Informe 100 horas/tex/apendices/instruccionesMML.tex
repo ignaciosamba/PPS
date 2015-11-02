@@ -1,10 +1,14 @@
-\section{Instrucciones MML}\label{ap:instrucciones}
+\section{Instrucciones MML} % (fold)
+\label{sec:instrucciones_mml}
 
-\subsection{SSE (Set Single Ended)}
+
+\subsection{SSE (Set Single Ended)} % (fold)
+\label{sub:sse_set_single_ended}
+
 
 \textbf{Formato:} SSE,[1]
 
-\textbf{Descripcion:}
+\textbf{Descripci\'on:}
 Establece el pin ingresado en modo single ended.
 
 \textbf{Limitaciones:}
@@ -16,12 +20,16 @@ Establece el pin ingresado en modo single ended.
 \textbf{Ejemplo:}
 
 SSE,4: Establece el pin 4 del ADC en modo single ended
+% subsection sse_set_single_ended (end)
 
-\subsection{SDI (Set Diferencial)}
+
+\subsection{SDI (Set Diferencial)} % (fold)
+\label{sub:sdi_set_diferencial}
+
 
 \textbf{Formato:} SDI,[1]
 
-\textbf{Descripcion:}
+\textbf{Descripci\'on:}
 Establece el pin ingresado y el pin siguiente a ese en numero en modo diferencial
 
 \textbf{limitaciones:}
@@ -34,11 +42,14 @@ Establece el pin ingresado y el pin siguiente a ese en numero en modo diferencia
 
 SDI,2: setea los pines 2 y 3 en modo diferencial
 
-\subsection{SGA (Set Ganancia)}
+% subsection sdi_set_diferencial (end)
+\subsection{SGA (Set Ganancia)} % (fold)
+\label{sub:sga_set_ganancia}
+
 
 \textbf{Formato:} SGA,[1]
 
-\textbf{descripcion:}
+\textbf{Descripci\'on:}
 Establece la ganancia del ADC segun el argumento a la potencia de 2
 
 \textbf{Limitaciones:}
@@ -50,25 +61,30 @@ Establece la ganancia del ADC segun el argumento a la potencia de 2
 \textbf{Ejemplo:}
 
 SGA,3: Establece la ganancia en $2^{3} = 8$
+% subsection sga_set_ganancia (end)
 
 
-\subsection{GT0 (Get Timer 0)}
+\subsection{GT0 (Get Timer 0)} % (fold)
+\label{sub:gt0_get_timer_0}
+
 
 \textbf{Formato:} GT0[0]
 
-\textbf{Descripcion:}
+\textbf{Descripci\'on:}
 Obtiene el valor actual de la cuenta de los eventos digitales monitoreados por timer0
 
 \textbf{Limitaciones:}
 \begin{itemize}
   \item No lleva argumentos
+\end{itemize}
 
-
-\end{itemize}\subsection{GT2 (Get Timer 2)}
+% subsection gt0_get_timer_0_ (end)
+\subsection{GT2 (Get Timer 2)} % (fold)
+\label{sub:gt2_get_timer_2}
 
 \textbf{Formato:} GT2[0]
 
-\textbf{descripcion:}
+\textbf{Descripci\'on:}
 Obtiene el valor actual de la cuenta de los eventos digitales monitoreados por timer2
 
 \textbf{Limitaciones:}
@@ -76,11 +92,14 @@ Obtiene el valor actual de la cuenta de los eventos digitales monitoreados por t
   \item No lleva argumentos
 \end{itemize}
 
-\subsection{ST (Start)}
+% subsection gt2_get_timer_2_ (end)
+\subsection{ST (Start)} % (fold)
+\label{sub:st_start}
+
 
 \textbf{Formato:} ST[0]
 
-\textbf{Descripcion:}
+\textbf{Descripci\'on:}
 Guarda los cambios, sale del modo de configuracion y comienza a correr el programa
 
 \textbf{Limitaciones:}
@@ -88,7 +107,8 @@ Guarda los cambios, sale del modo de configuracion y comienza a correr el progra
   \item No lleva argumentos
 \end{itemize}
 
+% subsection st_start_ (end)
 
 \clearpage
 
-%\end{appendices} 
+% section instrucciones_mml (end)

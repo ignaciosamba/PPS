@@ -4,12 +4,12 @@
 
 Con el microcontrolador seleccionado, se procedio a la etapa de dise\~no de hardware. La placa de desarrollo C8051F350 (ver seccion \ref{sec:silicon_labs_c8051f352}) con la que se conto en el laboratorio donde se trabajo, sirvio de modelo para dise\~nar el circuito esquematico en la placa a desarrollar.
 
-La primera etapa de dise\~no consiste en dise\~nar un diagrama de bloques que ilustre a grandes rasgos la organizacion del circuito. Luego de esto se realiza el dise\~no esquematico que consiste en llevar cada bloque a nivel de componente electronico y realizar la interconexion necesaria entre todos los componentes existentes para lograr el funcionamiento buscado. Los diagramas de bloque y esquematicos se pueden ver en las figuras \underline{\textbf{FIGURA DEL DIAGRAMA DE BLOQUE}} y \underline{\textbf{FIGURA DEL ESQUEMATICO}}. Con ayuda del software KiCad (\textbf{\underline{REFERENCIA A KICAD EN SOFTWARE UTILIZADO}}), se realizo el diagrama esquematico y la implementacion en circuito impreso del esquematico construido
+La primera etapa de dise\~no consiste en dise\~nar un diagrama de bloques que ilustre a grandes rasgos la organizacion del circuito. Luego de esto se realiza el dise\~no esquematico que consiste en llevar cada bloque a nivel de componente electronico y realizar la interconexion necesaria entre todos los componentes existentes para lograr el funcionamiento buscado. Los diagramas de bloque y esquematicos se pueden ver en las figuras \underline{\textbf{FIGURA DEL DIAGRAMA DE BLOQUE}} y \underline{\textbf{FIGURA DEL ESQUEMATICO}}. Con ayuda del software KiCad (\ref{sub:kicad}), se realizo el diagrama esquematico y la implementacion en circuito impreso del esquematico construido
 
 \subsection{Diagrama de Bloques de Hardware} % (fold)
 \label{sub:diagrama_de_bloques_de_hardware}
 
-escribite algo sobre los bloques
+\textbf{\underline{ESCRIBITE ALGO SOBRE LOS BLOQUES}}
 
 % subsection diagrama_de_bloques_de_hardware (end)
 
@@ -18,7 +18,7 @@ escribite algo sobre los bloques
 \subsection{Diagrama Esquematico} % (fold)
 \label{sub:diagrama_esquematico}
 
-En la figura \textbf{\underline{REFERENCIA A FIGURA DEL DIAGRAMA ESQUEMATICO}} se muestra el esquematico del total a desarrollar. Podemos ver que la placa en principio tendria un microcontrolador C8051F352, que trabaja con un nivel de tension de 3,3V. La entrada de alimentacion tiene un Jack Power al que se le conecta una fuente de 9 voltios y 500 miliAmeperes. Ademas se le agrega a la placa un regulador de tension LM2937\textbf{\underline{REFERENCIA A LM2937 EN COMPONENTES UTILIZADOS}}. Desde el regulador se sacan 3 lineas distintas (con el mismo valor de tensi\'on de alimentaci\'on), una ir\'a hacía la pata de alimentacion del C8051F350(\textbf{\underline{REFERENCIA AL C8051F350}}), otra hacia AV (\textbf{\underline{NO SE QUE ES ESTO}}) del chip y una tercera que se utilizara para alimentacion de un integrado MAX232 \textbf{\underline{REFERENCIA A MAX232 EN COMPONENTES UTILIZADOS}} y un Led testigo de alimentacion.
+En la figura \textbf{\underline{REFERENCIA A FIGURA DEL DIAGRAMA ESQUEMATICO}} se muestra el esquematico del total a desarrollar. Podemos ver que la placa en principio tendria un microcontrolador C8051F352, que trabaja con un nivel de tension de 3,3V. La entrada de alimentacion tiene un Jack Power al que se le conecta una fuente de 9 voltios y 500 miliAmeperes. Ademas se le agrega a la placa un regulador de tension LM2937(\ref{sub:regulador_de_tension_lm2937})). Desde el regulador se sacan 3 lineas distintas (con el mismo valor de tensi\'on de alimentaci\'on), una ir\'a hacía la pata de alimentacion del C8051F350(\ref{sec:silicon_labs_c8051f352}), otra hacia AV (\textbf{\underline{NO SE QUE ES ESTO}}) del chip y una tercera que se utilizara para alimentacion de un integrado MAX232 \ref{sub:driver_max232} y un Led testigo de alimentacion.
 
 
 
