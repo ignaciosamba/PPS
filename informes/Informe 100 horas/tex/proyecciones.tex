@@ -1,12 +1,14 @@
 \section{Proyeccion a futuro} % (fold)
 \label{sec:proyeccion_a_futuro}
 
-En las proximas 100 horas de trabajo, el objetivo es finalizar la idea de los diseños propuestos hasta el momento, corregirlos si es necesario, y luego implementar hasta donde se llegue. Si es posible, llegar a tener pruebas de laboratorio funcionando. Probar el dispositivo conectandolo con uno o varios sensores que provean datos crudos, y brindarle la informacion ordenada a travez del protocolo UART \ref{ssub:interfaz_serial} a algun servidor activo que la almacene en una base de datos.
+En las proximas 100 horas de trabajo, el objetivo es finalizar la idea de los dise\~nos propuestos hasta el momento, corregirlos si es necesario, y luego implementar hasta donde se llegue. Si es posible, llegar a tener pruebas de laboratorio funcionando. Probar el dispositivo conectandolo con uno o varios sensores que provean datos crudos, y brindarle la informacion ordenada a travez del protocolo UART \ref{ssub:interfaz_serial} a algun servidor activo que la almacene en una base de datos.
 
 En concreto, los objetivos son los siguientes:
 \begin{itemize}
-	\item Completar el diseño de hardware
-	\item Conformar el software en un incremento solido capaz de implementar los requerimientos principales
+	\item Completar el dise\~no de hardware
+	\item Ampliar la lista de comandos de la interfaz MML para admitir mayor programabilidad a la plataforma
+	\item Añadir mas contadores de eventos utilizando las funcionalidades de Timer y de PCA del microcontrolador utilizado
+	\item Añadir la funcionalidad de especificar una frecuencia deseada de muestreo en la adquisicion de datos del conversor analogico-digital
 	\item Realizar un prototipo del hardware y probarlo con el software desarrollado
 	\item Conformar una base de testing que permite probar que todas las funcionalidades de hardware y software funcionen como se espera
 \end{itemize}
