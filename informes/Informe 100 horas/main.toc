@@ -35,7 +35,8 @@
 \contentsline {subsubsection}{\numberline {7.1.6}Interrupciones}{11}
 \contentsline {section}{\numberline {8}Avances con respecto al dise\~no de software}{12}
 \contentsline {section}{\numberline {9}Avances con respecto al dise\~no de hardware}{13}
-\contentsline {section}{\numberline {10}Apendices}{13}
+\contentsline {section}{\numberline {10}Conslusiones de la primera etapa}{13}
+\contentsline {section}{\numberline {11}Apendices}{13}
 \contentsline {section}{\numberline {A}Instrucciones MML}{13}
 \contentsline {subsection}{\numberline {A.1}SSE (Set Single Ended)}{13}
 \contentsline {subsection}{\numberline {A.2}SDI (Set Diferencial)}{13}

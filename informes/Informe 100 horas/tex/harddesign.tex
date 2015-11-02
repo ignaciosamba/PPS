@@ -18,7 +18,10 @@ La primera etapa de dise\~no consiste en dise\~nar un diagrama de bloques que il
 \subsection{Diagrama Esquematico} % (fold)
 \label{sub:diagrama_esquematico}
 
-En la figura \textbf{\underline{REFERENCIA A FIGURA DEL DIAGRAMA ESQUEMATICO}} se muestra el esquematico del total a desarrollar. Podemos ver que la placa en principio tendria un microcontrolador C8051F352, que trabaja con un nivel de tension de 3,3V. La entrada de alimentacion tiene un Jack Power al que se le conecta una fuente de 9 voltios y 500 miliAmeperes. Ademas se le agrega a la placa un regulador de tension LM2937(\ref{sub:regulador_de_tension_lm2937})). Desde el regulador se sacan 3 lineas distintas (con el mismo valor de tensi\'on de alimentaci\'on), una ir\'a hacía la pata de alimentacion del C8051F350(\ref{sec:silicon_labs_c8051f352}), otra hacia AV (\textbf{\underline{NO SE QUE ES ESTO}}) del chip y una tercera que se utilizara para alimentacion de un integrado MAX232 \ref{sub:driver_max232} y un Led testigo de alimentacion.
+La figura \textbf{\underline{REFERENCIA A FIGURA DEL DIAGRAMA ESQUEMATICO}} muestra el diagrama esquematico del circuito a implementar. El microcontrolador(\ref{sec:silicon_labs_c8051f352}) con el que se trabaja tiene ciertos niveles de tension de operacion con el que se trabaja. En principio, se alimenta con una fuente de 5V y 500mA que trabaja en paralelo con un regulador de tension(\ref{sub:regulador_de_tension_lm2937}) que lleve la alimentacion a un nivel de 3,3V. Estos 3,3V se utilizan para alimentar al microcontrolador; la tension analogica positiva del conversor; a un integrado MAX232(\ref{sub:driver_max232}) que se utiliza para lograr una interfaz serial entre la UART(\ref{ssub:interfaz_serial}) de la placa y un puerto serial de una PC; y a un led testigo de alimentacion.
+
+
+\textbf{\underline{ESCRIBITE ALGO MAS DEL ESQUEMATICO PORQUE SOLAMENTE HABLAS DE LA ALIMENTACION. BAH NO SE.. UN POCO MAS DE FRUTA NOMAS TAMPOCO TANTO}}
 
 
 
