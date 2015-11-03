@@ -24,14 +24,15 @@
 \contentsline {subsection}{\numberline {6.1}Diagrama de Bloques de Hardware}{9}
 \contentsline {subsection}{\numberline {6.2}Diagrama Esquematico}{9}
 \contentsline {subsection}{\numberline {6.3}Implementacion en Circuito Impreso}{9}
+\contentsline {subsection}{\numberline {6.4}Impresion del circuito en placa de cobre}{9}
 \contentsline {section}{\numberline {7}Estructura del software}{9}
 \contentsline {subsection}{\numberline {7.1}Partes que conforman el software}{9}
 \contentsline {paragraph}{}{9}
 \contentsline {subsubsection}{\numberline {7.1.1}Configurador}{10}
 \contentsline {subsubsection}{\numberline {7.1.2}Principal}{10}
 \contentsline {subsubsection}{\numberline {7.1.3}Conversor}{10}
-\contentsline {subsubsection}{\numberline {7.1.4}Interfaz de usuario}{10}
-\contentsline {subsubsection}{\numberline {7.1.5}Contador}{10}
+\contentsline {subsubsection}{\numberline {7.1.4}Interfaz de Usuario}{10}
+\contentsline {subsubsection}{\numberline {7.1.5}Contador}{11}
 \contentsline {subsubsection}{\numberline {7.1.6}Interrupciones}{11}
 \contentsline {section}{\numberline {8}Avances con respecto al dise\~no de software}{11}
 \contentsline {section}{\numberline {9}Avances con respecto al dise\~no de hardware}{11}
@@ -45,9 +46,9 @@
 \contentsline {subsection}{\numberline {A.4}GT0 (Get Timer 0)}{13}
 \contentsline {subsection}{\numberline {A.5}GT2 (Get Timer 2)}{13}
 \contentsline {subsection}{\numberline {A.6}ST (Start)}{14}
-\contentsline {section}{\numberline {B}Componentes Electronicos Utilizados}{15}
-\contentsline {subsection}{\numberline {B.1}Regulador de Tension LM2937}{15}
-\contentsline {subsection}{\numberline {B.2}Driver MAX232}{15}
-\contentsline {section}{\numberline {C}Sofware Utilizado}{16}
-\contentsline {subsubsection}{\numberline {C.0.1}uVision 4}{16}
-\contentsline {subsection}{\numberline {C.1}KiCad}{16}
+\contentsline {section}{\numberline {B}Componentes Electronicos Utilizados}{14}
+\contentsline {subsection}{\numberline {B.1}Regulador de Tension LM2937}{14}
+\contentsline {subsection}{\numberline {B.2}Driver MAX232}{14}
+\contentsline {section}{\numberline {C}Sofware Utilizado}{14}
+\contentsline {subsubsection}{\numberline {C.0.1}$\mu $Vision 4}{14}
+\contentsline {subsection}{\numberline {C.1}KiCad}{14}
