@@ -1,0 +1,54 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n}{1}
+\contentsline {section}{\numberline {2}Planteo de Requerimientos}{1}
+\contentsline {subsubsection}{\numberline {2.0.1}Requerimientos principales}{1}
+\contentsline {subsubsection}{\numberline {2.0.2}Requerimientos Secundarios}{1}
+\contentsline {section}{\numberline {3}Investigaci\IeC {\'o}n}{1}
+\contentsline {subsection}{\numberline {3.1}Par\IeC {\'a}metros tenidos en cuenta en la selecci\IeC {\'o}n del microcontrolador}{3}
+\contentsline {subsection}{\numberline {3.2}Selecci\'on}{3}
+\contentsline {section}{\numberline {4}Silicon Labs \emph {C8051F352}}{3}
+\contentsline {subsection}{\numberline {4.1}Conversor Anal\IeC {\'o}gico-Digital}{4}
+\contentsline {subsubsection}{\numberline {4.1.1}Modos de Medici\IeC {\'o}n}{4}
+\contentsline {subsubsection}{\numberline {4.1.2}Modos de Conversion}{4}
+\contentsline {subsubsection}{\numberline {4.1.3}Contadores}{4}
+\contentsline {subsubsection}{\numberline {4.1.4}Interfaz serial}{4}
+\contentsline {subsubsection}{\numberline {4.1.5}Flash}{4}
+\contentsline {section}{\numberline {5}Dise\IeC {\~n}o de Software}{5}
+\contentsline {subsection}{\numberline {5.1}Descripci\IeC {\'o}n gr\IeC {\'a}fica del sistema}{5}
+\contentsline {subsubsection}{\numberline {5.1.1}Diagrama de bloques}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {subsubsection}{\numberline {5.1.2}Diagramas de caso de uso}{6}
+\contentsline {subsubsection}{\numberline {5.1.3}Diagramas de secuencia}{6}
+\contentsline {section}{\numberline {6}Dise\IeC {\~n}o de hardware}{8}
+\contentsline {subsection}{\numberline {6.1}Diagrama de Bloques de Hardware}{9}
+\contentsline {subsection}{\numberline {6.2}Diagrama Esquem\IeC {\'a}tico}{9}
+\contentsline {subsection}{\numberline {6.3}Implementaci\IeC {\'o}n en Circuito Impreso}{9}
+\contentsline {subsection}{\numberline {6.4}Impresi\IeC {\'o}n del circuito en placa de cobre}{9}
+\contentsline {section}{\numberline {7}Estructura del software}{9}
+\contentsline {subsection}{\numberline {7.1}Partes que conforman el software}{9}
+\contentsline {paragraph}{}{9}
+\contentsline {subsubsection}{\numberline {7.1.1}Configurador}{10}
+\contentsline {subsubsection}{\numberline {7.1.2}Principal}{10}
+\contentsline {subsubsection}{\numberline {7.1.3}Conversor}{10}
+\contentsline {subsubsection}{\numberline {7.1.4}Interfaz de Usuario}{10}
+\contentsline {subsubsection}{\numberline {7.1.5}Contador}{11}
+\contentsline {subsubsection}{\numberline {7.1.6}Interrupciones}{11}
+\contentsline {section}{\numberline {8}Avances con respecto al dise\IeC {\~n}o de software}{11}
+\contentsline {section}{\numberline {9}Avances con respecto al dise\IeC {\~n}o de hardware}{11}
+\contentsline {section}{\numberline {10}Proyecci\IeC {\'o}n a futuro}{11}
+\contentsline {section}{\numberline {11}Conclusiones de la primera etapa}{12}
+\contentsline {section}{\numberline {12}Apendices}{13}
+\contentsline {section}{\numberline {A}Instrucciones MML}{13}
+\contentsline {subsection}{\numberline {A.1}SSE (Set Single Ended)}{13}
+\contentsline {subsection}{\numberline {A.2}SDI (Set Diferencial)}{13}
+\contentsline {subsection}{\numberline {A.3}SGA (Set Ganancia)}{13}
+\contentsline {subsection}{\numberline {A.4}GT0 (Get Timer 0)}{13}
+\contentsline {subsection}{\numberline {A.5}GT2 (Get Timer 2)}{13}
+\contentsline {subsection}{\numberline {A.6}ST (Start)}{14}
+\contentsline {section}{\numberline {B}Componentes Electr\IeC {\'o}nicos Utilizados}{14}
+\contentsline {subsection}{\numberline {B.1}Regulador de Tension LM2937}{14}
+\contentsline {subsection}{\numberline {B.2}Driver MAX232}{14}
+\contentsline {section}{\numberline {C}Software Utilizado}{14}
+\contentsline {subsubsection}{\numberline {C.0.1}$\mu $Vision 4}{14}
+\contentsline {subsection}{\numberline {C.1}KiCad}{14}
