@@ -24,7 +24,7 @@
 \contentsline {subsection}{\numberline {6.1}Diagrama de Bloques de Hardware}{9}{subsection.6.1}
 \contentsline {subsection}{\numberline {6.2}Diagrama Esquem\IeC {\'a}tico}{9}{subsection.6.2}
 \contentsline {subsection}{\numberline {6.3}Implementaci\IeC {\'o}n en Circuito Impreso}{10}{subsection.6.3}
-\contentsline {subsection}{\numberline {6.4}Circuito anexo de programacion}{10}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.4}Circuito anexo de programaci\IeC {\'o}n}{10}{subsection.6.4}
 \contentsline {subsection}{\numberline {6.5}Impresi\IeC {\'o}n del circuito en placa de cobre}{10}{subsection.6.5}
 \contentsline {section}{\numberline {7}Estructura del software}{11}{section.7}
 \contentsline {subsection}{\numberline {7.1}Partes que conforman el software}{11}{subsection.7.1}
@@ -37,9 +37,9 @@
 \contentsline {subsubsection}{\numberline {7.1.6}Interrupciones}{13}{subsubsection.7.1.6}
 \contentsline {section}{\numberline {8}Avances con respecto al dise\IeC {\~n}o de software}{13}{section.8}
 \contentsline {section}{\numberline {9}Avances con respecto al dise\IeC {\~n}o de hardware}{13}{section.9}
-\contentsline {section}{\numberline {10}Proyecci\IeC {\'o}n a futuro}{13}{section.10}
+\contentsline {section}{\numberline {10}Proyecci\IeC {\'o}n a futuro}{14}{section.10}
 \contentsline {section}{\numberline {11}Conclusiones de la primera etapa}{14}{section.11}
-\contentsline {section}{\numberline {12}Apendices}{15}{section.12}
+\contentsline {section}{\numberline {12}Ap\IeC {\'e}ndices}{15}{section.12}
 \contentsline {section}{\numberline {A}Instrucciones MML}{15}{appendix.Alph1}
 \contentsline {subsection}{\numberline {A.1}SSE (Set Single Ended)}{15}{subsection.Alph1.1}
 \contentsline {subsection}{\numberline {A.2}SDI (Set Diferencial)}{15}{subsection.Alph1.2}
