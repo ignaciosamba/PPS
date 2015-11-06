@@ -25,10 +25,10 @@
 \contentsline {subsection}{\numberline {6.2}Diagrama Esquem\IeC {\'a}tico}{9}{subsection.6.2}
 \contentsline {subsection}{\numberline {6.3}Implementaci\IeC {\'o}n en Circuito Impreso}{10}{subsection.6.3}
 \contentsline {subsection}{\numberline {6.4}Circuito anexo de programaci\IeC {\'o}n}{10}{subsection.6.4}
-\contentsline {subsection}{\numberline {6.5}Impresi\IeC {\'o}n del circuito en placa de cobre}{10}{subsection.6.5}
+\contentsline {subsection}{\numberline {6.5}Impresi\IeC {\'o}n del circuito en placa de cobre}{11}{subsection.6.5}
 \contentsline {section}{\numberline {7}Estructura del software}{11}{section.7}
-\contentsline {subsection}{\numberline {7.1}Partes que conforman el software}{11}{subsection.7.1}
-\contentsline {paragraph}{}{11}{section*.4}
+\contentsline {subsection}{\numberline {7.1}Partes que conforman el software}{12}{subsection.7.1}
+\contentsline {paragraph}{}{12}{section*.4}
 \contentsline {subsubsection}{\numberline {7.1.1}Configurador}{12}{subsubsection.7.1.1}
 \contentsline {subsubsection}{\numberline {7.1.2}Principal}{12}{subsubsection.7.1.2}
 \contentsline {subsubsection}{\numberline {7.1.3}Conversor}{12}{subsubsection.7.1.3}
