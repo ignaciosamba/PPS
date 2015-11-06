@@ -448,9 +448,9 @@ La primera etapa de diseño consiste en diseñar un diagrama de bloques que ilus
   \caption{\small Diagrama de bloques del circuito a realizar}\label{fig:bloquesHW}
 \end{figure}
 
-Los bloques en la figura \ref{fig:bloquesHW} representan de forma general los distintos modulos a implementar. Las entradas analogicas entran al sistema a traves de filtros que reducen el ruido. Luego ingresan al microcontrolador para ser procesadas. El bloque de GPIO y contadores de eventos es simplemente un grupo de pines direccionados a distintas entradas del microcontrolador. GPIO significa `General Purpose Input Output'. Son 4 pines que se separaron para uso general, por necesidad eventual de necesitarlos. Parte de estos GPIO son los pines contadores de eventos, por lo cual se incluyeron dentro del mismo bloque.
+Los bloques en la figura \ref{fig:bloquesHW} representan de forma general los distintos módulos a implementar. Las entradas analógicas entran al sistema a través de filtros que reducen el ruido. Luego ingresan al microcontrolador para ser procesadas. El bloque de GPIO y contadores de eventos es simplemente un grupo de pines direccionados a distintas entradas del microcontrolador. GPIO significa `General Purpose Input Output'. Son 4 pines que se separaron para uso general, por necesidad eventual de necesitarlos. Parte de estos GPIO son los pines contadores de eventos, por lo cual se incluyeron dentro del mismo bloque.
 
-Es posible alimentar el sistema por mediante el programador, o mediante una tension de 3,3V que se obtiene como salida de un regulador de tension, cuya entrada es de 5V. La llave selectora decide si se alimenta el sistema usando la alimentacion por fuente continua de 5V, o por el programador.
+Es posible alimentar el sistema por mediante el programador, o mediante una tension de 3,3V que se obtiene como salida de un regulador de tension, cuya entrada es de 5V. La llave selectora decide si se alimenta el sistema usando la alimentación por fuente continua de 5V, o por el programador.
 
 % subsection diagrama_de_bloques_de_hardware (end)
 
@@ -464,7 +464,7 @@ La figura \ref{fig:esquematico} muestra el diagrama esquemático del circuito a 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.95\textwidth, height = 10cm]{esquematico}
-  \caption{\small Diagrama esquematico del circuito a realizar}\label{fig:esquematico}
+  \caption{\small Diagrama esquemático del circuito a realizar}\label{fig:esquematico}
 \end{figure}
 
 
@@ -483,7 +483,7 @@ Una implementación en circuito impreso consiste simplemente en pasar de un diag
 
 % subsection implementación_en_circuito_impreso (end)
 
-\subsection{Circuito anexo de programacion} % (fold)
+\subsection{Circuito anexo de programación} % (fold)
 \label{sub:circuito_anexo_de_programacion}
 
 Para programar el microcontrolador, se utiliza un programador de la marca de Silicon Labs hecho para la placa de desarrollo utilizada. Es posible usar este mismo programador en la plataforma a construir, pero es necesario armar un circuito que funcione como interfaz entre la placa del microcontrolador y el programador de la misma. El circuito se muestra en la figura
@@ -494,16 +494,16 @@ Para programar el microcontrolador, se utiliza un programador de la marca de Sil
   \caption{\small Diagrama del despliegue de componentes del circuito que hace de interfaz entre el programador y la plataforma}\label{fig:PCB2}
 \end{figure}
 
-% subsection circuito_anexo_de_programacion (end)
+% subsection circuito_anexo_de_programación (end)
 
 \subsection{Impresión del circuito en placa de cobre} % (fold)
 \label{sub:impresion_del_circuito_en_placa_de_cobre}
 
 La impresión de la placa física aun no se implemento. Todavía quedan aspectos que resolver tanto en el diseño del esquemático como el despliegue, y antes de no resolverlos no es posible tener un primer prototipo. Es uno de los objetivos a lograr en las próximas 100 horas de trabajo.
 
-% subsection impresion_del_circuito_en_placa_de_cobre (end)
+% subsection impresión_del_circuito_en_placa_de_cobre (end)
 
-% section diseno_de_hardware (end)
+% section diseño_de_hardware (end)
 
 
 %Estructura de Software
@@ -534,7 +534,7 @@ En este momento, el programa entero esta compuesto por 6 módulos. Un modulo pri
 \subsubsection{Configurador} % (fold)
 \label{ssub:configurador}
 
-El configurador se encarga de inicializar todos los parametros necesarios que permiten la operatividad del resto de los módulos. Establece los valores correspondientes para todos los registros pertinentes y configura los puertos seleccionados en el modulo del conversor (Sección \ref{ssub:conversor}) cuando se especifique por parte del usuario.
+El configurador se encarga de inicializar todos los parámetros necesarios que permiten la operatividad del resto de los módulos. Establece los valores correspondientes para todos los registros pertinentes y configura los puertos seleccionados en el modulo del conversor (Sección \ref{ssub:conversor}) cuando se especifique por parte del usuario.
 \subsubsection{Principal}
 El modulo principal es la función main, inicializa todo el sistema usando funciones del configurador (Sección \ref{ssub:configurador}) y hace el loop infinito que corre el sistema indefinidamente, obteniendo los comandos del usuario via la interfaz (Sección \ref{ssub:interfaz_de_usuario}).
 
@@ -552,7 +552,7 @@ Las funciones de este modulo se encargan de que la obtención de los datos se co
 \subsubsection{Interfaz de Usuario} % (fold)
 \label{ssub:interfaz_de_usuario}
 
-En un principio, se comenzó con una interfaz de usuario pensada en forma de un menu principal. La idea era que un pueda acceder a todas las opciones de configuración del sistema desde este menu, ingresando opciones por teclado y cambiando así los parametros. La ventaja de este método es que los errores por parte del usuario se reducen significativamente, dado que no tiene otra opción que elegir entre las opciones que muestra el menu. La desventaja es la complejidad que implica hacer un sistema altamente configurable con una interfaz de este tipo. Esta desventaja fue finalmente la que hizo que se cambiara la interfaz por completo, ya que luego de algunas semanas, las opciones de configuración comenzaron a crecer y se hizo evidente que una interfaz de menu hacia la configuración muy arduosa para el usuario y muy complicada de cambiar y hacer para el programador.Por lo que se cambio a un método con mas libertades para el usuario y menos complejidad para el programador.
+En un principio, se comenzó con una interfaz de usuario pensada en forma de un menu principal. La idea era que un pueda acceder a todas las opciones de configuración del sistema desde este menu, ingresando opciones por teclado y cambiando así los parámetros. La ventaja de este método es que los errores por parte del usuario se reducen significativamente, dado que no tiene otra opción que elegir entre las opciones que muestra el menu. La desventaja es la complejidad que implica hacer un sistema altamente configurable con una interfaz de este tipo. Esta desventaja fue finalmente la que hizo que se cambiara la interfaz por completo, ya que luego de algunas semanas, las opciones de configuración comenzaron a crecer y se hizo evidente que una interfaz de menu hacia la configuración muy arduosa para el usuario y muy complicada de cambiar y hacer para el programador.Por lo que se cambio a un método con mas libertades para el usuario y menos complejidad para el programador.
 
 La interfaz de usuario actual esta hecha con un lenguaje de especificación denominado "Man Machine Languaje". MML es un lenguaje de especificación que se usa típicamente para estandarizar la interfaz de un sistema para el manejo del mismo desde una consola. Siguiendo el paradigma de MML, lo que se hace es definir una serie de comandos que pueden aceptar una serie de argumentos. Con cada comando y sus argumentos se conforma una orden que ejecuta el procesador. De esta manera, se pueden lograr instrucciones simples que cambian distintos aspectos de la configuración del sistema conforme a las intenciones del usuario. Una descripción completa de las instrucciones hechas hasta el momento se encuentra en el apéndice \ref{sec:instrucciones_mml}. Con esto, es posible configurar todos los aspectos del sistema, sabiendo como operan todas las instrucciones y sus argumentos.
 
@@ -593,7 +593,7 @@ En las primeras 100 horas no fue posible cubrir los requerimientos principales. 
   \item Es posible modificar la tasa de envío de datos por UART para cada señal convertida por separado
 \end{itemize}
 
-% section avances_con_respecto_al_dise~no_de_software (end)
+% section avances_con_respecto_al_diseño_de_software (end)
 
 \section{Avances con respecto al diseño de hardware} % (fold)
 \label{sec:avances_con_respecto_al_diseno_de_hardware}
@@ -611,7 +611,7 @@ En las próximas 100 horas de trabajo, el objetivo es finalizar la idea de los d
 En concreto, los objetivos son los siguientes:
 \begin{itemize}
 	\item Completar el diseño de hardware
-	\item Impresion del circuito en placa de cobre
+	\item Impresión del circuito en placa de cobre
 	\item Ampliar la lista de comandos de la interfaz MML para admitir mayor programabilidad a la plataforma
 	\item Añadir mas contadores de eventos utilizando las funcionalidades de Timer y de PCA del microcontrolador utilizado
 	\item Añadir la funcionalidad de especificar una frecuencia deseada de muestreo en la adquisición de datos del conversor analógico-digital
@@ -637,7 +637,7 @@ En esta primera etapa se avanzo principalmente en concepto de investigación y p
 %   \addappheadtotoc
 %   \appendixpage
 
-\section{Apendices} % (fold)
+\section{Apéndices} % (fold)
 \label{sec:apendices}
 
 
@@ -684,7 +684,7 @@ Establece el pin ingresado y el pin siguiente a ese en numero en modo diferencia
 
 \textbf{ejemplo:}
 
-SDI,2: setea los pines 2 y 3 en modo diferencial
+SDI,2: Establece los pines 2 y 3 en modo diferencial
 
 % subsection sdi_set_diferencial (end)
 \subsection{SGA (Set Ganancia)} % (fold)
@@ -780,7 +780,7 @@ Es un regulador de tension positivo capaz de soportar una corriente de carga de 
 \subsection{Driver MAX232} % (fold)
 \label{sub:driver_max232}
 
-Es un driver receptor/emisor que incluye un voltaje capacitivo generador para proveer voltajes a niveles TTL de una alimentación de 5V. Un receptor convierte entradas de tipo s TIA/EIA-232-F a niveles TTL/CMOS. Tiene una histeresis típica de 0.5V. \\
+Es un driver receptor/emisor que incluye un voltaje capacitivo generador para proveer voltajes a niveles TT de una alimentación de 5V. Un receptor convierte entradas de tipo s TIA/EIA-232-F a niveles TTL/CMOS. Tiene una histeresis típica de 0.5V. \\
 
 
 \textbf{Mas información:} http://www.ti.com/lit/ds/symlink/max232.pdf
@@ -800,7 +800,7 @@ Es un driver receptor/emisor que incluye un voltaje capacitivo generador para pr
 \subsubsection{$\mu$Vision 4} % (fold)
 \label{ssub:uvision_4}
 
-$\mu$Vision 4 es un entorno de desarrollo de programación desarrollado por KeilARM. Esta pensado para construcción de programas en C destinados a correr sobre sistemas embebidos, como es el caso de una Silicon Labs C8051F350. Confecciona todos los archivos fuente de un proyecto y los arma en un único ejecutable, que luego puede cargarse al microcontrolador para su ejecución. También permite la opción de debugging. \\
+$\mu$Vision 4 es un entorno de desarrollo de programación desarrollado por ARMKeil. Esta pensado para construcción de programas en C destinados a correr sobre sistemas embebidos, como es el caso de una Silicon Labs C8051F350. Confecciona todos los archivos fuente de un proyecto y los arma en un único ejecutable, que luego puede cargarse al microcontrolador para su ejecución. También permite la opción de debugging. \\
 
 \textbf{Mas información:}$\mu$Vision IDE Overview ( http://www.keil.com/uvision/default.asp )
 
