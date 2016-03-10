@@ -98,3 +98,5 @@ Placa/prueba1.bak
 *.log
 *.synctex
 *.pdf
+*.jpg
+*.hex

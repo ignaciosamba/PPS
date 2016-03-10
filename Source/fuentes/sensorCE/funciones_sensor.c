@@ -113,10 +113,10 @@ void arrancar_motor(void)
 	HABILITAR_MOTOR = 1;
 	delay(1000);
 	
-	printf("\nFase 1...\n");
+	// printf("\nFase 1...\n");
 	set_Pwm(V_FASE_1);
 	delay(800);
-	printf("Fase 2...\n");
+	// printf("Fase 2...\n");
 	set_Pwm(V_FASE_2);
 	delay(800);
 
@@ -126,7 +126,7 @@ void arrancar_motor(void)
 	// printf("Arranque...\n");
 	// set_Pwm(V_ARRANQUE);
 	// delay(600);
-	printf("Nivel estable\n");
+	// printf("Nivel estable\n");
 	set_Pwm(V_ESTABLE);
 
     EIE1 |= 0x80; //habilitar interrupcion de timer3
@@ -134,6 +134,7 @@ void arrancar_motor(void)
 
 	// EA = 0;
 	// EIE1 &= ~0x10;      
+
 }
 
 void apagar_motor(void) 

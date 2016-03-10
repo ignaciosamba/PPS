@@ -31,7 +31,7 @@ struct shellstr *obtener_entrada(struct shellstr *shell)
     shell->errn = 0;
 
     //recibe el comando
-    while((shell->entrada = getchar()) != 'x')
+    while((shell->entrada = getchar()) != ',')
     {
         if((shell->entrada == '\n') && (i == 0)){ shell->errn = 1000; return shell;}
         if(shell->entrada == '\n'){break;}
@@ -87,6 +87,8 @@ struct shellstr *analizar(struct shellstr *shell)
     {
         shell->errn = 254;
         shell->stop_conf = 0;
+
+        return shell;
     }
 
 
@@ -112,6 +114,8 @@ struct shellstr *analizar(struct shellstr *shell)
         {shell->errn = 406; return shell;}
 
         cargar_buffer_single(shell);
+
+        return shell;
     }
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'D') && (shell->comando[2] == 'I'))
     {
@@ -135,6 +139,8 @@ struct shellstr *analizar(struct shellstr *shell)
         {shell->errn = 406; return shell;}
 
         cargar_buffer_dif(shell);
+
+        return shell;
     }
     else if((shell->comando[0] == 'G') && (shell->comando[1] == 'S') && (shell->comando[2] == 'E'))
     {
@@ -144,6 +150,8 @@ struct shellstr *analizar(struct shellstr *shell)
         {shell->errn = 406; return shell;}
 
         get_single_ended(shell);
+
+        return shell;
     }
     else if((shell->comando[0] == 'G') && (shell->comando[1] == 'D') && (shell->comando[2] == 'I'))
     {
@@ -154,6 +162,8 @@ struct shellstr *analizar(struct shellstr *shell)
         {shell->errn = 406; return shell;}
 
         get_differential(shell);
+
+        return shell;
     }
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'G') && (shell->comando[2] == 'A'))
     {
@@ -163,6 +173,8 @@ struct shellstr *analizar(struct shellstr *shell)
         {shell->errn = 406; return shell;}
 
         else conf_ganancia(shell);
+
+        return shell;
     }
     else if((shell->comando[0] == 'G') && (shell->comando[1] == 'T') && (shell->comando[2] == '0'))
     {
@@ -170,6 +182,8 @@ struct shellstr *analizar(struct shellstr *shell)
         {shell->errn = 405; return shell;}
 
         else get_timer0();
+
+        return shell;
     }
     else if((shell->comando[0] == 'G') && (shell->comando[1] == 'T') && (shell->comando[2] == '2'))
     {
@@ -177,6 +191,8 @@ struct shellstr *analizar(struct shellstr *shell)
         {shell->errn = 405; return shell;}
 
         else get_timer2();
+
+        return shell;
     }
     // else if((shell->comando[0] == 'G') && (shell->comando[1] == 'P') && (shell->comando[2] == 'C'))
     // {
@@ -191,6 +207,8 @@ struct shellstr *analizar(struct shellstr *shell)
         {shell->errn = 405; return shell;}
 
         else mostrar_config_actual(shell);
+
+        return shell;
     }
 
     else if((shell->comando[0] == 'G') && (shell->comando[1] == 'R') && (shell->comando[2] == 'P'))
@@ -199,6 +217,8 @@ struct shellstr *analizar(struct shellstr *shell)
         {shell->errn = 405; return shell;}
 
         else RPM_instantaneo();
+
+        return shell;
     }
 
     else if((shell->comando[0] == 'P') && (shell->comando[1] == 'W') && (shell->comando[2] == 'M'))
@@ -206,11 +226,10 @@ struct shellstr *analizar(struct shellstr *shell)
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
 
-        else 
-        {
-            // iniciar_PCA();
-            arrancar_motor();
-        }
+        else arrancar_motor();
+        shell->errn = 301;
+
+        return shell;
     }
 
     else if((shell->comando[0] == 'N') && (shell->comando[1] == 'T') && (shell->comando[2] == 'P'))
@@ -218,41 +237,37 @@ struct shellstr *analizar(struct shellstr *shell)
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
 
-        else 
-        {
-            // iniciar_PCA();
-            apagar_motor();
-        }
+        else apagar_motor();
+        shell->errn = 302;
+
+        return shell;
     }
     else if((shell->comando[0] == 'S') && (shell->comando[1] == 'L') && (shell->comando[2] == 'P'))
     {
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
 
-        else 
-        {
-            habilitar_modo_bajo_consumo();
-        }
+        else habilitar_modo_bajo_consumo();
+
+        return shell;
     }
     else if((shell->comando[0] == 'E') && (shell->comando[1] == 'S') && (shell->comando[2] == 'C'))
     {
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
 
-        else 
-        {
-            resetear_motor();
-        }
+        else resetear_motor();
+
+        return shell;
     }
     else if((shell->comando[0] == 'C') && (shell->comando[1] == 'N') && (shell->comando[2] == 'F'))
     {
         if(shell->n_args > 0)
         {shell->errn = 405; return shell;}
 
-        else 
-        {
-            configurar_motor();
-        }
+        else configurar_motor();
+
+        return shell;
     }
 
     else shell->errn = 404;
@@ -272,15 +287,17 @@ void reportar(struct shellstr *shell)
 {
     switch(shell->errn)
     {   
-        case 251: printf("%05d", 251); break;
-        case 252: printf("%05d", 252); break;
-        case 253: printf("%05d", 253); break;
-        case 254: printf("%05d", 254); break;
-        case 404: printf("%05d", 404); break;
-        case 405: printf("%05d", 405); break;
-        case 406: printf("%05d", 406); break;
-        case 407: printf("%05d", 407); break;
-        case 408: printf("%05d", 408); break;
+        case 251: printf("%05d", 251); break; // pin configurado en modo single-ended
+        case 252: printf("%05d", 252); break; // pin configurado en modo diferencial
+        case 253: printf("%05d", 253); break; // ganancia configurada
+        case 254: printf("%05d", 254); break; // comienza la conversion continua
+        case 301: printf("%05d", 301); break; // motor arranco
+        case 302: printf("%05d", 302); break; // motor paro
+        case 404: printf("%05d", 404); break; // comando no encontrado
+        case 405: printf("%05d", 405); break; // demasiados argumentos
+        case 406: printf("%05d", 406); break; // argumento(s) fuera de rango
+        case 407: printf("%05d", 407); break; // error de sintaxis
+        case 408: printf("%05d", 408); break; // error de sintaxis
         case 0: break; // para el caso donde se apreta enter solo
         default: break;
     }
