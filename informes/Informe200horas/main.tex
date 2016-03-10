@@ -4,15 +4,10 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass{article}
-
-
-% Esto es para poder escribir acentos directamente:
-\usepackage[latin1]{inputenc}
-% Esto es para que el LaTeX sepa que el texto está en espa\~nol:
+\documentclass[a4paper]{article}
 \usepackage[spanish]{babel}
-% Esto es para que se pueda crear el indice
-%\usepackage{makeidx}
+\selectlanguage{spanish}
+\usepackage[utf8]{inputenc}
 % Paquetes de la AMS:
 \usepackage{amsmath, amsthm, amsfonts}
 % para poder poner una hoja apaisada
@@ -31,47 +26,37 @@
 \usepackage{geometry}
 \geometry{a4paper}
 
-% Paquetes de la AMS:
-\usepackage{amsmath, amsthm, amsfonts}
 
-\graphicspath{ {Imagenes/} }
+\graphicspath{ {imagenes/} }
 
-% Teoremas
-%--------------------------------------------------------------------------
-\newtheorem{thm}{Teorema}[section]
-\newtheorem{cor}[thm]{Corolario}
-\newtheorem{lem}[thm]{Lema}
-\newtheorem{prop}[thm]{Proposición}
-\theoremstyle{definition}
-\newtheorem{defn}[thm]{Definición}
-\theoremstyle{remark}
-\newtheorem{rem}[thm]{Observación}
+%-------- ENCABEZADO Y PIE DE PAGINA--------
+\usepackage{float}
 
-% Atajos.
-% Se pueden definir comandos nuevos para acortar cosas que se usan
-% frecuentemente. Como ejemplo, aquí se definen la R y la Z dobles que
-% suelen representar a los conjuntos de números reales y enteros.
-%--------------------------------------------------------------------------
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Año 2015}
+\lhead{Practica Profesional Supervisada}
+\rfoot{Pagina \thepage}
+\lfoot{Mantovani - Sambataro}
 
-\def\RR{\mathbb{R}}
-\def\ZZ{\mathbb{Z}}
+%-------------------------------------------
 
-% De la misma forma se pueden definir comandos con argumentos. Por
-% ejemplo, aquí definimos un comando para escribir el valor absoluto
-% de algo más fácilmente.
-%--------------------------------------------------------------------------
-\newcommand{\abs}[1]{\left\vert#1\right\vert}
-\newcommand{\summary}[1]{\addtocontents{toc}{#1\par}}
+%para usar hipertexto en las referencias
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
 
-% Operadores.
-% Los operadores nuevos deben definirse como tales para que aparezcan
-% correctamente. Como ejemplo definimos en jacobiano:
-%--------------------------------------------------------------------------
-\DeclareMathOperator{\Jac}{Jac}
 
 %--------------------------------------------------------------------------
 \title{\underline{Practica Profesional Supervisada} \\
-\large \underline{Informe de las 100 horas} \\
+\large \underline{Informe de las 200 horas} \\
 \huge \textbf{ \\ Plataforma concentradora de sensores y eventos digitales} \\ }
 \author{Autores: Ignacio Sambataro, Luciano Mantovani\\ \\
   \large Tutor: PhD. Ing. Orlando Micolini \\
@@ -105,7 +90,13 @@
 \clearpage
 %resumen
 \abstract{
-En este informe se describen las primeras 100 horas de trabajo de la Practica Profesional Supervisada. Se comenzo un proyecto nuevo, sugerido por el director, Orlando Micolini, y se trabajo todo el tiempo en el Laboratorio de Arquitectura de Computadoras. Se documentaron los requerimientos, la etapa de investigacion, los dise\~nos de hardware y software hasta el momento, y las implementaciones que se llegaron a lograr. Lo que se llego a implementar se hizo en una placa de desarrollo prestada. Las razones de utilizacion de esta placa se explican en el documento. Algunos requerimientos basicos llegaron a cumplirse dentro de las 100 horas, pero solamente prototipos de prueba en la placa de desarrollo. El primer prototipo real tiene la mayor parte del dise\~no de hardware y software hecho, pero todavia no esta implementado. 
+%En este informe se describen las primeras 100 horas de trabajo de la Practica Profesional Supervisada. Se comenzó un proyecto nuevo, sugerido por el director, Orlando Micolini, y se trabajo todo el tiempo en el Laboratorio de Arquitectura de Computadoras. Se documentaron los requerimientos, la etapa de investigacion, los dise\~nos de hardware y software hasta el momento, y las implementaciones que se llegaron a lograr. Lo que se llego a implementar se hizo en una placa de desarrollo prestada. Las razones de utilizacion de esta placa se explican en el documento. Algunos requerimientos basicos llegaron a cumplirse dentro de las 100 horas, pero solamente prototipos de prueba en la placa de desarrollo. El primer prototipo real tiene la mayor parte del dise\~no de hardware y software hecho, pero todavia no esta implementado. 
+
+En el campo de trabajo de los sistemas embebidos, suele ser necesaria la interaccion con sensores de distintos tipos. Las distintas maneras de obtener los datos de los sensores para procesarlos en el sistema final puede llegar a ser una tarea extra para este. 
+
+El objetivo de esta practica fue diseñar y prototipar un sistema que concentre señales de sensores y cuente eventos de fuentes digitales externas; de forma que todo el trabajo de obtencion de señales, digitalizado y procesamiento de las mismas, sea hecho por una placa externa, para que luego se envie por un protocolo serial al sistema final, que termina de procesar los datos de las mediciones. 
+
+El resultado final fue un prototipo de un sistema programable, capaz de tomar señales de 8 canales analogicos distintos, ya sea en forma diferencial o singular, y contar eventos de dos fuentes de señales digitales distintas. Todos estos datos se envian por protocolo serial hacia el sistema final conectado, en cadenas de caracteres.
 }
 
 %salto de pagina

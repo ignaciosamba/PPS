@@ -6,20 +6,20 @@
 \contentsline {section}{\numberline {3}Investigaci\IeC {\'o}n}{1}{section.3}
 \contentsline {subsection}{\numberline {3.1}Par\IeC {\'a}metros tenidos en cuenta en la selecci\IeC {\'o}n del microcontrolador}{3}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Selecci\IeC {\'o}n}{3}{subsection.3.2}
-\contentsline {section}{\numberline {4}Silicon Labs \emph {C8051F352}}{3}{section.4}
+\contentsline {section}{\numberline {4}Silicon Labs $\emph {C8051F352}^{\relax \fontsize {5}{6}\selectfont \cite {bib:datasheet}}$}{4}{section.4}
 \contentsline {subsection}{\numberline {4.1}Conversor Anal\IeC {\'o}gico-Digital}{4}{subsection.4.1}
 \contentsline {subsubsection}{\numberline {4.1.1}Modos de Medici\IeC {\'o}n}{4}{subsubsection.4.1.1}
 \contentsline {subsubsection}{\numberline {4.1.2}Modos de Conversion}{4}{subsubsection.4.1.2}
 \contentsline {subsubsection}{\numberline {4.1.3}Contadores}{4}{subsubsection.4.1.3}
 \contentsline {subsubsection}{\numberline {4.1.4}Interfaz serial}{4}{subsubsection.4.1.4}
-\contentsline {subsubsection}{\numberline {4.1.5}Flash}{4}{subsubsection.4.1.5}
+\contentsline {subsubsection}{\numberline {4.1.5}Flash}{5}{subsubsection.4.1.5}
 \contentsline {section}{\numberline {5}Dise\IeC {\~n}o de Software}{5}{section.5}
 \contentsline {subsection}{\numberline {5.1}Descripci\IeC {\'o}n gr\IeC {\'a}fica del sistema}{5}{subsection.5.1}
 \contentsline {subsubsection}{\numberline {5.1.1}Diagrama de bloques}{5}{subsubsection.5.1.1}
 \contentsline {paragraph}{}{5}{section*.2}
 \contentsline {paragraph}{}{5}{section*.3}
 \contentsline {subsubsection}{\numberline {5.1.2}Diagramas de caso de uso}{6}{subsubsection.5.1.2}
-\contentsline {subsubsection}{\numberline {5.1.3}Diagramas de secuencia}{6}{subsubsection.5.1.3}
+\contentsline {subsubsection}{\numberline {5.1.3}Diagramas de secuencia}{7}{subsubsection.5.1.3}
 \contentsline {section}{\numberline {6}Dise\IeC {\~n}o de hardware}{8}{section.6}
 \contentsline {subsection}{\numberline {6.1}Diagrama de Bloques de Hardware}{9}{subsection.6.1}
 \contentsline {subsection}{\numberline {6.2}Diagrama Esquem\IeC {\'a}tico}{9}{subsection.6.2}
@@ -48,8 +48,8 @@
 \contentsline {subsection}{\numberline {A.5}GT2 (Get Timer 2)}{15}{subsection.Alph1.5}
 \contentsline {subsection}{\numberline {A.6}ST (Start)}{16}{subsection.Alph1.6}
 \contentsline {section}{\numberline {B}Componentes Electr\IeC {\'o}nicos Utilizados}{16}{appendix.Alph2}
-\contentsline {subsection}{\numberline {B.1}Regulador de Tension LM2937}{16}{subsection.Alph2.1}
-\contentsline {subsection}{\numberline {B.2}Driver MAX232}{16}{subsection.Alph2.2}
+\contentsline {subsection}{\numberline {B.1}Regulador de Tension $LM2937^{\relax \fontsize {5}{6}\selectfont \cite {bib:lm2937}}$}{16}{subsection.Alph2.1}
+\contentsline {subsection}{\numberline {B.2}Driver $MAX232^{\relax \fontsize {5}{6}\selectfont \cite {bib:max232}}$}{16}{subsection.Alph2.2}
 \contentsline {section}{\numberline {C}Software Utilizado}{16}{appendix.Alph3}
-\contentsline {subsubsection}{\numberline {C.0.1}$\mu $Vision 4}{16}{subsubsection.Alph3.0.1}
-\contentsline {subsection}{\numberline {C.1}KiCad}{16}{subsection.Alph3.1}
+\contentsline {subsubsection}{\numberline {C.0.1}$\mu $$Vision 4^{\relax \fontsize {5}{6}\selectfont \cite {bib:uvision4}}$}{16}{subsubsection.Alph3.0.1}
+\contentsline {subsection}{\numberline {C.1}$KiCad^{\relax \fontsize {5}{6}\selectfont \cite {bib:kicad}}$}{16}{subsection.Alph3.1}
