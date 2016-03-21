@@ -1,0 +1,4 @@
+Author: Cyril Frausti
+Kicad components
+License: CC-BY-NC
+http://creativecommons.org/licenses/by-nc/4.0/

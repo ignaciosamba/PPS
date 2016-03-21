@@ -1,0 +1,178 @@
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 06/11/2015 12:55:34 p.m.
+
+BeginCmp
+TimeStamp = /563CC725;
+Reference = AIN0;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CC631;
+Reference = C1;
+ValeurCmp = 0.1uF;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CB9BE;
+Reference = COM1;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CB5E1;
+Reference = D1;
+ValeurCmp = 1N4004;
+IdModule  = diode-DO41-10;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CB720;
+Reference = D2;
+ValeurCmp = LED;
+IdModule  = led-1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CB9CD;
+Reference = Derecha1;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CB9EB;
+Reference = Izquierda1;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CBB62;
+Reference = J1;
+ValeurCmp = JACK_2P;
+IdModule  = ;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CC017;
+Reference = JP1;
+ValeurCmp = PINHD-1X2;
+IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CC752;
+Reference = JP2;
+ValeurCmp = PINHD-1X3;
+IdModule  = PIN_ARRAY_3X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CC450;
+Reference = Motor1;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CB99A;
+Reference = NA1;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CB9DC;
+Reference = NC1;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CC467;
+Reference = Operacional1;
+ValeurCmp = LM324N;
+IdModule  = op-amp-DIL14;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CB42A;
+Reference = Operacional2;
+ValeurCmp = LM324N;
+IdModule  = op-amp-DIL14;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CB78C;
+Reference = OPTO1;
+ValeurCmp = LBB110;
+IdModule  = optocoupler-2-DIL04;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CC256;
+Reference = P0.2;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CC21F;
+Reference = R1;
+ValeurCmp = 50;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CC1E0;
+Reference = R2;
+ValeurCmp = 1k;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CBC03;
+Reference = R3;
+ValeurCmp = 10k;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CC613;
+Reference = R4;
+ValeurCmp = 10k;
+IdModule  = SM1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CC822;
+Reference = Sense1;
+ValeurCmp = PINHD-1X1;
+IdModule  = PIN_ARRAY_1;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CBBA5;
+Reference = SW1;
+ValeurCmp = SWITCH_INV;
+IdModule  = ;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CBB71;
+Reference = T1;
+ValeurCmp = NPN;
+IdModule  = PIN_ARRAY_3X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /563CBD3E;
+Reference = USB-Macho1;
+ValeurCmp = USB-A-H;
+IdModule  = con-usb-2-USB-A-H;
+EndCmp
+
+EndListe
