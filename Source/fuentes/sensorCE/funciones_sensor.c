@@ -99,6 +99,8 @@ void control_RPM(unsigned short eventos_real, unsigned short eventos_ideal)
 
 	if(velocidad < V_MAXIMA)
 		apagar_motor();			//si llega a ir demasiado rapido, se apaga por seguridad.
+
+	
 }
 
 /**

@@ -99,4 +99,6 @@ struct shellstr
 
 	///variable auxiliar para las funciones get_single_ended y get_differential
 	char opt;
+
+	bool conversion_active;
 };

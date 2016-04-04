@@ -30,6 +30,7 @@ void main()
 
     shell = (struct shellstr *) malloc(sizeof(struct shellstr));
    	shell->var = 0; // inicializar en 0 la variable auxiliar para la funcion analizar_buffer
+   	shell->conversion_active = false;
 
    	if(shell == NULL)
    	{
@@ -96,15 +97,31 @@ void main()
 			while(1)
 			{
 				// empezar_adc();
+				shell->conversion_active = true;
 			    ES0 = 1; // habilitar interrupcion de UART
 				if (f_UART)
-			    {
-			    	ADC0MD = 0x00; // conversion inhabilitada
-			    	EA = 0; // inhabilitar interrupciones globales
-			    	f_UART = false;
-			    	shell->stop_conf = 1;
-			    	printf("STOP\n");
-			    	break;
+			    {	
+			    	int recibido = (int)SBUF0;
+					f_UART = false;
+			    	//printf("STOP. message: '%c'\n", (char)recibido);
+
+			    	if(recibido == 112) // 112 es 'p' en ascii
+			    	{
+			    		// printf("stillOn\n");
+						shell->conversion_active = false;
+				    	shell->errn = 501; // stillOn successful
+				    	reportar(shell);
+					}
+			    	else if(recibido == 115) //115 es 's' en ascii
+			    	{
+						ADC0MD = 0x00; // conversion inhabilitada
+						EA = 0; // inhabilitar interrupciones globales
+						shell->stop_conf = 1;
+				    	shell->errn = 500; // stop succesful
+				    	reportar(shell);
+
+				    	break;
+			    	}
 			    }
 
 			    ES0 = 0; // deshabilitar interrupcion de UART
