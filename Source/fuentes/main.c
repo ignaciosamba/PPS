@@ -93,7 +93,6 @@ void main()
 			// ES0 = 1;
 
 
-
 			while(1)
 			{
 				// empezar_adc();
@@ -109,6 +108,7 @@ void main()
 			    	{
 			    		// printf("stillOn\n");
 						shell->conversion_active = false;
+						refresh_watchDog();
 				    	shell->errn = 501; // stillOn successful
 				    	reportar(shell);
 					}

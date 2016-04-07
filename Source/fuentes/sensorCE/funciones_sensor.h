@@ -7,4 +7,6 @@ void control_RPM(unsigned short rpm_real, unsigned short rpm_ideal);
 void RPM_instantaneo(void);
 void resetear_motor(void);
 void configurar_motor(void);
+void check_watchdog();
+void refresh_watchDog();
 

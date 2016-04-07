@@ -50,6 +50,8 @@ typedef enum { false, true } bool;
 // unsigned long dato_convertido;
 // unsigned short pin_actual;
 
+#define WATCHDOG_MOTOR 100
+
 
 //////////-----BANDERAS------///////////
 
@@ -101,4 +103,6 @@ struct shellstr
 	char opt;
 
 	bool conversion_active;
+
+	char conversion_timer;
 };

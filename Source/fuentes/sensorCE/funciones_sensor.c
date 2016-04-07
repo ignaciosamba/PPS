@@ -12,12 +12,14 @@
 #define VUELTAS_CADA_100MS 18 //para una velocidad ideal de 3600 rpm. valor explicado en la funcion contar_RPM
 #define HISTERESIS 2
 #define CORRECCION 50
+#define WATCHDOG_INITIAL 100
 
 
 unsigned short int velocidad = V_ESTABLE;
 unsigned long eventos;
 sbit HABILITAR_MOTOR = P0^2;
 sbit LED = P0^6;                          // LED='1' means ON
+short int watchdog_value = WATCHDOG_INITIAL;
 
 void RPM_instantaneo()
 {
@@ -65,7 +67,25 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
 	TH0 = 0;           // Resetear valor de timer0
 	TL0 = 0;    
 
+	watchdog_value--;
+	check_watchdog();
+
 }
+
+void check_watchdog()
+{
+	if(watchdog_value == 0)
+	{
+		apagar_motor();
+	}
+}
+
+
+void refresh_watchDog()
+{
+	watchdog_value = WATCHDOG_INITIAL;
+}
+
 /**
  * @brief agrega una histeresis al funcionamiento del motor que evita el desvio de las RPM
  * @details [long description]
