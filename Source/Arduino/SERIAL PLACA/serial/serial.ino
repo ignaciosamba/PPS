@@ -33,7 +33,7 @@ void setup()
 {
   // Open serial communications and wait for port to open:
   Serial.begin(115200);
-  Serial2.begin(9600);
+  Serial2.begin(115200);
   
   while (!Serial) 
   {
