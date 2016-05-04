@@ -2,9 +2,9 @@
 \section{Estructura del software} % (fold)
 \label{sec:estructura_del_software}
 
-El programa esta dividido en 6 modulos que en la mayoria de los casos corresponde a cada bloque en el que esta dividido el sistema, como se muestra en la figura \ref{fig:bloques1}
+El programa esta dividido en 6 m\'odulos que en la mayor\'ia de los casos corresponde a cada bloque en el que esta dividido el sistema, como se muestra en la figura \ref{fig:bloques1}.
 
-En este momento, el programa entero esta compuesto por 6 modulos. Un modulo principal y otros 5 que definen funciones segun los bloques que describen el comportamiento del sistema. El modulo principal ejecuta las funciones de los modulos secundarios.
+En este momento, el programa entero esta compuesto por 6 m\'odulos. Un modulo principal y otros 5 que definen funciones seg\'un los bloques que describen el comportamiento del sistema. El modulo principal ejecuta las funciones de los m\'odulos secundarios.
 
 \paragraph{}
 \textbf{Modulos:}
@@ -18,47 +18,65 @@ En este momento, el programa entero esta compuesto por 6 modulos. Un modulo prin
 \end{itemize}
 
 \subsection{Configurador}\label{sec:configuradorsw}
-El configurador se encarga de inicializar todos los parametros necesarios que permiten la operatividad del resto de los modulos. Establece los valores correspondientes para todos los registros pertinentes y configura los puertos seleccionados en el modulo del conversor (Seccin \ref{sec:conversorsw}) cuando se especifique por parte del usuario.
+El configurador se encarga de inicializar todos los par\'ametros necesarios que permiten la operatividad del resto de los m\'odulos. Establece los valores correspondientes para todos los registros pertinentes y configura los puertos seleccionados en el modulo del conversor (Secci\'on \ref{sec:conversorsw}) cuando se especifique por parte del usuario.
 \subsection{Principal}
-El modulo principal es la funcion main, inicializa todo el sistema usando funciones del configurador (Seccion \ref{sec:configuradorsw}) y hace el loop infinito que corre el sistema indefinidamente, obteniendo los comandos del usuario via la interfaz (Seccion \ref{sub:interfaz_de_usuario}).
+El modulo principal es la funci\'on main, inicializa todo el sistema usando funciones del configurador (Secci\'on \ref{sec:configuradorsw}) y hace el loop infinito que corre el sistema indefinidamente, obteniendo los comandos del usuario via la interfaz (Secci\'on \ref{sub:interfaz_de_usuario}).
 
 \subsection{Conversor}\label{sec:conversorsw}
-El modulo de conversion se encarga de la etapa de obtencion y procesado de las se\~nales convertidas del ADC (Secci\'on \ref{sec:adc}).
+El modulo de conversi\'on se encarga de la etapa de obtenci\'on y procesado de las se\~nales convertidas del ADC (Secci\'on \ref{sub:conversor_anal\'ogico_digital}).
 
-Las funciones de este modulo se encargan de que la obtencion de los datos se corresponda con la configuracion dada por el usuario. Es por esto que tiene funciones que se activan en la etapa de configuracion del sistema que preparan al mismo para una obtencion de datos conforme a los ajustes hechos por el usuario. Estos ajustes se realizan mediante las instrucciones MML mencionadas en la seccion \ref{sub:interfaz_de_usuario} y explicadas con detalle en el apendice \ref{ap:instrucciones}.
+Las funciones de este modulo se encargan de que la obtenci\'on de los datos se corresponda con la configuraci\'on dada por el usuario. Es por esto que tiene funciones que se activan en la etapa de configuraci\'on del sistema que preparan al mismo para una obtenci\'on de datos conforme a los ajustes hechos por el usuario. Estos ajustes se realizan mediante las instrucciones MML mencionadas en la secci\'on \ref{sub:interfaz_de_usuario} y explicadas con detalle en el ap\'endice \ref{ap:instrucciones}.
 
 
 \subsection{Interfaz de usuario} % (fold)
 \label{sub:interfaz_de_usuario}
 
 
-En un principio, se comenzo con una interfaz de usuario pensada en forma de un menu principal. La idea era que un pueda acceder a todas las opciones de configuracion del sistema desde este menu, ingresando opciones por teclado y cambiando asi los parametros. La ventaja de este metodo es que los errores por parte del usuario se reducen significativamente, dado que no tiene otra opcion que elegir entre las opciones que muestra el menu. La desventaja es la complejidad que implica hacer un sistema altamente configurable con una interfaz de este tipo. Esta desventaja fue finalmente la que hizo que se cambiara la interfaz por completo, ya que luego de algunas semanas, las opciones de configuracion comenzaron a crecer y se hizo evidente que una interfaz de menu hacia la configuracion muy arduosa para el usuario y muy complicada de cambiar y hacer para el programador.Por lo que se cambio a un metodo con mas libertades para el usuario y menos complejidad para el programador.
+En un principio, se comenz\'o con una interfaz de usuario pensada en forma de un men\'u principal. La idea era que el usuario pueda acceder a todas las opciones de configuraci\'on del sistema desde este men\'u, ingresando opciones por teclado y cambiando as\'i los par\'ametros. La ventaja de este m\'etodo es que los errores por parte del usuario se reducen significativamente, dado que no tiene otra opci\'on que elegir entre las opciones que muestra el men\'u. La desventaja es la complejidad que implica hacer un sistema altamente configurable con una interfaz de este tipo. Esta desventaja fue finalmente la que hizo que se cambiara la interfaz por completo, ya que luego de algunas semanas, las opciones de configuraci\'on comenzaron a crecer y se hizo evidente que una interfaz de men\'u hacia la configuraci\'on muy engorrosa para el usuario y muy complicada de cambiar y hacer para el programador.Por lo que se cambio a un m\'etodo con mas libertades para el usuario y menos complejidad para el programador.
 
-La interfaz de usuario actual esta hecha con un lenguaje de especificacion denominado "Man Machine Languaje". MML es un lenguaje de especificacion que se usa tipicamente para estandarizar la interfaz de un sistema para el manejo del mismo desde una consola. Siguendo el paradigma de MML, lo que se hace es definir una serie de comandos que pueden aceptar una serie de argumentos. Con cada comando y sus argumentos se conforma una orden que ejecuta el procesador. De esta manera, se pueden lograr instrucciones simples que cambian distintos aspectos de la configuracion del sistema conforme a las intenciones del usuario. Una descripcion completa de las instrucciones hechas hasta el momento se encuentra en el apendice \ref{ap:instrucciones}. Con esto, es posible configurar todos los aspectos del sistema, sabiendo como operan todas las instrucciones y sus argumentos.
+La interfaz de usuario actual esta hecha con un paradigma denominado "Man Machine Languaje". MML es un lenguaje de especificaci\'on que se usa t\'ipicamente para estandarizar la interfaz de un sistema para el manejo del mismo desde una consola. Siguiendo el paradigma de MML, lo que se hace es definir una serie de comandos que pueden aceptar una serie de argumentos. Con cada comando y sus argumentos se conforma una orden que ejecuta el procesador. De esta manera, se pueden lograr instrucciones simples que cambian distintos aspectos de la configuraci\'on del sistema conforme a las intenciones del usuario.
+
+\subsection{Estructura de las instrucciones}
+
+Todas las instrucciones siguen las mismas reglas. Una instrucci\'on puede ser un \'unico comando, o un comando y uno o varios argumentos.
+
+\begin{equation}
+	MML>COMANDO[,ARG1,ARG2,...]
+\end{equation}
+
+Arriba puede verse la estructura de una instrucci\'on. Una instrucci\'on puede tener argumentos, dependiendo de la funcionalidad a implementar. En caso que los tenga deben escribirse separados por comas. El prompt ``MML$>$'' indica que el sistema esta esperando una nueva instrucci\'on.
+
+Una descripci\'on completa de las instrucciones hechas hasta el momento se encuentra en el ap\'endice \ref{ap:instrucciones}. Con esto, es posible configurar todos los aspectos del sistema, sabiendo como operan todas las instrucciones y sus argumentos.
 
 % subsection interfaz_de_usuario (end)
-\subsubsection{Modo de operacion de la interfaz de usuario} % (fold)
-\label{ssub:modo_de_operacion_de_la_interfaz_de_usuario}
+\subsubsection{Modo de operaci\'on de la interfaz de usuario} % (fold)
+\label{ssub:modo_de_operaci\'on_de_la_interfaz_de_usuario}
 
 
-Cuando se inicia el sistema, envia un prompt (``MML>'') por UART al dispositivo que este conectado del otro lado. Cada vez que se pueda leer un prompt, es porque el sistema esta esperando un comando. Con cada comando ingresado, hay un codigo de error que se devuelve, que indica al usuario si la operacion fue exitosa, y sino, que es lo que ocasiono que no lo sea.
+Cuando se inicia el sistema, se env\'ia un primate (``MML$>$'') por UART al dispositivo que este conectado del otro lado. Cada vez que se pueda leer un prompt, es porque el sistema esta esperando un comando. Con cada comando ingresado, hay un c\'odigo de error que se devuelve, que indica al usuario si la operaci\'on fue exitosa, y sino, que es lo que ocasiono que no lo sea.
 
-\textbf{\underline{PONER ACA ALGUNAS IMAGENES DE SCREENSHOT CON UN EJEMPLO DE ALGUN COMANDO QUE SE INGRESE}}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.80\textwidth, height = 9cm]{ejemplo_instrucciones}
+  \caption{Ejemplo de uso instrucciones}\label{fig:instrucciones}
+\end{figure}
+
+En la figura \ref{fig:instrucciones} se muestra un caso de instrucciones ingresadas en el sistema. Cada instrucci\'on devuelve algo, ya sea una respuesta a una solicitud o un c\'odigo de respuesta, que puede incluir un error. Los detalles de las instrucciones ingresadas (SSE,SGA y SHA) se describen en el ap\'endice \ref{ap:instrucciones}.
 
 % subsubsection modo_de_operacion_de_la_interfaz_de_usuario (end)
 
 \subsection{Contador} % (fold)
 \label{sub:contador}
 
-El modulo de contador contiene funciones que devuelven los valores de las cuentas actuales de los contadores en funcionamiento. Por una cuestion de simpleza, los contadores siempre estan activos, ya sea que se usen o no. Actualmente se cuenta con tres contadores de eventos. El microcontrolador tiene cuatro timers (Sección\ref{sec:contadores}) pero obligadamente uno de ellos debe ser utilizado por el modulo de la interfaz serial UART (Secci\'on\ref{sec:serial}).
+El modulo de contador contiene funciones que devuelven los valores de las cuentas actuales de los contadores en funcionamiento. Por una cuesti\'on de simpleza, los contadores siempre est\'an activos, ya sea que se usen o no. Actualmente se cuenta con tres contadores de eventos. El microcontrolador tiene cuatro timers (Secci\'on\ref{sub:contadores}) pero obligadamente uno de ellos debe ser utilizado por el modulo de la interfaz serial UART (Secci\'on\ref{sub:interfaz_serial}).
 
-Cada contador utilizable tiene una funcion que simplemente se encarga de obtener el valor de la cuenta en su respectivo timer asociado. Las instrucciones definidas en MML(Seccion \ref{sub:interfaz_de_usuario}) descriptas en el apencice \ref{ap:instrucciones} incluyen las instrucciones GT0, GT1, y GT2, que se utilizan para la obtencion del valor de la cuenta actual.
+Cada contador utilizable tiene una funci\'on que simplemente se encarga de obtener el valor de la cuenta en su respectivo timer asociado. Las instrucciones definidas en MML(Secci\'on \ref{sub:interfaz_de_usuario}) descriptas en el ap\'endice \ref{ap:instrucciones} incluyen las instrucciones GT0, GT1, y GT2, que se utilizan para la obtenci\'on del valor de la cuenta actual.
 % subsection contador (end)
 
 \subsection{Interrupciones} % (fold)
 \label{sub:interrupciones}
 
-Este archivo define las rutinas de interrupcion para aquellas funcionalidades que se requiere que realicen interrupciones sobre el microcontrolador para condicionar el comportamiento del programa. El conversor analogico-digital\ref{sec:adc} es el unico modulo que realiza interrupciones.
+Este archivo define las rutinas de interrupci\'on para aquellas funcionalidades que se requiere que realicen interrupciones sobre el microcontrolador para condicionar el comportamiento del programa. El conversor anal\'ogico-digital (Secci\'on \ref{sub:conversor_anal\'ogico_digital}) es el \'unico modulo que realiza interrupciones.
 
 % subsection interrupciones (end)
 

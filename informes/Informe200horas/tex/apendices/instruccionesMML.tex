@@ -5,20 +5,21 @@
 \label{sub:sse_set_single_ended}
 
 
-\textbf{Formato:} SSE,[1]
+\textbf{Formato:} SSE,[1],[1]
 
-\textbf{Descripcion:}
-Establece el pin ingresado en modo single ended.
+\textbf{Descripci\'on:}
+Establece el pin ingresado en modo single ended. El primer argumento es el numero de pin. El segundo argumento es un numero entre 0 y 65536 que establece la cantidad de unidades de tiempo entre env\'ios de mediciones en el pin. Cada unidad de tiempo dura aproximadamente 70ms.
 
 \textbf{Limitaciones:}
 \begin{itemize}
-  \item Un solo argumento
-  \item El argumento es un byte par comprendido entre 0 y 7
+  \item Lleva 2 argumentos.
+  \item El primer argumento es un numero par comprendido entre 0 y 7.
+  \item El segundo argumento es un numero comprendido entre 0 y 65536.
 \end{itemize}
 
 \textbf{Ejemplo:}
 
-SSE,4: Establece el pin 4 del ADC en modo single ended
+SSE,4,10: Establece el pin 4 del ADC en modo single ended, con un intervalo de 10 unidades de tiempo entre cada medici\'on.
 
 % subsection sse_set_single_ended (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -27,20 +28,21 @@ SSE,4: Establece el pin 4 del ADC en modo single ended
 \label{sub:sdi_set_diferencial}
 
 
-\textbf{Formato:} SDI,[1]
+\textbf{Formato:} SDI,[1],[1]
 
-\textbf{Descripcion:}
-Establece el pin ingresado y el pin siguiente a ese en numero en modo diferencial
+\textbf{Descripci\'on:}
+Se establece, en el primer argumento, el pin ingresado y el pin siguiente a ese en numero en modo diferencial. El segundo argumento es un numero entre 0 y 65536 que establece la cantidad de unidades de tiempo entre env\'ios de mediciones en el pin. Cada unidad de tiempo dura aproximadamente 70ms.
 
 \textbf{limitaciones:}
 \begin{itemize}
-  \item un solo argumento
-  \item el argumento es un byte par comprendido entre 0 y 6
+  \item Lleva 2 argumentos.
+  \item el primer argumento es un byte par comprendido entre 0 y 6.
+  \item El segundo argumento es un numero comprendido entre 0 y 65536.
 \end{itemize}
 
 \textbf{ejemplo:}
 
-SDI,2: setea los pines 2 y 3 en modo diferencial
+SDI,2,20: setea los pines 2 y 3 en modo diferencial, con un intervalo de 20 unidades de tiempo entre cada medicion
 
 % subsection sdi_set_diferencial (end)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -51,7 +53,7 @@ SDI,2: setea los pines 2 y 3 en modo diferencial
 
 \textbf{Formato:} SGA,[1]
 
-\textbf{descripcion:}
+\textbf{Descripci\'on:}
 Establece la ganancia del ADC segun el argumento a la potencia de 2
 
 \textbf{Limitaciones:}
@@ -73,8 +75,8 @@ SGA,3: Establece la ganancia en $2^{3} = 8$
 
 \textbf{Formato:} GT0
 
-\textbf{Descripcion:}
-Obtiene el valor actual de la cuenta de los eventos digitales monitoreados por timer0
+\textbf{Descripci\'on:}
+Obtiene el valor actual de la cuenta de los eventos digitales monitorizados por timer0
 
 \textbf{Limitaciones:}
 \begin{itemize}
@@ -89,8 +91,8 @@ Obtiene el valor actual de la cuenta de los eventos digitales monitoreados por t
 
 \textbf{Formato:} GT2[0]
 
-\textbf{descripcion:}
-Obtiene el valor actual de la cuenta de los eventos digitales monitoreados por timer2
+\textbf{Descripci\'on:}
+Obtiene el valor actual de la cuenta de los eventos digitales monitorizados por timer2
 
 \textbf{Limitaciones:}
 \begin{itemize}
@@ -104,8 +106,8 @@ Obtiene el valor actual de la cuenta de los eventos digitales monitoreados por t
 \label{sub:gse_get_single_ended}
 \textbf{Formato:} GSE,[1]
 
-\textbf{Descripcion:}
-Obtiene una conversion inmediata de un canal especifico en modo single-ended
+\textbf{Descripci\'on:}
+Obtiene una conversi\'on inmediata de un canal especifico en modo single-ended
 
 \begin{itemize}
   \item Un solo argumento
@@ -122,8 +124,8 @@ GSE,3: Obtiene de manera inmediata un valor convertido en modo single-ended en e
 \label{sub:gdi_get_differential}
 \textbf{Formato:} GDI,[1]
 
-\textbf{Descripcion:}
-Obtiene una conversion inmediata del canal especificado y el siguiente en numero en modo diferencial
+\textbf{Descripci\'on:}
+Obtiene una conversi\'on inmediata del canal especificado y el siguiente en numero en modo diferencial
 
 \begin{itemize}
   \item Un solo argumento
@@ -138,8 +140,8 @@ GDI,2: Obtiene de manera inmediata un valor convertido en modo diferencial entre
 \label{sub:sha_show_actual_configuration}
 \textbf{Formato:} SHA[0]
 
-\textbf{Descripcion:}
-Muestra el buffer estatico de los canales del ADC, cada uno con su respectivo valor que da el periodo de muestreo de los datos. Mientras mas alto el numero, mayor el periodo. Los que tienen un 0 estan deshabilitados.
+\textbf{Descripci\'on:}
+Muestra el buffer est\'atico de los canales del ADC, cada uno con su respectivo valor que da el periodo de muestreo de los datos. Mientras mas alto el numero, mayor el periodo. Los que tienen un 0 est\'an deshabilitados.
 
 \begin{itemize}
   \item No lleva argumentos
@@ -154,8 +156,8 @@ Muestra el buffer estatico de los canales del ADC, cada uno con su respectivo va
 
 \textbf{Formato:} ST[0]
 
-\textbf{Descripcion:}
-Guarda los cambios, sale del modo de configuracion y comienza a correr el programa
+\textbf{Descripci\'on:}
+Guarda los cambios, sale del modo de configuraci\'on y comienza a correr el programa
 
 \textbf{Limitaciones:}
 \begin{itemize}

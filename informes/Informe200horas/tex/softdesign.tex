@@ -1,11 +1,11 @@
-\section{Diseño del software} % (fold)
+\section{Dise\~no del software} % (fold)
 \label{sec:diseno_del_software}
 
 
-Con la eleccion del microcontrolador C8051F350, se procedio a la etapa de diseño del sistema. Para ilustrar el diseño, se utilizan diagramas UML.
+Con la elecci\'on del microcontrolador C8051F350, se procedi\'o a la etapa de dise\~no del sistema. Para ilustrar el dise\~no, se utilizan diagramas UML.
 
-\subsubsection{Diagrama de bloques} % (fold)
-\label{ssub:diagrama_de_bloques}
+\subsection{Diagrama de bloques} % (fold)
+\label{sub:diagrama_de_bloques}
 
 \begin{figure}[h]
   \centering
@@ -14,32 +14,37 @@ Con la eleccion del microcontrolador C8051F350, se procedio a la etapa de diseñ
 \end{figure}
 
 \paragraph{}
-El sistema esta compuesto por 6 bloques o modulos separados, manejados por un modulo principal. En la figura \ref{fig:bloques1} se pueden observar estos bloques y la interaccion que tienen entre si. 
+El sistema esta compuesto por 6 bloques o m\'odulos separados, manejados por un modulo principal. En la figura \ref{fig:bloques1} se pueden observar estos bloques y la interacci\'on que tienen entre si. 
 \paragraph{}
 
 
 \begin{itemize}
-  \item El \textbf{Bloque Principal} se encarga ejecutar las funciones del resto de los modulos para dar arranque y ejecucion al sistema.
-  \item El \textbf{Bloque Conversor Analógico-Digital} principalmente obtiene los datos de los sensores, los procesa, y los envia al modulo principal. Ademas de esto, configura el funcionamiento del ADC segun los parametros dados por el usuario. El usuario puede elegir la cantidad de pines que va a utilizar como entrada segun la cantidad de sensores que quiera medir, puede elegir un nivel de ganancia de amplificacion de la señal antes de la conversion, y puede tambien elegir el modo de obtencion de los datos (diferencial o single-ended).
+  \item El \textbf{Bloque Principal} se encarga ejecutar las funciones del resto de los m\'odulos para dar arranque y ejecuci\'on al sistema.
+  \item El \textbf{Bloque Conversor Anal\'ogico-Digital} principalmente obtiene los datos de los sensores, los procesa, y los env\'ia al modulo principal. Adem\'as de esto, configura el funcionamiento del ADC seg\'un los par\'ametros dados por el usuario. El usuario puede elegir la cantidad de pines que va a utilizar como entrada seg\'un la cantidad de sensores que quiera medir, puede elegir un nivel de ganancia de amplificaci\'on de la se\~nal antes de la conversi\'on, y puede tambi\'en elegir el modo de obtenci\'on de los datos (diferencial o single-ended).
   \item El \textbf{Bloque Contador} se encarga de obtener los valores en los contadores de eventos.
-  \item El \textbf{Bloque de Interfaz de Usuario} en este modulo se levanta la interfaz con la que interactua el usuario para establecer los parametros configurables del sistema.
-  \item El \textbf{Bloque Configurador} interactua directamente con el hardware del microcontrolador. Realiza todas las configuraciones necesarias para poder hacer funcionar cada modulo. Es por esto que en el diagrama de bloques se puede ver que este modulo interactua directamente con todos los demas. Inicializa todos los registros pertinentes, el clock del sistema y setea los puertos de entrada y salida.
-  \item El \textbf{Bloque Serial} envia los datos por interfaz UART.
+  \item El \textbf{Bloque de Interfaz de Usuario} levanta la interfaz con la que interact\'ua el usuario para establecer los par\'ametros configurables del sistema.
+  \item El \textbf{Bloque Configurador} interact\'ua directamente con el hardware del microcontrolador. Realiza todas las configuraciones necesarias para poder hacer funcionar cada modulo. Es por esto que en el diagrama de bloques se puede ver que este modulo interact\'ua directamente con todos los dem\'as. Inicializa todos los registros pertinentes, el clock del sistema y setea los puertos de entrada y salida.
+  \item El \textbf{Bloque Serial} env\'ia los datos por interfaz UART.
   %\item El \textbf{Bloque Flash} Maneja la unidad de memoria no volatil del sistema. Se utiliza para guardar y cargar configuraciones hechas por el usuario, de forma que puedan cargarse automaticamente al inicio del sistema sin necesidad de volver a configurarlo cada vez que se inicia.
 \end{itemize}
 
-\subsection{Mencion sobre la memoria flash} % (fold)
+\subsection{Menci\'on sobre la memoria flash} % (fold)
 \label{sub:mencion_sobre_la_memoria_flash}
 
-Con respecto al informe de las 100 horas, se removio el bloque flash del diseño. En un principio, se penso en la posibilidad de utilizar la memoria flash del microcontrolador para guardar configuraciones, de forma que no sea necesario configurar el sistema desde 0 cada vez que se inicia. Pero esto no pudo ser posible. Las operaciones necesarias para leer y escribir la memoria y el tamaño de la misma hicieron que sea dificil realizar la escritura y la lectura de la misma. Para escribir una palabra en memoria, es necesario borrar toda la pagina en donde se encuentra la palabra para luego reescribirla. Cada pagina de la memoria flash ocupa 512 Bytes.
-Tanto el programa que corre en el microprocesador como los datos de configuracion debe guardarse en la misma memoria flash de 8Kb. El programa ocupa alrededor de 7Kb. En el Kb que sobra, es posible guardar las configuraciones, pero lo que lo dificulta es que el metodo de escritura de la flash pone en riesgo la integridad del programa. Teniendo en cuenta esto, se decidio no utilizar la flash para guardar las configuraciones. Cada vez que se inicia el sistema, es necesario que el usuario ingrese las configuraciones desde 0.
+Con respecto al informe de las 100 horas, se removi\'o el bloque flash del dise\~no. En un principio, se pens\'o en la posibilidad de utilizar la memoria flash del microcontrolador para guardar configuraciones, de forma que no sea necesario configurar el sistema desde 0 cada vez que se inicia. Pero esto no pudo ser posible. Las operaciones necesarias para leer y escribir la memoria y el tama\~no de la misma hicieron que sea dif\'icil realizar la escritura y la lectura de la misma.
+
+Para escribir una palabra en memoria, es necesario borrar toda la pagina en donde se encuentra la palabra para luego reescribirla. Cada pagina de la memoria flash ocupa 512 Bytes.
+
+Tanto el programa que corre en el microprocesador como los datos de configuraci\'on debe guardarse en la misma memoria flash de 8Kb. El programa ocupa alrededor de 7Kb. En el Kb que sobra, es posible guardar las configuraciones, pero lo que lo dificulta es que el m\'etodo de escritura de la flash pone en riesgo la integridad del programa. Teniendo en cuenta esto, se decidi\'o no utilizar la flash para guardar las configuraciones. Por lo tanto, cada vez que el sistema se apague, se pierden las configuraciones, sin posibilidad de guardarlas.
 
 % subsection mencion_sobre_la_memoria_flash (end)
 
-\subsection{Mencion sobre SMBus} % (fold)
+\subsection{Menci\'on sobre SMBus} % (fold)
 \label{sub:mencion_sobre_smbus}
 
-En los requerimientos, se especifica que es necesario que se puedan transmitir los datos de las mediciones utilizando protocolo UART tanto con RS232 como con $I^{2}$C. El microcontrolador cuenta con una interfaz serial[\ref{sec:serial}] llamada SMBus, que puede comunicarse con cualquier dispositivo que utilice $I^{2}$C porque es compatible. Sin embargo, fue complicado lograr hacer funcionar esta funcionalidad, y luego de hacer algunas investigaciones, se encontro que suele ser un problema comun que esta interfaz no suela funcionar en estos microcontroladores. Luego de intentar reiteradas veces sin obtener resultados, se opto por no utilizar SMBus y trabajar unicamente con el protocolo UART.
+En los requerimientos, se especifica que es necesario que se puedan transmitir los datos de las mediciones utilizando protocolo UART tanto con RS232 como con $I^{2}$C. El microcontrolador cuenta con una interfaz serial$^{\tiny{\ref{sub:interfaz_serial}}}$ llamada SMBus, que puede comunicarse con cualquier dispositivo que utilice $I^{2}$C porque es compatible. Sin embargo, fue complicado lograr que funcione, y luego de hacer algunas investigaciones, se encontr\'o que suele ser un problema com\'un que esta interfaz no suela funcionar en estos microcontroladores. Luego de intentar reiteradas veces sin obtener resultados, se opto por no utilizar SMBus y trabajar \'unicamente con el protocolo UART.
+
+
 
 % subsection mencion_sobre_smbus (end)
 
@@ -61,7 +66,7 @@ En la figura \ref{fig:casouso1} se muestra un diagrama de caso de uso del sistem
 \subsubsection{Diagramas de secuencia} % (fold)
 \label{ssub:diagramas_de_secuencia}
 
-Los diagramas de secuencia modelan distintas interacciones entre los componentes de un sistema. En este caso, los dos componentes mas importantes del sistema son el usuario, y el programa principal que recibe las peticiones del usuario a traves de la interfaz grafica, y procesa los pedidos llamando a funciones de otros bloques del sistema. En el primer diagrama (figura \ref{fig:secuencia1}) se modelo una configuracion de un pin especifico para medir una entrada analogica. El programa principal, en este caso, debe llamar a funciones del bloque conversor para configurar el pedido del usuario. Luego, el usuario habilita el comienzo de conversion para que el sistema envie los datos ya digitales por interfaz serial.
+Los diagramas de secuencia modelan distintas interacciones entre los componentes de un sistema. En este caso, los dos componentes mas importantes del sistema son el usuario, y el programa principal que recibe las peticiones del usuario a trav\'es de la interfaz gr\'afica, y procesa los pedidos llamando a funciones de otros bloques del sistema. En el primer diagrama (figura \ref{fig:secuencia1}) se modelo una configuraci\'on de un pin especifico para medir una entrada anal\'ogica. El programa principal, en este caso, debe llamar a funciones del bloque conversor para configurar el pedido del usuario. Luego, el usuario habilita el comienzo de conversi\'on para que el sistema envi\'e los datos ya digitales por interfaz serial.
 
 
 \begin{figure}[h]
@@ -70,7 +75,7 @@ Los diagramas de secuencia modelan distintas interacciones entre los componentes
   \caption{Diagrama de secuencia del usuario configurando el ADC e iniciando las conversiones}\label{fig:secuencia1}
 \end{figure}
 
-El diagrama en la figura \ref{fig:secuencia2} muestra una configuracion de un contador. En este sistema, los contadores se inician junto con el arranque mismo del sistema y desde ahi mismo comienzan a contar los eventos que ocurran en el pin que tienen asignado. Es por esto que lo unico que hay que hacer es consultar el valor en los registros asociados al contador para obtener la cuenta actual.
+El diagrama en la figura \ref{fig:secuencia2} muestra una configuraci\'on de un contador. En este sistema, los contadores se inician junto con el arranque mismo del sistema y desde ah\'i mismo comienzan a contar los eventos que ocurran en el pin que tienen asignado. Es por esto que lo \'unico que hay que hacer es consultar el valor en los registros asociados al contador para obtener la cuenta actual.
 
 % El diagrama \ref{fig:secuencia3} muestra una obtencion y un guardado de datos de configuracion en la memoria flash del microcontrolador. Los datos de configuracion son unicamente los pertenecientes al conversor analogico-digital.
 
