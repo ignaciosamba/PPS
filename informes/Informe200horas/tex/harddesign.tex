@@ -4,7 +4,6 @@
 
 
 
-
 Con el microcontrolador seleccionado, se procedi\'o a la etapa de dise\~no de hardware. La placa de desarrollo C8051F350 (Secci\'on \ref{sec:silicon_labs_c8051f352}) con la que se cont\'o en el laboratorio donde se trabajo, sirvi\'o de modelo para delinear el circuito esquem\'atico en la placa a desarrollar.
 
 
@@ -13,7 +12,7 @@ Con el microcontrolador seleccionado, se procedi\'o a la etapa de dise\~no de ha
 
 La primera etapa de dise\~no consiste en realizar un diagrama de bloques que ilustre a grandes rasgos la organizaci\'on del circuito. Luego de esto se realiza el dise\~no esquem\'atico que consiste en llevar cada bloque a nivel de componente electr\'onico y realizar la interconexi\'on necesaria entre todos los elementos existentes para lograr el funcionamiento buscado. Los diagramas de bloque y esquem\'aticos se pueden ver en las figuras \ref{fig:bloquesHW} y \ref{fig:esquematico}. Con ayuda del software KiCad$^{\tiny{\cite{bib:kicad}}}$, se realizo el diagrama esquem\'atico y la implementaci\'on en circuito impreso correspondiente al esquem\'atico construido.
 
-\begin{figure}[h]
+\begin{figure}[/h]
   \centering
   \includegraphics[width=0.80\textwidth, height = 9cm]{bloquesHW}
   \caption{\small Diagrama de bloques del circuito a realizar}\label{fig:bloquesHW}
@@ -32,7 +31,8 @@ Es posible alimentar el sistema por medio del programador (propietario de Silico
 
 La figura \ref{fig:esquematico} muestra el diagrama esquem\'atico del circuito a implementar. El microcontrolador (Secci\'on \ref{sec:silicon_labs_c8051f352}) con el que se trabaja tiene ciertos niveles de tensi\'on de operaci\'on con el que se trabaja. En principio, se alimenta con una fuente de 5V y 500mA que trabaja junto con un regulador de tensi\'on$^{\tiny{\cite{bib:lm2937}}}$ llevando la alimentaci\'on a un nivel de 3,3V. Estos 3,3V se utilizan para alimentar al microcontrolador; la tensi\'on anal\'ogica positiva del conversor; a un integrado MAX232$^{\tiny{\cite{bib:max232}}}$ que se utiliza para lograr una interfaz serial entre la UART (Secci\'on \ref{sub:interfaz_serial}) de la placa y un puerto serial de una PC; y a un led testigo de alimentaci\'on.
 
-\begin{figure}[H]
+
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.95\textwidth, height = 10cm]{esquem\'atico}
   \caption{\small Diagrama esquem\'atico del circuito realizado}\label{fig:esquematico}
@@ -47,7 +47,8 @@ Como podemos ver, el esquem\'atico, es una proyecci\'on (a nivel electr\'onico) 
 
 Una implementaci\'on en circuito impreso consiste simplemente en pasar de un diagrama esquem\'atico al despliegue f\'isico de los componentes reales en una PCB (en ingl\'es, Printed Circuit Board). Para esto, se utilizaron funcionalidades del software KiCad$^{\tiny{\cite{bib:kicad}}}$, que tambi\'en se utilizo para realizar el esquem\'atico del circuito. Una imagen del resultado del despliegue de componentes esta en la figura \ref{fig:PCB1}, as\'i con el PCB se utiliza para organizar los componentes y las interconexiones f\'isicas, de modo tal que as\'i quede en la placa impresa.
 
-\begin{figure}[H]
+
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.95\textwidth, height = 10cm]{PCB1}
   \caption{\small Diagrama del despliegue de componentes}\label{fig:PCB1}
@@ -60,7 +61,7 @@ Una implementaci\'on en circuito impreso consiste simplemente en pasar de un dia
 
 Para programar el microcontrolador, se utiliza un programador de la marca de Silicon Labs hecho para la placa de desarrollo utilizada. Es posible usar este mismo programador en la plataforma a construir, pero es necesario armar un circuito que funcione como interfaz entre la placa del microcontrolador y el programador de la misma. El procedimiento para realizar esta placa es el mismo que se utiliz\'o para la del microcontrolador. En la figura \ref{fig:PCB2} se puede ver la figura del despliegue de componentes electr\'onicos de este circuito.
 
-\begin{figure}[H]
+\begin{figure}[/h]
   \centering
   \includegraphics[width=0.20\textwidth, height = 3cm]{PCB2}
   \caption{\small Diagrama del despliegue de componentes del circuito que hace de interfaz entre el programador y la plataforma}\label{fig:PCB2}
@@ -82,7 +83,6 @@ La primera versi\'on de la placa se puede ver en la figura \ref{fig:placa1}. En 
   \includegraphics[width=0.60\textwidth, height = 6cm]{placa1}
   \caption{\small Fotograf\'ia del primer prototipo}\label{fig:placa1}
 \end{figure}
-
 
 % subsubsection primer_prototipo (end)
 \subsubsection{Segundo prototipo} % (fold)

@@ -1,0 +1,60 @@
+\section{Silicon Labs \emph{C8051F352}} % (fold)
+\label{sec:silicon_labs_c8051f352}
+
+En esta sección se explicaran brevemente las funcionalidades que se utilizaron del microcontrolador elegido. Para información mas detallada referirse al datasheet del mismo. \cite{bib:datasheet}
+
+\subsection{Conversor Analógico-Digital} % (fold)
+\label{sub:conversor_analogico_digital}
+
+El C8051F350 incluye un ADC Sigma-Delta completamente diferencial de 16 bits con capacidad de calibración interna, con capacidad de 8 mediciones simultaneas en modo singular, y 4 mediciones simultaneas en modo diferencial. Tiene dos filtros separados de decimación programables con un throughput de hasta 1KHz. Tiene un voltaje de referencia interno de 2.5 V, y admite la administración de voltajes de referencia externos. Cada canal puede ser amplificado 1, 2, 4, 8, 16, 32, 64, o 128 veces.
+
+\subsubsection{Modos de medición} % (fold)
+\label{ssub:modos_de_medicion}
+
+\begin{itemize}
+  \item \textbf{Singular}: La entrada es independiente y medida con respecto a tierra.
+  \item \textbf{Diferencial}: Dos entradas medidas con respecto una de la otra.
+\end{itemize}
+% subsubsection modos_de_medición (end)
+
+\subsubsection{Modos de conversión} % (fold)
+\label{ssub:modos_de_conversion}
+
+\begin{itemize}
+  \item \textbf{Singular}: Indica al ADC que genere información suficiente para producir un resultado luego de un ciclo de conversión. El filtro puede ser \emph{fast-filter} o \emph{SINC3}. En el primero, el resultado esta disponible luego de un solo ciclo de conversión del ADC. En el segundo, espera 3 ciclos antes de que este disponible el resultado.
+  \item \textbf{Continua}: El ADC comienza una nueva conversión inmediatamente después de terminar la anterior. Los filtros funcionan de manera análoga al modo singular.
+\end{itemize}
+% subsubsection modos_de_conversión (end)
+% subsubsection conversor_analógico_digital (end)
+
+\subsection{Contadores} % (fold)
+\label{sub:contadores}
+
+El C8051F350 cuenta con 4 contadores: Timer0, Timer1, Timer2 y Timer3. Timer0 y Timer1 cuentan con 3 modos de operación:
+\begin{itemize}
+  \item Contador de 13 bits
+  \item Contador de 16 bits
+  \item Contador de 8 bits con valor de retorno
+\end{itemize}
+Timer0 cuenta con un modo mas que es el de separarse en dos contadores independientes de 8 bits.
+Timer2 y Timer3 tienen 2 modos:
+ \begin{itemize}
+   \item Contador de 16 bits con valor de retorno
+   \item Dos contadores independientes de 8 bits con valor de retorno
+ \end{itemize}
+
+Todos los timers pueden ser clockeados por fuente interna o externa. En el caso de los timers 2 y 3 la fuente externa se divide por 8.
+% subsection contadores (end)
+
+\subsection{Interfaz Serial} % (fold)
+\label{sub:interfaz_serial}
+
+El C8051F352 cuenta con dos protocolos de transferencia serial de datos: SMBus y UART. \textbf{SMBus} es una interfaz de dos cables bi-direccional. Es compatible con $I^{2}$C, es por esto que se considera que este microcontrolador cuenta con $I^{2}$C, por el hecho de tener SMBus. \textbf{UART} es una interfaz serial asíncrona full-duplex.
+% subsection interfaz_serial (end)
+
+\subsection{Flash} % (fold)
+\label{sub:flash}
+
+Incluye una memoria Flash de 8 Kilobytes re programable dentro del chip para almacenamiento de datos no volátil. Es programable mediante interfaz C2 o por software
+% subsection flash (end)
+% section silicon_labs_c8051f352 (end)

@@ -1,0 +1,166 @@
+\section{Instrucciones MML}\label{ap:instrucciones}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{SSE - Set Single Ended} % (fold)
+\label{sub:sse_set_single_ended}
+
+
+\textbf{Formato:} SSE,[1]
+
+\textbf{Descripción:}
+Establece el pin ingresado en modo single ended.
+
+\textbf{Limitaciones:}
+\begin{itemize}
+  \item Un solo argumento
+  \item El argumento es un byte par comprendido entre 0 y 7
+\end{itemize}
+
+\textbf{Ejemplo:}
+
+SSE,4: Establece el pin 4 del ADC en modo single ended
+
+% subsection sse_set_single_ended (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{SDI - Set Diferencial} % (fold)
+\label{sub:sdi_set_diferencial}
+
+
+\textbf{Formato:} SDI,[1]
+
+\textbf{Descripción:}
+Establece el pin ingresado y el pin siguiente a ese en numero en modo diferencial
+
+\textbf{limitaciones:}
+\begin{itemize}
+  \item un solo argumento
+  \item el argumento es un byte par comprendido entre 0 y 6
+\end{itemize}
+
+\textbf{ejemplo:}
+
+SDI,2: setea los pines 2 y 3 en modo diferencial
+
+% subsection sdi_set_diferencial (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{SGA - Set Ganancia} % (fold)
+\label{sub:sga_set_ganancia}
+
+
+\textbf{Formato:} SGA,[1]
+
+\textbf{Descripción:}
+Establece la ganancia del ADC según el argumento a la potencia de 2
+
+\textbf{Limitaciones:}
+\begin{itemize}
+  \item Un solo argumento
+  \item El argumento es un byte comprendido entre 0 y 7
+\end{itemize}
+
+\textbf{Ejemplo:}
+
+SGA,3: Establece la ganancia en $2^{3} = 8$
+
+% subsection sga_set_ganancia (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{GT0 - Get Timer 0} % (fold)
+\label{sub:gt0_get_timer_0}
+
+
+\textbf{Formato:} GT0
+
+\textbf{Descripción:}
+Obtiene el valor actual de la cuenta de los eventos digitales monitoreados por timer0
+
+\textbf{Limitaciones:}
+\begin{itemize}
+  \item No lleva argumentos
+\end{itemize}
+
+% subsection gt0_get_timer_0 (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{GT2 - Get Timer 2} % (fold)
+\label{sub:gt2_get_timer_2}
+
+\textbf{Formato:} GT2[0]
+
+\textbf{Descripción:}
+Obtiene el valor actual de la cuenta de los eventos digitales monitoreados por timer2
+
+\textbf{Limitaciones:}
+\begin{itemize}
+  \item No lleva argumentos
+\end{itemize}
+
+% subsection gt2_get_timer_2 (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{GSE - Get Single-Ended} % (fold)
+\label{sub:gse_get_single_ended}
+\textbf{Formato:} GSE,[1]
+
+\textbf{Descripción:}
+Obtiene una conversión inmediata de un canal especifico en modo single-ended
+
+\begin{itemize}
+  \item Un solo argumento
+  \item El argumento es un byte comprendido entre 0 y 7
+\end{itemize}
+
+\textbf{Ejemplo:}
+GSE,3: Obtiene de manera inmediata un valor convertido en modo single-ended en el canal 3
+
+% subsection gse_get_single_ended (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{GDI - Get Differential} % (fold)
+\label{sub:gdi_get_differential}
+\textbf{Formato:} GDI,[1]
+
+\textbf{Descripción:}
+Obtiene una conversión inmediata del canal especificado y el siguiente en numero en modo diferencial
+
+\begin{itemize}
+  \item Un solo argumento
+  \item El argumento es un byte par comprendido entre 0 y 7
+\end{itemize}
+
+GDI,2: Obtiene de manera inmediata un valor convertido en modo diferencial entre el canal 2 y el canal 3 
+
+% subsection gdi_get_differential (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{SHA - Show Actual Configuration} % (fold)
+\label{sub:sha_show_actual_configuration}
+\textbf{Formato:} SHA[0]
+
+\textbf{Descripción:}
+Muestra el buffer estático de los canales del ADC, cada uno con su respectivo valor que da el periodo de muestreo de los datos. Mientras mas alto el numero, mayor el periodo. Los que tienen un 0 están des-habilitados.
+
+\begin{itemize}
+  \item No lleva argumentos
+\end{itemize}
+
+% subsection sha_show_actual_configuration (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{ST - Start} % (fold)
+\label{sub:st_start}
+
+
+\textbf{Formato:} ST[0]
+
+\textbf{Descripción:}
+Guarda los cambios, sale del modo de configuración y comienza a correr el programa
+
+\textbf{Limitaciones:}
+\begin{itemize}
+  \item No lleva argumentos
+\end{itemize}
+
+% subsection st_start (end)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

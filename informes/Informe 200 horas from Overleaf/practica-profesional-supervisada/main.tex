@@ -1,0 +1,139 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Plantilla para un artículo en LaTeX en espa\~nol.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper]{article}
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+\usepackage[utf8]{inputenc}
+% Paquetes de la AMS:
+\usepackage{amsmath, amsthm, amsfonts}
+% para poder poner una hoja apaisada
+\usepackage{lscape}
+%para incluir graficos
+\usepackage{graphicx}
+%para permitir que la imagen este donde yo quiero y no en otro lugar
+\usepackage{float}
+% para hipertexto
+\usepackage{url}
+% para poder envolver imagenes con texto
+\usepackage{wrapfig}
+%para los apendices
+\usepackage[titletoc]{appendix}
+% Esto es para poder modificar las dimensiones del texto
+\usepackage{geometry}
+\geometry{a4paper}
+
+
+\graphicspath{ {imagenes/} }
+
+%-------- ENCABEZADO Y PIE DE PAGINA--------
+\usepackage{float}
+
+\usepackage{fancyhdr}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Año 2015}
+\lhead{Practica Profesional Supervisada}
+\rfoot{Pagina \thepage}
+\lfoot{Mantovani - Sambataro}
+
+%-------------------------------------------
+
+%para usar hipertexto en las referencias
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+
+%--------------------------------------------------------------------------
+\title{\underline{Practica Profesional Supervisada} \\
+\large \underline{Informe de las 200 horas} \\
+\huge \textbf{ \\ Plataforma concentradora de sensores y eventos digitales} \\ }
+\author{Autores: Ignacio Sambataro, Luciano Mantovani\\ \\
+  \large Tutor: PhD. Ing. Orlando Micolini \\
+  \large Supervisor: Ing. Maximiliano Eschoyez
+ % \small Facultad de Ciencias Exactas, Fisicas y Naturales\\
+ % \small Laboratorio de Arquitectura de Computadoras\\
+ % \small Universidad Nacional de Cordoba\\
+  \date{}
+}
+
+
+
+%\makeindex
+\begin{document}
+\maketitle
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm, height = 3.2cm]{Escudo}
+\end{figure}
+
+\begin{center}
+\small Facultad de Ciencias Exactas, Fisicas y Naturales \\
+\small Laboratorio de Arquitectura de Computadoras \\
+\end{center}
+\begin{center}
+\small \textbf{A\~no 2015} \\
+\end{center}
+
+
+
+\clearpage
+%resumen
+\abstract{
+%En este informe se describen las primeras 100 horas de trabajo de la Practica Profesional Supervisada. Se comenzó un proyecto nuevo, sugerido por el director, Orlando Micolini, y se trabajo todo el tiempo en el Laboratorio de Arquitectura de Computadoras. Se documentaron los requerimientos, la etapa de investigacion, los dise\~nos de hardware y software hasta el momento, y las implementaciones que se llegaron a lograr. Lo que se llego a implementar se hizo en una placa de desarrollo prestada. Las razones de utilizacion de esta placa se explican en el documento. Algunos requerimientos basicos llegaron a cumplirse dentro de las 100 horas, pero solamente prototipos de prueba en la placa de desarrollo. El primer prototipo real tiene la mayor parte del dise\~no de hardware y software hecho, pero todavia no esta implementado. 
+
+En el campo de trabajo de los sistemas embebidos, suele ser necesaria la interaccion con sensores de distintos tipos. Las distintas maneras de obtener los datos de los sensores para procesarlos en el sistema final puede llegar a ser una tarea extra para este. 
+
+El objetivo de esta practica fue diseñar y prototipar un sistema que concentre señales de sensores y cuente eventos de fuentes digitales externas; de forma que todo el trabajo de obtencion de señales, digitalizado y procesamiento de las mismas, sea hecho por una placa externa, para que luego se envie por un protocolo serial al sistema final, que termina de procesar los datos de las mediciones. 
+
+El resultado final fue un prototipo de un sistema programable, capaz de tomar señales de 8 canales analogicos distintos, ya sea en forma diferencial o singular, y contar eventos de dos fuentes de señales digitales distintas. Todos estos datos se envian por protocolo serial hacia el sistema final conectado, en cadenas de caracteres.
+}
+
+%salto de pagina
+\thispagestyle{empty}
+\clearpage
+
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+
+\setcounter{page}{1}
+%introduccion
+\input{./tex/introduccion.tex}
+
+%requerimientos
+\input{./tex/requerimientos.tex}
+
+%investigacion
+\input{./tex/investigacion.tex}
+
+%Silicon Labs C8051F352
+\input{./tex/siliconlabs.tex}
+
+%Diseño de Software
+\input{./tex/softdesign.tex}
+
+%Diseño de Hardware
+\input{./tex/harddesign.tex}
+
+%Estructura de Software
+\input{./tex/softstruct.tex}
+
+%Apendice
+\input{./tex/appendix.tex}
+
+%Bibliografia
+\input{./tex/bibliografia.tex}
+
+
+\end{document} 
