@@ -1,0 +1,98 @@
+Crear Base de Datos SQL con python en Raspberry
+
+1) Instalar MySQL server en la Raspberry (y python si no esta)
+		
+		sudo apt-get install mysql-server python-mysqldb
+
+2) Durante la instalacion te pide una contraseña para el servido.
+
+3) Para la creacion de la base de datos, usamos la terminal de MySQL:
+		
+		$ mysql -u root -p
+		Enter password:
+		mysql> CREATE DATABASE nombre
+		mysql> USE nombre
+
+4) MySQL soporta usuarios, por lo que debemos crear un usuario y darle privilegios para el uso de la tabla que creamos anteriormente:
+		
+		mysql> CREATE USER 'monitor'@'localhost' IDENTIFIED BY 'password';
+		mysql> GRANT ALL PRIVILEGES ON temps.* TO 'monitor'@'localhost'
+		mysql> FLUSH PRIVILEGES;
+		mysql> quit
+
+   This creates a user called monitor (because the database is going to be accessed by a program that monitors temperatures), and assigns it a pass word 'password'. This user is allowed to connect to the database from 'localhost'.
+
+   Initially, the new user has no privileges, so it must be granted some access rights using the 'GRANT' command. I have used 'ALL' in this example, but in real world applications it would be better to grant users more limited rights.
+
+5) Para salir de la terminal y poder entrar con el usuario que acabamos de crear:
+	
+		mysql -u monitor -p
+
+6) Creamos una tabla para luego poder cargar los datos:
+
+	CREATE TABLE nombre (tdate DATE, ttime TIME, zone TEXT, temperature NUMERIC);
+
+============================================================================================================================
+
+ACCEDER A LA BASE DE DATOS CON PYTHON:
+
+1) Hace falta conectarse a la base de datos, y lo hacemos de la siguiente manera:
+		
+		#!/usr/bin/env python
+
+		import MySQLdb
+
+
+		db = MySQLdb.connect("localhost", "monitor", "password", "temps")
+		curs=db.cursor()
+
+   Entonces importamos MySQL, y luego nos conectamos a la base de datos con localhost, usuario monitor y pasword, ademas de conectarnos a la tabla temps (en este caso).
+
+2) Ahora creamos guardamos datos en la base de datos, en el ejemplo se muestran con la fecha de hoy: 
+
+    curs.execute ("""INSERT INTO tempdat 
+            values(CURRENT_DATE(), NOW(), 'kitchen', 22.9)""")
+    curs.execute ("""INSERT INTO tempdat 
+            values(CURRENT_DATE(), NOW(), 'greenhouse', 25.7)""")
+    curs.execute ("""INSERT INTO tempdat 
+            values(CURRENT_DATE(), NOW(), 'garage', 18.2)""")
+
+    	db.commit()
+    	print "Data committed"
+
+	except:
+    	print "Error: the database is being rolled back"
+    	db.rollback()
+
+3) Si queremos obtener la informacion de la base de datos: 
+	
+
+		curs.execute ("SELECT * FROM tempdat")
+
+		print "\nDate     	Time		Zone		Temperature"
+		print "==========================================================="
+
+		for reading in curs.fetchall():
+		    print str(reading[0])+"	"+str(reading[1])+" 	"+\
+		                reading[2]+"  	"+str(reading[3])
+
+4) Para cerrar la conexion con la base de datos:
+
+		db.close()
+
+=====================================================================================================================================================
+
+PARA EXPANDIR LA MEMORIA SD DE LA RASPBERRY:
+
+1) Escribimos el comando: 
+		
+		sudo raspi-config
+
+2) Se abre un menu de configuracion y desde ahi elegimos la opcion: 
+		
+		 1 Expand filesystem 
+
+3) Ponemos acepta, esperamos que se ejecute y una vez finalizado apretamos sobre finish, reiniciamos la raspberry y habremos expandido la memoria de la sd.
+
+=====================================================================================================================================================
+
