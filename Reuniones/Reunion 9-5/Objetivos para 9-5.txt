@@ -1,0 +1,10 @@
+Problemas de la reunion:
+Placa de potencia de motor (PWM), poner la tolerancia de RPM (mas menos) , servidor web montado en la raspberry
+Hay que poner un buffer en el hilo de la raspberry. Es un productor y consumidor. 
+
+Objetivos:
+
+1) Probar las lecturas, varias veces si es constante.
+2) Log del instante en que comienza y termina una medicion.
+3) Arreglar el productor consumidor.
+4) Arreglar los diagramas.
