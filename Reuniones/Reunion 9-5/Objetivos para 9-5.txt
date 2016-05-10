@@ -1,6 +1,8 @@
 Problemas de la reunion:
 Placa de potencia de motor (PWM), poner la tolerancia de RPM (mas menos) , servidor web montado en la raspberry
 Hay que poner un buffer en el hilo de la raspberry. Es un productor y consumidor. 
+Tiiene que haber una trazabilidad
+
 
 Objetivos:
 

@@ -13,12 +13,14 @@
 unsigned long int dato_a_enviar;
 unsigned short int posicion_adc;
 short int bandera_dif;
+short int envio_st;
 sbit LED = P0^7;                          // LED='1' means ON
 
 bool f_dato_convertido;
 bool f_UART;
 bool f_contRPM;
 bool f_sleep;
+
 /**
  * @brief funcion principal, inicializa todos los parametros y corre las funciones principales
  */
@@ -122,6 +124,20 @@ void main()
 
 				    	break;
 			    	}
+			    	else if (recibido == 101) //101 es 'e' en ascci 
+			    	{
+			    		envio_st = 1
+			    		if (sizeof(buffer_intermedio) == 0)
+			    		{
+				    		shell->errn = 504; //Buffer de Conversion intermedio vacio.
+				    		reportar(shell);
+				    	}
+				    	else 
+				    	{
+				    		shell-errn = 503; //El buffer tiene datos para chupar.
+				    		reportar(shell);
+				    	}
+			    	}
 			    }
 
 			    ES0 = 0; // deshabilitar interrupcion de UART
@@ -129,11 +145,27 @@ void main()
 				{
 					f_dato_convertido = false;
 					dato_a_enviar = convertir();
+					//obtengo el dato de la conversion, ahora lo tengo que meter en el buffer.
+					if (sizeof(buffer_intermedio) =< 20)
+					{	
+						//el buffer tiene espacio, por lo tanto guardo la conversion en el mismo buffer.
+					}
 
 					if(analizar_buffer(shell))
 					{
-						enviar_dato(&dato_a_enviar);
-						// mostrar_config_actual(shell);
+						if (envio_st = 1) //si esta en 1 esta variable entonces se mando una 'e' desde el servidor, y estoy habilidatod a enviar datos.
+						{				  //Recordar que la 'e' se envia cuando se quiere leer algo desde el buffer.
+							envio_st = 0;
+							if(sizeof(buffer_intermedio) > 0)
+							{
+								enviar_dato(&dato_a_enviar);
+								// mostrar_config_actual(shell);
+							}
+							if (sizeof(buffer_intermedio) == 0)
+							{
+								printf("%05d", 504); //se informa al servidor que no hay datos en el buffer
+							}
+						}
 					}
 					// LED = ~LED;
 					cambiar_pin();
