@@ -11,6 +11,7 @@
 #include "sensorCE/funciones_sensor.h"
  
 unsigned long int dato_a_enviar;
+unsigned long int dato_a_enviar1;
 unsigned short int posicion_adc;
 short int bandera_dif;
 short int envio_st;
@@ -149,6 +150,7 @@ void main()
 					if (sizeof(buffer_intermedio) =< 20)
 					{	
 						//el buffer tiene espacio, por lo tanto guardo la conversion en el mismo buffer.
+						buffer_intermedio[n] = dato_a_enviar;
 					}
 
 					if(analizar_buffer(shell))
@@ -158,7 +160,8 @@ void main()
 							envio_st = 0;
 							if(sizeof(buffer_intermedio) > 0)
 							{
-								enviar_dato(&dato_a_enviar);
+								dato_a_enviar1 = buffer_intermedio[0];
+								enviar_dato(&dato_a_enviar1);
 								// mostrar_config_actual(shell);
 							}
 							if (sizeof(buffer_intermedio) == 0)
