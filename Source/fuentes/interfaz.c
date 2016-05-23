@@ -275,11 +275,6 @@ struct shellstr *analizar(struct shellstr *shell)
         shell->errn = 501; // stillOn successful
         return shell;
     }
-    else if (shell->comando[0] == 'e')
-    {
-        shell->errn = 502;
-        return shell;
-    }
 
     else shell->errn = 404;
 
@@ -312,7 +307,6 @@ void reportar(struct shellstr *shell)
         case 500: printf("%05d", 500); break; // stop succesful
         case 501: printf("%05d", 501); break; // stillOn successul
         case 502: printf("%05d", 502); break; // Inactive Server Stop
-        case 503: printf("%05d", 503); break; // Send petition
         case 0: break; // para el caso donde se apreta enter solo
         default: break;
     }

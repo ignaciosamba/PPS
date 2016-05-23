@@ -106,6 +106,3 @@ struct shellstr
 
 	char conversion_timer;
 };
-
-int buffer_intermedio[20]; //Buffer que utilizo para guardar los datos que convierto, 
-						   //y para enviar los datos al consumidor (servidor).
