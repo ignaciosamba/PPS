@@ -96,7 +96,7 @@ void control_RPM(unsigned short eventos_real, unsigned short eventos_ideal)
 	// static short int correcciones_menos;
 	if(eventos_real > eventos_ideal + HISTERESIS) // si las eventos son muy altas
 	{
-		velocidad +=CORRECCION; //parece que se baja pero restarla es subirla
+		velocidad +=CORRECCION; //parece que se sube pero sumarla es bajarla
 		set_Pwm(velocidad); // se baja la velocidad relativa
 		// printf("se controlo para que vaya mas despacio\neventos_ideal = %d\neventos_real = %d", eventos_ideal, eventos_real);
 		// correcciones_menos++;

@@ -108,30 +108,43 @@ lsb: los 4 bits menos significativos de ADC0MUX
 msb: los 4 bits mas significativos de ADC0MUX
 adc[]: buffer con valores variables de la cuenta de cada entrada
 adc_c[]: buffer inicial con valores constantes de la cuenta de cada entrada
+var: variable auxiliar inicializada en 0 para la primera ejecucion. Mantiene el valor en ejecuciones sucesivas
 
-var = 0
 idx = 0
 
-if(lsb % 8  >  0)
+//si el modulo de los 4LSB de ADC0MUX con 8 es mayor a 0, estamos en la parte diferencial de buffer_adc
+if(lsb % 8  >  0) 
 	var++
-else var = 0
+else var = 0 //si no, estamos en la parte single ended.
 
+// se restan ambos grupos de 4 de bits de ADC0MUX, se le suma 8, y se le suma la variable auxiliar
+// que es mayor a 0 unicamente cuando es necesario que el indice recorra la parte diferencial 
 idx = msb - lsb + 8 + var
 
+
+//con esta operacion, idx recorre todos los indices del buffer, teniendo en cuenta el valor de ADC0MUX
 if(adc[idx] = 1)
 {
 	adc[idx] = adc_c[idx]
-	return true
+	return true                 // canal deshabilitado
 }
 if(adc[idx] = 0)
 {
-	return false
+	return false				// canal habilitado listo para imprimir. se resetea al valor inicial
 }
 if(adc[idx] > 1)
 {
 	adc[idx]--
-	return false
+	return false   				// canal habilitado aun no listo para imprimir. se decrementa
 }
+
+
+cada uno de los elementos de ambos buffers representa un canal del ADC. Hay 8 canales, sin embargo estos 8 pueden estar configurados para medir de manera singular o equilibrada. No es posible medir en un mismo canal de ambas maneras, por lo que no existe el caso donde todos los elementos de los buffers estan habilitados para medir. Asi tambien, si el canal 0 esta habilitado en modo singular, no se permite que a su vez este habilitado para medir de manera equilibrada junto con el canal 1. 
+
+En cada elemento del buffer se carga un valor mayor a 0 siempre que se tenga intencion de medir un sensor conectado al canal. Las posiciones 9, 10, 11 y 12 miden para los pares de canales [0,1]; [2,3]; [4,5] y [6,7] en modo equilibrado. 
+
+Los valores de cada elemento representan el tiempo entre cada medicion. Mientras menor es el numero, menor es el tiempo entre mediciones. 
+
 
 
 1/07

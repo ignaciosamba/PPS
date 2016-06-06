@@ -12,7 +12,8 @@
 short int dato_n;
 unsigned short int num;
 unsigned long dato_conversor;
-
+unsigned short int timestamp_counter = 0;
+unsigned short int timestamp = 0;
 /**
  * @brief Esta funcion obtiene un valor de los registros ADC0H, ADC0M, y ADC0L. Que corresponden al valor de la
  * conversion actual.
@@ -21,7 +22,7 @@ unsigned long dato_conversor;
  * se trabaja.
  * @return Devuelve el valor obtenido en los registros
  */
-unsigned long convertir(void)
+unsigned long convertir()
 {
 	static LONGDATA rawValue;
 	unsigned long mV;
@@ -53,13 +54,21 @@ unsigned long convertir(void)
 	//   medicion (mV) =  result (bits) / (6710)  para 24 bits
 	//   medicion (mV) =  result (bits) / (26)   para 16 bits
 
-	// se calcula el voltaje medido segun el voltaje de referencia
+	/// reseteo el contador del timestamp para obtener la diferencia de tiempo entre la ultima medicion y la actual.
+	timestamp = timestamp_counter;
+	timestamp_counter = 0;
 
+	// se calcula el voltaje medido segun el voltaje de referencia
 	mV = rawValue.result / 6710; // para adc de 24 bits
-	// mV = rawValue.result / 26; // para adc de 16 bits        
+	// mV = rawValue.result / 26; // para adc de 16 bits
 
 	return mV;
 
+}
+
+void sumar_timestamp()
+{
+	timestamp_counter++;
 }
 
 /**
@@ -162,6 +171,9 @@ void enviar_dato(unsigned long int *dato)
 		 * hay toda una explicacion que duro bastante tiempo de porque pasa
 		 */
 	}
+	///imprimir timestamp
+	printf("%u\n", timestamp);
+
 }
 
 /**

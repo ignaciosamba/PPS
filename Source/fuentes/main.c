@@ -52,12 +52,11 @@ void main()
 	iniciar_PCA();
 	iniciar_ADC();
 	iniciar_timer0();
-	// iniciar_timer2();
+	iniciar_timer2();
 	iniciar_contadorRPM();
 	// iniciar_timer3();
 
 	shell->stop_conf = 1;
-	//printf("00000");
 
 	while (1)
 		{
@@ -89,6 +88,7 @@ void main()
 			ADC0MUX = 0x08;  // el primer pin a analizar es el pin 0 en modo single-ended
 			ADC0MD = 0x83;	// Habilitar conversion en modo continuo
 			EIE1 |= 0x08;    // Enable ADC0 Interrupts
+		    IE |= 0x20; // habilitar interrupcion de timer2 para la generacion de timestamps relativos
 			EA = 1;          // habilitar interrupciones globales
 			// ES0 = 1;
 

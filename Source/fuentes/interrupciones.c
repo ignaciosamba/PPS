@@ -9,6 +9,7 @@
 #include "sensorCE/funciones_sensor.h"
 #include "interrupciones.h"
 #include "configurador.h"
+#include "conversor.h"
 
 sbit LED = P0^7;
 
@@ -47,6 +48,12 @@ void ADC0_ISR (void) interrupt 10
     //LED = ~LED;
  }
 
+ /**
+  * @brief Timer 3 Interruption service routine
+  * @details Esta funcion se ejecuta en cada interrupcion por overflow del timer 3. Esto ocurre aproximadamente cada 32 ms
+  * la usamos para dos cosas, cuando el motor esta andando, sienta la base de tiempo para el control del motor.
+  * tanto si el motor esta o no andando, sienta la base de tiempo para la medicion del timestamp relativo entre conversiones
+  */
  void T3_ISR(void) interrupt 14
  {
 	static short int i = 0;
@@ -54,7 +61,7 @@ void ADC0_ISR (void) interrupt 10
  	TMR3CN &= ~(1 << 7); // volver a 0 la bandera de interrupcion del byte superior
  	TMR3CN &= ~(1 << 6); // volver a 0 la bandera de interrupcion del byte inferior
 
-	// timer2 es de 16 bits, por lo que en un segundo, timer2 interrumpe 2041666/65536 = 31 veces
+	// timer3 es de 16 bits, por lo que en un segundo, timer3 interrumpe 2041666/65536 = 31 veces
 	// si i == 3, pasaron aproximadamente 100 ms
   	if(i >= 3)
  	{
@@ -62,4 +69,18 @@ void ADC0_ISR (void) interrupt 10
  		i = 0;
  	}
 	i++;
+ }
+
+  void T2_ISR(void) interrupt 5
+ {
+ 	TMR2CN &= ~(1 << 7); // volver a 0 la bandera de interrupcion del byte superior
+ 	TMR2CN &= ~(1 << 6); // volver a 0 la bandera de interrupcion del byte inferior
+
+	// Con timer en modo partido: 
+	// timer2L es de 8 bits, por lo que en un segundo, timer2 interrumpe 2041666/256 = 7975 veces
+
+	// Con timer en modo 16 bits:
+	// timer2 es de 16 bits, por lo que en un segundo, timer2 interrumpe 2041666/65536 = 31 veces
+
+	sumar_timestamp();
  }

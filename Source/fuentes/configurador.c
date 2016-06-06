@@ -117,12 +117,20 @@ void iniciar_timer0(void)
    TCON |= 0x50;                        // Timer0 ON
 }
 
-// void iniciar_timer2(void)
-// {
-//    TMR2CN |= 0x05;    // T2 en modo 16 bits, TR2 habilitado, clockeado por fuente externa
-//    TMR2L = 0;
-//    TMR2H = 0;
-// }
+void iniciar_timer2(void)
+{
+   // CKCON |= 0x30; // T2MH = 1, T2ML = 1 ==> ambos timers de 8 bits clockeados por clock interno 
+   CKCON |= 0x20; // T2MH = 1 clockeado por clock interno 
+   // TMR2CN |= 0x2C;    //Timer2 en modo de 2 timers de 8 bits, interrupciones en byte bajo habilitadas, TR2 habilitado
+   TMR2CN |= 0x04;    //Timer2 en modo 16 bits, interrupciones en byte bajo habilitadas, TR2 habilitado
+   TMR2L = 0;  
+   TMR2H = 0;
+
+   TMR2RLL = 0; //parte alta y baja del valor de retorno de timer3.
+   TMR2RLH = 0;
+
+   //la habilitacion de interrupciones se hace en el main, una vez activadas las conversiones continuas
+}
 
 void iniciar_contadorRPM(void) // usa timer3
 {
@@ -130,14 +138,14 @@ void iniciar_contadorRPM(void) // usa timer3
 	TMR3CN |= (1 << 2); //timer3 habilitado
 	//clock interno / 12, en modo 16 bit auto-reload
 
-    EIE1 |= 0x80; //habilitar interrupcion de timer3
-    EIP1 |= 0x80; // dar prioridad a interrupcion de timer3
+   EIE1 |= 0x80; //habilitar interrupcion de timer3
+   EIP1 |= 0x80; // dar prioridad a interrupcion de timer3
 
-	TMR3L = 0;
-    TMR3H = 0;
+   TMR3L = 0;
+   TMR3H = 0;
 
-    TMR3RLL = 0; //parte alta y baja del valor de retorno de timer3.
-    TMR3RLH = 0;
+   TMR3RLL = 0; //parte alta y baja del valor de retorno de timer3.
+   TMR3RLH = 0;
 }
 
 // void iniciar_PCA(void)

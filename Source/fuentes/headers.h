@@ -105,4 +105,6 @@ struct shellstr
 	bool conversion_active;
 
 	char conversion_timer;
+
+	short int timestamp;
 };
