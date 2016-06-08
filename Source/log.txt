@@ -185,3 +185,13 @@ set_PWM(16000) ===> cdt = 2000uS  ===>(esto sale del calculo matematico teorico)
 formulita para sacarlo matematicamente
 
 valorPWM = 65536 - 25,2 * valoruS ==> para un ciclo de trabajo en uS, se obtiene el valor a colocar en valorPWM
+
+
+7/06/16
+
+GENERACION DE TIMESTAMPS
+
+no encontre ninguna libreria en internet que me facilite un metodo rapido y liviano para obtener los timestamps de cada conversion, asi que decidimos usar directamente el timer2 para generarlos. Lo pusimos en modo 16 bits, interrumpe mas o menos 31 veces por segundo, dando una presicion de 1000/31 = 32 ms aprox para cada timestamp.
+
+Cuando arranca la medicion continua, el timestamp empieza en 0. Incrementa hasta 10000 y despues vuelve a 0. Es relativo al tiempo actual, porque no hay manera de conseguirlo en la 8051. La idea es que en la rbpi, teniendo el timestamp actual y el ultimo recibido, convertir la diferencia entre ellos a segundos, y adaptarlo al tiempo en ese momento, y asi generar el timestamp posta.
+

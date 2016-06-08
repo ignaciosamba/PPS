@@ -120,22 +120,23 @@ void iniciar_timer0(void)
 void iniciar_timer2(void)
 {
    // CKCON |= 0x30; // T2MH = 1, T2ML = 1 ==> ambos timers de 8 bits clockeados por clock interno 
-   CKCON |= 0x20; // T2MH = 1 clockeado por clock interno 
+
+
    // TMR2CN |= 0x2C;    //Timer2 en modo de 2 timers de 8 bits, interrupciones en byte bajo habilitadas, TR2 habilitado
-   TMR2CN |= 0x04;    //Timer2 en modo 16 bits, interrupciones en byte bajo habilitadas, TR2 habilitado
+	TMR2CN |= (1 << 2); //timer2 habilitado
+
    TMR2L = 0;  
    TMR2H = 0;
 
-   TMR2RLL = 0; //parte alta y baja del valor de retorno de timer3.
+   TMR2RLL = 0; //parte alta y baja del valor de retorno de timer2.
    TMR2RLH = 0;
 
-   //la habilitacion de interrupciones se hace en el main, una vez activadas las conversiones continuas
+   IE |= 0x20; // habilitar interrupcion de timer2 para la generacion de timestamps relativos
 }
 
 void iniciar_contadorRPM(void) // usa timer3
 {
-	TMR3CN |= (1 << 7); //flag de overflow habilitada
-	TMR3CN |= (1 << 2); //timer3 habilitado
+   TMR3CN |= (1 << 2); //timer3 habilitado
 	//clock interno / 12, en modo 16 bit auto-reload
 
    EIE1 |= 0x80; //habilitar interrupcion de timer3

@@ -88,7 +88,6 @@ void main()
 			ADC0MUX = 0x08;  // el primer pin a analizar es el pin 0 en modo single-ended
 			ADC0MD = 0x83;	// Habilitar conversion en modo continuo
 			EIE1 |= 0x08;    // Enable ADC0 Interrupts
-		    IE |= 0x20; // habilitar interrupcion de timer2 para la generacion de timestamps relativos
 			EA = 1;          // habilitar interrupciones globales
 			// ES0 = 1;
 

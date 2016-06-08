@@ -7,4 +7,4 @@ void cargar_buffer_single(struct shellstr *shell);
 void cargar_buffer_dif (struct shellstr *shell);
 void get_single_ended(struct shellstr *shell);
 void get_differential(struct shellstr *shell);
-void sumar_timestamp();
+void actualizar_timestamp(unsigned short int);

@@ -73,7 +73,9 @@ void ADC0_ISR (void) interrupt 10
 
   void T2_ISR(void) interrupt 5
  {
- 	TMR2CN &= ~(1 << 7); // volver a 0 la bandera de interrupcion del byte superior
+ 	static short int i = 0;
+ 
+	TMR2CN &= ~(1 << 7); // volver a 0 la bandera de interrupcion del byte superior
  	TMR2CN &= ~(1 << 6); // volver a 0 la bandera de interrupcion del byte inferior
 
 	// Con timer en modo partido: 
@@ -81,6 +83,10 @@ void ADC0_ISR (void) interrupt 10
 
 	// Con timer en modo 16 bits:
 	// timer2 es de 16 bits, por lo que en un segundo, timer2 interrumpe 2041666/65536 = 31 veces
+ 	i++;
 
-	sumar_timestamp();
+	actualizar_timestamp(i);
+
+	if(i >= 10000)
+		i = 0;
  }
