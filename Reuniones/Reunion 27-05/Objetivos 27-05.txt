@@ -1,0 +1,7 @@
+Objetivos:
+
+1) Poder enviar TimeStamp desde la placa.
+
+2) Diagrama de las RPM.
+
+3) Arreglar hilos (semaforo) y Base de Datos (comunicacion de UART).

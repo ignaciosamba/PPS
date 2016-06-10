@@ -29,7 +29,7 @@ Crear Base de Datos SQL con python en Raspberry
 		mysql -u monitor -p
 
 6) Creamos una tabla para luego poder cargar los datos:
-
+	
 	CREATE TABLE nombre (tdate DATE, ttime TIME, zone TEXT, temperature NUMERIC);
 
 ============================================================================================================================
