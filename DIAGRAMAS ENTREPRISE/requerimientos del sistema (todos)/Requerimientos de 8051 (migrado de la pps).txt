@@ -1,0 +1,4 @@
+-Leer de 4 a 8 señales analógicas y convertirlas a digital.
+-Deberia haber posibilidad de amplificar la señal de entrada al conversor, y esta a su vez deberia ser configurable.
+-Se deberian poder contar eventos digitales con 3 o 4 contadores distintos dentro del microcontrolador.
+-Se deberian transmitir los datos digitales a través de un protocolo serial a alguna otra placa o procesador.

@@ -1,0 +1,8 @@
+-Una vez conectado e inicializado el sistema, el servidor deberia poder enviar cualquier comando.
+-En cada comando que se envia, se deberia esperar por el codigo de error. En caso de haber error, se toman las acciones correspondientes.
+-Deberia tener un modo de recepcion continua de mediciones una vez que se envia el comando "ST".
+-Deberia tener una manera de entrar en modo de recepcion continua de mediciones en intervalos de tiempo definidos por el usuario
+-Cada medicion deberia ser almacenada junto con un timestamp
+-El usuario deberia, a traves de una interfaz, poder configurar los parametros de los pines a medir y la ganancia a la entrada del adc.
+-El usuario deberia poder tener acceso a las mediciones hechas, en vista ordenada segun el timestamp.
+-Se deberia avisar cuando las mediciones sobrepasan ciertos niveles (mas adelante se pueden tomar acciones correspondientes)

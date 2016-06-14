@@ -1,0 +1,9 @@
+
+- Se deberia poder recibir datos de sensores analogicos en modo singular o equilibrado.
+- Se deberia poder contar eventos de sensores digitales.
+- Se deberian poder configurar estos sensores mediante una interfaz web grafica.
+- Se debe poder configurar, en cada sensor por separado, una ganancia y tiempo entre mediciones especifico.
+- Las interacciones del sistema deberan guardarse en una base de datos en el sistema junto con un timestamp. Una interaccion incluye desde una medicion hasta una funcion ejecutada de importancia relevante (configuracion de un nuevo sensor, cambio de ganancia, etc) 
+- El sistema de adquisicion debera consumir lo menos posible, y debera estar separado fisicamente del sistema que almacena y procesa los datos.
+- Ambos sistemas deberan tener una comunicacion que permita la ejecucion de funciones de manera remota en un tiempo relativamente bajo.
+- El sistema de almacenamiento y procesado deberia ser lo suficientemente potente como para levantar la base de datos, y ademas, soportar operaciones disparadas en base a la informacion de los sensores. (posible extension: soportar lectura de datos y reaccion en tiempo real)
