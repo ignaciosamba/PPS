@@ -284,7 +284,7 @@ void reportar(struct shellstr *shell)
         case 406: printf("%05d", 406); break; // argumento(s) fuera de rango
         case 407: printf("%05d", 407); break; // error de sintaxis
         case 408: printf("%05d", 408); break; // error de sintaxis
-        case 500: printf("%05d", 3000); break; // stop succesful
+        case 500: printf("%s", "0000.3000"); break; // stop succesful
         case 501: printf("%05d", 501); break; // stillOn successul
         case 502: printf("%05d", 502); break; // Inactive Server Stop
         case 0: break; // para el caso donde se apreta enter solo
