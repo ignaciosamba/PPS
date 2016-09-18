@@ -72,6 +72,11 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
 
 }
 
+/**
+ * @brief Checkea el valor de watchdog_value para verificar que el motor no este en velocidades muy altas que puedan provocar que el sistema este en peligro.
+ * @details La variable watchdog_value se resetea cada vez que se controla la velocidad del motor. En caso que el programa no pueda controlar la velocidad del motor por la razon que sea, es necesario un watchdog que corte el funcionamiento del motor por inanicion de control. Eso es justamente lo que logra esta funcion.
+ * 
+ */
 void check_watchdog()
 {
 	if(watchdog_value == 0)
@@ -80,47 +85,35 @@ void check_watchdog()
 	}
 }
 
-
+/**
+ * @brief Refresca el valor de watchdog_value
+ * @details Esta funcion impide que el motor se apague por inanicion de control de velocidad.
+ */
 void refresh_watchDog()
 {
 	watchdog_value = WATCHDOG_INITIAL;
 }
 
 /**
- * @brief agrega una histeresis al funcionamiento del motor que evita el desvio de las RPM
- * @details [long description]
+ * @brief Controla la velocidad del motor para que este siempre con valores cercanos a una velocidad ideal pre-programada
+ * @details Con una histeresis, controla si la velocidad del motor es mayor o menor a la ideal. En caso de ser menor, la aumenta, y en caso de ser mayor, la disminuye. Es un control por software que puede no ser muy preciso pero es suficiente para los fines del motor. Contiene ademas un control que verifica que la velocidad del motor no sobrepase la maxima. En caso que esto ocurra, se apaga el motor por razones de seguridad.
  */
 void control_RPM(unsigned short eventos_real, unsigned short eventos_ideal)
 {
-	// static short int correcciones_mas;
-	// static short int correcciones_menos;
 	if(eventos_real > eventos_ideal + HISTERESIS) // si las eventos son muy altas
 	{
 		velocidad +=CORRECCION; //parece que se sube pero sumarla es bajarla
 		set_Pwm(velocidad); // se baja la velocidad relativa
-		// printf("se controlo para que vaya mas despacio\neventos_ideal = %d\neventos_real = %d", eventos_ideal, eventos_real);
-		// correcciones_menos++;
 	}
 
 	if(eventos_real < eventos_ideal - HISTERESIS) // si las eventos son muy bajas
 	{
 		velocidad -=CORRECCION; //parece que se baja pero restarla es subirla
 		set_Pwm(velocidad); // se sube la velocidad relativa
-		// correcciones_mas++;
-		// printf("se controlo para que vaya mas rapido\n");
 	}
-
-	// if(correcciones_mas + correcciones_menos >= 10)
-	// {
-		// printf("se corrigio 10 veces..\n%d de mas\n%d de menos\n", correcciones_mas, correcciones_menos);
-	// 	correcciones_menos = 0;
-	// 	correcciones_mas = 0;
-	// }
 
 	if(velocidad < V_MAXIMA)
 		apagar_motor();			//si llega a ir demasiado rapido, se apaga por seguridad.
-
-	
 }
 
 /**
@@ -129,39 +122,22 @@ void control_RPM(unsigned short eventos_real, unsigned short eventos_ideal)
  */
 void arrancar_motor(void) 
 {
-
-	// EIE1 |= 0x10;                       // Enable PCA interrupts
-	// EA = 1;
 	HABILITAR_MOTOR = 1;
 	delay(1000);
 	
-	// printf("\nFase 1...\n");
 	set_Pwm(V_FASE_1);
 	delay(800);
-	// printf("Fase 2...\n");
 	set_Pwm(V_FASE_2);
 	delay(800);
 
-	// printf("Fase 3...\n");
-	// set_Pwm(V_FASE_3);
-	// delay(600);
-	// printf("Arranque...\n");
-	// set_Pwm(V_ARRANQUE);
-	// delay(600);
-	// printf("Nivel estable\n");
 	set_Pwm(V_ESTABLE);
 
     EIE1 |= 0x80; //habilitar interrupcion de timer3
 	EA = 1; // habilitar interrupciones globales para hacer que interrumpa timer3 para realizar el control
-
-	// EA = 0;
-	// EIE1 &= ~0x10;      
-
 }
 
 void apagar_motor(void) 
 {
-	//printf("01011\n");
     EIE1 &= ~0x80; //deshabilitar interrupcion de timer3
 	set_Pwm(VELOCIDAD_APAGADO);
 	HABILITAR_MOTOR = 0;
@@ -173,41 +149,22 @@ void apagar_motor(void)
  * Cambia segun la funcion
  * 
  *  cdt = (65536 - PCA0CPn) / 65536
- *  
- * 
- * @param int [description]
  */
 void set_Pwm(unsigned int num)
 {
-
-	// EIE1 |= 0x10;                       // Enable PCA interrupts
-	// EA = 1;
-
-	// while(CCF0 != 0);       // espera que termine el ciclo de trabajo
-
-	// luego setea los valores
 	PCA0CPL0 = (num & 0x00FF);
 	PCA0CPH0 = (num & 0xFF00)>>8;
-
-	// EA = 0;
-	// EIE1 &= ~0x10;       
 }
 
 /**
- * @brief este delay esta hecho exclusivamente para el pwm y no puede usarse en otro lado porque puede interferir
- * con el funcionamiento del mismo
- * 
- * @details [long description]
- * 
- * @param tiempo [description]
+ * @brief Delay para el contador del PCA
+ * @details Funcion que genera un delay necesario para los intervalos necesarios para generar los codigos para el driver PWM del motor brushless
+ * @param tiempo tiempo de delay medido en cantidad de interrupciones (no hay referencia relativa a segundos)
+ * @warning este delay esta hecho exclusivamente para el pwm y no puede usarse en otro lado porque puede interferir con el funcionamiento del mismo
  */
 void delay(int tiempo)
 {
-
 	int i = 0;
-
-	// EIE1 |= 0x10;                       // Enable PCA interrupts
-	// EA = 1;
 
 	while(1)
 	if(CCF0) // bandera de interrupciones del contador del PCA. Se cuentan interrupciones para generar el delay
@@ -216,25 +173,17 @@ void delay(int tiempo)
 		i++;
 		if(i >= tiempo) break;
 	}
-
-	// EA = 0;
-	// EIE1 &= ~0x10;     
-	// IE = aux1;
-	// EIE1 = aux2; // reestablecemos los valores del registro de interrupcion.
-
 }
 
+/**
+ * @brief Genera los codigos en señales PWM necesarios para reestablecer los valores del driver que hacen que el sensor funcione correctamente con respecto a nuestro sistema.
+ */
 void resetear_motor(void) 
 {
 	long unsigned int k = 0;
-
-	// EIE1 |= 0x10;                       // Enable PCA interrupts
-	// EA = 1;
 	HABILITAR_MOTOR = 1;
 	delay(1000);
 	printf("reestableciando valores del motor\n");
-	//printf("\nFase 1...\n");
-	// for(i = 0; i < 20000; i = i + 100)
 	while(k < 30000)
 	{
 		printf("%lu\n", 53000 - k);
@@ -250,17 +199,17 @@ void resetear_motor(void)
 
     EIE1 |= 0x80; //habilitar interrupcion de timer3
 	EA = 1; // habilitar interrupciones globales para hacer que interrumpa timer3 para realizar el control
-
-	// EA = 0;
-	// EIE1 &= ~0x10;      
 }
 
+/**
+ * @brief Coloca el driver del motor en modo configuracion
+ * @details En este modo, el PCA genera dos distintas señales de PWM de forma que cualquier tecla que se presione hace un toggle entre estas dos señales, eligiendo asi las distintas opciones de configuracion. Presionando la tecla "s" se sale del modo de configuracion 
+ */
 void configurar_motor(void)
 {
 	unsigned long int opcion = 48200;
 	printf("configuracion del motor.. cualquier tecla hace toggle en la aceleracion de 0 a 100. 's' sale\n");
 	HABILITAR_MOTOR = 1;
-	// delay(1000);
 
 	while(getchar() != 's')
 	{
@@ -279,28 +228,5 @@ void configurar_motor(void)
 	}
 
 	printf("fin de configuracion del motor\n");
-
-	
 	HABILITAR_MOTOR = 0;
-
 }
-
-
-// char getchar_pasivo()
-// {
-// 	unsigned char res;
-
-// 	ES0 = 1; // habilitar interrupcion de UART
-// 	if (f_UART)
-// 	{
-// 		EA = 0; // inhabilitar interrupciones globales
-// 		f_UART = false;
-// 		printf("STOP\n");
-// 		break;
-// 	}
-// 	ES0 = 0;
-
-// 	res = (unsigned char)SBUF0; // obtengo el caracter leido accediendo al registro asociado a la UART
-
-// 	return res;
-// }

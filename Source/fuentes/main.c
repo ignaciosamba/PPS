@@ -67,7 +67,7 @@ void main()
 				restart(shell);		// reinicia los arreglos de obtencion de comandos
 				obtener_entrada(shell); 
 
-				if(shell->errn != 0) // si hay un error, el comando no se analiza
+				if(shell->report != 0) // si hay un error, el comando no se analiza
 				{
 					reportar(shell); 
 				}
@@ -87,7 +87,7 @@ void main()
 			AD0INT = 0;		// se inicializa en 0 el bit de conversion completa del ADC	
 			ADC0MUX = 0x08;  // el primer pin a analizar es el pin 0 en modo single-ended
 			ADC0MD = 0x83;	// Habilitar conversion en modo continuo
-			EIE1 |= 0x08;    // Enable ADC0 Interrupts
+			EIE1 |= 0x08;    // Habilitar interrupciones del ADC
 			EA = 1;          // habilitar interrupciones globales
 			// ES0 = 1;
 
@@ -97,6 +97,8 @@ void main()
 				// empezar_adc();
 				shell->conversion_active = true;
 			    ES0 = 1; // habilitar interrupcion de UART
+
+			    //monitoriza entrada serial
 				if (f_UART)
 			    {	
 			    	int recibido = (int)SBUF0;
@@ -108,7 +110,7 @@ void main()
 			    		// printf("stillOn\n");
 						shell->conversion_active = false;
 						refresh_watchDog();
-				    	shell->errn = 501; // stillOn successful
+				    	shell->report = 501; // stillOn successful
 				    	reportar(shell);
 					}
 			    	else if(recibido == 115) //115 es 's' en ascii
@@ -116,7 +118,7 @@ void main()
 						ADC0MD = 0x00; // conversion inhabilitada
 						EA = 0; // inhabilitar interrupciones globales
 						shell->stop_conf = 1;
-				    	shell->errn = 500; // stop succesful
+				    	shell->report = 500; // stop succesful
 				    	reportar(shell);
 
 				    	break;
@@ -140,6 +142,4 @@ void main()
 
 			}
 		}
-	// free(shell->buffer_adc);
-	// free(shell);
 }

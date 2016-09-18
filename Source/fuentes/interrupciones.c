@@ -15,8 +15,7 @@ sbit LED = P0^7;
 
 /**
  * @brief rutina de interrupcion para el ADC
- * @details simplemente reinicia la bandera de interrupcion por conversion terminada y habilita un flag que se 
- * evalua en la funcion principal y hace que se ponga en funcionamiento el procesamiento de los datos convertidos
+ * @details Reinicia la bandera de interrupcion por conversion terminada y habilita un flag que se evalua en la funcion principal y hace que se ponga en funcionamiento el procesamiento de los datos convertidos.
  */
 void ADC0_ISR (void) interrupt 10
 {
@@ -27,8 +26,7 @@ void ADC0_ISR (void) interrupt 10
 }
 /**
  * @brief rutina de interrpucion para la UART
- * @details es usada para detectar una entrada por teclado cuando el programa esta convirtiendo y se desea volver
- * a la etapa de configuracion
+ * @details es usada para detectar una entrada por teclado cuando el programa esta convirtiendo y se desea volver a la etapa de configuracion
  */
  void UART_ISR (void) interrupt 4
  {
@@ -49,11 +47,9 @@ void ADC0_ISR (void) interrupt 10
  }
 
  /**
-  * @brief Timer 3 Interruption service routine
-  * @details Esta funcion se ejecuta en cada interrupcion por overflow del timer 3. Esto ocurre aproximadamente cada 32 ms
-  * la usamos para dos cosas, cuando el motor esta andando, sienta la base de tiempo para el control del motor.
-  * tanto si el motor esta o no andando, sienta la base de tiempo para la medicion del timestamp relativo entre conversiones
-  */
+  * @brief Rutina de interrupcion para Timer 3
+  * @details Esta funcion se ejecuta en cada interrupcion por overflow del timer 3. Esto ocurre aproximadamente cada 32 ms. La usamos para dos cosas, cuando el motor esta andando, sienta la base de tiempo para el control del motor. Tanto si el motor esta o no andando, sienta la base de tiempo para la medicion del timestamp relativo entre conversiones
+  * */
  void T3_ISR(void) interrupt 14
  {
 	static short int i = 0;

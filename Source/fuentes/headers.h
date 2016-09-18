@@ -87,11 +87,11 @@ struct shellstr
 	///array estatico que se carga para dar una frecuencia a las salidas del adc con buffer_adc
 	unsigned short int buffer_adc_count[TAM_SINGLE];  
 	
-	///posicion dentro del array 
+	///posicion dentro del array buffer_adc 
 	short int posicion;				
 
-	///numero de error de error
-	short int errn;
+	///numero de reporte
+	short int report;
 
 	///bandera de habilitacion de configuracion
 	char stop_conf;
@@ -102,9 +102,6 @@ struct shellstr
 	///variable auxiliar para las funciones get_single_ended y get_differential
 	char opt;
 
+	///variable booleana para saber si esta activa la conversion continua
 	bool conversion_active;
-
-	char conversion_timer;
-
-	short int timestamp;
 };

@@ -1,0 +1,211 @@
+
+\documentclass[a4paper]{article}
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{float}
+%para incluir graficos
+\usepackage{graphicx}
+
+% Esto es para que el [h] me ponga las imagenes dentro de las secciones
+\usepackage[section]{placeins}
+
+\graphicspath{ {imagenes/} }
+
+\title{\textbf{\underline{Sinopsis de Proyecto integrador}}  \\}
+\author{Mantovani, Sambataro}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Sistema centralizador de señales analogicas y digitales}
+\subsection{Idea} % (fold)
+\label{sub:idea}
+
+Se propuso dise~nar y prototipar un sistema que concentre se~nales de sensores (analogicos) y cuente eventos de fuentes digitales externas. De forma, todo el trabajo de
+obtencion de se~nales, digitalizado y procesamiento de las mismas, sea hecho por una placa externa. En la que se pueda configurar y programar la forma en la que la señal es procesada. Para que luego se envie por un protocolo de comunicación al sistema en el que se este trabajando o analizando las determinadas señales.
+
+% subsection idea (end)
+\subsection{Arquitectura de Software} % (fold)
+\label{sub:arquitectura}
+
+La arquitectura de software del sistema concentrador esta descripta graficamente en la figura \ref{fig:arquitectura}. El software entero esta desarrollado en el lenguaje C embebido en un microcontrolador C8051F352.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.80\textwidth, height = 9cm]{ArquitecturaSoftware}
+  \caption{Modelo de Arquitectura}\label{fig:arquitectura}
+\end{figure}
+
+Consiste en una estructura donde existe una rutina dentro de un modulo principal, que llama a subrutinas de modulos secundarios. Existe ademas una estructura global que contiene variables compartidas por todos los modulos, llamada "global\_struct" (Ver \ref{ssub:la_estructura_global_struct}). 
+
+\subsubsection{Rutina principal: main} % (fold)
+\label{ssub:rutina_principal_main_c}
+
+En la rutina principal se llama a las funciones de configuracion, y se ejecuta el interprete que toma los comandos de entrada para realizar distintas acciones. Los comandos de entrada siguen un patron de expresiones regulares, definido en el modulo `interprete' (Ver \ref{ssub:interprete}). La rutina principal llama a las funciones del interprete para comprender los comandos, y luego ejecuta distintas funciones segun cada comando.
+% subsubsection rutina_principal_main_c (end)
+
+\subsubsection{Interprete} % (fold)
+\label{ssub:interprete}
+
+El modulo interprete se puede considerar como un orquestrador que analiza y ejecuta funciones de los distintos modulos del sistema concentrador, analizando los comandos de entrada. Tiene acceso a la mayoria de los modulos del sistema, y tambien maneja errores de ingreso de comandos que no respeten las expresiones regulares utilizadas.
+
+Algunos comandos siguen una expresion regular distinta de otros. Pero en todos los casos existe la documentacion para ejecutarlos correctamente.
+
+% subsubsection interprete (end)
+\subsubsection{Configurador} % (fold)
+\label{ssub:configurador}
+
+interactua directamente con el hardware del microcontrolador. Realiza todas las configuraciones necesarias para poder hacer funcionar cada modulo. Inicializa todos los registros pertinentes, el clock del sistema y setea los puertos de entrada y salida.
+% subsubsection configurador (end)
+
+\subsubsection{Conversor} % (fold)
+\label{ssub:conversor}
+
+El conversor contiene todas las funciones que permiten al resto de los modulos interactuar con el ADC del microcontrolador. Incluye ciertas funcionalidades que trabajan con los registros del ADC de forma que se puedan realizar conversiones continuas de manera ciclica en cada puerto. Esto ultimo no esta incluido como funcionalidad directa en el microcontrolador, sino que fue desarrollado por nosotros para agregar utilidad al concentrador. 
+Las rutinas de este modulo permiten que se puedan configurar intervalos de medicion separados para cada puerto, y que cada puerto pueda ser configurado en el modo de medicion que se necesite (single-ended o diferencial).
+
+% subsubsection conversor (end)
+
+\subsubsection{La estructura global\_struct} % (fold)
+\label{ssub:la_estructura_global_struct}
+
+La razon de existencia de esta estructura se debe a que trabajar con variables globales no es recomendado, y necesitabamos compartir variables entre los distintos modulos para facilitar la comunicacion entre los mismos y facilitar el paso de parametros en las funciones. En lugar de pasar cada parametro segun se necesite, se pasa un puntero a la estructura entera, y se accede al parametro que se necesite. Por una cuestion de orden, en la documentacion de cada funcion se incluye cuales son las variables de la estructura que se utilizan en la misma, y para que se utilizan.
+% subsubsection la_estructura_global_struct (end)
+
+% subsection arquitectura (end)
+
+\subsection{Arquitectura de Hardware} % (fold)
+\label{sub:hardware}
+
+En cuanto a el hardware lo que nos planteamos poder lograr una placa que tenga el menor tamaño posible, en la que se pudieran colocar la mayor cantidad de canales para señales analogicas y digitales para ser procesadas por un microcontrolador.
+
+Despues de investigar varios micros distintos, se eligió como un C8051F352 (de SiliconLabs), ya que tenia las características y especificaciones que necesitabamos(8 canales analogicos, 16bits de resolucion, 4 timers, y ganancia hasta x128).
+
+ Basamos el diseño en la placa de desarrollo C8051F35x-DK de SiliconLabs, adaptandola a nuestras necesidades. Decidimos separar todo el procesamiento de la programacion de la placa propiamente dicha, es decir, lo que hicimos fue realizar dos sistemas separados. Uno realizaría todo el proceso y envío de señales y otro para poder cargarle el programa deseado al microcontrolador (ubicado en el otro sistema).
+ 
+\subsubsection{Plaqueta Principal} % (fold)
+\label{ssub:plaqueta principal}
+
+ El sistema final de la placa quedo con 2 C8051F352, duplicando asi la cantidad de señales analogicas que se pueden procesar (16 entradas analogicas), cada una de estas contienen un filtro RC para eliminar todo el ruido posible en la entrada al micro. Además tiene 32 entradas para señales digitales que están conectadas directamente al controlador. Contiene comunicación UART a nivel TTL (Rx y Tx). 
+Tiene la opcion de elegir que la alimentación sea a través de una fuente externa de 12 Voltios o utilizando una placa externa como un arduino o una raspberry pi que pueda proporcionar 5 Voltios. 
+
+Podemos ver en \ref{fig:esquematico1} el diagrama esquematico (realizado en KiCad) de como se diseño la placa (componentes).
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.80\textwidth, height = 9cm]{esquematico1}
+  \caption{Esquematico de Placa con C805F352}\label{fig:esquematico1}
+\end{figure}
+
+% subsubsection plaqueta principal (end)
+
+\subsubsection{Adaptador para Debugger de C8051F352} % (fold)
+\label{ssub:adaptador para debugger microcontrolador}
+
+La placa que se utiliza como driver para la programación del microcontrolador solo consta de resistencias que se usan a modo de bajar la tensión. Y los pines necearios para conectarla al sistema principal. La idea de separar estas dos placas fue para que solo se utilice el sistema principal, y no se reprograme (a menos que sea necesario por algun fallo).
+Se puede ver en \ref{fig:esquematico2} el esquematico del adaptador para el debbuger y programacion del C8051F352.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.80\textwidth, height = 9cm]{esquematico2}
+  \caption{Esquematico de Placa Adaptador Debugger}\label{fig:esquematico2}
+\end{figure}
+ 
+% subsubsection adaptador para debugger microcontrolador (end)
+
+
+
+
+% subsection hardware (end)
+
+
+\section{Adaptacion de un dispositivo gestionador para el centralizador} % (fold)
+\label{sec:adaptacion_de_un_dispositivo_gestionador_para_un_centralizador}
+
+\subsection{Idea} % (fold)
+\label{sub:idea}
+
+El sistema centralizador es independiente por si mismo, es decir que se puede poner como esta a centralizar las señales de los sensores. Pero tiene la particularidad de no contar con mucha memoria de almacenamiento como para guardar datos de señales, ni tampoco alberga la posibilidad de embeberle un sistema operativo que permita utilizar las mediciones de alguna manera especificas, o simplemente almacenarlas.
+
+Con esto en mente, pensamos en que un buen complemento para el centralizador es una placa que pueda levantar un sistema operativo, con cantidad de memoria considerable, que pueda gestionar al centralizador ademas de recibir sus datos de mediciones para luego almacenarlos o realizar acciones segun reglas almacenadas. Para esto, utilizamos una placa de desarrollo raspberry pi, y la contectamos via UART con la placa centralizadora. En esta placa, embebimos un sistema operativo Raspbian, que facilito el entorno para poder lograr obtener un lugar donde recibir las mediciones, almacenarlas, aplicar reglas a partir de ellas, y enviarlas a traves de internet.
+
+Lo que se intenta lograr con el trabajo conjunto del gestionador con el concentrador es obtener una forma generica de concentrar y adeministrar datos de sensores
+
+% subsection idea (end)
+
+\subsection{Implementacion} % (fold)
+\label{sub:implementacion}
+
+La implementacion de un sistema gestionador entero no esta completa en complemento con nuestro centralizador. En realidad, la parte gestionadora dentro de la Raspberry Pi esta pensada para el control y la adquisicion de datos del sensor de campo electrostatico unicamente (ver \ref{sec:adaptacion_de_un_sensor_de_campo_electromagnetico_al_centralizador}). Como trabajo futuro, quedaria implementar esto como un gestionador generico, que sirva para administrar dispositivos concentradores de sensores, como el nuestro.
+
+Como base, utilizamos parte del software hecho por Gaston Lucero en su proyecto integrador, que consiste en un gestionador de dispositivos IoT . El proyecto integrador de Lucero podria verse como un sistema que podria funcionar en paralelo junto con el nuestro, siendo uno el concentrador y otro el gestionador. Junto con Lucero, adaptamos su software para que trabaje en conjunto con nuestro centralizador, de forma que se obtuviera una interfaz grafica en un explorador de internet, que permitiera manejar el concentrador de manera remota. La interfaz grafica esta preparada especificamente para manejar el sensor de campo electrostatico. Desde el servidor web se envian los comandos por UART hacia el centralizador, y la respuesta es leida, tambien por UART. 
+
+El programa embebido en la raspberry nos dio la posibilidad de incrementar el potencial del centralizador. Nuestro software funciona en base a comandos en orden. Lo cual indica que pueden realizarse scripts que realizan distintas acciones segun los comandos y el orden en que se ponen. Estos scripts pueden ser enviados por UART hacia el centralizador y este realizara las acciones que se requieran. 
+% subsection implementacion (end)
+% section adaptacion_de_un_dispositivo_gestionador_para_un_centralizador (end)
+
+\section{Adaptacion de un sensor de campo electromagnetico al centralizador} % (fold)
+\label{sec:adaptacion_de_un_sensor_de_campo_electromagnetico_al_centralizador}
+
+\subsection{Idea} % (fold)
+\label{sub:idea}
+
+Como aplicación para la placa centralizadora, utilizamos un sensor de variación del campo electrostatico. La idea de utilizar este sensor fue la de probar el sistema de centralizador, ya que con este sensor, que consta con una placa de cobre que mide la variacion de campo, y un motor con un driver pwm y un fotoacoplador para contar las vueltas, se puede poner a funcionar y probar la fiabilidad tanto de las conversiones del ADC como de los contadores/timers utilizados para el PWM y para contar las RPM y generar un control sobre las mismas para mantener estable el motor del sensor.
+
+
+% subsection idea (end)
+
+
+\subsection{Circuito de adaptacion para el sensor} % (fold)
+\label{sub:circuito_de_adaptacion_para_el_sensor}
+
+El circuito esta dividido en dos partes, una sirve para el manejo de potencia y el control del motor del sensor, y la otra sirve para controlar las mediciones del sensor.
+Tenemos que alimentar el motor (input: 12 Voltios), los chips dentro de la placa, como optoacoplador y operacional (input: 5 Voltios), además colocamos una salida de 5 Voltios para poder alimentar la placa centralizadora. 
+
+Colocamos dos reguladores de tensión, uno que de 18V a 12V (por seguridad así el nivel de tensión es estable para el motor) y un regulador de 12V a 5V. De esta manera podemos alimentar todo lo necesario con una sola fuente de tensión (que se puede elegir entre 18 a 12 Voltios). Para que el motor no esté constante alimentado, instalamos un optoacoplador y un relay, para que cuando se envía un "PWM" al C8051F352 (comando que setea y envía la secuencia de arrancar para el motor del sensor), el micro active el relay y se pueda prender el motor. 
+
+En cuanto al manejo de la señal enviada por el sensor, lo primero que se le aplica es un amplificador operacional (configurado como amplificador no inversor), para amplificar la señal que sera procesada luego por el centralizador. 
+
+Por comodidad de cables y espacios decidimos que el diseño y la impresion de la placa este hecha en funcion de la concentradora de señales analogicas y eventos digitales, es decir, se hizo para que se adapte a modo de "shield".
+
+En la figura \ref{fig:esquematico3} podemos ver el esquematico de la placa.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.90\textwidth, height = 9cm]{esquematico3}
+  \caption{Esquematico de Placa adaptador para sensor}\label{fig:esquematico3}
+\end{figure}
+
+
+
+% subsection circuito_de_adaptacion_para_el_sensor (end)
+
+\subsection{Utilizacion de funciones del microcontrolador del centralizador para controlar el sensor} % (fold)
+\label{sub:utilizacion_de_funciones_del_microcontrolador_del_centralizador_para_controlar_el_sensor}
+
+Al tener un motor el sensor, surgió la necesidad de adaptar el software embebido en el microcontrolador para poder manejar a dicho motor. Si o si desde la placa centralizadora debiamos enviar las señales necesarias para poder prender, apagar y controlar el motor.
+
+Para prenderlo utilizamos una señal de arranque con un pwm variando el ciclo de trabajo, que una vez que arranca el motor, se mantiene constante. Además agregamos una función para apagarlo.
+
+Como las mediciones de las variaciones de campo electrostatico son más precisas al mantenterse la velocidad constante, por lo que agregamos una funcionalidad para mantener un control en la velocidad del motor, que lo logramos gracias a que en la estructura del sensor hay un fotoacoplador con el que podemos medir las cantidad vueltas que da el motor en una base de tiempo definidas por nosotros.
+
+
+% subsection utilizacion_de_funciones_del_microcontrolador_del_centralizador_para_controlar_el_sensor (end)
+
+\subsection{Programa acoplado al centralizador para hacer funcionar el sensor} % (fold)
+\label{sub:programa_acoplado_al_centralizador_para_hacer_funcionar_el_sensor}
+
+El sensor tiene necesidad de ciertas funcionalidades para medir correctamente. En principio, necesita de un motor controlado por una señal PWM, y ademas necesita controlar esa velocidad para que sea estable. No era suficiente con generar una señal estable de PWM, ya que el motor requiere de una secuencia particular tanto para configuracion como para el funcionamiento normal.
+
+Para evitar agregar mas circuitos innecesarios, utilizamos funcionalidades dentro del microcontrolador C8051F352. Contiene un modulo especifico para generacion de señales PWM, y contiene ademas un modulo contador que puede ser utilizado para contar señales digitales externas. Estos dos modulos fueron utilizados tanto para configurar como para mantener estable el funcionamiento del motor del sensor. 
+
+Las funciones debieron ser acompañadas de un placa adicional de hardware (ver \ref{sub:circuito_de_adaptacion_para_el_sensor}), que se coloco como shield sobre la placa concentradora, de forma que tanto el funcionamiento como la adquisicion de la señal del sensor estaban juntos en una misma placa, acoplada al concentrador. 
+
+% subsection programa_acoplado_al_centralizador_para_hacer_funcionar_el_sensor (end)
+
+\end{document}

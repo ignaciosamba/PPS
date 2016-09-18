@@ -2,8 +2,7 @@
  * @file conversor.c
  * @author Sambataro, Ignacio; Mantovani, Luciano
  * @date 2015
- * @brief este archivo define el comportamiento de todas las funciones que intervienen en la logica a nivel de
- * registro y a nivel operativo del conversor analogico digital.
+ * @brief este archivo define el comportamiento de todas las funciones que intervienen en la logica a nivel de registro y a nivel operativo del conversor analogico digital.
  */
 
 #include "headers.h"
@@ -15,11 +14,8 @@ unsigned long dato_conversor;
 unsigned short int timestamp_counter = 0;
 unsigned short int timestamp = 0;
 /**
- * @brief Esta funcion obtiene un valor de los registros ADC0H, ADC0M, y ADC0L. Que corresponden al valor de la
- * conversion actual.
- * @details El valor de conversion tiene un total de 24 bits, y esta repartido en 3 registros de 8 bits.
- * Para obtener este valor es necesario hacer un calculo teniendo en cuenta la tension de referencia con la que
- * se trabaja.
+ * @brief Esta funcion obtiene un valor de los registros ADC0H, ADC0M, y ADC0L. Que corresponden al valor de la conversion actual.
+ * @details El valor de conversion tiene un total de 24 bits, y esta repartido en 3 registros de 8 bits. Para obtener este valor Es necesario hacer un calculo teniendo en cuenta la tension de referencia con la que se trabaja.
  * @return Devuelve el valor obtenido en los registros
  */
 unsigned long convertir()
@@ -65,6 +61,12 @@ unsigned long convertir()
 
 }
 
+/**
+ * @brief Funcion que actualiza el valor del timestamp
+ * @details Esta funcion es llamada unicamente por la interrupcion de Timer 2. El Timer esta configurado para que interrumpa 31 veces por segundo si se configura en modo de 16 bits. En cada interrupcion de Timer 2, se actualiza el valor de i que se pasa como parametro para esta funcion. De forma que en el momento de la conversion, se tienen la cantidad de interrupciones que hubo desde la ultima, ya que en cada conversion se resetea el valor de timestamp_counter. Sabiendo la cantidad de interrupciones que ocurren en un segundo, es posible calcular asi, el valor de un timestamp relativo entre conversiones en la unidad de tiempo deseada. Con este valor se puede extrapolar un timestamp absoluto (no en este programa) teniendo en cuenta el tiempo de inicio de conversion.
+ * @param short Valor pasado desde la interrupcion que indica de 0 a 10000 la cantidad de veces que interrumpio
+ * Timer 2 desde la ultima conversion.
+ */
 void actualizar_timestamp(unsigned short int i)
 {
 	timestamp_counter = i;
@@ -72,11 +74,9 @@ void actualizar_timestamp(unsigned short int i)
 
 /**
  * @brief Configura la ganancia a la entrada del ADC.
- * @details La ganancia determina la magnitud de la señal a medir. El valor de amplificacion puede ser de 
- * un factor de 2 a 128
+ * @details La ganancia determina la magnitud de la señal a medir. El valor de amplificacion puede ser de un factor de 2 a 128
  * 
- * @param shellstr se pasa la direccion de la estructura entera como parametro. El valor de args[0] determina
- * el factor por el que se potencia a 2 para obtener la ganancia.
+ * @param shellstr se pasa la direccion de la estructura entera como parametro. El valor de args[0] determina el factor por el que se potencia a 2 para obtener la ganancia.
  * @return devuelve la misma estructura
  */
 struct shellstr *conf_ganancia(struct shellstr *shell)
@@ -92,10 +92,10 @@ struct shellstr *conf_ganancia(struct shellstr *shell)
 		case '5': ADC0CN = (ADC0CN & 0xF0) + 0x05; break;
 		case '6': ADC0CN = (ADC0CN & 0xF0) + 0x06; break;
 		case '7': ADC0CN = (ADC0CN & 0xF0) + 0x07; break;
-		default: shell->errn = 407; ADC0MD = 0x83; return shell;
+		default: shell->report = 407; ADC0MD = 0x83; return shell;
 	}
 	ADC0MD = 0x83;
-	shell->errn = 253;
+	shell->report = 253;
 	return shell;
 
 }
@@ -103,10 +103,7 @@ struct shellstr *conf_ganancia(struct shellstr *shell)
 
 /**
  * @brief Cambia el pin actual medido al siguiente.
- * @details Cada vez que se llama esta funcion, se analiza el estado actual del registro ADC0MUX, y segun su 
- * valor, se calcula el valor siguiente. Esta hecha de forma que recorra todos los pines en todos sus modos
- * posibles en forma de escalera; de forma que si se llama en un ciclo infinito, recorreria todos los pines
- * en todas sus configuraciones, con una frecuencia igual para cada pin.
+ * @details Cada vez que se llama esta funcion, se analiza el estado actual del registro ADC0MUX, y segun su valor, se calcula el valor siguiente. Esta hecha de forma que recorra todos los pines en todos sus modos posibles en forma de escalera; de forma que si se llama en un ciclo infinito, recorreria todos los pines en todas sus configuraciones, con una frecuencia igual para cada pin.
  */
 void cambiar_pin()
 {
@@ -142,9 +139,7 @@ void cambiar_pin()
 
 /**
  * @brief Envia datos por la interfaz serial
- * @details el formato de envio es: MODO,PIN,VALOR. Donde el modo puede ser SE o DF, siendo single-ended o 
- * diferencial, respectivamente; el pin es el pin donde se midio, en el caso que sea diferencial, se le debe 
- * sumar 1 al pin mostrado para tener los pines donde se midio; y el valor es el valor medido.
+ * @details el formato de envio es: MODO,PIN,VALOR.TIMESTAMP. Donde el modo puede ser SE o DF, siendo single-ended o diferencial, respectivamente; el pin es el pin donde se midio, en el caso que sea diferencial, se le debe sumar 1 al pin mostrado para tener los pines donde se midio; y el valor es el valor medido.
  * 
  * @param long El dato a enviar
  */
@@ -155,35 +150,25 @@ void enviar_dato(unsigned long int *dato)
 
 	if((num_pin & 0x0F) == 0x08)
 	{
-		// printf("SE,%c,%lu,z", (num_pin >> 4) + '0',*dato);
-		printf("%05lu.",*dato);
+		printf("SE,%c,%05lu.", (num_pin >> 4) + '0',*dato);
+		// printf("%05lu.",*dato);
 	}
 	else if((num_pin & 0x0F) < 0x08)
 	{
 		if(*dato < 1250)
-			// printf("DF,%c,+%lu.", (num_pin >> 4) + '0',(*dato)*2);
-			printf("+%04lu.",(*dato)*2);
+			printf("DF,%c,+%04lu.", (num_pin >> 4) + '0',(*dato)*2);
+			// printf("+%04lu.",(*dato)*2);
 		else
-			// printf("DF,%c,-%lu.", (num_pin >> 4) + '0',(2520 - *dato)*2);
-			printf("-%04lu.",(2520 - *dato)*2);
-		/**
-		 * hay toda una explicacion que duro bastante tiempo de porque pasa
-		 */
+			printf("DF,%c,-%04lu.", (num_pin >> 4) + '0',(2520 - *dato)*2);
+			// printf("-%04lu.",(2520 - *dato)*2);
 	}
-	///imprimir timestamp
-	printf("%u\n", timestamp);
+	printf("%05u\n", timestamp);
 
 }
 
 /**
  * @brief Analiza el buffer de pines para determinar si el envio esta o no habilitado
- * @details Esta funcion se encarga de verificar si el pin medido esta habilitado para el envio o no.
- * Esta funcion fue hecha para trabajar en conjunto con la funcion cambiar_pin(). La idea es que se haga un
- * barrido constante de todos los pines en todos sus modos, pero que se envien solo los que deban enviarse.
- * La informacion de si se envia o no esta en los buffers "buffer_adc_count" y "buffer_adc". El primero contiene
- * los valores iniciales de cada pin en cada modo, y el segundo contiene los valores actuales. Cada vez que se 
- * hace un llamado a esta funcion, el los valores de buffer_adc se decrementan en 1. Cuando un elemento del array
- * llega a 1, esta habilitado para el envio. Si un elemento tiene valor 0, el pin correspondiente esta deshabilitado.
+ * @details Esta funcion se encarga de verificar si el pin medido esta habilitado para el envio o no. Esta funcion fue hecha para trabajar en conjunto con la funcion cambiar_pin(). La idea es que se haga un barrido constante de todos los pines en todos sus modos, pero que se envien solo los que deban enviarse. La informacion de si se envia o no esta en los buffers "buffer_adc_count" y "buffer_adc". El primero contiene los valores iniciales de cada pin en cada modo, y el segundo contiene los valores actuales. Cada vez que se  hace un llamado a esta funcion, el los valores de buffer_adc se decrementan en 1. Cuando un elemento del array llega a 1, esta habilitado para el envio. Si un elemento tiene valor 0, el pin correspondiente esta deshabilitado. 
  * @return devuelve true si el pin actual esta habilitado para enviar, 0 si no esta habilitado.
  */
 char analizar_buffer(struct shellstr *shell)
@@ -222,10 +207,6 @@ char analizar_buffer(struct shellstr *shell)
 	}	
 	else
 	{
-		printf("se detono todo\n");
-		printf("idx: %i\n", (int)idx);
-		printf("ADC0MUX: 0x%x\n", (char)ADC0MUX);
-		printf("var: %i\n", (int)shell->var);
 		return -1;
 	}
 	return 0;
@@ -234,12 +215,7 @@ char analizar_buffer(struct shellstr *shell)
 
 /**
  * @brief carga uno de los pines del ADC en modo single-ended con un valor de 0 a 65536
- * @details el arreglo buffer_adc_count contiene los valores de todos los pines en todas las configuraciones
- * posibles. Esta funcion se encarga de cargar los valores desde el 0 al 7 de buffer_adc_count que corresponden a las configuraciones
- * de los pines en modo single-ended.
- * El valor con el que se cargen sera despues lo que determina la frecuencia de salida de los datos por el medio
- * de transmision. Mientras mas grande sea el valor, menor es la frecuencia. Si se carga con el valor 0, el pin
- * ingresado se deshabilita
+ * @details el arreglo buffer_adc_count contiene los valores de todos los pines en todas las configuraciones posibles. Esta funcion se encarga de cargar los valores desde el 0 al 7 de buffer_adc_count que corresponden a las figuraciones de los pines en modo single-ended. El valor con el que se cargen sera despues lo que determina la frecuencia de salida de los datos por el medio de transmision. Mientras mas grande sea el valor, menor es la frecuencia. Si se carga con el valor 0, el pin ingresado se deshabilita.
  * 
  * @param shellstr se pasa la direccion de la estructura entera como parametro.
  * El campo args[0] da el valor del indice de buffer_adc_count. el resto de los argumentos de args dan el valor
@@ -252,7 +228,7 @@ void cargar_buffer_single(struct shellstr *shell)
 	num = (unsigned)(atoi(shell->args + 2));
 	if(num > 65536)
 	{
-		shell->errn = 406;
+		shell->report = 406;
 		return;
 	}
 
@@ -260,18 +236,13 @@ void cargar_buffer_single(struct shellstr *shell)
 	if(dato_n >= 0 && dato_n < 8)
 	shell->buffer_adc_count[dato_n] = num;
 
-	shell->errn = 251;
+	shell->report = 251;
 }
 
 
 /**
  * @brief carga uno de los pines del ADC en modo diferencial con un valor de 0 a 65536
- * @details el arreglo buffer_adc_count contiene los valores de todos los pines en todas las configuraciones
- * posibles. Esta funcion se encarga de cargar los valores desde el 8 al 11 de buffer_adc_count que corresponden a las configuraciones
- * de los pines en modo diferencial.
- * El valor con el que se cargen sera despues lo que determina la frecuencia de salida de los datos por el medio
- * de transmision. Mientras mas grande sea el valor, menor es la frecuencia. Si se carga con el valor 0, el pin
- * ingresado se deshabilita
+ * @details el arreglo buffer_adc_count contiene los valores de todos los pines en todas las configuraciones posibles. Esta funcion se encarga de cargar los valores desde el 8 al 11 de buffer_adc_count que corresponden a las configuraciones de los pines en modo diferencial. El valor con el que se cargen sera despues lo que determina la frecuencia de salida de los datos por el medio de transmision. Mientras mas grande sea el valor, menor es la frecuencia. Si se carga con el valor 0, el pin ingresado se deshabilita
  * 
  * @param shellstr se pasa la direccion de la estructura entera como parametro.
  * El campo args[0] da el valor del indice de buffer_adc_count. Este valor corresponde a uno de los dos pines que seran
@@ -291,19 +262,18 @@ void cargar_buffer_dif (struct shellstr *shell)
 		case '2': dato_n = 9; break;
 		case '4': dato_n = 10; break;
 		case '6': dato_n = 11; break;
-		default: shell->errn = 406; return; 
+		default: shell->report = 406; return; 
 	}
 
 	shell->buffer_adc_count[dato_n] = num;
 
-	shell->errn = 252;
+	shell->report = 252;
 }
 
 /**
- * @brief devuelve el valor de una medicion en el momento que se ingresa la instruccion
- * @details 
+ * @brief devuelve el valor de una medicion en modo de canal unico en el momento que se ingresa la instruccion
  * 
- * @param shellstr [description]
+ * @param shellstr estructura global
  */
 void get_single_ended(struct shellstr *shell)
 {
@@ -327,10 +297,15 @@ void get_single_ended(struct shellstr *shell)
 	EA = 0;
 
 	EIE1 &= ~0x08;    // Disable ADC0 Interrupts
-	shell->errn = 0;
+	shell->report = 0;
 
 }
-
+/**
+ * @brief devuelve el valor de una medicion de un canal en modo diferencial en el momento que se ingresa la instruccion
+ * @details En esta funcion, la entrada se toma desde un unico argumento tomado del comando. Este argumento corresponde a el primer canal (de menor a mayor) del par de canales que miden de manera diferencial. Para que devuelva el valor, es necesario que el numero que se ingrese sea el primero de los cuatro posibles pares de canales. Es decir, si se quiere averiguar la medicion diferencial del par de canales (0,1), el comando a ingresar es "GSI,0". Si se ingresa "GSI,1", el programa devuelve error.
+ * 
+ * @param shellstr estructura global
+ */
 void get_differential(struct shellstr *shell)
 {
 	switch(shell->args[0])
@@ -339,7 +314,7 @@ void get_differential(struct shellstr *shell)
 		case '2': ADC0CN |= 0x10; ADC0MUX = 0x23; break;
 		case '4': ADC0CN |= 0x10; ADC0MUX = 0x45; break;
 		case '6': ADC0CN |= 0x10; ADC0MUX = 0x67; break;
-		default: shell->errn = 406; return; 
+		default: shell->report = 406; return; 
 	}
 	
 	AD0INT = 0;		 // se inicializa en 0 el bit de conversion completa del ADC	
@@ -357,10 +332,15 @@ void get_differential(struct shellstr *shell)
 	EA = 0;
 	
 	EIE1 &= ~0x08;    // Disable ADC0 Interrupts
-	shell->errn = 0;
+	shell->report = 0;
 }
 
-
+/**
+ * @brief Devuelve los parametros actuales de medicion en el conversor
+ * 
+ * @param shellstr estructura global
+ * @warning No esta preparada para ser utilizada con la raspberry
+ */
 void mostrar_config_actual(struct shellstr * shell)
 {
     char i;
