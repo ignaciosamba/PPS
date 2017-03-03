@@ -150,16 +150,16 @@ void enviar_dato(unsigned long int *dato)
 
 	if((num_pin & 0x0F) == 0x08)
 	{
-		printf("SE,%c,%05lu.", (num_pin >> 4) + '0',*dato);
+		printf("SE,%c,%05lu,", (num_pin >> 4) + '0',*dato);
 		// printf("%05lu.",*dato);
 	}
 	else if((num_pin & 0x0F) < 0x08)
 	{
 		if(*dato < 1250)
-			printf("DF,%c,+%04lu.", (num_pin >> 4) + '0',(*dato)*2);
+			printf("DF,%c,+%04lu,", (num_pin >> 4) + '0',(*dato)*2);
 			// printf("+%04lu.",(*dato)*2);
 		else
-			printf("DF,%c,-%04lu.", (num_pin >> 4) + '0',(2520 - *dato)*2);
+			printf("DF,%c,-%04lu,", (num_pin >> 4) + '0',(2520 - *dato)*2);
 			// printf("-%04lu.",(2520 - *dato)*2);
 	}
 	printf("%05u\n", timestamp);
