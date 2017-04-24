@@ -13,6 +13,7 @@
 #define HISTERESIS 2
 #define CORRECCION 50
 #define WATCHDOG_INITIAL 100
+#define ONDA_CUADRADA 32768
 
 
 unsigned short int velocidad = V_ESTABLE;
@@ -134,6 +135,33 @@ void arrancar_motor(void)
 
     EIE1 |= 0x80; //habilitar interrupcion de timer3
 	EA = 1; // habilitar interrupciones globales para hacer que interrumpa timer3 para realizar el control
+}
+
+/**
+ * @brief arranca el motor usando el pwm del microcontrolador, sin control de velocidad
+ * @details [long description]
+ */
+void arrancar_motor_sin_control(void) 
+{
+	HABILITAR_MOTOR = 1;
+	delay(1000);
+	
+	set_Pwm(V_FASE_1);
+	delay(800);
+	set_Pwm(V_FASE_2);
+	delay(800);
+
+	set_Pwm(V_ESTABLE);
+}
+
+void generar_onda_cuadrada(void)
+{
+   // PCA0MD = 0x00; // Use SYSCLK as time base
+   // PCA0CPM0 |= 0x46; // ECOM, TOG, & PWM en 1
+   // PCA0CPM0 &= ~0x80; // PWM16 en 0
+   // PCA0CPH0 = 0x00;
+
+	set_Pwm(ONDA_CUADRADA);
 }
 
 void apagar_motor(void) 

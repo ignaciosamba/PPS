@@ -249,6 +249,26 @@ struct shellstr *analizar(struct shellstr *shell)
 
         return shell;
     }
+    else if((shell->comando[0] == 'G') && (shell->comando[1] == 'O') && (shell->comando[2] == 'C'))
+    {
+        if(shell->n_args > 0)
+        {shell->report = 405; return shell;}
+
+        else generar_onda_cuadrada();
+
+        shell->report = 303;
+        return shell;
+    }
+    else if((shell->comando[0] == 'A') && (shell->comando[1] == 'M') && (shell->comando[2] == 'S'))
+    {
+        if(shell->n_args > 0)
+        {shell->report = 405; return shell;}
+
+        else arrancar_motor_sin_control();
+
+        shell->report = 303;
+        return shell;
+    }
     else if(shell->comando[0] == 'p')
     {
         refresh_watchDog();
@@ -279,6 +299,7 @@ void reportar(struct shellstr *shell)
         case 254: printf("%05d", 254); break; // comienza la conversion continua
         case 301: printf("%05d", 301); break; // motor arranco
         case 302: printf("%05d", 302); break; // motor paro
+        case 303: printf("%05d", 303); break; // onda cuadrada
         case 404: printf("%05d", 404); break; // comando no encontrado
         case 405: printf("%05d", 405); break; // demasiados argumentos
         case 406: printf("%05d", 406); break; // argumento(s) fuera de rango
