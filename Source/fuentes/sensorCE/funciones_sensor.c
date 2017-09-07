@@ -5,9 +5,10 @@
 // #define V_FASE_1 42200
 #define V_FASE_1 48200 // 700uS
 // #define V_FASE_2 42100
-#define V_FASE_2 42800 // 900uS
+#define V_FASE_2 46300 // 900uS
 #define V_MAXIMA 33264
-#define V_ESTABLE 37800 // 1100uS 
+// #define V_ESTABLE 44000 // 1100uS 
+#define V_ESTABLE 46300 // 1100uS 
 #define VELOCIDAD_APAGADO 48200  // 700uS
 #define VUELTAS_CADA_100MS 18 //para una velocidad ideal de 3600 rpm. valor explicado en la funcion contar_RPM
 #define HISTERESIS 2
@@ -71,6 +72,8 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
 	watchdog_value--;
 	check_watchdog();
 
+	return;
+
 }
 
 /**
@@ -123,18 +126,21 @@ void control_RPM(unsigned short eventos_real, unsigned short eventos_ideal)
  */
 void arrancar_motor(void) 
 {
-	HABILITAR_MOTOR = 1;
-	delay(1000);
-	
 	set_Pwm(V_FASE_1);
-	delay(800);
-	set_Pwm(V_FASE_2);
-	delay(800);
+	HABILITAR_MOTOR = 1;
+	delay(1500);
+	
+	// set_Pwm(V_FASE_1);
+	// delay(800);
+	// set_Pwm(V_FASE_2);
+	// delay(800);
 
 	set_Pwm(V_ESTABLE);
 
     EIE1 |= 0x80; //habilitar interrupcion de timer3
 	EA = 1; // habilitar interrupciones globales para hacer que interrumpa timer3 para realizar el control
+
+	return;
 }
 
 /**
@@ -143,15 +149,28 @@ void arrancar_motor(void)
  */
 void arrancar_motor_sin_control(void) 
 {
-	HABILITAR_MOTOR = 1;
-	delay(1000);
-	
-	set_Pwm(V_FASE_1);
-	delay(800);
-	set_Pwm(V_FASE_2);
-	delay(800);
+		// threshold = 46300 
 
-	set_Pwm(V_ESTABLE);
+	set_Pwm(48200);
+	// delay(1000);
+	HABILITAR_MOTOR = 1;
+	delay(1500);	
+	// set_Pwm(V_FASE_1);
+	// delay(800);
+	// set_Pwm(V_FASE_2);
+	// delay(800);
+////////////////////////////
+	set_Pwm(46300);	
+	// delay(600);
+	// delay(600);
+	// set_Pwm(33264);
+	// delay(600);
+	// set_Pwm(36000);
+	// delay(600);
+	// set_Pwm(32000);
+	// delay(600);
+
+	// set_Pwm(40000);
 }
 
 void generar_onda_cuadrada(void)
@@ -235,26 +254,17 @@ void resetear_motor(void)
  */
 void configurar_motor(void)
 {
-	unsigned long int opcion = 48200;
-	printf("configuracion del motor.. cualquier tecla hace toggle en la aceleracion de 0 a 100. 's' sale\n");
+	unsigned long int opcion = 16000; // original en 48200
+	set_Pwm(opcion);
+	delay(400);
 	HABILITAR_MOTOR = 1;
 
-	while(getchar() != 's')
-	{
-		set_Pwm(opcion);
+	getchar();
+	set_Pwm(48200);
 
-		if(opcion == 48200)
-		{	
-			printf("PWM = '700uS'\n");
-			opcion = 16000;
-		}
-		else if(opcion == 16000) 
-		{
-			printf("PWM = '2000uS'\n");
-			opcion = 48200;
-		}
-	}
 
-	printf("fin de configuracion del motor\n");
+	delay(2500);
+
 	HABILITAR_MOTOR = 0;
 }
+
