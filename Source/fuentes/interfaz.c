@@ -200,6 +200,15 @@ struct shellstr *analizar(struct shellstr *shell)
 
         return shell;
     }
+    else if((shell->comando[0] == 'C') && (shell->comando[1] == 'R') && (shell->comando[2] == 'P'))
+    {
+        if(shell->n_args > 0)
+        {shell->report = 405; return shell;}
+
+        else RPM_continuo();
+
+        return shell;
+    }
 
     else if((shell->comando[0] == 'P') && (shell->comando[1] == 'W') && (shell->comando[2] == 'M'))
     {
@@ -265,6 +274,26 @@ struct shellstr *analizar(struct shellstr *shell)
         {shell->report = 405; return shell;}
 
         else arrancar_motor_sin_control();
+
+        shell->report = 303;
+        return shell;
+    }
+    else if((shell->comando[0] == 'E') && (shell->comando[1] == 'I') && (shell->comando[2] == 'N'))
+    {
+        if(shell->n_args > 0)
+        {shell->report = 405; return shell;}
+
+        else enable_int();
+
+        shell->report = 303;
+        return shell;
+    }
+    else if((shell->comando[0] == 'D') && (shell->comando[1] == 'I') && (shell->comando[2] == 'N'))
+    {
+        if(shell->n_args > 0)
+        {shell->report = 405; return shell;}
+
+        else disable_int();
 
         shell->report = 303;
         return shell;

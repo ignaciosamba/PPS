@@ -11,3 +11,6 @@ void configurar_motor(void);
 void check_watchdog();
 void refresh_watchDog();
 void generar_onda_cuadrada(void);
+void enable_int();
+void disable_int();
+void RPM_continuo();

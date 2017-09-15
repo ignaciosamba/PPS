@@ -25,6 +25,9 @@
 
 unsigned short int velocidad = V_ESTABLE;
 unsigned long eventos;
+// unsigned long hertz;
+// unsigned long print_hertz;
+// unsigned int hertz_count;
 sbit HABILITAR_MOTOR = P0^2;
 sbit LED = P0^6;                          // LED='1' means ON
 short int watchdog_value = WATCHDOG_INITIAL;
@@ -44,10 +47,35 @@ void RPM_instantaneo()
 	printf("%lu Hz\n", eventos*5);
 }
 
+void RPM_continuo()
+{
+	while(1)
+	printf("%lu Hz\n", eventos*5);
+}
+void enable_int()
+{
+    EIE1 |= 0x80; //habilitar interrupcion de timer3
+	EA = 1; // habilitar interrupciones globales para hacer que interrumpa timer3 para realizar el control
+}
+
+void disable_int()
+{
+    EIE1 &= ~0x80; //deshabilitar interrupcion de timer3
+}
+
+// void get_hertz()
+// {
+// 	printf("%lu\n", print_hertz);
+// }
+
 void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de timer3
 {
 	static LONGDATA rawValue;
 	unsigned long res = 0;
+
+	// if (hertz_count >= 5)
+	// 	hertz_count = 0;
+
 
 	rawValue.Byte[Byte3] = 0x00;
 	rawValue.Byte[Byte2] = 0x00;
@@ -57,6 +85,15 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
 	res = rawValue.result;
 
 	eventos = res;
+
+	// if (hertz_count == 0)
+	// {
+	// 	print_hertz = hertz;
+	// 	hertz = 0;
+	// }
+
+	// hertz = hertz + res;
+	// hertz_count++;
 
 	//res tiene la cantidad de vueltas en 100 ms teniendo en cuenta que esta funcion se llama cada 3 interrupciones
 	//del timer3 que son aprox 100ms.
@@ -87,13 +124,13 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
  * @details La variable watchdog_value se resetea cada vez que se controla la velocidad del motor. En caso que el programa no pueda controlar la velocidad del motor por la razon que sea, es necesario un watchdog que corte el funcionamiento del motor por inanicion de control. Eso es justamente lo que logra esta funcion.
  * 
  */
-void check_watchdog()
-{
-	if(watchdog_value == 0)
-	{
-		apagar_motor();
-	}
-}
+// void check_watchdog()
+// {
+// 	if(watchdog_value == 0)
+// 	{
+// 		// apagar_motor();
+// 	}
+// }
 
 /**
  * @brief Refresca el valor de watchdog_value
