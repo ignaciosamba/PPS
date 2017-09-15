@@ -59,7 +59,9 @@ void ADC0_ISR (void) interrupt 10
 
 	// timer3 es de 16 bits, por lo que en un segundo, timer3 interrumpe 2041666/65536 = 31 veces
 	// si i == 3, pasaron aproximadamente 100 ms
-  	if(i >= 3)
+
+	// 6 son 200ms aprox 
+  	if(i >= 6)
  	{
 		contar_RPM(); 
  		i = 0;

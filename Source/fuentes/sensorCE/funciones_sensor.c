@@ -3,16 +3,22 @@
 
 
 // #define V_FASE_1 42200
-#define V_FASE_1 48200 // 700uS
+// #define V_FASE_1 48200 // 700uS
+#define V_FASE_1 39500 // 1150uS TIEMPO EN ALTO
 // #define V_FASE_2 42100
-#define V_FASE_2 46300 // 900uS
-#define V_MAXIMA 33264
+// #define V_FASE_2 46300 // 900uS
+#define V_FASE_2 37200 // 1200uS
+// #define V_MAXIMA 33264
+#define V_MAXIMA 34864
 // #define V_ESTABLE 44000 // 1100uS 
-#define V_ESTABLE 46300 // 1100uS 
+// #define V_ESTABLE 46300
+// #define V_ESTABLE 33400 // 1350uS 
+#define V_ESTABLE 45600 
 #define VELOCIDAD_APAGADO 48200  // 700uS
-#define VUELTAS_CADA_100MS 18 //para una velocidad ideal de 3600 rpm. valor explicado en la funcion contar_RPM
-#define HISTERESIS 2
-#define CORRECCION 50
+#define VUELTAS_CADA_100MS 30 //para una velocidad ideal de 3600 rpm. valor explicado en la funcion contar_RPM
+#define VUELTAS_CADA_200MS 33 //para una velocidad ideal de 3600 rpm. valor explicado en la funcion contar_RPM
+#define HISTERESIS 5
+#define CORRECCION 10
 #define WATCHDOG_INITIAL 100
 #define ONDA_CUADRADA 32768
 
@@ -35,7 +41,7 @@ void RPM_instantaneo()
 	// cantidad de vueltas en 100 ms = vueltas por segundo.
 	// (eventos / 4) * 10 = rpm
 	// eventos * 150 = rpm
-	printf("%lu +-150 rps\n", eventos*150);
+	printf("%lu Hz\n", eventos*5);
 }
 
 void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de timer3
@@ -64,13 +70,13 @@ void contar_RPM(void) // utiliza timer0 y timer3. llamada por interrupcion de ti
 	//como esta funcion se llama cada 100 milisegundos, se controla acorde colocando una velocidad estable
 
 
-	control_RPM(eventos,(unsigned)VUELTAS_CADA_100MS);
+	control_RPM(eventos,(unsigned)VUELTAS_CADA_200MS);
   	
 	TH0 = 0;           // Resetear valor de timer0
 	TL0 = 0;    
 
 	watchdog_value--;
-	check_watchdog();
+	// check_watchdog();
 
 	return;
 
@@ -116,8 +122,8 @@ void control_RPM(unsigned short eventos_real, unsigned short eventos_ideal)
 		set_Pwm(velocidad); // se sube la velocidad relativa
 	}
 
-	if(velocidad < V_MAXIMA)
-		apagar_motor();			//si llega a ir demasiado rapido, se apaga por seguridad.
+	// if(velocidad < V_MAXIMA)
+		// apagar_motor();			//si llega a ir demasiado rapido, se apaga por seguridad.
 }
 
 /**
@@ -126,16 +132,38 @@ void control_RPM(unsigned short eventos_real, unsigned short eventos_ideal)
  */
 void arrancar_motor(void) 
 {
-	set_Pwm(V_FASE_1);
-	HABILITAR_MOTOR = 1;
-	delay(1500);
+	// HABILITAR_MOTOR = 1;
+	// set_Pwm(V_FASE_1);
+	// delay(1500);
+	// set_Pwm(V_FASE_2);
+	// delay(1500);
+	// set_Pwm(V_ESTABLE);
 	
+	unsigned long int comienzo = 48200;
+	unsigned long int velocidad = 48200;
+	unsigned long int vel_init = 45600;
+	int i = 0;
+
+
+	set_Pwm(comienzo);
+	// delay(1000);
+	HABILITAR_MOTOR = 1;
+	delay(2000);
+
+
+	while(velocidad > vel_init)
+	{
+		// printf("%lu\n", velocidad);
+		set_Pwm(velocidad);
+		velocidad = velocidad - 10;
+		// delay(50);
+	}
+
 	// set_Pwm(V_FASE_1);
 	// delay(800);
 	// set_Pwm(V_FASE_2);
 	// delay(800);
 
-	set_Pwm(V_ESTABLE);
 
     EIE1 |= 0x80; //habilitar interrupcion de timer3
 	EA = 1; // habilitar interrupciones globales para hacer que interrumpa timer3 para realizar el control
@@ -150,17 +178,31 @@ void arrancar_motor(void)
 void arrancar_motor_sin_control(void) 
 {
 		// threshold = 46300 
+	unsigned long int comienzo = 48200;
+	unsigned long int velocidad = 48200;
+	unsigned long int vel_init = 45600;
+	int i = 0;
 
-	set_Pwm(48200);
+
+	set_Pwm(comienzo);
 	// delay(1000);
 	HABILITAR_MOTOR = 1;
-	delay(1500);	
+	delay(2000);
+
+
+	while(velocidad > vel_init)
+	{
+		// printf("%lu\n", velocidad);
+		set_Pwm(velocidad);
+		velocidad = velocidad - 100;
+		delay(50);
+	}
+
 	// set_Pwm(V_FASE_1);
 	// delay(800);
 	// set_Pwm(V_FASE_2);
 	// delay(800);
 ////////////////////////////
-	set_Pwm(46300);	
 	// delay(600);
 	// delay(600);
 	// set_Pwm(33264);
@@ -254,13 +296,19 @@ void resetear_motor(void)
  */
 void configurar_motor(void)
 {
-	unsigned long int opcion = 16000; // original en 48200
+	unsigned long int opcion = 48200; // original en 48200
+	unsigned long int cosa = 0;
 	set_Pwm(opcion);
-	delay(400);
 	HABILITAR_MOTOR = 1;
 
-	getchar();
-	set_Pwm(48200);
+	while(1)
+	{	
+		getchar();
+		set_Pwm(opcion - cosa);
+		cosa = cosa + 100;
+		printf("%lu\n", (opcion - cosa));
+	}
+
 
 
 	delay(2500);
