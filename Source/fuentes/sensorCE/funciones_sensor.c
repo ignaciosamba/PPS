@@ -49,8 +49,12 @@ void RPM_instantaneo()
 
 void RPM_continuo()
 {
+	int i;
 	while(1)
-	printf("%lu Hz\n", eventos*5);
+	{
+		for(i = 0; i < 9000; i++);
+		printf("%lu\n", eventos);
+	}
 }
 void enable_int()
 {
@@ -175,8 +179,7 @@ void arrancar_motor(void)
 	// set_Pwm(V_FASE_2);
 	// delay(1500);
 	// set_Pwm(V_ESTABLE);
-	
-	unsigned long int lebuffer[30];
+
 	unsigned long int comienzo = 48200;
 	unsigned long int velocidad = 48200;
 	unsigned long int vel_init = 45600;
@@ -189,12 +192,13 @@ void arrancar_motor(void)
 	delay(2000);
 
 
-	while(velocidad > vel_init)
+	// while(velocidad > vel_init)
+	for (velocidad = 48200; velocidad > vel_init; velocidad = velocidad - 10)
 	{	
 		// RPM_instantaneo();
-		// printf("%lu\n", velocidad);
+		// printf("%lu\n", eventos);
 		set_Pwm(velocidad);
-		velocidad = velocidad - 10;
+		// velocidad = velocidad - 10;
 		// delay(50);
 	}
 
@@ -207,7 +211,7 @@ void arrancar_motor(void)
     EIE1 |= 0x80; //habilitar interrupcion de timer3
 	EA = 1; // habilitar interrupciones globales para hacer que interrumpa timer3 para realizar el control
 
-	return;
+	// RPM_continuo();
 }
 
 /**
@@ -230,7 +234,8 @@ void arrancar_motor_sin_control(void)
 
 
 	while(velocidad > vel_init)
-	{
+	{	
+		// RPM_instantaneo();
 		// printf("%lu\n", velocidad);
 		set_Pwm(velocidad);
 		velocidad = velocidad - 100;
@@ -252,6 +257,7 @@ void arrancar_motor_sin_control(void)
 	// delay(600);
 
 	// set_Pwm(40000);
+	// RPM_continuo();
 }
 
 void generar_onda_cuadrada(void)

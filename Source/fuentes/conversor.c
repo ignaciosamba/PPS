@@ -13,6 +13,8 @@ unsigned short int num;
 unsigned long dato_conversor;
 unsigned short int timestamp_counter = 0;
 unsigned short int timestamp = 0;
+sbit LED = P0^6;                          // LED='1' means ON
+
 /**
  * @brief Esta funcion obtiene un valor de los registros ADC0H, ADC0M, y ADC0L. Que corresponden al valor de la conversion actual.
  * @details El valor de conversion tiene un total de 24 bits, y esta repartido en 3 registros de 8 bits. Para obtener este valor Es necesario hacer un calculo teniendo en cuenta la tension de referencia con la que se trabaja.
@@ -63,7 +65,14 @@ unsigned long convertir()
 
 /**
  * @brief Funcion que actualiza el valor del timestamp
- * @details Esta funcion es llamada unicamente por la interrupcion de Timer 2. El Timer esta configurado para que interrumpa 31 veces por segundo si se configura en modo de 16 bits. En cada interrupcion de Timer 2, se actualiza el valor de i que se pasa como parametro para esta funcion. De forma que en el momento de la conversion, se tienen la cantidad de interrupciones que hubo desde la ultima, ya que en cada conversion se resetea el valor de timestamp_counter. Sabiendo la cantidad de interrupciones que ocurren en un segundo, es posible calcular asi, el valor de un timestamp relativo entre conversiones en la unidad de tiempo deseada. Con este valor se puede extrapolar un timestamp absoluto (no en este programa) teniendo en cuenta el tiempo de inicio de conversion.
+ * @details Esta funcion es llamada unicamente por la interrupcion de Timer 2. El Timer esta configurado para que
+ *  interrumpa 31 veces por segundo si se configura en modo de 16 bits. En cada interrupcion de Timer 2, se
+ *  actualiza el valor de i que se pasa como parametro para esta funcion. De forma que en el momento de la
+ *  conversion, se tienen la cantidad de interrupciones que hubo desde la ultima, ya que en cada conversion 
+ *  se resetea el valor de timestamp_counter. Sabiendo la cantidad de interrupciones que ocurren en un segundo
+ *  , es posible calcular asi, el valor de un timestamp relativo entre conversiones en la unidad de tiempo
+ *  deseada. Con este valor se puede extrapolar un timestamp absoluto (no en este programa) teniendo en cuenta
+ *  el tiempo de inicio de conversion.
  * @param short Valor pasado desde la interrupcion que indica de 0 a 10000 la cantidad de veces que interrumpio
  * Timer 2 desde la ultima conversion.
  */
@@ -148,6 +157,8 @@ void enviar_dato(unsigned long int *dato)
 	char num_pin;
 	num_pin = (char)ADC0MUX;
 
+	LED = LED ? 0 : 1;
+
 	if((num_pin & 0x0F) == 0x08)
 	{
 		printf("SE,%c,%05lu,", (num_pin >> 4) + '0',*dato);
@@ -163,7 +174,6 @@ void enviar_dato(unsigned long int *dato)
 			// printf("-%04lu.",(2520 - *dato)*2);
 	}
 	printf("%05u\n", timestamp);
-
 }
 
 /**
