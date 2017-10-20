@@ -44,7 +44,7 @@ void RPM_instantaneo()
 	// cantidad de vueltas en 100 ms = vueltas por segundo.
 	// (eventos / 4) * 10 = rpm
 	// eventos * 150 = rpm
-	printf("%lu Hz\n", eventos*5);
+	printf("%lu\n", eventos);
 }
 
 void RPM_continuo()
@@ -170,12 +170,13 @@ void control_RPM(unsigned short eventos_real, unsigned short eventos_ideal)
 void arrancar_motor(void) 
 {
 	// HABILITAR_MOTOR = 1;
-	// set_Pwm(V_FASE_1);
+	// set_Pwm(V_FASE_1);S
 	// delay(1500);
 	// set_Pwm(V_FASE_2);
 	// delay(1500);
 	// set_Pwm(V_ESTABLE);
 	
+	unsigned long int lebuffer[30];
 	unsigned long int comienzo = 48200;
 	unsigned long int velocidad = 48200;
 	unsigned long int vel_init = 45600;
@@ -189,7 +190,8 @@ void arrancar_motor(void)
 
 
 	while(velocidad > vel_init)
-	{
+	{	
+		// RPM_instantaneo();
 		// printf("%lu\n", velocidad);
 		set_Pwm(velocidad);
 		velocidad = velocidad - 10;
@@ -338,7 +340,7 @@ void configurar_motor(void)
 	set_Pwm(opcion);
 	HABILITAR_MOTOR = 1;
 
-	while(1)
+	while(opcion - cosa > 30000)
 	{	
 		getchar();
 		set_Pwm(opcion - cosa);
